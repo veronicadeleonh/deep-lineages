@@ -4,19 +4,22 @@ import { useMemo, useRef, useState, type ReactElement } from "react";
 import { CLADE_NOTES, dietOf } from "../constants";
 import { fMa, fRange } from "../format";
 import { useWidth } from "../hooks";
+import { silhouetteUrl } from "../data";
 import { useStore } from "../state";
 import { familyTree, fold, genusTree, layout, leaves, neighbourhood, pathTo, type TNode } from "../tree";
 import type { Family } from "../types";
 import { useTooltip } from "./Tooltip";
 import s from "./CladeTree.module.css";
 
-const ROW = 18, TOP = 14, AXIS = 22, LABEL_W = 132, PAD_L = 4;
+const ROW = 20, TOP = 14, AXIS = 22, PAD_L = 4;
 
 export function CladeTree({ f, genus }: { f: Family; genus?: string }) {
   const { data, dispatch } = useStore();
   const tip = useTooltip();
   const wrap = useRef<HTMLDivElement>(null);
   const width = useWidth(wrap, 440);
+  const SIL_W = width < 420 ? 0 : 30;          // no silhouettes in the tree on narrow screens: the branches need the room
+  const LABEL_W = 138 + SIL_W;
   const [wide, setWide] = useState(false);
   const focus = genus ?? f.family;
   const color = dietOf(f).color;
@@ -60,6 +63,7 @@ export function CladeTree({ f, genus }: { f: Family; genus?: string }) {
     const click = n.family ? () => dispatch({ type: "select", family: n.family!.family })
       : n.genus ? () => dispatch({ type: "genus", family: f.family, genus: n.genus!.genus }) : undefined;
     const c = n.family ? dietOf(n.family).color : color;
+    const sil = n.family ? n.family.phylopic?.svg : n.genus ? n.genus.phylopic?.svg : data.clades[n.name]?.svg;
     segs.push({ y: y(n), a: parentX, b: x1 });
     nodes.push(
       <g key={`l-${n.name}`} className={click && !self ? s.leafLink : undefined} onClick={self ? undefined : click}
@@ -69,7 +73,8 @@ export function CladeTree({ f, genus }: { f: Family; genus?: string }) {
         <line className={cls} x1={parentX} x2={x(a)} y1={y(n)} y2={y(n)} />
         <line className={s.bar} x1={x(a)} x2={Math.max(x(b), x(a) + 3)} y1={y(n)} y2={y(n)} style={{ stroke: c, opacity: self ? 1 : 0.55 }} />
         {x(b) < x1 - 4 && <line className={s.leader} x1={x(b) + 4} x2={x1} y1={y(n)} y2={y(n)} />}
-        <text className={[s.label, self && s.labelSelf, n.genus && s.italic, n.count && s.summary].filter(Boolean).join(" ")} x={x1 + 8} y={y(n)} dy="0.35em">
+        {sil && SIL_W > 0 && <image className={`sil ${self ? "" : s.silDim}`} href={silhouetteUrl(sil)} x={x1 + 6} y={y(n) - 8} width={SIL_W - 4} height={16} preserveAspectRatio="xMidYMid meet" />}
+        <text className={[s.label, self && s.labelSelf, n.genus && s.italic, n.count && s.summary].filter(Boolean).join(" ")} x={x1 + 8 + SIL_W} y={y(n)} dy="0.35em">
           {n.name}{n.count ? ` · ${n.count}` : ""}
         </text>
       </g>,
@@ -95,7 +100,7 @@ export function CladeTree({ f, genus }: { f: Family; genus?: string }) {
       return [];
     });
 
-  const ticks = x.ticks(width < 400 ? 3 : 5);
+  const ticks = x.ticks(Math.max(2, Math.floor((x1 - x.range()[0]) / 55)));
   const wideLabel = genus ? "Whole family" : "All dinosaurs";
   const nearLabel = genus ? "Closest genera" : "Close relatives";
   return (

@@ -9,7 +9,7 @@
 .toggle:hover, .more:hover { color: var(--text); border-color: var(--text-3); }
 
 .line { list-style: none; margin: 0; padding: 0; }
-.step { position: relative; padding: 0 0 9px 20px; font-size: 12px; line-height: 1.35; }
+.step { position: relative; padding: 0 0 9px 20px; min-height: 26px; font-size: 12px; line-height: 1.35; }
 /* the connector: a line from this dot down to the next one */
 .step::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: -6px; width: 1.5px; background: var(--text-3); opacity: .55; }
 .step:last-child::before { content: none; }
@@ -29,3 +29,9 @@
 .current .name { color: var(--text); font-weight: 700; font-size: 13px; }
 .rank { margin-left: 6px; color: var(--text-3); font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; }
 .note { display: block; color: var(--text-3); font-size: 11.5px; }
+.sil {
+  float: right; width: 52px; height: 26px; margin: 0 0 0 10px; background: var(--text-3); opacity: .75;
+  -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat;
+}
+.silCurrent { background: var(--text); opacity: 1; }
+.gap { min-height: 0; }

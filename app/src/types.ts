@@ -81,6 +81,10 @@ export interface FamilyGenera {
 
 export type GeneraByFamily = Record<string, FamilyGenera>;
 
+/** Silhouette of a group on the ancestry paths; `depicts` is the taxon actually drawn. */
+export interface CladeSilhouette { depicts?: string | null; uuid?: string; attribution?: string | null; license?: string | null; page?: string; svg: string }
+export type CladeSilhouettes = Record<string, CladeSilhouette>;
+
 export interface Interval { name: string; start: number; end: number }
 
 export interface DiversityPoint { ma: number; genera: number }
@@ -106,6 +110,7 @@ export interface PaleoIndex { model: string; times: number[] }
 export interface AppData {
   families: Family[];
   genera: GeneraByFamily;
+  clades: CladeSilhouettes;
   fossils: Fossil[];
   diversity: DiversityPoint[];
   periods: Interval[];

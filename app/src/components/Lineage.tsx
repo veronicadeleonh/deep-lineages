@@ -1,10 +1,15 @@
 /* "Where it comes from": the ancestry as a connected line, from the oldest, widest group down to this family or genus. */
 import { useState } from "react";
 import { CLADE_NOTES } from "../constants";
+import { silhouetteUrl } from "../data";
 import { WELL_KNOWN } from "../tree";
 import s from "./Lineage.module.css";
 
-export interface Step { name: string; rank?: string }
+export interface Step {
+  name: string;
+  rank?: string;
+  sil?: { svg: string; credit: string } | null; // small illustration of the group
+}
 
 export function Lineage({ steps }: { steps: Step[] }) {
   const [all, setAll] = useState(false);
@@ -35,6 +40,8 @@ export function Lineage({ steps }: { steps: Step[] }) {
           </li>
         ) : (
           <li key={it.name} className={[s.step, WELL_KNOWN.has(it.name) && s.landmark, it.i === last && s.current].filter(Boolean).join(" ")}>
+            {it.sil && <span className={`${s.sil} ${it.i === last ? s.silCurrent : ""}`} title={it.sil.credit}
+              style={{ ["--src" as string]: `url("${silhouetteUrl(it.sil.svg)}")` }} role="img" aria-label={`Silhouette for ${it.name}`} />}
             <span className={s.name}>{it.rank === "genus" ? <i>{it.name}</i> : it.name}</span>
             {it.rank && <span className={s.rank}>{it.rank}</span>}
             {CLADE_NOTES[it.name] && <span className={s.note}>{CLADE_NOTES[it.name]}</span>}

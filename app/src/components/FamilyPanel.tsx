@@ -3,9 +3,9 @@ import { LINEAGE_NOTES, dietOf, groupOf } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, fMa, fNum, fRange, isAlive } from "../format";
 import { useStore } from "../state";
-import type { Family, Genus, Phylopic, Wikipedia } from "../types";
+import type { AppData, Family, Genus, Phylopic, Wikipedia } from "../types";
 import { CladeTree } from "./CladeTree";
-import { Lineage } from "./Lineage";
+import { Lineage, type Step } from "./Lineage";
 import { ancestry } from "../tree";
 import s from "./FamilyPanel.module.css";
 
@@ -53,6 +53,22 @@ function AliveNow() {
 
 const gs = (fg?: { genera: Genus[] }) => fg?.genera ?? [];
 
+/** Silhouette + hover credit for one step of the ancestry line. */
+type Sil = { svg?: string | null; depicts?: string | null; source?: string; attribution?: string | null; license?: string | null } | null | undefined;
+const stepSil = (ph: Sil, name: string) => {
+  if (!ph?.svg) return null;
+  const depicts = ph.depicts ?? ph.source;
+  return { svg: ph.svg, credit: `${depicts && depicts !== name ? `Drawn: ${depicts} · ` : ""}${ph.attribution || "unknown author"} · ${license(ph.license)} · PhyloPic` };
+};
+
+/** The ancestry line from Archosauria down to the family, with whatever silhouettes we have. */
+function familySteps(f: Family, data: AppData): Step[] {
+  return [
+    ...ancestry(f.family, data).slice(0, -1).map((name) => ({ name, sil: stepSil(data.clades[name], name) })),
+    { name: f.family, rank: "family", sil: stepSil(f.phylopic, f.family) },
+  ];
+}
+
 const license = (url?: string | null) => {
   if (!url) return "";
   const m = url.match(/licenses\/([^/]+)\/([\d.]+)/);
@@ -92,7 +108,7 @@ function Profile({ f }: { f: Family }) {
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
       <CladeTree key={f.family} f={f} />
-      <Lineage key={f.family} steps={[...ancestry(f.family, data).slice(0, -1).map((name) => ({ name })), { name: f.family, rank: "family" }]} />
+      <Lineage key={f.family} steps={familySteps(f, data)} />
 
       <p className={s.meta}><b>Fossils by continent:</b> {byCount(f.continents).map((c) => `${c} ${fNum(f.continents[c])}`).join(" · ")}</p>
       {first.length > 0 && (
@@ -116,11 +132,10 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
   const own = g.phylopic?.svg ? g.phylopic : null;
   const sil = own ?? f.phylopic;
   const w = g.wikipedia;
-  const steps = [
-    ...ancestry(f.family, data).slice(0, -1).map((name) => ({ name })),
-    { name: f.family, rank: "family" },
-    ...(g.below ?? []).map((b) => ({ name: b.name, rank: b.rank })),
-    { name: g.genus, rank: "genus" },
+  const steps: Step[] = [
+    ...familySteps(f, data),
+    ...(g.below ?? []).map((b) => ({ name: b.name, rank: b.rank, sil: stepSil(data.clades[b.name], b.name) })),
+    { name: g.genus, rank: "genus", sil: stepSil(own, g.genus) },
   ];
   const back = () => dispatch({ type: "clearGenus" });
   const close = () => dispatch({ type: "select", family: null });
@@ -185,6 +200,7 @@ function Silhouette({ ph, name, caption }: { ph: Phylopic | null | undefined; na
 }
 
 function Credits({ ph, silOf, w }: { ph: Phylopic | null | undefined; silOf: string; w: Wikipedia | null | undefined }) {
+  const { data } = useStore();
   return (
     <p className={s.credits}>
       {ph && (
@@ -194,6 +210,7 @@ function Credits({ ph, silOf, w }: { ph: Phylopic | null | undefined; silOf: str
           <a href={ph.page} target="_blank" rel="noopener">PhyloPic</a><br />
         </>
       )}
+      {Object.keys(data.clades).length > 0 && <>Group silhouettes in the tree and ancestry: PhyloPic contributors (hover one for its author and license)<br /></>}
       {w?.extract && <>Text: Wikipedia ({w.lang}) · CC BY-SA 4.0 · </>}Data: Paleobiology Database · CC BY 4.0
     </p>
   );

@@ -2,7 +2,7 @@ import { geoArea } from "d3";
 import type { FeatureCollection, Geometry, Position } from "geojson";
 import { DEFAULT_SNAPS } from "./constants";
 import type {
-  AppData, DiversityPoint, Family, Fossil, FossilsFile, GeneraByFamily, Interval, PaleoIndex,
+  AppData, CladeSilhouettes, DiversityPoint, Family, Fossil, FossilsFile, GeneraByFamily, Interval, PaleoIndex,
 } from "./types";
 
 const url = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -24,7 +24,7 @@ export async function getJSON<T>(path: string, optional = false): Promise<T | nu
 export const silhouetteUrl = (svg: string) => new URL(url(svg), document.baseURI).href;
 
 export async function loadData(): Promise<AppData> {
-  const [families, fossilsFile, diversity, periods, paleo, genera, stages] = await Promise.all([
+  const [families, fossilsFile, diversity, periods, paleo, genera, stages, clades] = await Promise.all([
     getJSON<Family[]>("families.json"),
     getJSON<FossilsFile>("fossils.json"),
     getJSON<DiversityPoint[]>("diversity.json"),
@@ -32,6 +32,7 @@ export async function loadData(): Promise<AppData> {
     getJSON<PaleoIndex>("paleomap/index.json", true),
     getJSON<GeneraByFamily>("genera.json", true),
     getJSON<Interval[]>("stages.json", true),
+    getJSON<CladeSilhouettes>("clades.json", true),
   ]);
   families.sort((a, b) => b.range_ma[0] - a.range_ma[0] || b.range_ma[1] - a.range_ma[1]);
 
@@ -52,7 +53,7 @@ export async function loadData(): Promise<AppData> {
     };
   });
 
-  return { families, genera: genera ?? {}, fossils, diversity, periods, stages: stages ?? [], paleo, times, nearestSnap };
+  return { families, genera: genera ?? {}, clades: clades ?? {}, fossils, diversity, periods, stages: stages ?? [], paleo, times, nearestSnap };
 }
 
 /* ---------- paleomaps ---------- */

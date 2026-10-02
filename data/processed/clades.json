@@ -1,0 +1,954 @@
+{
+ "Archosauria": {
+  "depicts": "Mambachiton fiandohana",
+  "uuid": "53fb0ee4-e136-4497-bcf9-272c663e1866",
+  "attribution": "Cy Marchant",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/53fb0ee4-e136-4497-bcf9-272c663e1866",
+  "svg": "silhouettes/clades/Archosauria.svg"
+ },
+ "Avemetatarsalia": {
+  "depicts": "Teleocrater rhadinus",
+  "uuid": "d6c7783a-d639-4290-97ee-1d85394d480c",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/d6c7783a-d639-4290-97ee-1d85394d480c",
+  "svg": "silhouettes/clades/Avemetatarsalia.svg"
+ },
+ "Ornithodira": {
+  "depicts": "Dromomeron romeri",
+  "uuid": "e4bf088b-35de-4730-aab6-8f860045eb29",
+  "attribution": "Nobu Tamura",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/e4bf088b-35de-4730-aab6-8f860045eb29",
+  "svg": "silhouettes/clades/Ornithodira.svg"
+ },
+ "Dinosauromorpha": {
+  "depicts": "Nyasasaurus parringtoni",
+  "uuid": "cb8b6dfb-d681-43be-b3da-2d8bde3eef34",
+  "attribution": "TotalDino",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/cb8b6dfb-d681-43be-b3da-2d8bde3eef34",
+  "svg": "silhouettes/clades/Dinosauromorpha.svg"
+ },
+ "Dinosauriformes": {
+  "depicts": "Lagosuchus talampayensis",
+  "uuid": "e936e01a-48b8-435f-951e-08d49d8673af",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/e936e01a-48b8-435f-951e-08d49d8673af",
+  "svg": "silhouettes/clades/Dinosauriformes.svg"
+ },
+ "Dinosauria": {
+  "depicts": "Eoraptor lunensis",
+  "uuid": "8f3e5723-986f-4f1d-9292-ff041ce176ca",
+  "attribution": "Marmelad",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/8f3e5723-986f-4f1d-9292-ff041ce176ca",
+  "svg": "silhouettes/clades/Dinosauria.svg"
+ },
+ "Ornithischia": {
+  "depicts": "Laquintasaura venezuelae",
+  "uuid": "1e8f0d85-cecf-49e9-8a3f-876d96b2929f",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/1e8f0d85-cecf-49e9-8a3f-876d96b2929f",
+  "svg": "silhouettes/clades/Ornithischia.svg"
+ },
+ "Parapredentata": {
+  "depicts": "Pisanosaurus mertii",
+  "uuid": "0e158e61-81c9-42c1-bba9-04f8c4647390",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/0e158e61-81c9-42c1-bba9-04f8c4647390",
+  "svg": "silhouettes/clades/Parapredentata.svg"
+ },
+ "Sulcimentisauria": {
+  "depicts": "Silesaurus opolensis",
+  "uuid": "a2443a0f-9eef-4029-a154-1a075d15cadf",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/a2443a0f-9eef-4029-a154-1a075d15cadf",
+  "svg": "silhouettes/clades/Sulcimentisauria.svg"
+ },
+ "Saurischia": {
+  "depicts": "Eoraptor lunensis",
+  "uuid": "8f3e5723-986f-4f1d-9292-ff041ce176ca",
+  "attribution": "Marmelad",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/8f3e5723-986f-4f1d-9292-ff041ce176ca",
+  "svg": "silhouettes/clades/Saurischia.svg"
+ },
+ "Theropoda": {
+  "depicts": "Zupaysaurus rougieri",
+  "uuid": "08c1a92c-4c36-43fe-b524-fc23d2cf8072",
+  "attribution": "FunkMonk [Michael B.H.] (modified by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/08c1a92c-4c36-43fe-b524-fc23d2cf8072",
+  "svg": "silhouettes/clades/Theropoda.svg"
+ },
+ "Neotheropoda": {
+  "depicts": "Inosaurus tedreftensis",
+  "uuid": "939361a0-daa0-4784-9108-5215ebf86fe9",
+  "attribution": "Pranav Iyer (grey ideas)",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/939361a0-daa0-4784-9108-5215ebf86fe9",
+  "svg": "silhouettes/clades/Neotheropoda.svg"
+ },
+ "Coelophysoidea": {
+  "depicts": "Zupaysaurus rougieri",
+  "uuid": "08c1a92c-4c36-43fe-b524-fc23d2cf8072",
+  "attribution": "FunkMonk [Michael B.H.] (modified by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/08c1a92c-4c36-43fe-b524-fc23d2cf8072",
+  "svg": "silhouettes/clades/Coelophysoidea.svg"
+ },
+ "Coelophysinae": {
+  "depicts": "Coelophysis bauri",
+  "uuid": "85008e98-2194-4844-bff9-4c5513ddd117",
+  "attribution": "Emily Willoughby",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/85008e98-2194-4844-bff9-4c5513ddd117",
+  "svg": "silhouettes/clades/Coelophysinae.svg"
+ },
+ "Sauropodomorpha": {
+  "depicts": "Eoraptor lunensis",
+  "uuid": "8f3e5723-986f-4f1d-9292-ff041ce176ca",
+  "attribution": "Marmelad",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/8f3e5723-986f-4f1d-9292-ff041ce176ca",
+  "svg": "silhouettes/clades/Sauropodomorpha.svg"
+ },
+ "Massopoda": {
+  "depicts": "Seitaad ruessi",
+  "uuid": "5d86d3a5-5813-4dea-b28f-14e99a912491",
+  "attribution": "Joseph J. W. Sertich, Mark A. Loewen",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/5d86d3a5-5813-4dea-b28f-14e99a912491",
+  "svg": "silhouettes/clades/Massopoda.svg"
+ },
+ "Saphornithischia": {
+  "depicts": "Eocursor parvus",
+  "uuid": "63cc3161-ac45-4b32-8fbe-fcc720a3c87c",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/63cc3161-ac45-4b32-8fbe-fcc720a3c87c",
+  "svg": "silhouettes/clades/Saphornithischia.svg"
+ },
+ "Prionodontia": {
+  "depicts": "Eocursor parvus",
+  "uuid": "63cc3161-ac45-4b32-8fbe-fcc720a3c87c",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/63cc3161-ac45-4b32-8fbe-fcc720a3c87c",
+  "svg": "silhouettes/clades/Prionodontia.svg"
+ },
+ "Averostra": {
+  "depicts": "Zupaysaurus rougieri",
+  "uuid": "08c1a92c-4c36-43fe-b524-fc23d2cf8072",
+  "attribution": "FunkMonk [Michael B.H.] (modified by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/08c1a92c-4c36-43fe-b524-fc23d2cf8072",
+  "svg": "silhouettes/clades/Averostra.svg"
+ },
+ "Tetanurae": {
+  "depicts": "Monolophosaurus jiangi",
+  "uuid": "79f26be5-29d6-4a8e-a2bf-cd3a15fa8e6f",
+  "attribution": "Jordan Mallon (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/79f26be5-29d6-4a8e-a2bf-cd3a15fa8e6f",
+  "svg": "silhouettes/clades/Tetanurae.svg"
+ },
+ "Megalosauroidea": {
+  "depicts": "Marshosaurus bicentesimus",
+  "uuid": "872eccf3-1624-4286-a101-0675954094f8",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/872eccf3-1624-4286-a101-0675954094f8",
+  "svg": "silhouettes/clades/Megalosauroidea.svg"
+ },
+ "Eustreptospondylinae": {
+  "depicts": "Eustreptospondylus oxoniensis",
+  "uuid": "e46c71d9-d38c-4539-9f95-b1a26167d5d0",
+  "attribution": "Jaime Headden",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/e46c71d9-d38c-4539-9f95-b1a26167d5d0",
+  "svg": "silhouettes/clades/Eustreptospondylinae.svg"
+ },
+ "Allosauroidea": {
+  "depicts": "Allosaurus fragilis",
+  "uuid": "a3fe8af3-8bcf-469a-b3d8-08bc0f071c98",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/a3fe8af3-8bcf-469a-b3d8-08bc0f071c98",
+  "svg": "silhouettes/clades/Allosauroidea.svg"
+ },
+ "Sauropodiformes": {
+  "depicts": "Melanorosaurus readi",
+  "uuid": "3d97dd93-8302-48f3-9da9-be0891dd46ff",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/3d97dd93-8302-48f3-9da9-be0891dd46ff",
+  "svg": "silhouettes/clades/Sauropodiformes.svg"
+ },
+ "Sauropoda": {
+  "depicts": "Vulcanodon karibaensis",
+  "uuid": "8f7c165f-3561-4dad-afe7-0af5faa5a66f",
+  "attribution": "Roberto Diaz Sibaja, based on Domser",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/8f7c165f-3561-4dad-afe7-0af5faa5a66f",
+  "svg": "silhouettes/clades/Sauropoda.svg"
+ },
+ "Gravisauria": {
+  "depicts": "Vulcanodon karibaensis",
+  "uuid": "8f7c165f-3561-4dad-afe7-0af5faa5a66f",
+  "attribution": "Roberto Diaz Sibaja, based on Domser",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/8f7c165f-3561-4dad-afe7-0af5faa5a66f",
+  "svg": "silhouettes/clades/Gravisauria.svg"
+ },
+ "Eusauropoda": {
+  "depicts": "Patagosaurus fariasi",
+  "uuid": "326f4e1a-6c4b-4165-90e2-9b68d144fe11",
+  "attribution": "Smokeybjb",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/326f4e1a-6c4b-4165-90e2-9b68d144fe11",
+  "svg": "silhouettes/clades/Eusauropoda.svg"
+ },
+ "Genasauria": {
+  "depicts": "Lesothosaurus diagnosticus",
+  "uuid": "c7f10ac9-bff4-4e88-b8f3-ccfb9f351240",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/c7f10ac9-bff4-4e88-b8f3-ccfb9f351240",
+  "svg": "silhouettes/clades/Genasauria.svg"
+ },
+ "Thyreophora": {
+  "depicts": "Urophora cardui",
+  "uuid": "be776840-35e4-45a8-87be-b0a39d22bd56",
+  "attribution": "Kamil S. Jaron",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/be776840-35e4-45a8-87be-b0a39d22bd56",
+  "svg": "silhouettes/clades/Thyreophora.svg"
+ },
+ "Thyreophoroidea": {
+  "depicts": "Scelidosaurus harrisonii",
+  "uuid": "8beb09fe-06ba-4be1-8b1b-18e5222a40eb",
+  "attribution": "Gareth Monger",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/8beb09fe-06ba-4be1-8b1b-18e5222a40eb",
+  "svg": "silhouettes/clades/Thyreophoroidea.svg"
+ },
+ "Eurypoda": {
+  "depicts": "Stegouros elengassen",
+  "uuid": "4ee1a15e-f275-4dc6-be7a-6669274c1e1e",
+  "attribution": "Alexander Vargas",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/4ee1a15e-f275-4dc6-be7a-6669274c1e1e",
+  "svg": "silhouettes/clades/Eurypoda.svg"
+ },
+ "Stegosauria": {
+  "depicts": "Tuojiangosaurus multispinus",
+  "uuid": "616a32f5-d1d1-4a93-bbfc-965b959e673a",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/616a32f5-d1d1-4a93-bbfc-965b959e673a",
+  "svg": "silhouettes/clades/Stegosauria.svg"
+ },
+ "Neostegosauria": {
+  "depicts": "Kentrosaurus aethiopicus",
+  "uuid": "3afa2880-fa0a-4df0-8a84-87670ca9bab4",
+  "attribution": "Emily Willoughby",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/3afa2880-fa0a-4df0-8a84-87670ca9bab4",
+  "svg": "silhouettes/clades/Neostegosauria.svg"
+ },
+ "Dacentrurinae": {
+  "depicts": "Kentrosaurus aethiopicus",
+  "uuid": "3afa2880-fa0a-4df0-8a84-87670ca9bab4",
+  "attribution": "Emily Willoughby",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/3afa2880-fa0a-4df0-8a84-87670ca9bab4",
+  "svg": "silhouettes/clades/Dacentrurinae.svg"
+ },
+ "Stegosaurinae": {
+  "depicts": "Stegosaurus",
+  "uuid": "173f44e3-2db7-4c98-b41f-6ab58093a145",
+  "attribution": "Andrew A. Farke",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/173f44e3-2db7-4c98-b41f-6ab58093a145",
+  "svg": "silhouettes/clades/Stegosaurinae.svg"
+ },
+ "Coelurosauria": {
+  "depicts": "Coelurus agilis",
+  "uuid": "d3ae8c0d-107d-45de-992e-177c551e079d",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/d3ae8c0d-107d-45de-992e-177c551e079d",
+  "svg": "silhouettes/clades/Coelurosauria.svg"
+ },
+ "Maniraptora": {
+  "depicts": "Jianchangosaurus yixianensis",
+  "uuid": "4391e695-92b0-4e67-be00-4116f8af9fd0",
+  "attribution": "Hanyong Pu, Yoshitsugu Kobayashi, Junchang Lü, Li Xu, Yanhua Wu, Huali Chang, Jiming Zhang, Songhai Jia & T. Michael Keesey",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/4391e695-92b0-4e67-be00-4116f8af9fd0",
+  "svg": "silhouettes/clades/Maniraptora.svg"
+ },
+ "Paraves": {
+  "depicts": "Jinfengopteryx elegans",
+  "uuid": "e57f6f0a-4a46-4e37-9752-9e10d042c067",
+  "attribution": "Matt Martyniuk",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/e57f6f0a-4a46-4e37-9752-9e10d042c067",
+  "svg": "silhouettes/clades/Paraves.svg"
+ },
+ "Deinonychosauria": {
+  "depicts": "Sinornithosaurus millenii",
+  "uuid": "4e1bed5f-86f2-49c6-a9f6-a7814d65ef69",
+  "attribution": "Scott Hartman (modified by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/4e1bed5f-86f2-49c6-a9f6-a7814d65ef69",
+  "svg": "silhouettes/clades/Deinonychosauria.svg"
+ },
+ "Sinovenatorinae": {
+  "depicts": "Xiaotingia zhengi",
+  "uuid": "38b3ad22-f475-4fb8-9a5c-7aeb520d3e28",
+  "attribution": "Matt Martyniuk",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/38b3ad22-f475-4fb8-9a5c-7aeb520d3e28",
+  "svg": "silhouettes/clades/Sinovenatorinae.svg"
+ },
+ "Troodontinae": {
+  "depicts": "Troodon junior",
+  "uuid": "948449df-8b08-4ea4-9f1e-391cd410c78a",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/948449df-8b08-4ea4-9f1e-391cd410c78a",
+  "svg": "silhouettes/clades/Troodontinae.svg"
+ },
+ "Jinfengopteryginae": {
+  "depicts": "Jinfengopteryx elegans",
+  "uuid": "e57f6f0a-4a46-4e37-9752-9e10d042c067",
+  "attribution": "Matt Martyniuk",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/e57f6f0a-4a46-4e37-9752-9e10d042c067",
+  "svg": "silhouettes/clades/Jinfengopteryginae.svg"
+ },
+ "Neosauropoda": {
+  "depicts": "Haplocanthosaurus priscus",
+  "uuid": "a490823a-c98e-48cd-ae0d-fbb7bce2af26",
+  "attribution": "T. Michael Keesey",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/a490823a-c98e-48cd-ae0d-fbb7bce2af26",
+  "svg": "silhouettes/clades/Neosauropoda.svg"
+ },
+ "Diplodocoidea": {
+  "depicts": "Haplocanthosaurus priscus",
+  "uuid": "a490823a-c98e-48cd-ae0d-fbb7bce2af26",
+  "attribution": "T. Michael Keesey",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/a490823a-c98e-48cd-ae0d-fbb7bce2af26",
+  "svg": "silhouettes/clades/Diplodocoidea.svg"
+ },
+ "Diplodocimorpha": {
+  "depicts": "Limaysaurus tessonei",
+  "uuid": "80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+  "attribution": "Michael P. Taylor",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+  "svg": "silhouettes/clades/Diplodocimorpha.svg"
+ },
+ "Flagellicaudata": {
+  "depicts": "Lingwulong shenqi",
+  "uuid": "1145212f-981a-4463-af51-f4f9541c4e4d",
+  "attribution": "Tasman Dixon",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/1145212f-981a-4463-af51-f4f9541c4e4d",
+  "svg": "silhouettes/clades/Flagellicaudata.svg"
+ },
+ "Diplodocinae": {
+  "depicts": "Diplodocus carnegii",
+  "uuid": "3cb1d5bf-7db5-4db2-82a6-4c39f6a4441b",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/3cb1d5bf-7db5-4db2-82a6-4c39f6a4441b",
+  "svg": "silhouettes/clades/Diplodocinae.svg"
+ },
+ "Apatosaurinae": {
+  "depicts": "Apatosaurus louisae",
+  "uuid": "b5a8f8c5-9986-4f7f-bb81-19fb184d7d51",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/b5a8f8c5-9986-4f7f-bb81-19fb184d7d51",
+  "svg": "silhouettes/clades/Apatosaurinae.svg"
+ },
+ "Neornithischia": {
+  "depicts": "Leaellynasaura amicagraphica",
+  "uuid": "5e82608f-3de6-4ad3-9ff7-3394b92c48d0",
+  "attribution": "Dann Pigdon",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/5e82608f-3de6-4ad3-9ff7-3394b92c48d0",
+  "svg": "silhouettes/clades/Neornithischia.svg"
+ },
+ "Pyrodontia": {
+  "depicts": "Oryctodromeus cubicularis",
+  "uuid": "c5b2e117-0973-4a0d-840a-de15f0296011",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/c5b2e117-0973-4a0d-840a-de15f0296011",
+  "svg": "silhouettes/clades/Pyrodontia.svg"
+ },
+ "Cerapoda": {
+  "depicts": "Gideonmantellia amosanjuanae",
+  "uuid": "7e9733bc-fa6c-49c0-a6e0-80f5a5377fcd",
+  "attribution": "Will Toosey",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/7e9733bc-fa6c-49c0-a6e0-80f5a5377fcd",
+  "svg": "silhouettes/clades/Cerapoda.svg"
+ },
+ "Ornithopoda": {
+  "depicts": "Gideonmantellia amosanjuanae",
+  "uuid": "7e9733bc-fa6c-49c0-a6e0-80f5a5377fcd",
+  "attribution": "Will Toosey",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/7e9733bc-fa6c-49c0-a6e0-80f5a5377fcd",
+  "svg": "silhouettes/clades/Ornithopoda.svg"
+ },
+ "Iguanodontia": {
+  "depicts": "Tenontosaurus tilletti",
+  "uuid": "5f4c760e-f6f7-4b9b-9199-db12bcfbf212",
+  "attribution": "Matt Dempsey",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/5f4c760e-f6f7-4b9b-9199-db12bcfbf212",
+  "svg": "silhouettes/clades/Iguanodontia.svg"
+ },
+ "Euiguanodontia": {
+  "depicts": "Iyuku raathi",
+  "uuid": "1de723b9-f8d2-4a66-8651-4fb36a816093",
+  "attribution": "Tasman Dixon",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/1de723b9-f8d2-4a66-8651-4fb36a816093",
+  "svg": "silhouettes/clades/Euiguanodontia.svg"
+ },
+ "Dryomorpha": {
+  "depicts": "Cumnoria prestwichii",
+  "uuid": "6cc4b756-fa65-471b-9c04-dbc9d27fcc4a",
+  "attribution": "Gareth Monger",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/6cc4b756-fa65-471b-9c04-dbc9d27fcc4a",
+  "svg": "silhouettes/clades/Dryomorpha.svg"
+ },
+ "Microraptorinae": {
+  "depicts": "Sinornithosaurus millenii",
+  "uuid": "4e1bed5f-86f2-49c6-a9f6-a7814d65ef69",
+  "attribution": "Scott Hartman (modified by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/4e1bed5f-86f2-49c6-a9f6-a7814d65ef69",
+  "svg": "silhouettes/clades/Microraptorinae.svg"
+ },
+ "Eudromaeosauria": {
+  "depicts": "Dromaeosauroides bornholmensis",
+  "uuid": "c85e9c59-deeb-4855-8c3f-90599ec44090",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/c85e9c59-deeb-4855-8c3f-90599ec44090",
+  "svg": "silhouettes/clades/Eudromaeosauria.svg"
+ },
+ "Dromaeosaurinae": {
+  "depicts": "Dromaeosauroides bornholmensis",
+  "uuid": "c85e9c59-deeb-4855-8c3f-90599ec44090",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/c85e9c59-deeb-4855-8c3f-90599ec44090",
+  "svg": "silhouettes/clades/Dromaeosaurinae.svg"
+ },
+ "Unenlagiinae": {
+  "depicts": "Rahonavis ostromi",
+  "uuid": "8fa6d585-3db4-40ba-8088-794a317cb1dc",
+  "attribution": "T. Michael Keesey",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/8fa6d585-3db4-40ba-8088-794a317cb1dc",
+  "svg": "silhouettes/clades/Unenlagiinae.svg"
+ },
+ "Velociraptorinae": {
+  "depicts": "Deinonychus antirrhopus",
+  "uuid": "7c86f479-5d3a-40b5-b6ec-ed291da2f8f9",
+  "attribution": "Emily Willoughby",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/7c86f479-5d3a-40b5-b6ec-ed291da2f8f9",
+  "svg": "silhouettes/clades/Velociraptorinae.svg"
+ },
+ "Halszkaraptorinae": {
+  "depicts": "Ningyuansaurus wangi",
+  "uuid": "51119f61-3475-497e-aea1-fd3489021dab",
+  "attribution": "Matt Martyniuk",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/51119f61-3475-497e-aea1-fd3489021dab",
+  "svg": "silhouettes/clades/Halszkaraptorinae.svg"
+ },
+ "Saurornitholestinae": {
+  "depicts": "Dromaeosauroides bornholmensis",
+  "uuid": "c85e9c59-deeb-4855-8c3f-90599ec44090",
+  "attribution": "FunkMonk",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/c85e9c59-deeb-4855-8c3f-90599ec44090",
+  "svg": "silhouettes/clades/Saurornitholestinae.svg"
+ },
+ "Baryonychinae": {
+  "depicts": "Baryonyx walkeri",
+  "uuid": "0c97094c-8de5-4d5e-aea6-cafe734bacfa",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/0c97094c-8de5-4d5e-aea6-cafe734bacfa",
+  "svg": "silhouettes/clades/Baryonychinae.svg"
+ },
+ "Spinosaurinae": {
+  "depicts": "Ichthyovenator laosensis",
+  "uuid": "4a3eeb5d-0f7b-4d9f-bbc4-d43d186218ba",
+  "attribution": "Pranav Iyer (grey ideas)",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/4a3eeb5d-0f7b-4d9f-bbc4-d43d186218ba",
+  "svg": "silhouettes/clades/Spinosaurinae.svg"
+ },
+ "Ceratosuchopsini": {
+  "depicts": "Cristatusaurus lapparenti",
+  "uuid": "909b5f69-8e28-4b9b-81cf-c86addbfd096",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/909b5f69-8e28-4b9b-81cf-c86addbfd096",
+  "svg": "silhouettes/clades/Ceratosuchopsini.svg"
+ },
+ "Spinosaurini": {
+  "depicts": "Oxalaia quilombensis",
+  "uuid": "8284190f-a528-4da0-b86e-63bc5badb950",
+  "attribution": "Connor Ashbridge",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/8284190f-a528-4da0-b86e-63bc5badb950",
+  "svg": "silhouettes/clades/Spinosaurini.svg"
+ },
+ "Khebbashia": {
+  "depicts": "Limaysaurus tessonei",
+  "uuid": "80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+  "attribution": "Michael P. Taylor",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+  "svg": "silhouettes/clades/Khebbashia.svg"
+ },
+ "Rebbachisaurinae": {
+  "depicts": "Nigersaurus taqueti",
+  "uuid": "76fe3085-c3f8-46e3-a0eb-c885aa30668c",
+  "attribution": "Mike Hanson",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/76fe3085-c3f8-46e3-a0eb-c885aa30668c",
+  "svg": "silhouettes/clades/Rebbachisaurinae.svg"
+ },
+ "Limaysaurinae": {
+  "depicts": "Limaysaurus tessonei",
+  "uuid": "80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+  "attribution": "Michael P. Taylor",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+  "svg": "silhouettes/clades/Limaysaurinae.svg"
+ },
+ "Macronaria": {
+  "depicts": "Brontomerus mcintoshi",
+  "uuid": "ea4d2a4d-3b4c-450a-bbdd-22520f7ef358",
+  "attribution": "Francisco Gascó (modified by Michael P. Taylor)",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/ea4d2a4d-3b4c-450a-bbdd-22520f7ef358",
+  "svg": "silhouettes/clades/Macronaria.svg"
+ },
+ "Titanosauriformes": {
+  "depicts": "Brontomerus mcintoshi",
+  "uuid": "ea4d2a4d-3b4c-450a-bbdd-22520f7ef358",
+  "attribution": "Francisco Gascó (modified by Michael P. Taylor)",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/ea4d2a4d-3b4c-450a-bbdd-22520f7ef358",
+  "svg": "silhouettes/clades/Titanosauriformes.svg"
+ },
+ "Somphospondyli": {
+  "depicts": "Wintonotitan wattsi",
+  "uuid": "cfdb4a18-90d1-4d50-8e70-55753d8026c7",
+  "attribution": "T. Tischler",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/cfdb4a18-90d1-4d50-8e70-55753d8026c7",
+  "svg": "silhouettes/clades/Somphospondyli.svg"
+ },
+ "Ankylosauria": {
+  "depicts": "Stegouros elengassen",
+  "uuid": "4ee1a15e-f275-4dc6-be7a-6669274c1e1e",
+  "attribution": "Alexander Vargas",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/4ee1a15e-f275-4dc6-be7a-6669274c1e1e",
+  "svg": "silhouettes/clades/Ankylosauria.svg"
+ },
+ "Euankylosauria": {
+  "depicts": "Mymoorapelta maysi",
+  "uuid": "16119d33-89ee-4c7a-ab16-9841ff1bda67",
+  "attribution": "Robert Gay",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/16119d33-89ee-4c7a-ab16-9841ff1bda67",
+  "svg": "silhouettes/clades/Euankylosauria.svg"
+ },
+ "Struthiosaurinae": {
+  "depicts": "Europelta carbonensis",
+  "uuid": "cd970ad1-0efd-4b26-8595-99ef104f96ef",
+  "attribution": "James I. Kirkland, Luis Alcalá, Mark A. Loewen, Eduardo Espílez, Luis Mampel, and Jelle P. Wiersma (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/cd970ad1-0efd-4b26-8595-99ef104f96ef",
+  "svg": "silhouettes/clades/Struthiosaurinae.svg"
+ },
+ "Ankylosaurinae": {
+  "depicts": "Bissektipelta archibaldi",
+  "uuid": "bf68e21e-fa8d-4f26-be72-03c52ce4d047",
+  "attribution": "Brad McFeeters (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/bf68e21e-fa8d-4f26-be72-03c52ce4d047",
+  "svg": "silhouettes/clades/Ankylosaurinae.svg"
+ },
+ "Ankylosaurini": {
+  "depicts": "Euoplocephalus tutus",
+  "uuid": "5b062105-b6a2-4405-bd75-3d0399102b9a",
+  "attribution": "Andrew A. Farke",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/5b062105-b6a2-4405-bd75-3d0399102b9a",
+  "svg": "silhouettes/clades/Ankylosaurini.svg"
+ },
+ "Ceratosauria": {
+  "depicts": "Deltadromeus agilis",
+  "uuid": "e1bc809f-5585-4741-acd4-a88e6ef5a754",
+  "attribution": "Jagged Fang Designs",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/e1bc809f-5585-4741-acd4-a88e6ef5a754",
+  "svg": "silhouettes/clades/Ceratosauria.svg"
+ },
+ "Brachyrostra": {
+  "depicts": "Aucasaurus garridoi",
+  "uuid": "51fde071-08c5-4278-91b4-79acf9263339",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc/3.0/",
+  "page": "https://www.phylopic.org/images/51fde071-08c5-4278-91b4-79acf9263339",
+  "svg": "silhouettes/clades/Brachyrostra.svg"
+ },
+ "Carnotaurinae": {
+  "depicts": "Carnotaurus sastrei",
+  "uuid": "9cd6e394-ea75-4d75-bfb6-8ba4bc855aa3",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/9cd6e394-ea75-4d75-bfb6-8ba4bc855aa3",
+  "svg": "silhouettes/clades/Carnotaurinae.svg"
+ },
+ "Majungasaurini": {
+  "depicts": "Majungasaurus crenatissimus",
+  "uuid": "d82ad39a-0770-4f85-99a6-f1d17bd1bf64",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/d82ad39a-0770-4f85-99a6-f1d17bd1bf64",
+  "svg": "silhouettes/clades/Majungasaurini.svg"
+ },
+ "Furileusauria": {
+  "depicts": "Aucasaurus garridoi",
+  "uuid": "51fde071-08c5-4278-91b4-79acf9263339",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc/3.0/",
+  "page": "https://www.phylopic.org/images/51fde071-08c5-4278-91b4-79acf9263339",
+  "svg": "silhouettes/clades/Furileusauria.svg"
+ },
+ "Abelisaurinae": {
+  "depicts": "Aucasaurus garridoi",
+  "uuid": "51fde071-08c5-4278-91b4-79acf9263339",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc/3.0/",
+  "page": "https://www.phylopic.org/images/51fde071-08c5-4278-91b4-79acf9263339",
+  "svg": "silhouettes/clades/Abelisaurinae.svg"
+ },
+ "Titanosauria": {
+  "depicts": "Tiamat valdecii",
+  "uuid": "f7d45ad0-0d64-4871-a59b-1414a41487dd",
+  "attribution": "Cy Marchant",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/f7d45ad0-0d64-4871-a59b-1414a41487dd",
+  "svg": "silhouettes/clades/Titanosauria.svg"
+ },
+ "Lithostrotia": {
+  "depicts": "Diamantinasaurus matildae",
+  "uuid": "aea1fe86-e7e8-4011-bf81-133cbb9c1f14",
+  "attribution": "T. Tischler",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/aea1fe86-e7e8-4011-bf81-133cbb9c1f14",
+  "svg": "silhouettes/clades/Lithostrotia.svg"
+ },
+ "Saltasaurinae": {
+  "depicts": "Neuquensaurus australis",
+  "uuid": "3e760e91-893b-4def-88ac-492e0ab22319",
+  "attribution": "Ryan Santos Soledade",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/3e760e91-893b-4def-88ac-492e0ab22319",
+  "svg": "silhouettes/clades/Saltasaurinae.svg"
+ },
+ "Opisthocoelicaudiinae": {
+  "depicts": "Opisthocoelicaudia skarzynskii",
+  "uuid": "33ae8000-0046-41bb-b68a-189a0eed3eca",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/33ae8000-0046-41bb-b68a-189a0eed3eca",
+  "svg": "silhouettes/clades/Opisthocoelicaudiinae.svg"
+ },
+ "Ankylopollexia": {
+  "depicts": "Camptosaurus dispar",
+  "uuid": "c2ed454e-1b4f-47f3-9e6c-4f227c3ba924",
+  "attribution": "Michael B. H. (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/c2ed454e-1b4f-47f3-9e6c-4f227c3ba924",
+  "svg": "silhouettes/clades/Ankylopollexia.svg"
+ },
+ "Styracosterna": {
+  "depicts": "Hippodraco scutodens",
+  "uuid": "d8cea744-f8f6-4174-9b2a-e154fa74513b",
+  "attribution": "Lukas Panzarin",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/d8cea744-f8f6-4174-9b2a-e154fa74513b",
+  "svg": "silhouettes/clades/Styracosterna.svg"
+ },
+ "Hadrosauriformes": {
+  "depicts": "Jinzhousaurus yangi",
+  "uuid": "145eb76f-4122-4e11-9ec2-c7448a088a98",
+  "attribution": "Pete Buchholz",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/145eb76f-4122-4e11-9ec2-c7448a088a98",
+  "svg": "silhouettes/clades/Hadrosauriformes.svg"
+ },
+ "Hadrosauroidea": {
+  "depicts": "Equijubus normani",
+  "uuid": "0cf38a02-1f3b-455c-b8df-d2760580a710",
+  "attribution": "Pete Buchholz",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/0cf38a02-1f3b-455c-b8df-d2760580a710",
+  "svg": "silhouettes/clades/Hadrosauroidea.svg"
+ },
+ "Hadrosaurinae": {
+  "depicts": "Hadrosaurus foulkii",
+  "uuid": "3bcbe8d3-a5e2-4d3e-b641-8fcb5be5c0e3",
+  "attribution": "Will Toosey",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/3bcbe8d3-a5e2-4d3e-b641-8fcb5be5c0e3",
+  "svg": "silhouettes/clades/Hadrosaurinae.svg"
+ },
+ "Lambeosaurinae": {
+  "depicts": "Parasaurolophus",
+  "uuid": "76779b00-0150-406a-a443-23c534ec80fe",
+  "attribution": "Scott Hartman (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/76779b00-0150-406a-a443-23c534ec80fe",
+  "svg": "silhouettes/clades/Lambeosaurinae.svg"
+ },
+ "Edmontosaurini": {
+  "depicts": "Edmontosaurus regalis",
+  "uuid": "48b6dd4b-b86d-4484-a1ff-a48f786e790f",
+  "attribution": "Pete Buchholz",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/48b6dd4b-b86d-4484-a1ff-a48f786e790f",
+  "svg": "silhouettes/clades/Edmontosaurini.svg"
+ },
+ "Brachylophosaurini": {
+  "depicts": "Brachylophosaurus canadensis",
+  "uuid": "7a96e7d9-93a2-4254-9868-c872a4003f39",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/7a96e7d9-93a2-4254-9868-c872a4003f39",
+  "svg": "silhouettes/clades/Brachylophosaurini.svg"
+ },
+ "Saurolophinae": {
+  "depicts": "Brachylophosaurus canadensis",
+  "uuid": "7a96e7d9-93a2-4254-9868-c872a4003f39",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/7a96e7d9-93a2-4254-9868-c872a4003f39",
+  "svg": "silhouettes/clades/Saurolophinae.svg"
+ },
+ "Kritosaurini": {
+  "depicts": "Gryposaurus monumentensis",
+  "uuid": "4ae90b8f-bbb4-47cd-a914-98e1c845cf1e",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/4ae90b8f-bbb4-47cd-a914-98e1c845cf1e",
+  "svg": "silhouettes/clades/Kritosaurini.svg"
+ },
+ "Lambeosaurini": {
+  "depicts": "Corythosaurus casuarius",
+  "uuid": "9f34bd6e-160b-4efc-91fd-d269441dd544",
+  "attribution": "Craig Dylke",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/9f34bd6e-160b-4efc-91fd-d269441dd544",
+  "svg": "silhouettes/clades/Lambeosaurini.svg"
+ },
+ "Parasaurolophini": {
+  "depicts": "Parasaurolophus cyrtocristatus",
+  "uuid": "9525cdcd-4e0a-4a20-8389-ee1e05f8f596",
+  "attribution": "Matt Martyniuk",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/9525cdcd-4e0a-4a20-8389-ee1e05f8f596",
+  "svg": "silhouettes/clades/Parasaurolophini.svg"
+ },
+ "Saurolophini": {
+  "depicts": "Prosaurolophus",
+  "uuid": "ff4388fc-6b5d-40dd-a439-aa71f485d6b6",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/ff4388fc-6b5d-40dd-a439-aa71f485d6b6",
+  "svg": "silhouettes/clades/Saurolophini.svg"
+ },
+ "Arenysaurini": {
+  "depicts": "Ajnabia odysseus",
+  "uuid": "a7e6e9a2-48d9-4ae8-90c8-35382c728fd7",
+  "attribution": "Tasman Dixon",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/a7e6e9a2-48d9-4ae8-90c8-35382c728fd7",
+  "svg": "silhouettes/clades/Arenysaurini.svg"
+ },
+ "Marginocephalia": {
+  "depicts": "Wannanosaurus yansiensis",
+  "uuid": "8de864d5-7133-4173-b914-1f9680af7fb5",
+  "attribution": "Jack Mayer Wood",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/8de864d5-7133-4173-b914-1f9680af7fb5",
+  "svg": "silhouettes/clades/Marginocephalia.svg"
+ },
+ "Ceratopsia": {
+  "depicts": "Psittacosaurus mongoliensis",
+  "uuid": "ed1981b1-43ad-412e-ac4b-0af0717b9137",
+  "attribution": "Matt Martyniuk (modified by Serenchia)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/ed1981b1-43ad-412e-ac4b-0af0717b9137",
+  "svg": "silhouettes/clades/Ceratopsia.svg"
+ },
+ "Centrosaurinae": {
+  "depicts": "Avaceratops lammersi",
+  "uuid": "030d53b7-5625-478e-9971-ef07a117f23b",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/030d53b7-5625-478e-9971-ef07a117f23b",
+  "svg": "silhouettes/clades/Centrosaurinae.svg"
+ },
+ "Pachyrhinosaurini": {
+  "depicts": "Einiosaurus procurvicornis",
+  "uuid": "fa749dd0-d69b-43a3-b239-75b80c4307aa",
+  "attribution": "Nobu Tamura (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/fa749dd0-d69b-43a3-b239-75b80c4307aa",
+  "svg": "silhouettes/clades/Pachyrhinosaurini.svg"
+ },
+ "Chasmosaurinae": {
+  "depicts": "Terminocavus sealeyi",
+  "uuid": "84d7b9cf-75ec-4144-b090-fec5f5448886",
+  "attribution": null,
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/84d7b9cf-75ec-4144-b090-fec5f5448886",
+  "svg": "silhouettes/clades/Chasmosaurinae.svg"
+ },
+ "Albertaceratopsini": {
+  "depicts": "Albertaceratops nesmoi",
+  "uuid": "4b12a77a-0a16-4b93-baf5-7d4d01d0d9bd",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/4b12a77a-0a16-4b93-baf5-7d4d01d0d9bd",
+  "svg": "silhouettes/clades/Albertaceratopsini.svg"
+ },
+ "Nasutoceratopsini": {
+  "depicts": "Avaceratops lammersi",
+  "uuid": "030d53b7-5625-478e-9971-ef07a117f23b",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/030d53b7-5625-478e-9971-ef07a117f23b",
+  "svg": "silhouettes/clades/Nasutoceratopsini.svg"
+ },
+ "Centrosaurini": {
+  "depicts": "Spinops sternbergorum",
+  "uuid": "778ff5cf-a1ad-408a-a88c-3db94b3fc99b",
+  "attribution": "Andrew A. Farke",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/778ff5cf-a1ad-408a-a88c-3db94b3fc99b",
+  "svg": "silhouettes/clades/Centrosaurini.svg"
+ },
+ "Triceratopsini": {
+  "depicts": "Eotriceratops xerinsularis",
+  "uuid": "b4705472-581f-4c8e-8d1e-be1d6d4f0f38",
+  "attribution": "Nobu Tamura (modified by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/b4705472-581f-4c8e-8d1e-be1d6d4f0f38",
+  "svg": "silhouettes/clades/Triceratopsini.svg"
+ },
+ "Tyrannosauroidea": {
+  "depicts": "Eotyrannus lengi",
+  "uuid": "8025b9c9-380b-44ca-a087-d0aa80c245be",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/8025b9c9-380b-44ca-a087-d0aa80c245be",
+  "svg": "silhouettes/clades/Tyrannosauroidea.svg"
+ },
+ "Tyrannosaurinae": {
+  "depicts": "Daspletosaurus torosus",
+  "uuid": "86bd9acd-704b-4072-abd1-a7449474184e",
+  "attribution": "Stephen O'Connor (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/86bd9acd-704b-4072-abd1-a7449474184e",
+  "svg": "silhouettes/clades/Tyrannosaurinae.svg"
+ },
+ "Teratophoneini": {
+  "depicts": "Teratophoneus curriei",
+  "uuid": "ad05ef4a-3533-4b30-b1ff-3d1faf393337",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/ad05ef4a-3533-4b30-b1ff-3d1faf393337",
+  "svg": "silhouettes/clades/Teratophoneini.svg"
+ },
+ "Daspletosaurini": {
+  "depicts": "Daspletosaurus torosus",
+  "uuid": "86bd9acd-704b-4072-abd1-a7449474184e",
+  "attribution": "Stephen O'Connor (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://www.phylopic.org/images/86bd9acd-704b-4072-abd1-a7449474184e",
+  "svg": "silhouettes/clades/Daspletosaurini.svg"
+ },
+ "Tyrannosaurini": {
+  "depicts": "Tyrannosaurus magnus",
+  "uuid": "f05e56c4-83bc-4809-8c2e-fd30c0b0bba2",
+  "attribution": "Conty (vectorized by T. Michael Keesey)",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/f05e56c4-83bc-4809-8c2e-fd30c0b0bba2",
+  "svg": "silhouettes/clades/Tyrannosaurini.svg"
+ },
+ "Albertosaurinae": {
+  "depicts": "Albertosaurus libratus",
+  "uuid": "d7da9be9-fad6-4683-bf5e-bf7c951ee92c",
+  "attribution": "Craig Dylke",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://www.phylopic.org/images/d7da9be9-fad6-4683-bf5e-bf7c951ee92c",
+  "svg": "silhouettes/clades/Albertosaurinae.svg"
+ },
+ "Alioramini": {
+  "depicts": "Alioramus remotus",
+  "uuid": "499fe1d6-a3c5-4219-a60e-d5ae93031bda",
+  "attribution": "Will Toosey",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://www.phylopic.org/images/499fe1d6-a3c5-4219-a60e-d5ae93031bda",
+  "svg": "silhouettes/clades/Alioramini.svg"
+ },
+ "Carcharodontosaurinae": {
+  "depicts": "Carcharodontosaurus saharicus",
+  "uuid": "84bfa110-4a5b-437e-b759-711c76f5eed8",
+  "attribution": "Martin Kevil",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://www.phylopic.org/images/84bfa110-4a5b-437e-b759-711c76f5eed8",
+  "svg": "silhouettes/clades/Carcharodontosaurinae.svg"
+ },
+ "Giganotosaurini": {
+  "depicts": "Giganotosaurus carolinii",
+  "uuid": "a7d7618f-f0db-47b0-b5f9-75176e7a9af5",
+  "attribution": "Scott Hartman",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "page": "https://www.phylopic.org/images/a7d7618f-f0db-47b0-b5f9-75176e7a9af5",
+  "svg": "silhouettes/clades/Giganotosaurini.svg"
+ }
+}
