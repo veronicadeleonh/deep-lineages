@@ -1,0 +1,1798 @@
+[
+  {
+    "family": "Silesauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 12,
+    "n_occurrences": 26,
+    "range_ma": [
+      247.0,
+      201.4
+    ],
+    "range_ma_all": [
+      247.0,
+      72.2
+    ],
+    "periods": [
+      "Middle Triassic",
+      "Late Triassic"
+    ],
+    "top_genera": [
+      "Kwanasaurus",
+      "Lewisuchus",
+      "Asilisaurus",
+      "Silesaurus",
+      "Eucoelophysis"
+    ],
+    "continents": {
+      "North America": 10,
+      "South America": 7,
+      "Africa": 6,
+      "Europe": 3
+    },
+    "pbdb": {
+      "taxon_name": "Silesauridae",
+      "taxon_attr": "Langer et al. 2010",
+      "parent_name": "Parapredentata",
+      "firstapp_max_ma": 247,
+      "firstapp_min_ma": 241.464,
+      "lastapp_max_ma": 205.7,
+      "lastapp_min_ma": 201.4,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 26,
+      "n_occs": 40
+    },
+    "phylopic": {
+      "source": "Silesauridae",
+      "uuid": "b512af42-a672-4362-95d6-96d3d0cfc369",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/b512af42-a672-4362-95d6-96d3d0cfc369",
+      "svg": "silhouettes/Silesauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Silesauridae",
+      "description": "Extinct family of dinosaur-like reptiles",
+      "extract": "Silesauridae is an extinct family of early dinosauriforms which lived during the Triassic Period. Their fossils have been found in Europe, North America, South America, and Africa, reaching peak diversity early in the Late Triassic. The exact affinities of silesaurids are debated, and various studies come to different conclusions regarding the relationship between silesaurids and early dinosaurs.",
+      "url": "https://en.wikipedia.org/wiki/Silesauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Asilisaurus_kongwe_FMNH.jpg/330px-Asilisaurus_kongwe_FMNH.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Coelophysidae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 9,
+    "n_occurrences": 42,
+    "range_ma": [
+      237.0,
+      174.7
+    ],
+    "range_ma_all": [
+      237.0,
+      174.7
+    ],
+    "periods": [
+      "Late Triassic",
+      "Early Jurassic"
+    ],
+    "top_genera": [
+      "Coelophysis",
+      "Megapnosaurus",
+      "Segisaurus",
+      "Camposaurus",
+      "Procompsognathus"
+    ],
+    "continents": {
+      "North America": 31,
+      "Africa": 6,
+      "Asia": 2,
+      "South America": 2,
+      "Europe": 1
+    },
+    "pbdb": {
+      "taxon_name": "Coelophysidae",
+      "taxon_attr": "Paul 1988",
+      "parent_name": "Coelophysoidea",
+      "firstapp_max_ma": 227.3,
+      "firstapp_min_ma": 211.18,
+      "lastapp_max_ma": 192.9,
+      "lastapp_min_ma": 174.7,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 23,
+      "n_occs": 46
+    },
+    "phylopic": {
+      "source": "Coelophysidae",
+      "uuid": "85008e98-2194-4844-bff9-4c5513ddd117",
+      "attribution": "Emily Willoughby",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/85008e98-2194-4844-bff9-4c5513ddd117",
+      "svg": "silhouettes/Coelophysidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Coelophysoidea",
+      "description": "Extinct superfamily of dinosaurs",
+      "extract": "Coelophysoidea is an extinct clade of theropod dinosaurs common during the Late Triassic and Early Jurassic periods. They were widespread geographically, probably living on all continents. Coelophysoids were all slender, carnivorous forms with a superficial similarity to the coelurosaurs, with which they were formerly classified, and some species had delicate cranial crests. Sizes range from about 1 to 6 m in length. It is unknown what kind of external covering coelophysoids had, and various artists have portrayed them as either scaly or feathered. Some species may have lived in packs, as inferred from sites where numerous individuals have been found together.",
+      "url": "https://en.wikipedia.org/wiki/Coelophysoidea",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Coelophysis_bauri_mount.jpg/330px-Coelophysis_bauri_mount.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Herrerasauridae",
+    "lineage": "theropoda",
+    "clade": "Saurischia",
+    "n_genera": 4,
+    "n_occurrences": 15,
+    "range_ma": [
+      237.0,
+      205.7
+    ],
+    "range_ma_all": [
+      237.0,
+      205.7
+    ],
+    "periods": [
+      "Late Triassic"
+    ],
+    "top_genera": [
+      "Herrerasaurus",
+      "Staurikosaurus",
+      "Sanjuansaurus",
+      "Gnathovorax"
+    ],
+    "continents": {
+      "South America": 15
+    },
+    "pbdb": {
+      "taxon_name": "Herrerasauridae",
+      "taxon_attr": "Benedetto 1973",
+      "parent_name": "Saurischia",
+      "firstapp_max_ma": 237,
+      "firstapp_min_ma": 227.3,
+      "lastapp_max_ma": 227.3,
+      "lastapp_min_ma": 201.4,
+      "motility": "actively mobile",
+      "taxon_size": 9,
+      "n_occs": 21
+    },
+    "phylopic": {
+      "source": "Herrerasauridae",
+      "uuid": "09509d42-df1a-4ce6-9a4e-63f2235b2269",
+      "attribution": "Oscar Alcober, Ricardo Martinez",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/09509d42-df1a-4ce6-9a4e-63f2235b2269",
+      "svg": "silhouettes/Herrerasauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Herrerasauria",
+      "description": "Extinct family of basal saurischian dinosaurs",
+      "extract": "Herrerasauria is an extinct clade of carnivorous dinosaurs, possibly basal to either theropods or all saurischians, or even their own branching from Dracohors, separate from Dinosauria altogether. They are among the oldest known dinosaurs, first appearing in the fossil record around 233.23 million years ago, before becoming extinct by the end of the Carnian stage. Herrerasaurids were relatively small-sized dinosaurs, normally no more than 4 metres (13 ft) long, although the holotype specimen of \"Frenguellisaurus ischigualastensis\" is thought to have reached around 6 meters long. The best known representatives of this group are from South America, where they were first discovered in the 1930s in relation to Staurikosaurus and 1960s in relation to Herrerasaurus. A nearly complete skeleton of Herrerasaurus ischigualastensis was discovered in the Ischigualasto Formation in San Juan, Argentina, in 1988. Less complete possible herrerasaurids have been found in North America and Africa, and they may have inhabited other continents as well.",
+      "url": "https://en.wikipedia.org/wiki/Herrerasauria",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Herrerasaurus_ischigualastensis_DSC_2929.jpg/330px-Herrerasaurus_ischigualastensis_DSC_2929.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Plateosauridae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 6,
+    "n_occurrences": 42,
+    "range_ma": [
+      237.0,
+      201.4
+    ],
+    "range_ma_all": [
+      237.0,
+      192.9
+    ],
+    "periods": [
+      "Late Triassic"
+    ],
+    "top_genera": [
+      "Plateosaurus",
+      "Plateosauravus",
+      "Issi",
+      "Unaysaurus",
+      "Ruehleia"
+    ],
+    "continents": {
+      "Europe": 36,
+      "Africa": 3,
+      "South America": 2,
+      "Asia": 1
+    },
+    "pbdb": {
+      "taxon_name": "Plateosauridae",
+      "taxon_attr": "Marsh 1895",
+      "parent_name": "Sauropodomorpha",
+      "firstapp_max_ma": 227.3,
+      "firstapp_min_ma": 211.18,
+      "lastapp_max_ma": 174.7,
+      "lastapp_min_ma": 168.2,
+      "motility": "actively mobile",
+      "taxon_size": 23,
+      "n_occs": 72
+    },
+    "phylopic": {
+      "source": "Plateosauridae",
+      "uuid": "27634607-f389-4895-822f-88164ae2d77a",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "page": "https://www.phylopic.org/images/27634607-f389-4895-822f-88164ae2d77a",
+      "svg": "silhouettes/Plateosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Plateosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Plateosauridae is a family of plateosaurian sauropodomorphs from the Late Triassic of Europe, Greenland, Africa and Asia. Although several dinosaurs have been classified as plateosaurids over the years, the family Plateosauridae is now restricted to Plateosaurus, Yimenosaurus, Euskelosaurus, and Issi. In another study, Yates (2003) sunk Sellosaurus into Plateosaurus. Gresslyosaurus is alternatively considered its own genus or a synonym of Plateosaurus.",
+      "url": "https://en.wikipedia.org/wiki/Plateosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Plateosaurus_panorama.jpg/330px-Plateosaurus_panorama.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Saturnaliidae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 4,
+    "n_occurrences": 8,
+    "range_ma": [
+      237.0,
+      205.7
+    ],
+    "range_ma_all": [
+      237.0,
+      205.7
+    ],
+    "periods": [
+      "Late Triassic"
+    ],
+    "top_genera": [
+      "Saturnalia",
+      "Pampadromaeus",
+      "Panphagia",
+      "Chromogisaurus"
+    ],
+    "continents": {
+      "South America": 7,
+      "Africa": 1
+    },
+    "pbdb": {
+      "taxon_name": "Saturnaliidae",
+      "taxon_attr": "(Ezcurra 2010)",
+      "parent_name": "Sauropodomorpha",
+      "firstapp_max_ma": 237,
+      "firstapp_min_ma": 227.3,
+      "lastapp_max_ma": 192.9,
+      "lastapp_min_ma": 174.7,
+      "motility": "actively mobile",
+      "taxon_size": 9,
+      "n_occs": 9
+    },
+    "phylopic": {
+      "source": "Saturnaliidae",
+      "uuid": "714874fa-9247-42bd-bcc9-9d10f1acad56",
+      "attribution": "Ricardo N. Martinez & Oscar A. Alcober",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/714874fa-9247-42bd-bcc9-9d10f1acad56",
+      "svg": "silhouettes/Saturnaliidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Saturnaliidae",
+      "description": "Late Triassic dinosaur clade",
+      "extract": "Saturnaliidae is a family of basal sauropodomorph dinosaurs found in Brazil, Argentina and possibly Zimbabwe. It is not to be confused with Saturnalidae, a family of radiolarian protists, or with Saturniidae, a family of large moths.",
+      "url": "https://en.wikipedia.org/wiki/Saturnaliidae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Saturnalia_NT_small.jpg/330px-Saturnalia_NT_small.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Massospondylidae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 10,
+    "n_occurrences": 120,
+    "range_ma": [
+      201.4,
+      174.7
+    ],
+    "range_ma_all": [
+      237.0,
+      168.2
+    ],
+    "periods": [
+      "Early Jurassic"
+    ],
+    "top_genera": [
+      "Massospondylus",
+      "Lufengosaurus",
+      "Sarahsaurus",
+      "Coloradisaurus",
+      "Adeopapposaurus"
+    ],
+    "continents": {
+      "Africa": 83,
+      "Asia": 29,
+      "South America": 5,
+      "North America": 2,
+      "Oceania": 1
+    },
+    "pbdb": {
+      "taxon_name": "Massospondylidae",
+      "taxon_attr": "Huene 1914",
+      "parent_name": "Massopoda",
+      "firstapp_max_ma": 237,
+      "firstapp_min_ma": 227.3,
+      "lastapp_max_ma": 174.7,
+      "lastapp_min_ma": 168.2,
+      "motility": "actively mobile",
+      "taxon_size": 25,
+      "n_occs": 121
+    },
+    "phylopic": {
+      "source": "Massospondylidae",
+      "uuid": "5d86d3a5-5813-4dea-b28f-14e99a912491",
+      "attribution": "Joseph J. W. Sertich, Mark A. Loewen",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/5d86d3a5-5813-4dea-b28f-14e99a912491",
+      "svg": "silhouettes/Massospondylidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Massospondylidae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Massospondylidae is a family of early massopod dinosaurs that existed in Asia, Africa, North America, South America and Antarctica during the Late Triassic to the Early Jurassic periods. Several dinosaurs have been classified as massospondylids over the years. The largest cladistic analysis of early sauropodomorphs, which was presented by Apaldetti and colleagues in November 2011, found Adeopapposaurus, Coloradisaurus, Glacialisaurus, Massospondylus, Leyesaurus and Lufengosaurus to be massospondylids. This result supports many previous analyses that tested fewer taxa. However, this analysis found the two recently described North American massopods, Sarahsaurus and Seitaad, and the South African Ignavusaurus to nest outside Massospondylidae, as opposed to some provisional proposals. Earlier in 2011, Pradhania, a sauropodomorph from India, was tested for the first time in a large cladistic analysis and was found to be a relatively basal massospondylid. Mussaurus and Xixiposaurus may also be included within Massospondylidae.",
+      "url": "https://en.wikipedia.org/wiki/Massospondylidae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Adeopapposaurus_mognai.jpg/330px-Adeopapposaurus_mognai.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Heterodontosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 8,
+    "n_occurrences": 27,
+    "range_ma": [
+      201.4,
+      137.1
+    ],
+    "range_ma_all": [
+      201.4,
+      137.1
+    ],
+    "periods": [
+      "Early Jurassic",
+      "Late Jurassic",
+      "Early Cretaceous"
+    ],
+    "top_genera": [
+      "Heterodontosaurus",
+      "Echinodon",
+      "Lycorhinus",
+      "Fruitadens",
+      "Manidens"
+    ],
+    "continents": {
+      "Africa": 13,
+      "North America": 6,
+      "Europe": 5,
+      "South America": 2,
+      "Asia": 1
+    },
+    "pbdb": {
+      "taxon_name": "Heterodontosauridae",
+      "taxon_attr": "Romer 1966",
+      "parent_name": "Prionodontia",
+      "firstapp_max_ma": 227.3,
+      "firstapp_min_ma": 205.7,
+      "lastapp_max_ma": 125.77,
+      "lastapp_min_ma": 121.4,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 19,
+      "n_occs": 39
+    },
+    "phylopic": {
+      "source": "Heterodontosauridae",
+      "uuid": "a25a1c20-972a-46f4-ac18-6b463a7d53c7",
+      "attribution": "Jaime Headden",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/a25a1c20-972a-46f4-ac18-6b463a7d53c7",
+      "svg": "silhouettes/Heterodontosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Heterodontosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Heterodontosauridae is a family of ornithischian dinosaurs that were likely among the most basal (primitive) members of the group. Their phylogenetic placement is uncertain but they are most commonly found outside of the group Genasauria. Although their fossils are relatively rare and their group small in numbers, they have been found on all continents except Australia and Antarctica, with a range spanning the Early Jurassic to the Early Cretaceous.",
+      "url": "https://en.wikipedia.org/wiki/Heterodontosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Heterodontosaurus_tucki_cast_-_University_of_California_Museum_of_Paleontology_-_Berkeley%2C_CA_-_DSC04696.JPG/330px-Heterodontosaurus_tucki_cast_-_University_of_California_Museum_of_Paleontology_-_Berkeley%2C_CA_-_DSC04696.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Megalosauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 11,
+    "n_occurrences": 101,
+    "range_ma": [
+      174.7,
+      100.5
+    ],
+    "range_ma_all": [
+      205.7,
+      66.0
+    ],
+    "periods": [
+      "Middle Jurassic",
+      "Late Jurassic",
+      "Early Cretaceous"
+    ],
+    "top_genera": [
+      "Megalosaurus",
+      "Torvosaurus",
+      "Piveteausaurus",
+      "Afrovenator",
+      "Dubreuillosaurus"
+    ],
+    "continents": {
+      "Europe": 77,
+      "North America": 9,
+      "Africa": 7,
+      "Asia": 5,
+      "South America": 3
+    },
+    "pbdb": {
+      "taxon_name": "Megalosauridae",
+      "taxon_attr": "(Fitzinger 1843)",
+      "parent_name": "Megalosauroidea",
+      "firstapp_max_ma": 205.7,
+      "firstapp_min_ma": 201.4,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 32,
+      "n_occs": 119
+    },
+    "phylopic": {
+      "source": "Megalosaurus",
+      "uuid": "bacadb12-5f94-4397-8c4a-573b3e2a5d07",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "page": "https://www.phylopic.org/images/bacadb12-5f94-4397-8c4a-573b3e2a5d07",
+      "svg": "silhouettes/Megalosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Megalosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Megalosauridae is a monophyletic family of carnivorous theropod dinosaurs within the group Megalosauroidea. Appearing in the Middle Jurassic, megalosaurids were among the first major radiation of large theropod dinosaurs. They were a relatively primitive group of basal tetanurans containing two main subfamilies, Megalosaurinae and Afrovenatorinae, along with the basal genus Eustreptospondylus, an unresolved taxon which differs from both subfamilies.",
+      "url": "https://en.wikipedia.org/wiki/Megalosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Torvosaurus_Museum_of_Ancient_Life_2.jpg/330px-Torvosaurus_Museum_of_Ancient_Life_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Metriacanthosauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 7,
+    "n_occurrences": 11,
+    "range_ma": [
+      174.7,
+      113.2
+    ],
+    "range_ma_all": [
+      174.7,
+      113.2
+    ],
+    "periods": [
+      "Middle Jurassic",
+      "Late Jurassic",
+      "Early Cretaceous"
+    ],
+    "top_genera": [
+      "Yangchuanosaurus",
+      "Sinraptor",
+      "Siamotyrannus",
+      "Metriacanthosaurus",
+      "Shidaisaurus"
+    ],
+    "continents": {
+      "Asia": 10,
+      "Europe": 1
+    },
+    "pbdb": {
+      "taxon_name": "Metriacanthosauridae",
+      "taxon_attr": "Carrano et al. 2012",
+      "parent_name": "Allosauroidea",
+      "firstapp_max_ma": 174.7,
+      "firstapp_min_ma": 168.2,
+      "lastapp_max_ma": 100.5,
+      "lastapp_min_ma": 93.9,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 21,
+      "n_occs": 23
+    },
+    "phylopic": {
+      "source": "Metriacanthosauridae",
+      "uuid": "3ee39f8e-9216-4fa4-abba-1d1d024b2c99",
+      "attribution": "James Neenan",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://www.phylopic.org/images/3ee39f8e-9216-4fa4-abba-1d1d024b2c99",
+      "svg": "silhouettes/Metriacanthosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Metriacanthosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Metriacanthosauridae is an extinct family of allosauroid theropod dinosaurs that lived in Europe and Asia from the Middle Jurassic to the Early Cretaceous. The family is split into two subgroups: Metriacanthosaurinae, which includes dinosaurs closely related to Metriacanthosaurus, and another group composed of the close relatives of Yangchuanosaurus. Metriacanthosaurids are considered carnosaurs, belonging to the Allosauroidea superfamily. The group includes species of large range in body size. Of their physical traits, most notable are their neural spines. The records of the group are mostly confined to Asia, though Metriacanthosaurus is known from Europe. Metriacanthosauridae is used as a senior synonym of Sinraptoridae.",
+      "url": "https://en.wikipedia.org/wiki/Metriacanthosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Sinraptor_dongi.jpg/330px-Sinraptor_dongi.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Mamenchisauridae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 23,
+    "n_occurrences": 61,
+    "range_ma": [
+      174.7,
+      137.1
+    ],
+    "range_ma_all": [
+      201.4,
+      113.2
+    ],
+    "periods": [
+      "Middle Jurassic",
+      "Late Jurassic"
+    ],
+    "top_genera": [
+      "Mamenchisaurus",
+      "Omeisaurus",
+      "Tienshanosaurus",
+      "Wamweracaudia",
+      "Hudiesaurus"
+    ],
+    "continents": {
+      "Asia": 58,
+      "Africa": 2,
+      "Europe": 1
+    },
+    "pbdb": {
+      "taxon_name": "Mamenchisauridae",
+      "taxon_attr": "(Chao 1965)",
+      "parent_name": "Eusauropoda",
+      "firstapp_max_ma": 201.4,
+      "firstapp_min_ma": 174.7,
+      "lastapp_max_ma": 113.2,
+      "lastapp_min_ma": 110.1,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 61,
+      "n_occs": 72
+    },
+    "phylopic": {
+      "source": "Mamenchisauridae",
+      "uuid": "7a260016-8958-445b-86da-1bb361b510ef",
+      "attribution": "Nobu Tamura (vectorized by T. Michael Keesey)",
+      "license": "https://creativecommons.org/licenses/by-nc/3.0/",
+      "page": "https://www.phylopic.org/images/7a260016-8958-445b-86da-1bb361b510ef",
+      "svg": "silhouettes/Mamenchisauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Mamenchisauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Mamenchisauridae is a family of sauropod dinosaurs belonging to the Eusauropoda known from the Jurassic and Early Cretaceous of Asia and Africa. Mamenchisaurids are characterized by their proportionately extremely long necks. Some members of the group reached gigantic sizes, amongst the largest of all sauropods.",
+      "url": "https://en.wikipedia.org/wiki/Mamenchisauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Zigong_Dinosaur_Museum_Mamenchisaurus_hochuanensis_below.jpg/330px-Zigong_Dinosaur_Museum_Mamenchisaurus_hochuanensis_below.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Cetiosauridae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 3,
+    "n_occurrences": 6,
+    "range_ma": [
+      182.9,
+      154.8
+    ],
+    "range_ma_all": [
+      182.9,
+      154.8
+    ],
+    "periods": [
+      "Early Jurassic",
+      "Middle Jurassic"
+    ],
+    "top_genera": [
+      "Patagosaurus",
+      "Chebsaurus",
+      "Protognathosaurus"
+    ],
+    "continents": {
+      "South America": 4,
+      "Africa": 1,
+      "Asia": 1
+    },
+    "pbdb": {
+      "taxon_name": "Cetiosauridae",
+      "taxon_attr": "(Lydekker 1888)",
+      "parent_name": "Eusauropoda",
+      "firstapp_max_ma": 184.2,
+      "firstapp_min_ma": 180.4,
+      "lastapp_max_ma": 143.1,
+      "lastapp_min_ma": 137.05,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 10,
+      "n_occs": 15
+    },
+    "phylopic": {
+      "source": "Cetiosauridae",
+      "uuid": "326f4e1a-6c4b-4165-90e2-9b68d144fe11",
+      "attribution": "Smokeybjb",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/326f4e1a-6c4b-4165-90e2-9b68d144fe11",
+      "svg": "silhouettes/Cetiosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Cetiosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Cetiosauridae is a family of sauropod dinosaurs which was first proposed by Richard Lydekker in 1888. While traditionally a wastebasket taxon containing various unrelated species, some recent studies have found that it may represent a natural clade. Alongside Cetiosaurus from the Middle Jurassic of Britain, other taxa recently assigned to the family include Lapparentosaurus from the Middle Jurassic of Madagascar, and Patagosaurus from the late Early-Middle Jurassic of Patagonia, which share autapomorphies with Cetiosaurus that are not shared by other eusauropods. Additionally, at least one study has suggested that the mamenchisaurids may represent a sub-group of the cetiosaurids, which would be termed Mamenchisaurinae.",
+      "url": "https://en.wikipedia.org/wiki/Cetiosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Cetiosaurus.jpg/330px-Cetiosaurus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Stegosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 17,
+    "n_occurrences": 171,
+    "range_ma": [
+      174.7,
+      100.5
+    ],
+    "range_ma_all": [
+      174.7,
+      93.9
+    ],
+    "periods": [
+      "Middle Jurassic",
+      "Late Jurassic",
+      "Early Cretaceous"
+    ],
+    "top_genera": [
+      "Stegosaurus",
+      "Dacentrurus",
+      "Kentrosaurus",
+      "Hesperosaurus",
+      "Chungkingosaurus"
+    ],
+    "continents": {
+      "North America": 93,
+      "Europe": 34,
+      "Africa": 30,
+      "Asia": 14
+    },
+    "pbdb": {
+      "taxon_name": "Stegosauridae",
+      "taxon_attr": "Marsh 1880",
+      "parent_name": "Stegosauria",
+      "firstapp_max_ma": 174.7,
+      "firstapp_min_ma": 161.5,
+      "lastapp_max_ma": 100.5,
+      "lastapp_min_ma": 93.9,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 50,
+      "n_occs": 193
+    },
+    "phylopic": {
+      "source": "Stegosauridae",
+      "uuid": "616a32f5-d1d1-4a93-bbfc-965b959e673a",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "page": "https://www.phylopic.org/images/616a32f5-d1d1-4a93-bbfc-965b959e673a",
+      "svg": "silhouettes/Stegosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Stegosauria",
+      "description": "Extinct clade of armored dinosaurs",
+      "extract": "Stegosauria is a group of herbivorous ornithischian dinosaurs that lived during the Jurassic and early Cretaceous periods. Stegosaurian fossils have been found mostly in the Northern Hemisphere, Africa and South America. Although their geographical origins are unclear, the earliest unequivocal stegosaurians are known from the Middle Jurassic, including Adratiklit, Bashanosaurus, Isaberrysaura and Thyreosaurus.",
+      "url": "https://en.wikipedia.org/wiki/Stegosauria",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Zigong_Dinosaur_Museum_Gigantspinosaurus.jpg/330px-Zigong_Dinosaur_Museum_Gigantspinosaurus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Huayangosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 5,
+    "n_occurrences": 5,
+    "range_ma": [
+      170.9,
+      154.8
+    ],
+    "range_ma_all": [
+      170.9,
+      154.8
+    ],
+    "periods": [
+      "Middle Jurassic"
+    ],
+    "top_genera": [
+      "Huayangosaurus",
+      "Gigantspinosaurus",
+      "Isaberrysaura",
+      "Bashanosaurus",
+      "Baiyinosaurus"
+    ],
+    "continents": {
+      "Asia": 4,
+      "South America": 1
+    },
+    "pbdb": {
+      "taxon_name": "Huayangosauridae",
+      "taxon_attr": "Dong et al. 1982",
+      "parent_name": "Stegosauria",
+      "firstapp_max_ma": 170.9,
+      "firstapp_min_ma": 168.6,
+      "lastapp_max_ma": 168.2,
+      "lastapp_min_ma": 154.8,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 11,
+      "n_occs": 5
+    },
+    "phylopic": {
+      "source": "Huayangosauridae",
+      "uuid": "afacddab-f924-4618-868b-85b5607f2afc",
+      "attribution": "Connor Ashbridge",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/afacddab-f924-4618-868b-85b5607f2afc",
+      "svg": "silhouettes/Huayangosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Stegosauria",
+      "description": "Extinct clade of armored dinosaurs",
+      "extract": "Stegosauria is a group of herbivorous ornithischian dinosaurs that lived during the Jurassic and early Cretaceous periods. Stegosaurian fossils have been found mostly in the Northern Hemisphere, Africa and South America. Although their geographical origins are unclear, the earliest unequivocal stegosaurians are known from the Middle Jurassic, including Adratiklit, Bashanosaurus, Isaberrysaura and Thyreosaurus.",
+      "url": "https://en.wikipedia.org/wiki/Stegosauria",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Zigong_Dinosaur_Museum_Gigantspinosaurus.jpg/330px-Zigong_Dinosaur_Museum_Gigantspinosaurus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Troodontidae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 35,
+    "n_occurrences": 189,
+    "range_ma": [
+      137.1,
+      66.0
+    ],
+    "range_ma_all": [
+      168.2,
+      66.0
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Troodon",
+      "Stenonychosaurus",
+      "Pectinodon",
+      "Saurornithoides",
+      "Urbacodon"
+    ],
+    "continents": {
+      "North America": 140,
+      "Asia": 48,
+      "Europe": 1
+    },
+    "pbdb": {
+      "taxon_name": "Troodontidae",
+      "taxon_attr": "Gilmore 1924",
+      "parent_name": "Deinonychosauria",
+      "firstapp_max_ma": 168.2,
+      "firstapp_min_ma": 154.8,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 61.66,
+      "diet": "carnivore, omnivore",
+      "life_habit": "ground dwelling",
+      "motility": "actively mobile",
+      "taxon_size": 78,
+      "n_occs": 251
+    },
+    "phylopic": {
+      "source": "Troodontidae",
+      "uuid": "38b3ad22-f475-4fb8-9a5c-7aeb520d3e28",
+      "attribution": "Matt Martyniuk",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/38b3ad22-f475-4fb8-9a5c-7aeb520d3e28",
+      "svg": "silhouettes/Troodontidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Troodontidae",
+      "description": "Extinct family of bird-like dinosaurs",
+      "extract": "Troodontidae is a clade of bird-like theropod dinosaurs from the Late Jurassic to Late Cretaceous. During most of the 20th century, troodontid fossils were few and incomplete and they have therefore been allied, at various times, with many dinosaurian lineages. More recent fossil discoveries of complete and articulated specimens, have helped to increase understanding about this group. Anatomical studies, particularly studies of the most primitive troodontids, like Sinovenator, demonstrate striking anatomical similarities with Archaeopteryx and primitive dromaeosaurids, and demonstrate that they are relatives comprising a clade called Paraves.",
+      "url": "https://en.wikipedia.org/wiki/Troodontidae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Troodontidae.jpg/330px-Troodontidae.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Diplodocidae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 9,
+    "n_occurrences": 190,
+    "range_ma": [
+      157.9,
+      143.1
+    ],
+    "range_ma_all": [
+      157.9,
+      132.6
+    ],
+    "periods": [
+      "Late Jurassic"
+    ],
+    "top_genera": [
+      "Apatosaurus",
+      "Diplodocus",
+      "Brontosaurus",
+      "Barosaurus",
+      "Tornieria"
+    ],
+    "continents": {
+      "North America": 180,
+      "Africa": 8,
+      "Europe": 1,
+      "South America": 1
+    },
+    "pbdb": {
+      "taxon_name": "Diplodocidae",
+      "taxon_attr": "(Marsh 1884)",
+      "parent_name": "Flagellicaudata",
+      "firstapp_max_ma": 159,
+      "firstapp_min_ma": 157.9,
+      "lastapp_max_ma": 125.77,
+      "lastapp_min_ma": 121.4,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 30,
+      "n_occs": 270
+    },
+    "phylopic": {
+      "source": "Diplodocidae",
+      "uuid": "2760ebd2-de6d-4682-8ea9-9b60b168f993",
+      "attribution": "Will Toosey",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.phylopic.org/images/2760ebd2-de6d-4682-8ea9-9b60b168f993",
+      "svg": "silhouettes/Diplodocidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Diplodocidae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Diplodocids, or members of the family Diplodocidae, are a group of sauropod dinosaurs. The family includes some of the longest creatures ever to walk the Earth, including Diplodocus and Supersaurus, some of which may have reached lengths of up to 42 metres (138 ft).",
+      "url": "https://en.wikipedia.org/wiki/Diplodocidae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Apatosaurus_louisae_-_CM.jpg/330px-Apatosaurus_louisae_-_CM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Dryosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 5,
+    "n_occurrences": 39,
+    "range_ma": [
+      154.8,
+      113.2
+    ],
+    "range_ma_all": [
+      154.8,
+      113.2
+    ],
+    "periods": [
+      "Late Jurassic",
+      "Early Cretaceous"
+    ],
+    "top_genera": [
+      "Dryosaurus",
+      "Valdosaurus",
+      "Dysalotosaurus",
+      "Eousdryosaurus",
+      "Elrhazosaurus"
+    ],
+    "continents": {
+      "North America": 21,
+      "Europe": 16,
+      "Africa": 2
+    },
+    "pbdb": {
+      "taxon_name": "Dryosauridae",
+      "taxon_attr": "Milner and Norman 1984",
+      "parent_name": "Dryomorpha",
+      "firstapp_max_ma": 154.8,
+      "firstapp_min_ma": 152.21,
+      "lastapp_max_ma": 83.6,
+      "lastapp_min_ma": 66,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 14,
+      "n_occs": 61
+    },
+    "phylopic": {
+      "source": "Dryosauridae",
+      "uuid": "14184e4e-0777-4d0b-8cb4-00dedd216af4",
+      "attribution": "Gareth Monger",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/14184e4e-0777-4d0b-8cb4-00dedd216af4",
+      "svg": "silhouettes/Dryosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Dryosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Dryosauridae is an extinct family of herbivorous bipedal ornithopod dinosaurs, first proposed by Milner & Norman in 1984. They are known from Middle Jurassic to Early Cretaceous rocks of Africa, Europe, and North America, with their fossil record possibly extending to South America, Australia and Antarctica and to the Late Cretaceous if elasmarians are included in the group.",
+      "url": "https://en.wikipedia.org/wiki/Dryosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/D._lettowvorbecki.jpg/330px-D._lettowvorbecki.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Dromaeosauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 54,
+    "n_occurrences": 606,
+    "range_ma": [
+      143.1,
+      66.0
+    ],
+    "range_ma_all": [
+      154.8,
+      66.0
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Richardoestesia",
+      "Saurornitholestes",
+      "Dromaeosaurus",
+      "Deinonychus",
+      "Velociraptor"
+    ],
+    "continents": {
+      "North America": 472,
+      "Asia": 76,
+      "Europe": 43,
+      "South America": 13,
+      "Africa": 2
+    },
+    "pbdb": {
+      "taxon_name": "Dromaeosauridae",
+      "taxon_attr": "Colbert and Russell 1969",
+      "parent_name": "Deinonychosauria",
+      "firstapp_max_ma": 184.2,
+      "firstapp_min_ma": 170.9,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 61.66,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling",
+      "motility": "actively mobile",
+      "taxon_size": 129,
+      "n_occs": 1020
+    },
+    "phylopic": {
+      "source": "Dromaeosauridae",
+      "uuid": "4e1bed5f-86f2-49c6-a9f6-a7814d65ef69",
+      "attribution": "Scott Hartman (modified by T. Michael Keesey)",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/4e1bed5f-86f2-49c6-a9f6-a7814d65ef69",
+      "svg": "silhouettes/Dromaeosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Dromaeosauridae",
+      "description": "Family of theropod dinosaurs",
+      "extract": "Dromaeosauridae is a family of feathered coelurosaurian theropod dinosaurs. They were generally small to medium-sized feathered carnivores that flourished in the Cretaceous period. The name Dromaeosauridae means 'running lizards', from Greek δρομαῖος (dromaîos), meaning 'running at full speed', 'swift', and σαῦρος (saûros), meaning 'lizard'. In informal usage, they are often called raptors, a term popularized by the film Jurassic Park; several genera include the term \"raptor\" directly in their name, and popular culture has come to emphasize their bird-like appearance and speculated bird-like behavior.",
+      "url": "https://en.wikipedia.org/wiki/Dromaeosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Dromaeosauridae_Diversity.jpg/330px-Dromaeosauridae_Diversity.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Spinosauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 14,
+    "n_occurrences": 69,
+    "range_ma": [
+      143.1,
+      72.2
+    ],
+    "range_ma_all": [
+      143.1,
+      72.2
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Spinosaurus",
+      "Baryonyx",
+      "Suchomimus",
+      "Irritator",
+      "Angaturama"
+    ],
+    "continents": {
+      "Africa": 47,
+      "Europe": 18,
+      "South America": 3,
+      "Asia": 1
+    },
+    "pbdb": {
+      "taxon_name": "Spinosauridae",
+      "taxon_attr": "Stromer 1915",
+      "parent_name": "Megalosauroidea",
+      "firstapp_max_ma": 168.2,
+      "firstapp_min_ma": 165.3,
+      "lastapp_max_ma": 83.6,
+      "lastapp_min_ma": 66,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 35,
+      "n_occs": 172
+    },
+    "phylopic": {
+      "source": "Spinosauridae",
+      "uuid": "0c97094c-8de5-4d5e-aea6-cafe734bacfa",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "page": "https://www.phylopic.org/images/0c97094c-8de5-4d5e-aea6-cafe734bacfa",
+      "svg": "silhouettes/Spinosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Spinosauridae",
+      "description": "Family of dinosaurs",
+      "extract": "Spinosauridae is a clade or family of tetanuran theropod dinosaurs comprising ten to seventeen known genera. Spinosaurid fossils have been recovered worldwide, including Africa, Europe, South America, and Asia. Their remains have generally been attributed to the Early to Late Cretaceous.",
+      "url": "https://en.wikipedia.org/wiki/Spinosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Spinosauridae_Diversity.jpg/330px-Spinosauridae_Diversity.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Rebbachisauridae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 22,
+    "n_occurrences": 35,
+    "range_ma": [
+      139.1,
+      89.8
+    ],
+    "range_ma_all": [
+      149.2,
+      89.8
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Limaysaurus",
+      "Rebbachisaurus",
+      "Nigersaurus",
+      "Demandasaurus",
+      "Sidersaura"
+    ],
+    "continents": {
+      "South America": 21,
+      "Africa": 9,
+      "Europe": 4,
+      "North America": 1
+    },
+    "pbdb": {
+      "taxon_name": "Rebbachisauridae",
+      "taxon_attr": "(Bonaparte 1997)",
+      "parent_name": "Diplodocimorpha",
+      "firstapp_max_ma": 149.2,
+      "firstapp_min_ma": 143.1,
+      "lastapp_max_ma": 89.8,
+      "lastapp_min_ma": 85.7,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 49,
+      "n_occs": 77
+    },
+    "phylopic": {
+      "source": "Rebbachisauridae",
+      "uuid": "80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+      "attribution": "Michael P. Taylor",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://www.phylopic.org/images/80596e4b-3b9f-4521-9d4a-a1b2ab2a0098",
+      "svg": "silhouettes/Rebbachisauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Rebbachisauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Rebbachisauridae is a family of sauropod dinosaurs known from fragmentary fossil remains from the Cretaceous of South America, Africa, North America, Europe and possibly Central Asia.",
+      "url": "https://en.wikipedia.org/wiki/Rebbachisauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Limaysaurus.jpg/330px-Limaysaurus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Euhelopodidae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 14,
+    "n_occurrences": 30,
+    "range_ma": [
+      137.1,
+      72.2
+    ],
+    "range_ma_all": [
+      137.1,
+      72.2
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Phuwiangosaurus",
+      "Tangvayosaurus",
+      "Erketu",
+      "Huabeisaurus",
+      "Gobititan"
+    ],
+    "continents": {
+      "Asia": 30
+    },
+    "pbdb": {
+      "taxon_name": "Euhelopodidae",
+      "taxon_attr": "(Romer 1956)",
+      "parent_name": "Somphospondyli",
+      "firstapp_max_ma": 149.2,
+      "firstapp_min_ma": 137.05,
+      "lastapp_max_ma": 83.6,
+      "lastapp_min_ma": 72.2,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 31,
+      "n_occs": 38
+    },
+    "phylopic": {
+      "source": "Euhelopodidae",
+      "uuid": "2d448563-aede-4a54-a061-7382551214dd",
+      "attribution": "DiBgd (modified by T. Michael Keesey)",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/2d448563-aede-4a54-a061-7382551214dd",
+      "svg": "silhouettes/Euhelopodidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Euhelopodidae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Euhelopodidae is a family of sauropod dinosaurs of disputed membership and affinities, which contains Euhelopus and its close relatives. Most proposed euhelopodids are from East Asia.",
+      "url": "https://en.wikipedia.org/wiki/Euhelopodidae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/EuhelopusDB2.jpg/330px-EuhelopusDB2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Nodosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 30,
+    "n_occurrences": 157,
+    "range_ma": [
+      139.1,
+      66.0
+    ],
+    "range_ma_all": [
+      152.2,
+      66.0
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Sauropelta",
+      "Struthiosaurus",
+      "Polacanthus",
+      "Edmontonia",
+      "Panoplosaurus"
+    ],
+    "continents": {
+      "North America": 100,
+      "Europe": 53,
+      "Asia": 3,
+      "South America": 1
+    },
+    "pbdb": {
+      "taxon_name": "Nodosauridae",
+      "taxon_attr": "(Marsh 1890)",
+      "parent_name": "Euankylosauria",
+      "firstapp_max_ma": 154.8,
+      "firstapp_min_ma": 145.06,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 74,
+      "n_occs": 273
+    },
+    "phylopic": {
+      "source": "Nodosauridae",
+      "uuid": "af64af4c-5a03-4218-b9fe-440253fd51ae",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "page": "https://www.phylopic.org/images/af64af4c-5a03-4218-b9fe-440253fd51ae",
+      "svg": "silhouettes/Nodosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Nodosauridae",
+      "description": "Extinct family of armored dinosaurs",
+      "extract": "Nodosauridae is a family of ankylosaurian dinosaurs known from the Late Jurassic to the Late Cretaceous periods in what is now Asia, Europe, North America, and possibly South America. While traditionally regarded as a monophyletic clade as the sister taxon to the Ankylosauridae, some analyses recover it as a paraphyletic grade leading to the ankylosaurids.",
+      "url": "https://en.wikipedia.org/wiki/Nodosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Gargoy.jpg/330px-Gargoy.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Ankylosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 32,
+    "n_occurrences": 138,
+    "range_ma": [
+      143.1,
+      66.0
+    ],
+    "range_ma_all": [
+      143.1,
+      66.0
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Pinacosaurus",
+      "Euoplocephalus",
+      "Ankylosaurus",
+      "Anodontosaurus",
+      "Platypelta"
+    ],
+    "continents": {
+      "North America": 82,
+      "Asia": 55,
+      "Oceania": 1
+    },
+    "pbdb": {
+      "taxon_name": "Ankylosauridae",
+      "taxon_attr": "Brown 1908",
+      "parent_name": "Euankylosauria",
+      "firstapp_max_ma": 199.5,
+      "firstapp_min_ma": 184.2,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 77,
+      "n_occs": 294
+    },
+    "phylopic": {
+      "source": "Ankylosauridae",
+      "uuid": "294aa46e-d5a8-4c48-b3ba-f1f3f4fd0c1e",
+      "attribution": "Brad McFeeters (vectorized by T. Michael Keesey)",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://www.phylopic.org/images/294aa46e-d5a8-4c48-b3ba-f1f3f4fd0c1e",
+      "svg": "silhouettes/Ankylosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Ankylosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Ankylosauridae is a family of armored dinosaurs within Ankylosauria, and is the sister group to Nodosauridae. The oldest known ankylosaurids date to around 122 million years ago, and the clade went extinct 66 million years ago during the Cretaceous–Paleogene extinction event. These animals were mainly herbivorous and were obligate quadrupeds, with leaf-shaped teeth and robust, scute-covered bodies. Ankylosaurids possess a distinctly domed and short snout, wedge-shaped osteoderms on their skull, scutes along their torso, and a tail club.",
+      "url": "https://en.wikipedia.org/wiki/Ankylosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Euoplocephalus_tutus_RTMP.jpg/330px-Euoplocephalus_tutus_RTMP.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Abelisauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 34,
+    "n_occurrences": 65,
+    "range_ma": [
+      121.4,
+      66.0
+    ],
+    "range_ma_all": [
+      184.2,
+      66.0
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Majungasaurus",
+      "Arcovenator",
+      "Aucasaurus",
+      "Skorpiovenator",
+      "Carnotaurus"
+    ],
+    "continents": {
+      "Africa": 28,
+      "South America": 23,
+      "Europe": 9,
+      "Asia": 5
+    },
+    "pbdb": {
+      "taxon_name": "Abelisauridae",
+      "taxon_attr": "Bonaparte and Novas 1985",
+      "parent_name": "Ceratosauria",
+      "firstapp_max_ma": 184.2,
+      "firstapp_min_ma": 174.7,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 75,
+      "n_occs": 214
+    },
+    "phylopic": {
+      "source": "Abelisauridae",
+      "uuid": "1730665f-ffb8-4026-b9a6-e36ba92bbc24",
+      "attribution": "Andrew Farke and Joseph Sertich",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/1730665f-ffb8-4026-b9a6-e36ba92bbc24",
+      "svg": "silhouettes/Abelisauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Abelisauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Abelisauridae is a family of ceratosaurian theropod dinosaurs. Abelisaurids thrived during the Cretaceous period, mainly on the ancient southern supercontinent of Gondwana, and today their fossil remains are found on the modern continents of Africa, South America, and (western) Europe, as well as on the Indian subcontinent and the island of Madagascar. Abelisaurids possibly first appeared during the Early Jurassic based on the putative abelisaurid Eoabelisaurus from Patagonia and some genera survived until the end of the Mesozoic era, around 66 million years ago.",
+      "url": "https://en.wikipedia.org/wiki/Abelisauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Majungasaurus_SBU_right.jpg/330px-Majungasaurus_SBU_right.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Saltasauridae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 14,
+    "n_occurrences": 71,
+    "range_ma": [
+      100.5,
+      66.0
+    ],
+    "range_ma_all": [
+      100.5,
+      66.0
+    ],
+    "periods": [
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Alamosaurus",
+      "Neuquensaurus",
+      "Rocasaurus",
+      "Ibirania",
+      "Abditosaurus"
+    ],
+    "continents": {
+      "North America": 38,
+      "South America": 25,
+      "Asia": 4,
+      "Europe": 3,
+      "Africa": 1
+    },
+    "pbdb": {
+      "taxon_name": "Saltasauridae",
+      "taxon_attr": "(Sereno 1998)",
+      "parent_name": "Lohuecosauria",
+      "firstapp_max_ma": 85.7,
+      "firstapp_min_ma": 83.6,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 32,
+      "n_occs": 81
+    },
+    "phylopic": {
+      "source": "Saltasauridae",
+      "uuid": "33ae8000-0046-41bb-b68a-189a0eed3eca",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/33ae8000-0046-41bb-b68a-189a0eed3eca",
+      "svg": "silhouettes/Saltasauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Saltasauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Saltasauridae is a family of armored herbivorous sauropods from the Upper Cretaceous. They are known from fossils found in South America, Africa, Asia, North America, and Europe. They are characterized by their vertebrae and feet, which are similar to those of Saltasaurus, the first of the group to be discovered and the source of the name. The last and largest of the group and only one found in North America, Alamosaurus, was twenty-six metres in length and one of the last sauropods to go extinct.",
+      "url": "https://en.wikipedia.org/wiki/Saltasauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Saltasaurus_dinosaur.png/330px-Saltasaurus_dinosaur.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Hadrosauridae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 62,
+    "n_occurrences": 394,
+    "range_ma": [
+      100.5,
+      66.0
+    ],
+    "range_ma_all": [
+      121.4,
+      66.0
+    ],
+    "periods": [
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Edmontosaurus",
+      "Saurolophus",
+      "Hypacrosaurus",
+      "Corythosaurus",
+      "Kritosaurus"
+    ],
+    "continents": {
+      "North America": 319,
+      "Asia": 54,
+      "Europe": 12,
+      "South America": 6,
+      "Africa": 3
+    },
+    "pbdb": {
+      "taxon_name": "Hadrosauridae",
+      "taxon_attr": "(Cope 1869)",
+      "parent_name": "Hadrosauroidea",
+      "firstapp_max_ma": 174.7,
+      "firstapp_min_ma": 168.2,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 164,
+      "n_occs": 1631
+    },
+    "phylopic": {
+      "source": "Hadrosauridae",
+      "uuid": "3bcbe8d3-a5e2-4d3e-b641-8fcb5be5c0e3",
+      "attribution": "Will Toosey",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.phylopic.org/images/3bcbe8d3-a5e2-4d3e-b641-8fcb5be5c0e3",
+      "svg": "silhouettes/Hadrosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Hadrosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Hadrosauridae, is a family of ornithischian dinosaurs informally referred to as duck-billed dinosaurs. This group is known as the duck-billed dinosaurs for the flat duck-bill appearance of the bones in their snouts. The ornithopod family, which includes genera such as Edmontosaurus and Parasaurolophus, was a common group of herbivores during the Late Cretaceous Period. Hadrosaurids are descendants of the Late Jurassic/Early Cretaceous iguanodontian dinosaurs and had a similar body layout. Hadrosaurs were among the most dominant herbivores during the Late Cretaceous in Asia and North America, and during the close of the Cretaceous several lineages dispersed into Europe, Africa, and South America.",
+      "url": "https://en.wikipedia.org/wiki/Hadrosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/ROM_39_-_Maiasaura_%26_Gryposaurus_%2814358703974%29.jpg/330px-ROM_39_-_Maiasaura_%26_Gryposaurus_%2814358703974%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Ceratopsidae",
+    "lineage": "ornithischia",
+    "clade": "Ornithischia",
+    "n_genera": 45,
+    "n_occurrences": 394,
+    "range_ma": [
+      83.6,
+      66.0
+    ],
+    "range_ma_all": [
+      83.6,
+      66.0
+    ],
+    "periods": [
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Triceratops",
+      "Centrosaurus",
+      "Chasmosaurus",
+      "Pachyrhinosaurus",
+      "Agujaceratops"
+    ],
+    "continents": {
+      "North America": 393,
+      "Asia": 1
+    },
+    "pbdb": {
+      "taxon_name": "Ceratopsidae",
+      "taxon_attr": "Marsh 1888",
+      "parent_name": "Ceratopsia",
+      "firstapp_max_ma": 93.9,
+      "firstapp_min_ma": 89.8,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling",
+      "motility": "actively mobile",
+      "taxon_size": 113,
+      "n_occs": 754
+    },
+    "phylopic": {
+      "source": "Ceratopsidae",
+      "uuid": "030d53b7-5625-478e-9971-ef07a117f23b",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "page": "https://www.phylopic.org/images/030d53b7-5625-478e-9971-ef07a117f23b",
+      "svg": "silhouettes/Ceratopsidae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Ceratopsidae",
+      "description": "Family of dinosaurs including Triceratops and relatives",
+      "extract": "Ceratopsidae is a family of ceratopsian dinosaurs including Triceratops, Centrosaurus, and Styracosaurus. All known species were quadrupedal herbivores from the Upper Cretaceous. All but one species are known from western North America, which formed the island continent of Laramidia during most of the Late Cretaceous. Ceratopsids are characterized by beaks, rows of shearing teeth in the back of the jaw, elaborate nasal horns, and a thin parietal-squamosal shelf that extends back and up into a frill. The group is divided into two subfamilies—Chasmosaurinae and Centrosaurinae. The chasmosaurines are generally characterized by long, triangular frills and well-developed brow horns. The centrosaurines had well-developed nasal horns or nasal bosses, shorter and more rectangular frills, and elaborate spines on the back of the frill.",
+      "url": "https://en.wikipedia.org/wiki/Ceratopsidae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Ceratopsidae_Diversity.jpg/330px-Ceratopsidae_Diversity.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Tyrannosauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 17,
+    "n_occurrences": 237,
+    "range_ma": [
+      89.8,
+      66.0
+    ],
+    "range_ma_all": [
+      89.8,
+      66.0
+    ],
+    "periods": [
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Tyrannosaurus",
+      "Tarbosaurus",
+      "Albertosaurus",
+      "Daspletosaurus",
+      "Gorgosaurus"
+    ],
+    "continents": {
+      "North America": 172,
+      "Asia": 64,
+      "Europe": 1
+    },
+    "pbdb": {
+      "taxon_name": "Tyrannosauridae",
+      "taxon_attr": "Osborn 1906",
+      "parent_name": "Tyrannosauroidea",
+      "firstapp_max_ma": 125.77,
+      "firstapp_min_ma": 121.4,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 54,
+      "n_occs": 515
+    },
+    "phylopic": {
+      "source": "Tyrannosauridae",
+      "uuid": "d7da9be9-fad6-4683-bf5e-bf7c951ee92c",
+      "attribution": "Craig Dylke",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://www.phylopic.org/images/d7da9be9-fad6-4683-bf5e-bf7c951ee92c",
+      "svg": "silhouettes/Tyrannosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Tyrannosauridae",
+      "description": "Family of dinosaurs",
+      "extract": "Tyrannosauridae is a family of coelurosaurian dinosaurs that comprises two subfamilies containing up to fifteen genera, including the eponymous Tyrannosaurus. The exact number of genera is controversial, with some experts recognizing as few as three. All of these animals lived near the end of the Cretaceous period and their fossils have been found only in North America and Asia. Well-known genera include Tyrannosaurus, Albertosaurus, Gorgosaurus, Daspletosaurus, Tarbosaurus, and Dynamoterror.",
+      "url": "https://en.wikipedia.org/wiki/Tyrannosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Tyrannosauridae_Diversity2.jpg/330px-Tyrannosauridae_Diversity2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Carcharodontosauridae",
+    "lineage": "theropoda",
+    "clade": "Reptilia",
+    "n_genera": 15,
+    "n_occurrences": 79,
+    "range_ma": [
+      143.1,
+      72.2
+    ],
+    "range_ma_all": [
+      152.2,
+      72.2
+    ],
+    "periods": [
+      "Early Cretaceous",
+      "Late Cretaceous"
+    ],
+    "top_genera": [
+      "Carcharodontosaurus",
+      "Acrocanthosaurus",
+      "Giganotosaurus",
+      "Tyrannotitan",
+      "Veterupristisaurus"
+    ],
+    "continents": {
+      "Africa": 46,
+      "South America": 16,
+      "North America": 14,
+      "Asia": 2,
+      "Europe": 1
+    },
+    "pbdb": {
+      "taxon_name": "Carcharodontosauridae",
+      "taxon_attr": "Stromer 1931",
+      "parent_name": "Allosauroidea",
+      "firstapp_max_ma": 152.21,
+      "firstapp_min_ma": 149.2,
+      "lastapp_max_ma": 72.2,
+      "lastapp_min_ma": 66,
+      "diet": "carnivore",
+      "life_habit": "ground dwelling, solitary",
+      "motility": "actively mobile",
+      "taxon_size": 34,
+      "n_occs": 116
+    },
+    "phylopic": {
+      "source": "Carcharodontosauridae",
+      "uuid": "c4927904-010c-4c48-b1b6-a85669e043d7",
+      "attribution": "FunkMonk",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://www.phylopic.org/images/c4927904-010c-4c48-b1b6-a85669e043d7",
+      "svg": "silhouettes/Carcharodontosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Carcharodontosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "Carcharodontosauridae is a group of carnivorous theropod dinosaurs. In 1931, Ernst Stromer named Carcharodontosauridae as a family, which, in modern paleontology, indicates a clade within Carnosauria. Carcharodontosaurids include some of the largest land predators ever known: Acrocanthosaurus, Giganotosaurus, Mapusaurus, Carcharodontosaurus, and Tyrannotitan all rivaled Tyrannosaurus and Spinosaurus in size. Estimates give a maximum weight of 8–10 metric tons for the largest carcharodontosaurids, while the smallest carcharodontosaurids were estimated to have weighed at least 500 kilograms (1,100 lb).",
+      "url": "https://en.wikipedia.org/wiki/Carcharodontosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Ultimate_Dinosaurs_Carcharodontosaurus.jpg/330px-Ultimate_Dinosaurs_Carcharodontosaurus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "family": "Brachiosauridae",
+    "lineage": "sauropodomorpha",
+    "clade": "Saurischia",
+    "n_genera": 10,
+    "n_occurrences": 72,
+    "range_ma": [
+      161.5,
+      110.1
+    ],
+    "range_ma_all": [
+      161.5,
+      93.9
+    ],
+    "periods": [
+      "Late Jurassic",
+      "Early Cretaceous"
+    ],
+    "top_genera": [
+      "Giraffatitan",
+      "Brachiosaurus",
+      "Cedarosaurus",
+      "Sonorasaurus",
+      "Lusotitan"
+    ],
+    "continents": {
+      "Africa": 45,
+      "North America": 22,
+      "Europe": 5
+    },
+    "pbdb": {
+      "taxon_name": "Brachiosauridae",
+      "taxon_attr": "Riggs 1904",
+      "parent_name": "Titanosauriformes",
+      "firstapp_max_ma": 161.5,
+      "firstapp_min_ma": 154.8,
+      "lastapp_max_ma": 100.5,
+      "lastapp_min_ma": 93.9,
+      "diet": "herbivore",
+      "life_habit": "ground dwelling, gregarious",
+      "motility": "actively mobile",
+      "taxon_size": 28,
+      "n_occs": 93
+    },
+    "phylopic": {
+      "source": "Brachiosauridae",
+      "uuid": "f972f554-26cc-4c9c-93b0-0f58b6015de2",
+      "attribution": "Scott Hartman",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "page": "https://www.phylopic.org/images/f972f554-26cc-4c9c-93b0-0f58b6015de2",
+      "svg": "silhouettes/Brachiosauridae.svg"
+    },
+    "wikipedia": {
+      "lang": "en",
+      "title": "Brachiosauridae",
+      "description": "Extinct family of dinosaurs",
+      "extract": "The Brachiosauridae are a family or clade of herbivorous, quadrupedal sauropod dinosaurs. Brachiosaurids had long necks that enabled them to access the leaves of tall trees that other sauropods would have been unable to reach. In addition, they possessed thick spoon-shaped teeth which helped them to consume tough plants more efficiently than other sauropods. They have also been characterized by a few unique traits or synapomorphies; dorsal vertebrae with 'rod-like' transverse processes and an ischium with an abbreviated pubic peduncle.",
+      "url": "https://en.wikipedia.org/wiki/Brachiosauridae",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/FMNH_Brachiosaurus.JPG/330px-FMNH_Brachiosaurus.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "license": "CC BY-SA 4.0"
+    }
+  }
+]

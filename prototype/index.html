@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deep Lineages · dinosaur families of the Mesozoic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow"><b>Deep Lineages</b> · dinosaur families of the Mesozoic</p>
+      <h1 id="readout">— Ma</h1>
+    </div>
+    <p class="hint">Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family</p>
+  </header>
+
+  <main class="layout">
+    <section class="card timeline-card" aria-label="Timeline">
+      <div class="card-head">
+        <h2>Dominant families</h2>
+        <ul class="legend" id="legend"></ul>
+      </div>
+      <div class="zoom-bar">
+        <div class="zoom" id="zoom" role="group" aria-label="Timeline zoom">
+          <button data-z="out" aria-label="Zoom out" title="Zoom out (−)">−</button>
+          <button data-z="in" aria-label="Zoom in" title="Zoom in (+)">+</button>
+          <button data-z="all" title="Show all (0)">All</button>
+          <button data-z="fam" hidden></button>
+        </div>
+        <span class="muted" id="zoom-level"></span>
+        <span class="zoom-hint">⌘/Ctrl + scroll or pinch to zoom · swipe sideways to pan · click a period or stage to zoom in</span>
+      </div>
+      <div id="timeline" class="timeline"></div>
+      <p class="note">Bars: each family's range in the PBDB (periods holding ≥5% of its fossils). Area: genera on record (first → last appearance), excluding footprints and eggs.</p>
+    </section>
+
+    <aside class="side">
+      <section class="card map-card" aria-label="Paleomap">
+        <div class="card-head">
+          <h2 id="map-title">Map</h2>
+          <span class="muted" id="map-count"></span>
+        </div>
+        <div id="map" class="map"></div>
+        <p class="note" id="map-note"></p>
+      </section>
+
+      <section class="card detail-card" aria-live="polite">
+        <div id="detail"></div>
+      </section>
+    </aside>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="common.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
