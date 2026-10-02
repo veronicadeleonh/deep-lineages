@@ -26,13 +26,6 @@
 .meta b { color: var(--text); font-weight: 600; }
 .disputed { color: var(--text-3); font-style: italic; margin-bottom: 10px; }
 
-.pathWrap { margin: 10px 0; }
-.path { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 0; font-size: 11.5px; color: var(--text-3); }
-.path li::after { content: "›"; margin: 0 5px; color: var(--text-3); }
-.path li.last::after { content: none; }
-.key { color: var(--text-2); font-weight: 600; }
-.last { color: var(--text); font-weight: 650; }
-.hasTitle { text-decoration: underline dotted; text-underline-offset: 2px; cursor: help; }
 
 .credits { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--text-3); font-size: 11px; }
 

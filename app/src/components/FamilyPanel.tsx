@@ -1,9 +1,12 @@
 /* Right-hand panel: what is alive now (no selection), the selected family's profile, or the selected genus's profile. */
-import { COMMON_NAMES, LINEAGE_NOTES, dietOf, groupOf } from "../constants";
+import { LINEAGE_NOTES, dietOf, groupOf } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, fMa, fNum, fRange, isAlive } from "../format";
 import { useStore } from "../state";
 import type { Family, Genus, Phylopic, Wikipedia } from "../types";
+import { CladeTree } from "./CladeTree";
+import { Lineage } from "./Lineage";
+import { ancestry } from "../tree";
 import s from "./FamilyPanel.module.css";
 
 export function FamilyPanel() {
@@ -48,6 +51,8 @@ function AliveNow() {
   );
 }
 
+const gs = (fg?: { genera: Genus[] }) => fg?.genera ?? [];
+
 const license = (url?: string | null) => {
   if (!url) return "";
   const m = url.match(/licenses\/([^/]+)\/([\d.]+)/);
@@ -86,7 +91,8 @@ function Profile({ f }: { f: Family }) {
       {note && <p className={`${s.meta} ${s.disputed}`}>{note}</p>}
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
-      <PathList path={fg?.path ?? []} />
+      <CladeTree key={f.family} f={f} />
+      <Lineage key={f.family} steps={[...ancestry(f.family, data).slice(0, -1).map((name) => ({ name })), { name: f.family, rank: "family" }]} />
 
       <p className={s.meta}><b>Fossils by continent:</b> {byCount(f.continents).map((c) => `${c} ${fNum(f.continents[c])}`).join(" · ")}</p>
       {first.length > 0 && (
@@ -110,7 +116,12 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
   const own = g.phylopic?.svg ? g.phylopic : null;
   const sil = own ?? f.phylopic;
   const w = g.wikipedia;
-  const path = [...(fg?.path ?? [f.family]), ...(g.below ?? []).map((b) => b.name), g.genus];
+  const steps = [
+    ...ancestry(f.family, data).slice(0, -1).map((name) => ({ name })),
+    { name: f.family, rank: "family" },
+    ...(g.below ?? []).map((b) => ({ name: b.name, rank: b.rank })),
+    { name: g.genus, rank: "genus" },
+  ];
   const back = () => dispatch({ type: "clearGenus" });
   const close = () => dispatch({ type: "select", family: null });
 
@@ -138,7 +149,8 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
 
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
-      <PathList path={path} />
+      {gs(fg).length > 1 && <CladeTree key={`${f.family}/${g.genus}`} f={f} genus={g.genus} />}
+      <Lineage key={`${f.family}/${g.genus}`} steps={steps} />
 
       <p className={s.meta}><b>Fossils by continent:</b> {byCount(g.continents).map((c) => `${c} ${fNum(g.continents[c])}`).join(" · ")}</p>
 
@@ -169,24 +181,6 @@ function Silhouette({ ph, name, caption }: { ph: Phylopic | null | undefined; na
       <div className={s.silhouette} style={{ ["--src" as string]: `url("${silhouetteUrl(ph.svg)}")` }} role="img" aria-label={`Silhouette of ${name}`} />
       {caption && <figcaption className="muted">{caption}</figcaption>}
     </figure>
-  );
-}
-
-function PathList({ path }: { path: string[] }) {
-  if (!path.length) return null;
-  const keyClades = new Set(["Dinosauria", "Theropoda", "Sauropodomorpha", "Ornithischia"]);
-  return (
-    <div className={s.pathWrap}>
-      <p className={s.meta}><b>Where it comes from</b> <span className="muted">· each step is a group nested inside the previous one</span></p>
-      <ol className={s.path}>
-        {path.map((n, i) => (
-          <li key={n} title={COMMON_NAMES[n]}
-            className={[keyClades.has(n) && s.key, i === path.length - 1 && s.last, COMMON_NAMES[n] && s.hasTitle].filter(Boolean).join(" ")}>
-            {n}
-          </li>
-        ))}
-      </ol>
-    </div>
   );
 }
 

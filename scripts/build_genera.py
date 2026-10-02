@@ -25,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data/processed"
 PATH_FROM = "Archosauria"  # ancestry is shown from here (everything above is shared by all reptiles)
 GROUP_RANKS = ("subfamily", "tribe", "infrafamily", "supertribe", "subtribe")  # named levels used to group genera
+# Misspellings found in the PBDB tree, mapped to the accepted name
+GROUP_ALIASES = {"Centrasaurinae": "Centrosaurinae"}
 
 
 def path_of(fam):
@@ -65,12 +67,22 @@ def subtree(fam):
             out[name] = r
     return out
 
+def rank_of(record):
+    """Rank of a group. The PBDB list does not always return it, but zoological names carry it in their ending."""
+    if record.get("taxon_rank"):
+        return record["taxon_rank"]
+    name = record.get("taxon_name", "")
+    for suffix, rank in (("oidea", "superfamily"), ("inae", "subfamily"), ("ini", "tribe"), ("ina", "subtribe")):
+        if name.endswith(suffix):
+            return rank
+    return "unranked clade"
+
 def below(tree, fam, genus):
     """Groups between the family and the genus, top-down, e.g. [{"name": "Tyrannosaurinae", "rank": "subfamily"}]."""
     chain, name, seen = [], tree.get(genus, {}).get("parent_name"), set()
     while name and name != fam and name in tree and name not in seen:
         seen.add(name)
-        chain.append({"name": name, "rank": tree[name].get("taxon_rank")})
+        chain.append({"name": GROUP_ALIASES.get(name, name), "rank": rank_of(tree[name])})
         name = tree[name].get("parent_name")
     if name != fam:  # the genus does not hang from this family in the PBDB tree
         return []
@@ -82,14 +94,33 @@ def attr(tree, name):
 
 
 # ---------- Wikipedia: genus summary ----------
+
+def genus_phylopic(g):
+    """Genus silhouette, only if the PhyloPic image really depicts that genus.
+    A genus node's primary image can belong to a relative (e.g. Tarbosaurus -> "Tyrannosaurus magnus");
+    those are dropped so the app falls back to the family silhouette."""
+    ph = phylopic(g)
+    if not ph:
+        return None
+    f = CACHE / f"phylopic_img_{g}.json"
+    links = (json.loads(f.read_text()) if f.exists() else {}).get("_links", {})
+    titles = [(links.get(k) or {}).get("title") or "" for k in ("specificNode", "generalNode")]
+    if any(t == g or t.startswith(g + " ") for t in titles):
+        return ph
+    (SIL / f"{g}.svg").unlink(missing_ok=True)
+    return None
+
 def genus_wikipedia(genus):
-    """Genus article; if the plain name is ambiguous or not about a dinosaur, try "<Genus> (dinosaur)"."""
+    """Genus article; if the plain name is ambiguous or not about a dinosaur, try "<Genus> (dinosaur)".
+    Redirects to another genus's article are rejected so a profile never shows another animal's text."""
     for lang in ("en", "es"):
         for title in (genus, f"{genus} (dinosaur)"):
             key = f"wiki_{lang}_{title.replace(' ', '_')}"
             d = get_json(f"https://{lang}.wikipedia.org/api/rest_v1/page/summary/{urllib.parse.quote(title)}", key)
             text = (d or {}).get("extract") or ""
-            if text and d.get("type") != "disambiguation" and ("dinosaur" in text.lower() or "dinosaurio" in text.lower()):
+            # skip redirects to another article (e.g. a genus Wikipedia treats as a synonym of another one)
+            same = (d or {}).get("title", "").lower().startswith(genus.lower())
+            if text and same and d.get("type") != "disambiguation" and ("dinosaur" in text.lower() or "dinosaurio" in text.lower()):
                 return {
                     "lang": lang, "title": d.get("title"), "extract": text,
                     "url": ((d.get("content_urls") or {}).get("desktop") or {}).get("page"),
@@ -112,7 +143,9 @@ def main():
         for g, gd in d.groupby("genus"):
             sp = gd[gd.accepted_rank == "species"].accepted_name.value_counts()
             chain = below(tree, fam, g)
-            group = next((c["name"] for c in chain if c["rank"] in GROUP_RANKS), None)
+            # group by subfamily when there is one, otherwise by tribe
+            group = next((c["name"] for c in chain if c["rank"] == "subfamily"), None) \
+                or next((c["name"] for c in chain if c["rank"] in GROUP_RANKS), None)
             t = tree.get(g, {})
             genera.append({
                 "genus": g,
@@ -125,7 +158,7 @@ def main():
                 "pbdb_range": [t["firstapp_max_ma"], t["lastapp_min_ma"]] if "firstapp_max_ma" in t and "lastapp_min_ma" in t else None,
                 "species": [{"name": n, "n": int(c), "attr": attr(tree, n)} for n, c in sp.items()],
                 "wikipedia": genus_wikipedia(g),
-                "phylopic": phylopic(g),
+                "phylopic": genus_phylopic(g),
             })
             done += 1
             if not OFFLINE and done % 25 == 0:
