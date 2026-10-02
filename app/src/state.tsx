@@ -15,7 +15,7 @@ export interface State {
 
 export type Action =
   | { type: "time"; t: number }
-  | { type: "toggleFamily"; family: string }   // select + unfold, or deselect + fold
+  | { type: "toggleFamily"; family: string }   // select, or deselect if already selected
   | { type: "fold"; family: string; open: boolean } // unfold/fold without touching the selection
   | { type: "select"; family: string | null }  // select without touching the folds (panel chips)
   | { type: "genus"; family: string; genus: string }
@@ -54,13 +54,7 @@ function makeReducer(data: AppData) {
       case "toggleFamily": {
         const deselect = a.family === null || state.selected === a.family;
         const fam = deselect ? null : a.family;
-        let expanded = state.expanded;
-        let collapsed = state.collapsed;
-        if (a.type === "toggleFamily" && a.family) {
-          expanded = deselect ? expanded.filter((f) => f !== a.family) : [...new Set([...expanded, a.family])];
-          collapsed = deselect ? [...new Set([...collapsed, a.family])] : collapsed.filter((f) => f !== a.family);
-        }
-        let next: State = { ...state, selected: fam, genus: null, expanded, collapsed };
+        let next: State = { ...state, selected: fam, genus: null }; // unfolding is separate (▸, or zooming in)
         const r = fam ? famRange(fam) : undefined;
         if (r && !isAlive(r, state.t)) next = goTo(next, mid(r)); // jump to when the family lived
         return next;

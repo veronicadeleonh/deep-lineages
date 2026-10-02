@@ -5,7 +5,7 @@
 import {
   area, curveMonotoneX, curveStepAfter, easeCubicOut, interpolate, line, max, scaleLinear, timer, type Timer,
 } from "d3";
-import { useCallback, useEffect, useId, useMemo, useRef, type KeyboardEvent, type PointerEvent } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { DIET, EXTINCTIONS, GROUPS, TIME, dietOf, groupOf, type Group } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, fMa, fMa1, fNum, fRange, isAlive } from "../format";
@@ -13,6 +13,7 @@ import { useLatest, useWidth } from "../hooks";
 import { MIN_SPAN, clampView, useStore } from "../state";
 import { WELL_KNOWN, familyTree, genusTree, layout, leaves, pathTo, prune, type TNode } from "../tree";
 import type { Family, Genus, Range } from "../types";
+import { DeckMap } from "./PaleoMap";
 import { useTooltip } from "./Tooltip";
 import s from "./Timeline.module.css";
 
@@ -74,42 +75,41 @@ export function TimelineCard() {
 
   return (
     <section className={`card ${s.card}`} aria-label="Timeline">
-      <div className="card-head">
-        <h2>Dominant families</h2>
-        <ul className={s.legend}>
-          {Object.values(DIET).filter((d, i, a) => usedDiets.has(d.label) && a.findIndex((x) => x.label === d.label) === i).map((d) => (
-            <li key={d.label}><i className="swatch" style={{ background: d.color }} />{d.label}</li>
-          ))}
-        </ul>
-      </div>
-      <div className={s.zoomBar}>
-        <div className={s.zoom} role="group" aria-label="Timeline zoom">
-          <button aria-label="Zoom out" title="Zoom out (−)" onClick={() => zoomBy(2, state.t)} disabled={span >= FULL_SPAN - 0.01}>−</button>
-          <button aria-label="Zoom in" title="Zoom in (+)" onClick={() => zoomBy(0.5, state.t)} disabled={span <= MIN_SPAN + 0.01}>+</button>
-          <button title="Show all (0)" onClick={() => animateTo(TIME)} disabled={span >= FULL_SPAN - 0.01}>All</button>
-          {fam && <button onClick={fitFamily}>Fit {fam.family}</button>}
+      <Timeline animateTo={animateTo} zoomBy={zoomBy} deckTop={
+        <div className={s.zoomBar}>
+          <div className={s.zoom} role="group" aria-label="Timeline zoom">
+            <button aria-label="Zoom out" title="Zoom out (−)" onClick={() => zoomBy(2, state.t)} disabled={span >= FULL_SPAN - 0.01}>−</button>
+            <button aria-label="Zoom in" title="Zoom in (+)" onClick={() => zoomBy(0.5, state.t)} disabled={span <= MIN_SPAN + 0.01}>+</button>
+            <button title="Show all (0)" onClick={() => animateTo(TIME)} disabled={span >= FULL_SPAN - 0.01}>All</button>
+            {fam && <button onClick={fitFamily}>Fit {fam.family}</button>}
+          </div>
+          {span < FULL_SPAN - 0.1 && <span className="muted" data-testid="zoom-level">{fMa1(state.view[0])}–{fMa1(state.view[1])} Ma</span>}
+          <span className={s.zoomHint}>
+            {span > AUTO_SPAN ? "Pinch or ⌘/Ctrl + scroll to zoom: families open into their genera below 45 Myr, species below 15"
+              : span > SPECIES_SPAN ? "Zoom in further to see each genus's species" : "Species shown next to each genus"} · swipe sideways to pan
+          </span>
+          <ul className={s.legend}>
+            {Object.values(DIET).filter((d, i, a) => usedDiets.has(d.label) && a.findIndex((x) => x.label === d.label) === i).map((d) => (
+              <li key={d.label}><i className="swatch" style={{ background: d.color }} />{d.label}</li>
+            ))}
+          </ul>
         </div>
-        {span < FULL_SPAN - 0.1 && <span className="muted" data-testid="zoom-level">{fMa1(state.view[0])}–{fMa1(state.view[1])} Ma</span>}
-        <span className={s.zoomHint}>
-          {span > AUTO_SPAN ? "Pinch or ⌘/Ctrl + scroll to zoom: families open into their genera below 45 Myr, species below 15"
-            : span > SPECIES_SPAN ? "Zoom in further to see each genus's species" : "Species shown next to each genus"} · swipe sideways to pan
-        </span>
-      </div>
-      <Timeline animateTo={animateTo} zoomBy={zoomBy} />
+      } />
       <p className="note">
         Bars: each family's range in the PBDB (periods holding ≥5% of its fossils). Branches: each split is drawn just before
         the oldest fossil of its group (a minimum age); dotted where a lineage must have existed but has no fossils yet.
-        Area: genera on record (first → last appearance), excluding footprints and eggs.
+        Area: genera on record (first → last appearance), excluding footprints and eggs. Map: each dot is a fossil from the
+        10-Myr slice around the cursor, placed where that spot was at the time; continents are present-day coastlines moved to
+        their past position ({data.paleo?.model ?? "PALEOMAP"} model, GPlates), so inland seas of the time are not shown.
       </p>
     </section>
   );
 }
 
-function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomBy: (f: number, c: number, animate?: boolean) => void }) {
+function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => void; zoomBy: (f: number, c: number, animate?: boolean) => void; deckTop: ReactNode }) {
   const { data, state, dispatch } = useStore();
   const tip = useTooltip();
   const wrap = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
   const W = useWidth(wrap);
   const clip = useId().replace(/:/g, "");
   const { t, view, selected, genus, expanded } = state;
@@ -121,7 +121,8 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
   const SIL = compact ? { w: 34, h: 20 } : { w: 48, h: 26 };
   const GUT = compact ? 18 : 22; // left gutter for the vertical lineage labels
   const nameX = GUT + SIL.w + 8;
-  const L = nameX + (compact ? 128 : 150) + 12; // left edge of the plot
+  // left edge of the plot; on wide screens the column is wider, to give the paleomap in the deck room
+  const L = compact ? nameX + 140 : Math.max(nameX + 162, Math.min(380, Math.round(W * 0.27)));
   const stageTop = M.t + BAND, areaTop = stageTop + STAGE, rowsTop = areaTop + AREA + GAP;
 
   // which families are unfolded: the ones the user opened, plus (when zoomed in) the ones filling the window
@@ -218,9 +219,12 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
     }
     const lines: { x1: number; y1: number; x2: number; y2: number; hot: boolean; ghost?: boolean }[] = [];
     const nodes: { n: TNode; x: number; y: number; hot: boolean; depth: number }[] = [];
+    const track: TNode[] = []; // ancestors of the selection, oldest first
     for (const tr of trees) {
       const target = tr.f ? (tr.f.family === selected ? genus : null) : selected;
-      const hot = new Set(target ? pathTo(tr.root, target) : []);
+      const path = target ? pathTo(tr.root, target) : [];
+      track.push(...path.slice(0, -1)); // for a genus, this continues through its family, subfamily and tribe
+      const hot = new Set<TNode>();
       const leafY = (l: TNode) => rowY.get(tr.f ? `${tr.f.family}/${l.name}` : l.name) ?? 0;
       const walk = (n: TNode, px: number, depth: number): number => {
         if (!n.children.length) {
@@ -246,6 +250,25 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
         walk(tr.root, x(tr.root.t) - 14, 0);
       }
     }
+    // the selection's lineage as one track along its own row: from the oldest ancestor's split to its first fossil,
+    // with a stop at every split on the way (names alternate above and below the track)
+    let lineage: { y: number; x0: number; x1: number; stops: { name: string; x: number; above: boolean }[] } | null = null;
+    const selRow = selected ? (genus ? rowY.get(`${selected}/${genus}`) : rowY.get(selected)) : undefined;
+    const selRange = selected && (genus ? data.genera[selected]?.genera.find((g) => g.genus === genus)?.range_ma : data.families.find((f) => f.family === selected)?.range_ma);
+    if (selRow != null && selRange && track.length) {
+      const stops: { name: string; x: number; above: boolean }[] = [];
+      const last = { true: -Infinity, false: -Infinity } as Record<string, number>;
+      for (const n of track) {
+        const nx = x(n.t), w = n.name.length * 5.6;
+        // try above, then below; skip the name if both sides are taken (the dot stays)
+        const side = [true, false].find((a) => nx - w / 2 > last[String(a)] + 6 && nx - w / 2 > L);
+        if (side === undefined) { stops.push({ name: "", x: nx, above: true }); continue; }
+        last[String(side)] = nx + w / 2;
+        stops.push({ name: n.name, x: nx, above: side });
+      }
+      lineage = { y: selRow, x0: x(track[0].t) - 10, x1: x(selRange[0]), stops };
+    }
+
     // clade names sit just above (or below) the branch into each split, only where they overlap nothing
     const segs = [...lines.filter((l) => l.y1 === l.y2).map((l) => ({ y: l.y1, a: Math.min(l.x1, l.x2), b: Math.max(l.x1, l.x2), h: 1 })), ...bars];
     const boxes: { l: number; r: number; t: number; b: number }[] = [];
@@ -256,7 +279,7 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
         for (const below of [false, true]) {
           const top = below ? ny + 2 : ny - 12, bot = top + 10;
           const clash = l < L + 2 || r > W - M.r
-            || segs.some((g) => g.y + g.h + (below ? 0 : 2) > top && g.y - g.h - (below ? 2 : 0) < bot && g.a < r && g.b > l)
+            || (!hot && segs.some((g) => g.y + g.h + (below ? 0 : 2) > top && g.y - g.h - (below ? 2 : 0) < bot && g.a < r && g.b > l))
             || boxes.some((o) => o.l < r && o.r > l && o.t < bot && o.b > top);
           if (clash) continue;
           boxes.push({ l, r, t: top, b: bot });
@@ -264,23 +287,23 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
         }
         return [];
       });
-    return { lines, nodes, labels };
-  }, [items, trees, x, ROW, selected, genus, showSpecies, L, W]);
+    return { lines, nodes, labels, lineage };
+  }, [items, trees, x, ROW, selected, genus, showSpecies, L, W, data]);
 
   /* ---------- interaction ---------- */
   const latest = useLatest({ x, L, W, view });
   const toT = (clientX: number) => {
-    const r = svgRef.current!.getBoundingClientRect();
+    const r = wrap.current!.getBoundingClientRect();
     const px = ((clientX - r.left) / r.width) * W;
     return x.invert(Math.max(L, Math.min(W - M.r, px)));
   };
   const dragging = useRef(false);
   const onPointerDown = (e: PointerEvent<SVGSVGElement>) => {
     if ((e.target as Element).closest("[data-stop]")) return; // rows and zoomable labels handle their own clicks
-    const r = svgRef.current!.getBoundingClientRect();
+    const r = e.currentTarget.getBoundingClientRect();
     if (((e.clientX - r.left) / r.width) * W < L - 4) return;
     dragging.current = true;
-    svgRef.current!.setPointerCapture(e.pointerId);
+    e.currentTarget.setPointerCapture(e.pointerId);
     tip.hide();
     dispatch({ type: "time", t: toT(e.clientX) });
   };
@@ -330,7 +353,7 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
       {f.phylopic?.svg && <img className="sil" src={silhouetteUrl(f.phylopic.svg)} alt="" />}
       <b>{f.family}</b><br />
       <span>{fRange(f.range_ma)} · {fNum(f.n_genera)} genera · {dietOf(f).label.toLowerCase()}</span><br />
-      <span>{f.family === selected ? "Click to close" : "Click to see its profile and genera"} · ▸ folds and unfolds</span>
+      <span>{f.family === selected ? "Click to deselect" : "Click to follow its lineage and see its profile"} · ▸ unfolds its genera</span>
     </>
   );
   const genusTip = (f: Family, gn: Genus) => (
@@ -356,33 +379,51 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
   const ticks = x.ticks(compact ? 3 : 8);
   const fmtTick = span < 12 ? fMa1 : fMa;
 
+  /* period bands and extinction lines run through both the deck and the rows */
+  const bands = (y0: number, y1: number, labels: boolean) => data.periods.filter((p) => vis(p.start, p.end)).map((p) => {
+    const i = data.periods.indexOf(p);
+    const x0 = X(p.start), x1 = X(p.end), w = x1 - x0;
+    const short = `${p.name[0]}. ${p.name.split(" ")[1]}`;
+    const label = w > 84 ? p.name : w > 40 ? short : w > 22 ? short.replace(". ", ".").slice(0, 3) : "";
+    return (
+      <g key={p.name}>
+        <rect className={i % 2 ? s.bandAlt : s.band} x={x0} width={w} y={y0} height={y1 - y0} />
+        {labels && (
+          <text className={`${s.periodLabel} ${s.zoomable}`} x={(x0 + x1) / 2} y={M.t + 15} textAnchor="middle"
+            data-stop onPointerDown={() => zoomTo(p.start, p.end)}>
+            {label}<title>{`${p.name} · ${fRange([p.start, p.end])} · click to zoom in`}</title>
+          </text>
+        )}
+      </g>
+    );
+  });
+  const extinctions = (y0: number, y1: number, labels: boolean) => (
+    <g clipPath={`url(#${clip})`} className={s.extinction}>
+      {EXTINCTIONS.filter((e) => e.ma <= view[0] && e.ma >= view[1]).map((e) => (
+        <g key={e.ma}>
+          <line x1={x(e.ma)} x2={x(e.ma)} y1={y0} y2={y1} />
+          {labels && <text x={x(e.ma) - 5} y={areaTop + AREA - 6} textAnchor="end">{compact ? e.short : e.label}</text>}
+        </g>
+      ))}
+    </g>
+  );
+  const svgEvents = { onPointerDown, onPointerMove, onPointerUp, onPointerCancel: onPointerUp };
+  const mapW = L - 12, mapH = rowsTop - 10;
+
   return (
     <div
       ref={wrap} className={s.timeline} tabIndex={0} role="slider" onKeyDown={onKeyDown}
       aria-label="Time in millions of years" aria-valuenow={t} aria-valuemin={TIME[1]} aria-valuemax={TIME[0]}
       aria-valuetext={`${fMa(t)} million years ago`}
     >
-      <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H}
-        onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}>
-        <defs><clipPath id={clip}><rect x={L} y={0} width={W - M.r - L} height={H} /></clipPath></defs>
-
-        <g clipPath={`url(#${clip})`}>
-          {/* period bands (full height) */}
-          {data.periods.filter((p) => vis(p.start, p.end)).map((p) => {
-            const i = data.periods.indexOf(p);
-            const x0 = X(p.start), x1 = X(p.end), w = x1 - x0;
-            const short = `${p.name[0]}. ${p.name.split(" ")[1]}`;
-            const label = w > 84 ? p.name : w > 40 ? short : w > 22 ? short.replace(". ", ".").slice(0, 3) : "";
-            return (
-              <g key={p.name}>
-                <rect className={i % 2 ? s.bandAlt : s.band} x={x0} width={w} y={M.t} height={H - M.t - AXIS} />
-                <text className={`${s.periodLabel} ${s.zoomable}`} x={(x0 + x1) / 2} y={M.t + 15} textAnchor="middle"
-                  data-stop onPointerDown={() => zoomTo(p.start, p.end)}>
-                  {label}<title>{`${p.name} · ${fRange([p.start, p.end])} · click to zoom in`}</title>
-                </text>
-              </g>
-            );
-          })}
+      {/* the deck stays on screen while the rows scroll: zoom controls, periods, stages, diversity, cursor and the paleomap */}
+      <div className={s.deck}>
+        {deckTop}
+        <div className={s.deckPlot}>
+          <svg viewBox={`0 0 ${W} ${rowsTop}`} width={W} height={rowsTop} {...svgEvents}>
+            <defs><clipPath id={clip}><rect x={L} y={0} width={W - M.r - L} height={H} /></clipPath></defs>
+            <g clipPath={`url(#${clip})`}>
+              {bands(M.t, rowsTop, true)}
           {/* stages */}
           {data.stages.filter((st) => vis(st.start, st.end)).map((st) => {
             const x0 = X(st.start), x1 = X(st.end), w = x1 - x0;
@@ -400,13 +441,32 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
           {/* diversity */}
           <path className={s.area} d={areaPath} />
           <path className={s.areaLine} d={linePath} />
-        </g>
+            </g>
+            {/* diversity axis, inside the plot (the map sits to its left) */}
+            {yDiv.ticks(3).slice(1).map((v) => <line key={v} className={s.grid} x1={L} x2={W - M.r} y1={yDiv(v)} y2={yDiv(v)} />)}
+            {yDiv.ticks(3).slice(1).map((v, i, a) => (
+              <text key={v} className={s.axisInside} x={L + 4} y={yDiv(v) - 3}>{fNum(v)}{i === a.length - 1 ? " genera" : ""}</text>
+            ))}
+            {extinctions(areaTop, rowsTop, true)}
+            {inView && (
+              <g pointerEvents="none">
+                <line className={s.cursorLine} x1={cx} x2={cx} y1={M.t - 4} y2={rowsTop} />
+                <rect className={s.cursorHandle} x={hx - cw / 2} width={cw} y={M.t - 24} height={20} rx={5} />
+                <text className={s.cursorLabel} x={hx} y={M.t - 10} textAnchor="middle">{cursorLabel}</text>
+                <text className={s.cursorCount} x={cx + (nearRight ? -6 : 6)} y={yDiv(divNow) - 6} textAnchor={nearRight ? "end" : "start"}>
+                  {fNum(divNow)} genera
+                </text>
+              </g>
+            )}
+          </svg>
+          <div className={s.deckMap} style={{ width: mapW, height: mapH }}>
+            <DeckMap width={mapW} height={mapH} />
+          </div>
+        </div>
+      </div>
 
-        {/* diversity axis */}
-        {yDiv.ticks(3).slice(1).map((v) => <line key={v} className={s.grid} x1={L} x2={W - M.r} y1={yDiv(v)} y2={yDiv(v)} />)}
-        {yDiv.ticks(3).map((v) => <text key={v} className={s.axisText} x={L - 6} y={yDiv(v)} textAnchor="end" dominantBaseline="middle">{fNum(v)}</text>)}
-        <text className={s.periodLabel} x={L - (compact ? 34 : 40)} y={areaTop + AREA / 2} textAnchor="end" dominantBaseline="middle">Genera</text>
-        {!compact && <text className={s.periodLabel} x={L - 8} y={stageTop + 11.5} textAnchor="end">Stages</text>}
+      <svg viewBox={`0 ${rowsTop} ${W} ${H - rowsTop}`} width={W} height={H - rowsTop} {...svgEvents}>
+        <g clipPath={`url(#${clip})`}>{bands(rowsTop, H - AXIS, false)}</g>
 
         {/* lineage labels, vertical in the left gutter, spanning their rows */}
         {spans.map(({ gr, y0, y1 }) => {
@@ -422,9 +482,9 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
 
         {/* family tree: branches join each group at the age of its oldest fossil */}
         <g clipPath={`url(#${clip})`} className={s.tree} pointerEvents="none">
-          {branches.lines.map((l, i) => <line key={i} className={`${l.hot ? s.branchHot : s.branch} ${l.ghost ? s.ghost : ""}`} x1={l.x1} x2={l.x2} y1={l.y1} y2={l.y2} />)}
+          {branches.lines.map((l, i) => <line key={i} className={`${l.hot ? s.branchHot : selected ? s.branchFaded : s.branch} ${l.ghost ? s.ghost : ""}`} x1={l.x1} x2={l.x2} y1={l.y1} y2={l.y2} />)}
           {branches.nodes.map(({ n, x: nx, y: ny, hot }) => <circle key={`${n.name}-${ny}`} className={hot ? s.nodeHot : s.node} cx={nx} cy={ny} r={2.4} />)}
-          {branches.labels.map((l) => <text key={`${l.name}-${l.y}`} className={l.hot ? s.cladeHot : s.clade} x={l.x} y={l.y} textAnchor="end">{l.name}</text>)}
+          {branches.labels.map((l) => <text key={`${l.name}-${l.y}`} className={`${s.clade} ${selected ? s.cladeFaded : ""}`} x={l.x} y={l.y} textAnchor="end">{l.name}</text>)}
         </g>
 
         {/* rows */}
@@ -444,7 +504,7 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
             const f = it.f, on = isAlive(f.range_ma, t), sel = f.family === selected;
             const hasGenera = !!data.genera[f.family]?.genera.length;
             return (
-              <g key={f.family} transform={`translate(0,${it.y})`} className={s.row} data-stop data-family={f.family}
+              <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && !sel ? s.faded : ""}`} data-stop data-family={f.family}
                 onPointerDown={() => { tip.hide(); dispatch({ type: "toggleFamily", family: f.family }); }}
                 onPointerMove={(e) => tip.show(famTip(f), e)} onPointerLeave={tip.hide}>
                 <rect className={`${s.hit} ${sel && !genus ? s.hitSel : ""}`} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
@@ -483,7 +543,7 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
             : "";
           const xe = x(gn.range_ma[1]), spRight = xe + 6 + spText.length * 5.6 < W - M.r;
           return (
-            <g key={`${f.family}/${gn.genus}`} transform={`translate(0,${it.y})`} className={s.row} data-stop data-genus={gn.genus}
+            <g key={`${f.family}/${gn.genus}`} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && f.family !== selected ? s.faded : ""}`} data-stop data-genus={gn.genus}
               onPointerDown={() => { tip.hide(); dispatch({ type: "genus", family: f.family, genus: gn.genus }); }}
               onPointerMove={(e) => tip.show(genusTip(f, gn), e)} onPointerLeave={tip.hide}>
               <rect className={`${s.hit} ${sel ? s.hitSel : ""}`} x={nameX} width={W - M.r - nameX} height={GROW} rx={4} />
@@ -503,15 +563,21 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
           );
         })}
 
-        {/* extinctions */}
-        <g clipPath={`url(#${clip})`} className={s.extinction}>
-          {EXTINCTIONS.filter((e) => e.ma <= view[0] && e.ma >= view[1]).map((e) => (
-            <g key={e.ma}>
-              <line x1={x(e.ma)} x2={x(e.ma)} y1={areaTop} y2={H - AXIS} />
-              <text x={x(e.ma) - 5} y={areaTop + AREA - 6} textAnchor="end">{compact ? e.short : e.label}</text>
+        {/* the selection's lineage, on top of the rows */}
+        <g clipPath={`url(#${clip})`} pointerEvents="none">
+          {branches.lineage && (
+            <g className={s.lineageTrack}>
+              <line x1={branches.lineage.x0} x2={branches.lineage.x1} y1={branches.lineage.y} y2={branches.lineage.y} />
+              {branches.lineage.stops.map((st) => (
+                <g key={`${st.x}-${st.name}`}>
+                  <circle cx={st.x} cy={branches.lineage!.y} r={3.5} />
+                  {st.name && <text x={st.x} y={branches.lineage!.y + (st.above ? -8 : 15)} textAnchor="middle">{st.name}</text>}
+                </g>
+              ))}
             </g>
-          ))}
+          )}
         </g>
+        {extinctions(rowsTop, H - AXIS, false)}
 
         {/* bottom axis: ticks adapt to the zoom */}
         <g transform={`translate(0,${H - AXIS + 4})`}>
@@ -523,18 +589,7 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
             </g>
           ))}
         </g>
-
-        {/* cursor */}
-        {inView && (
-          <g pointerEvents="none">
-            <line className={s.cursorLine} x1={cx} x2={cx} y1={M.t - 4} y2={H - AXIS} />
-            <rect className={s.cursorHandle} x={hx - cw / 2} width={cw} y={M.t - 24} height={20} rx={5} />
-            <text className={s.cursorLabel} x={hx} y={M.t - 10} textAnchor="middle">{cursorLabel}</text>
-            <text className={s.cursorCount} x={cx + (nearRight ? -6 : 6)} y={yDiv(divNow) - 6} textAnchor={nearRight ? "end" : "start"}>
-              {fNum(divNow)} genera
-            </text>
-          </g>
-        )}
+        {inView && <line className={s.cursorLine} x1={cx} x2={cx} y1={rowsTop} y2={H - AXIS} pointerEvents="none" />}
       </svg>
     </div>
   );

@@ -4,7 +4,8 @@
 .legend :global(.swatch) { width: 10px; height: 10px; border-radius: 3px; }
 
 /* zoom bar */
-.zoomBar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: -2px 0 8px; }
+.zoomBar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 2px 0 6px; }
+.zoomBar .legend { margin-left: auto; }
 .zoom { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
 .zoom button {
   font: inherit; font-size: 12.5px; color: var(--text); background: none; border: 0; border-right: 1px solid var(--line);
@@ -74,3 +75,24 @@
 .moreRow text { fill: var(--text-3); font-size: 10.5px; font-style: italic; }
 .species { fill: var(--text-3); font-size: 10px; font-style: italic; pointer-events: none; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
 .ghost { stroke-dasharray: 2 3; }
+
+/* deck: stays on screen while the rows scroll */
+.deck { position: sticky; top: 0; z-index: 4; background: var(--surface); padding-top: 10px; margin-top: -10px; border-bottom: 1px solid var(--line); }
+.deckPlot { position: relative; }
+.deckPlot svg { display: block; }
+.deckMap { position: absolute; left: 0; top: 4px; }
+.axisInside { fill: var(--text-3); font-size: 10px; font-variant-numeric: tabular-nums; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; pointer-events: none; }
+@media (max-width: 600px) {
+  .zoomHint { display: none; } /* the deck stays on screen: keep it short on phones */
+  .zoomBar { gap: 8px; }
+  .zoomBar .legend { gap: 10px; }
+}
+
+/* with a selection: its lineage stands out, everything else steps back */
+.faded .bar, .faded .gbar, .faded .rowLabel, .faded .genusLabel, .faded image { opacity: .3; }
+.branchFaded { stroke: var(--text-3); stroke-width: 1; opacity: .3; }
+.branchHot { stroke: var(--text); stroke-width: 2; }
+.cladeFaded { opacity: .35; }
+.lineageTrack line { stroke: var(--text); stroke-width: 2.5; stroke-linecap: round; }
+.lineageTrack circle { fill: var(--surface); stroke: var(--text); stroke-width: 2; }
+.lineageTrack text { fill: var(--text); font-size: 10.5px; font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }

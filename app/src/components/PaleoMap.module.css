@@ -1,4 +1,8 @@
-.map svg { display: block; width: 100%; height: auto; }
+.deck { margin: 0; }
+.deck svg { display: block; }
+.deck figcaption { font-size: 10.5px; color: var(--text-3); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.deck figcaption b { color: var(--text-2); font-weight: 600; }
+.selCount { color: var(--text); font-weight: 600; }
 .sphere { fill: var(--ocean); stroke: var(--line); }
 .graticule { fill: none; stroke: var(--line); stroke-width: .5; }
 .land { fill: var(--land); stroke: var(--land); stroke-width: .6; } /* same color: hides the seams between plates */

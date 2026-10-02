@@ -1,7 +1,7 @@
-/* Right-hand panel: what is alive now (no selection), the selected family's profile, or the selected genus's profile. */
+/* Profile panel: the selected family's profile, or the selected genus's. */
 import { LINEAGE_NOTES, dietOf, groupOf } from "../constants";
 import { silhouetteUrl } from "../data";
-import { byCount, fMa, fNum, fRange, isAlive } from "../format";
+import { byCount, fMa, fNum, fRange } from "../format";
 import { useStore } from "../state";
 import type { AppData, Family, Genus, Phylopic, Wikipedia } from "../types";
 import { Lineage, type Step } from "./Lineage";
@@ -14,39 +14,8 @@ export function FamilyPanel() {
   const gn = fam && state.genus ? data.genera[fam.family]?.genera.find((g) => g.genus === state.genus) : undefined;
   return (
     <section className={`card ${s.panel}`} aria-live="polite">
-      {fam && gn ? <GenusProfile f={fam} g={gn} /> : fam ? <Profile f={fam} /> : <AliveNow />}
+      {fam && gn ? <GenusProfile f={fam} g={gn} /> : fam ? <Profile f={fam} /> : null}
     </section>
-  );
-}
-
-function Chip({ f }: { f: Family }) {
-  const { dispatch } = useStore();
-  return (
-    <button className="chip" onClick={() => dispatch({ type: "select", family: f.family })}>
-      <i className="swatch" style={{ background: dietOf(f).color }} />{f.family}
-    </button>
-  );
-}
-
-function AliveNow() {
-  const { data, state } = useStore();
-  const { t } = state;
-  const living = data.families.filter((f) => isAlive(f.range_ma, t));
-  const W = 5; // ±5 Myr window for "what is happening now"
-  const born = data.families.filter((f) => Math.abs(f.range_ma[0] - t) <= W);
-  const gone = data.families.filter((f) => Math.abs(f.range_ma[1] - t) <= W && f.range_ma[1] > 66);
-  return (
-    <div>
-      <h3 className={s.title}>
-        {living.length ? `${living.length} ${living.length === 1 ? "family" : "families"} alive` : "None of these families alive"}
-      </h3>
-      <p className={s.lede}>
-        {living.length ? "Pick one to see its profile and its fossils on the map." : "Move through time or pick a family on the timeline."}
-      </p>
-      {born.length > 0 && <p className={s.event}><b>Appearing</b> {born.map((f) => f.family).join(", ")}</p>}
-      {gone.length > 0 && <p className={s.event}><b>Disappearing</b> {gone.map((f) => f.family).join(", ")}</p>}
-      <div className={s.chips}>{(living.length ? living : data.families).map((f) => <Chip key={f.family} f={f} />)}</div>
-    </div>
   );
 }
 

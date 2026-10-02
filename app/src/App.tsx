@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FamilyPanel } from "./components/FamilyPanel";
-import { PaleoMap } from "./components/PaleoMap";
 import { TimelineCard } from "./components/Timeline";
 import { TooltipProvider } from "./components/Tooltip";
 import { loadData } from "./data";
@@ -29,15 +28,27 @@ export default function App() {
     <StoreProvider data={data}>
       <TooltipProvider>
         <Header />
-        <main className={s.layout}>
-          <TimelineCard />
-          <aside className={s.side}>
-            <PaleoMap />
-            <FamilyPanel />
-          </aside>
-        </main>
+        <Layout />
       </TooltipProvider>
     </StoreProvider>
+  );
+}
+
+/** Full-width timeline; the profile opens as a column on the right (a bottom sheet on phones) when something is selected. */
+function Layout() {
+  const { state, dispatch } = useStore();
+  const open = state.selected != null;
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") dispatch({ type: "select", family: null }); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, dispatch]);
+  return (
+    <main className={`${s.layout} ${open ? s.withPanel : ""}`}>
+      <TimelineCard />
+      {open && <aside className={s.panel}><FamilyPanel /></aside>}
+    </main>
   );
 }
 
@@ -51,7 +62,7 @@ function Header() {
         <h1>{fMa(state.t)} Ma {period && <span className={s.period}>· {period.name}</span>}</h1>
       </div>
       <p className={s.hint}>
-        Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family
+        Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it
       </p>
     </header>
   );

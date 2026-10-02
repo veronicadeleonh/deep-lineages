@@ -1,9 +1,5 @@
 .panel { min-width: 0; }
 .title { margin: 0; font-size: 18px; font-weight: 650; }
-.lede { color: var(--text-2); margin: 6px 0 10px; }
-.event { margin: 0 0 6px; font-size: 12.5px; color: var(--text-2); }
-.event b { color: var(--text); font-weight: 650; margin-right: 4px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
 
 .head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
 .sub { margin: 2px 0 0; color: var(--text-3); font-size: 12px; }
