@@ -1,5 +1,7 @@
 # environment
 .venv/
+node_modules/
+app/dist/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store

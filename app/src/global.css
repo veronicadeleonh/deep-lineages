@@ -1,0 +1,74 @@
+/* Design tokens (light + dark), base styles and shared pieces. Component styles live in *.module.css. */
+:root {
+  color-scheme: light;
+  --bg: #f4f3ef;
+  --surface: #fcfcfb;
+  --surface-2: #f0efec;
+  --line: #e2e0da;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --text-3: #85847f;
+  --ocean: #eef3f8;
+  --land: #d9d6cc;
+  --area: #b7d3f6;
+  --area-edge: #2a78d6;
+  --herb: #2a78d6;
+  --carn: #eb6834;
+  --unknown: #a3a29c;
+  --extinct: #d03b3b;
+  --cursor: #0b0b0b;
+  --dot: #52514e;
+  --radius: 10px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #232321; --line: #2e2e2b;
+    --text: #ffffff; --text-2: #c3c2b7; --text-3: #8d8c85;
+    --ocean: #18202a; --land: #3a3934;
+    --area: #1c5cab; --area-edge: #6da7ec;
+    --herb: #3987e5; --carn: #d95926; --unknown: #6f6e68; --extinct: #e66767;
+    --cursor: #ffffff; --dot: #c3c2b7;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --surface-2: #232321; --line: #2e2e2b;
+  --text: #ffffff; --text-2: #c3c2b7; --text-3: #8d8c85;
+  --ocean: #18202a; --land: #3a3934;
+  --area: #1c5cab; --area-edge: #6da7ec;
+  --herb: #3987e5; --carn: #d95926; --unknown: #6f6e68; --extinct: #e66767;
+  --cursor: #ffffff; --dot: #c3c2b7;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+h1 { margin: 2px 0 0; font-size: 28px; font-weight: 650; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+h2 { margin: 0; font-size: 13px; font-weight: 600; color: var(--text-2); }
+kbd { font: 11px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; color: var(--text-2); background: var(--surface); }
+
+/* shared pieces */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; min-width: 0; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.muted { color: var(--text-3); font-size: 12px; font-variant-numeric: tabular-nums; }
+.note { margin: 8px 0 0; color: var(--text-3); font-size: 11.5px; }
+.chip {
+  font: inherit; font-size: 12px; color: var(--text); background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px 3px 8px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.chip:hover { border-color: var(--text-3); }
+.swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
+
+/* PhyloPic silhouettes are black: white in dark mode */
+.sil { pointer-events: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sil { filter: invert(1); } }
+:root[data-theme="dark"] .sil { filter: invert(1); }

@@ -1,0 +1,7 @@
+.map svg { display: block; width: 100%; height: auto; }
+.sphere { fill: var(--ocean); stroke: var(--line); }
+.graticule { fill: none; stroke: var(--line); stroke-width: .5; }
+.land { fill: var(--land); stroke: var(--land); stroke-width: .6; } /* same color: hides the seams between plates */
+.lines { fill: none; stroke: var(--text-3); stroke-width: .8; }
+.dot { fill: var(--dot); opacity: .55; }
+.dotHi { opacity: 1; stroke: var(--surface); stroke-width: 1.5; }

@@ -1,0 +1,8 @@
+.tooltip {
+  position: fixed; z-index: 10; pointer-events: none; max-width: 260px;
+  background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 16px rgb(0 0 0 / .12);
+}
+.tooltip b { font-weight: 650; }
+.tooltip span { color: var(--text-2); }
+.tooltip img { display: block; width: 120px; height: 52px; object-fit: contain; object-position: left center; margin-bottom: 4px; }
