@@ -1,5 +1,7 @@
-/* The timeline: 252 Ma (left) to 66 Ma (right), with a draggable cursor, zoom/pan,
-   geological stages, and families grouped by lineage that unfold into their genera. */
+/* The timeline: 252 Ma (left) to 66 Ma (right), with a draggable cursor, zoom/pan, geological stages,
+   and families grouped by lineage, ordered and connected as a time-calibrated family tree.
+   Zooming in reveals detail: families that fill the window unfold into their genera (themselves
+   connected by subfamily), and closer still each genus shows its species. */
 import {
   area, curveMonotoneX, curveStepAfter, easeCubicOut, interpolate, line, max, scaleLinear, timer, type Timer,
 } from "d3";
@@ -9,19 +11,27 @@ import { silhouetteUrl } from "../data";
 import { byCount, fMa, fMa1, fNum, fRange, isAlive } from "../format";
 import { useLatest, useWidth } from "../hooks";
 import { MIN_SPAN, clampView, useStore } from "../state";
+import { WELL_KNOWN, familyTree, genusTree, layout, leaves, pathTo, prune, type TNode } from "../tree";
 import type { Family, Genus, Range } from "../types";
 import { useTooltip } from "./Tooltip";
 import s from "./Timeline.module.css";
 
 const M = { r: 18, t: 26 };
-const BAND = 22, STAGE = 18, AREA = 84, GAP = 16, AXIS = 26, HEAD = 26, GROW = 22, SUB = 20;
+const BAND = 22, STAGE = 18, AREA = 84, GAP = 16, AXIS = 26, HEAD = 14, GROW = 22, SUB = 20, MORE = 18;
+export const AUTO_SPAN = 45;    // at or below this many Myr on screen, families that fill the window unfold by themselves
+const AUTO_MAX = 3;      // …but no more than this many at once, to keep the page readable
+export const SPECIES_SPAN = 15; // at or below this, genera show their species
 const FULL_SPAN = TIME[0] - TIME[1];
 
 type Item =
   | { type: "head"; gr: Group | null; y: number }
   | { type: "fam"; f: Family; y: number }
   | { type: "sub"; f: Family; name: string; count: number; y: number }   // subfamily/tribe header inside an unfolded family
-  | { type: "genus"; f: Family; gn: Genus; y: number };
+  | { type: "genus"; f: Family; gn: Genus; y: number }
+  | { type: "more"; f: Family; count: number; y: number };                // genera of an open family outside the window
+
+/** A tree to draw over the rows: families of one lineage, or the visible genera of an open family. */
+interface Tree { root: TNode; f?: Family; famY?: number }
 
 export function TimelineCard() {
   const { data, state, dispatch } = useStore();
@@ -80,12 +90,16 @@ export function TimelineCard() {
           {fam && <button onClick={fitFamily}>Fit {fam.family}</button>}
         </div>
         {span < FULL_SPAN - 0.1 && <span className="muted" data-testid="zoom-level">{fMa1(state.view[0])}–{fMa1(state.view[1])} Ma</span>}
-        <span className={s.zoomHint}>⌘/Ctrl + scroll or pinch to zoom · swipe sideways to pan · click a period or stage to zoom in</span>
+        <span className={s.zoomHint}>
+          {span > AUTO_SPAN ? "Pinch or ⌘/Ctrl + scroll to zoom: families open into their genera below 45 Myr, species below 15"
+            : span > SPECIES_SPAN ? "Zoom in further to see each genus's species" : "Species shown next to each genus"} · swipe sideways to pan
+        </span>
       </div>
       <Timeline animateTo={animateTo} zoomBy={zoomBy} />
       <p className="note">
-        Bars: each family's range in the PBDB (periods holding ≥5% of its fossils). Area: genera on record (first → last
-        appearance), excluding footprints and eggs.
+        Bars: each family's range in the PBDB (periods holding ≥5% of its fossils). Branches: each split is drawn just before
+        the oldest fossil of its group (a minimum age); dotted where a lineage must have existed but has no fossils yet.
+        Area: genera on record (first → last appearance), excluding footprints and eggs.
       </p>
     </section>
   );
@@ -105,42 +119,76 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
   const compact = W < 600;
   const ROW = compact ? 26 : 32;
   const SIL = compact ? { w: 34, h: 20 } : { w: 48, h: 26 };
-  const nameX = SIL.w + 8;
+  const GUT = compact ? 18 : 22; // left gutter for the vertical lineage labels
+  const nameX = GUT + SIL.w + 8;
   const L = nameX + (compact ? 128 : 150) + 12; // left edge of the plot
   const stageTop = M.t + BAND, areaTop = stageTop + STAGE, rowsTop = areaTop + AREA + GAP;
 
-  // rows: lineage header → families (by first appearance) → genera when unfolded
-  const { items, H } = useMemo(() => {
-    const items: Item[] = [];
+  // which families are unfolded: the ones the user opened, plus (when zoomed in) the ones filling the window
+  const famTree = useMemo(() => familyTree(data), [data]);
+  const open = useMemo(() => {
+    const set = new Set(expanded);
+    if (span <= AUTO_SPAN) {
+      // the families that fill the window, richest in genera there first; at most AUTO_MAX open by themselves
+      const inView = (r: Range) => r[0] > view[1] && r[1] < view[0];
+      data.families
+        .filter((f) => {
+          if (state.collapsed.includes(f.family) || !data.genera[f.family]?.genera.length) return false;
+          const overlap = Math.min(f.range_ma[0], view[0]) - Math.max(f.range_ma[1], view[1]);
+          return overlap >= 0.35 * span || (overlap > 0 && overlap >= 0.8 * (f.range_ma[0] - f.range_ma[1]));
+        })
+        .map((f) => ({ f, n: data.genera[f.family].genera.filter((g) => inView(g.range_ma)).length }))
+        .filter((c) => c.n > 0)
+        .sort((a, b) => b.n - a.n)
+        .slice(0, AUTO_MAX)
+        .forEach((c) => set.add(c.f.family));
+    }
+    return set;
+  }, [data, expanded, state.collapsed, view, span]);
+
+  // rows: per lineage, families in family-tree order; an open family lists its genera in the window, by subfamily
+  const { items, spans, trees, H } = useMemo(() => {
+    const items: Item[] = [], trees: Tree[] = [];
     let y = rowsTop;
+    const inView = (g: Genus) => g.range_ma[0] > view[1] && g.range_ma[1] < view[0];
     [...GROUPS, null].forEach((gr) => {
-      const fs = data.families.filter((f) => (groupOf(f) ?? null) === gr)
-        .sort((a, b) => b.range_ma[0] - a.range_ma[0] || b.range_ma[1] - a.range_ma[1]);
-      if (!fs.length) return;
+      const sub = prune(famTree, (l) => !!l.family && (groupOf(l.family) ?? null) === gr);
+      if (!sub) return;
+      const { root } = layout(sub);
+      trees.push({ root });
       items.push({ type: "head", gr, y }); y += HEAD;
-      fs.forEach((f) => {
+      for (const lf of leaves(root)) {
+        const f = lf.family!;
         items.push({ type: "fam", f, y }); y += ROW;
-        if (expanded.includes(f.family)) {
-          const fg = data.genera[f.family];
-          const gs = fg?.genera ?? [];
-          const groups = fg?.groups ?? [];
-          if (groups.length) {
-            // genera grouped by subfamily/tribe (groups in order of first appearance), unplaced genera last
-            [...groups, null].forEach((name) => {
-              const members = gs.filter((g) => (g.group ?? null) === name);
-              if (!members.length) return;
-              items.push({ type: "sub", f, name: name ?? "Not placed in a subfamily", count: members.length, y }); y += SUB;
-              members.forEach((gn) => { items.push({ type: "genus", f, gn, y }); y += GROW; });
-            });
-          } else {
-            gs.forEach((gn) => { items.push({ type: "genus", f, gn, y }); y += GROW; });
-          }
-          y += 6;
+        if (!open.has(f.family)) continue;
+        const famY = y - ROW / 2;
+        const all = data.genera[f.family]?.genera ?? [];
+        const gt = prune(genusTree(f, data), (l) => !!l.genus && inView(l.genus));
+        const shown = gt ? leaves(gt).length : 0;
+        if (gt) {
+          const { root: g } = layout(gt);
+          // the family node may have been merged into its only group; then that group is the whole list
+          const top = g.name === f.family ? g.children : [g];
+          const groups = top.filter((c) => c.children.length), direct = top.filter((c) => !c.children.length);
+          const hasGroups = (data.genera[f.family]?.groups ?? []).length > 0;
+          groups.forEach((c) => {
+            const ls = leaves(c);
+            items.push({ type: "sub", f, name: c.name, count: ls.length, y }); y += SUB;
+            ls.forEach((l) => { items.push({ type: "genus", f, gn: l.genus!, y }); y += GROW; });
+          });
+          if (direct.length && hasGroups) { items.push({ type: "sub", f, name: "Not placed in a subfamily", count: direct.length, y }); y += SUB; }
+          direct.forEach((l) => { items.push({ type: "genus", f, gn: l.genus!, y }); y += GROW; });
+          trees.push({ root: g, f, famY });
         }
-      });
+        if (all.length > shown) { items.push({ type: "more", f, count: all.length - shown, y }); y += MORE; }
+        y += 6;
+      }
     });
-    return { items, H: y + AXIS };
-  }, [data, expanded, rowsTop, ROW]);
+    // vertical extent of each lineage, for its label in the gutter
+    const heads = items.filter((i) => i.type === "head");
+    const spans = heads.map((h, k) => ({ gr: (h as { gr: Group | null }).gr, y0: h.y + HEAD, y1: k + 1 < heads.length ? heads[k + 1].y : y }));
+    return { items, spans, trees, H: y + AXIS };
+  }, [data, famTree, open, view, rowsTop, ROW]);
 
   const x = useMemo(() => scaleLinear().domain(view).range([L, W - M.r]), [view, L, W]);
   const yDiv = useMemo(
@@ -152,6 +200,72 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
   const curve = span < 40 ? curveStepAfter : curveMonotoneX;
   const areaPath = area<{ ma: number; genera: number }>().x((d) => x(d.ma)).y0(yDiv(0)).y1((d) => yDiv(d.genera)).curve(curve)(data.diversity) ?? "";
   const linePath = line<{ ma: number; genera: number }>().x((d) => x(d.ma)).y((d) => yDiv(d.genera)).curve(curve)(data.diversity) ?? "";
+
+  /* ---------- family tree over the rows ---------- */
+  const showSpecies = span <= SPECIES_SPAN;
+  const branches = useMemo(() => {
+    const rowY = new Map<string, number>(); // "family" or "family/genus" -> row center
+    const bars: { y: number; a: number; b: number; h: number }[] = [];
+    for (const it of items) {
+      if (it.type === "fam") {
+        rowY.set(it.f.family, it.y + ROW / 2);
+        bars.push({ y: it.y + ROW / 2, a: x(it.f.range_ma[0]), b: x(it.f.range_ma[1]), h: 7 });
+      } else if (it.type === "genus") {
+        rowY.set(`${it.f.family}/${it.gn.genus}`, it.y + GROW / 2);
+        const end = x(it.gn.range_ma[1]) + (showSpecies && it.gn.species.length ? 120 : 0); // room for the species names
+        bars.push({ y: it.y + GROW / 2, a: x(it.gn.range_ma[0]), b: end, h: 5 });
+      }
+    }
+    const lines: { x1: number; y1: number; x2: number; y2: number; hot: boolean; ghost?: boolean }[] = [];
+    const nodes: { n: TNode; x: number; y: number; hot: boolean; depth: number }[] = [];
+    for (const tr of trees) {
+      const target = tr.f ? (tr.f.family === selected ? genus : null) : selected;
+      const hot = new Set(target ? pathTo(tr.root, target) : []);
+      const leafY = (l: TNode) => rowY.get(tr.f ? `${tr.f.family}/${l.name}` : l.name) ?? 0;
+      const walk = (n: TNode, px: number, depth: number): number => {
+        if (!n.children.length) {
+          const yy = leafY(n);
+          lines.push({ x1: px, x2: x(n.range![0]), y1: yy, y2: yy, hot: hot.has(n), ghost: true }); // lineage before its first fossil
+          return yy;
+        }
+        const nx = x(n.t);
+        const ys = n.children.map((c) => walk(c, nx, depth + 1));
+        const y0 = Math.min(...ys), y1 = Math.max(...ys), yy = (ys[0] + ys[ys.length - 1]) / 2;
+        lines.push({ x1: nx, x2: nx, y1: y0, y2: y1, hot: false });
+        lines.push({ x1: px, x2: nx, y1: yy, y2: yy, hot: hot.has(n) });
+        nodes.push({ n, x: nx, y: yy, hot: hot.has(n), depth });
+        return yy;
+      };
+      if (tr.f) {
+        // genera hang from their family's row: one vertical drop just before the oldest of them
+        const xr = Math.min(x(tr.root.t), x(tr.f.range_ma[0]) - 4);
+        const kids = tr.root.name === tr.f.family ? tr.root.children : [tr.root];
+        const ys = kids.map((c) => walk(c, xr, 1));
+        lines.push({ x1: xr, x2: xr, y1: tr.famY!, y2: Math.max(...ys), hot: false });
+      } else {
+        walk(tr.root, x(tr.root.t) - 14, 0);
+      }
+    }
+    // clade names sit just above (or below) the branch into each split, only where they overlap nothing
+    const segs = [...lines.filter((l) => l.y1 === l.y2).map((l) => ({ y: l.y1, a: Math.min(l.x1, l.x2), b: Math.max(l.x1, l.x2), h: 1 })), ...bars];
+    const boxes: { l: number; r: number; t: number; b: number }[] = [];
+    const labels = nodes
+      .sort((p, q) => Number(q.hot) - Number(p.hot) || Number(WELL_KNOWN.has(q.n.name)) - Number(WELL_KNOWN.has(p.n.name)) || p.depth - q.depth)
+      .flatMap(({ n, x: nx, y: ny, hot }) => {
+        const r = nx - 4, l = r - n.name.length * (hot ? 5.9 : 5.3);
+        for (const below of [false, true]) {
+          const top = below ? ny + 2 : ny - 12, bot = top + 10;
+          const clash = l < L + 2 || r > W - M.r
+            || segs.some((g) => g.y + g.h + (below ? 0 : 2) > top && g.y - g.h - (below ? 2 : 0) < bot && g.a < r && g.b > l)
+            || boxes.some((o) => o.l < r && o.r > l && o.t < bot && o.b > top);
+          if (clash) continue;
+          boxes.push({ l, r, t: top, b: bot });
+          return [{ name: n.name, x: r, y: bot - 2, hot }];
+        }
+        return [];
+      });
+    return { lines, nodes, labels };
+  }, [items, trees, x, ROW, selected, genus, showSpecies, L, W]);
 
   /* ---------- interaction ---------- */
   const latest = useLatest({ x, L, W, view });
@@ -216,7 +330,7 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
       {f.phylopic?.svg && <img className="sil" src={silhouetteUrl(f.phylopic.svg)} alt="" />}
       <b>{f.family}</b><br />
       <span>{fRange(f.range_ma)} · {fNum(f.n_genera)} genera · {dietOf(f).label.toLowerCase()}</span><br />
-      <span>{expanded.includes(f.family) ? "Click to fold" : "Click to unfold its genera"}</span>
+      <span>{f.family === selected ? "Click to close" : "Click to see its profile and genera"} · ▸ folds and unfolds</span>
     </>
   );
   const genusTip = (f: Family, gn: Genus) => (
@@ -294,15 +408,30 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
         <text className={s.periodLabel} x={L - (compact ? 34 : 40)} y={areaTop + AREA / 2} textAnchor="end" dominantBaseline="middle">Genera</text>
         {!compact && <text className={s.periodLabel} x={L - 8} y={stageTop + 11.5} textAnchor="end">Stages</text>}
 
+        {/* lineage labels, vertical in the left gutter, spanning their rows */}
+        {spans.map(({ gr, y0, y1 }) => {
+          const mid = (y0 + y1) / 2, lx = GUT - 8;
+          return (
+            <g key={`lab-${gr?.key}`} className={s.lineage}>
+              <title>{gr ? `${gr.label}: ${gr.clade.toLowerCase()} · ${gr.hint}` : "Other"}</title>
+              <line x1={GUT - 3} x2={GUT - 3} y1={y0 + 3} y2={y1 - 3} />
+              <text transform={`translate(${lx},${mid}) rotate(-90)`} textAnchor="middle">{gr?.label ?? "Other"}</text>
+            </g>
+          );
+        })}
+
+        {/* family tree: branches join each group at the age of its oldest fossil */}
+        <g clipPath={`url(#${clip})`} className={s.tree} pointerEvents="none">
+          {branches.lines.map((l, i) => <line key={i} className={`${l.hot ? s.branchHot : s.branch} ${l.ghost ? s.ghost : ""}`} x1={l.x1} x2={l.x2} y1={l.y1} y2={l.y2} />)}
+          {branches.nodes.map(({ n, x: nx, y: ny, hot }) => <circle key={`${n.name}-${ny}`} className={hot ? s.nodeHot : s.node} cx={nx} cy={ny} r={2.4} />)}
+          {branches.labels.map((l) => <text key={`${l.name}-${l.y}`} className={l.hot ? s.cladeHot : s.clade} x={l.x} y={l.y} textAnchor="end">{l.name}</text>)}
+        </g>
+
         {/* rows */}
         {items.map((it) => {
           if (it.type === "head") return (
-            <g key={`h-${it.gr?.key}`} transform={`translate(0,${it.y})`} className={s.groupHead}>
-              <text x={0} y={HEAD - 8}>
-                <tspan>{it.gr?.label ?? "Other"}</tspan>
-                {it.gr && !compact && <tspan className={s.groupHint} dx={8}>{`${it.gr.clade.toLowerCase()} · ${it.gr.hint}`}</tspan>}
-              </text>
-              <line x1={0} x2={W - M.r} y1={HEAD - 2} y2={HEAD - 2} />
+            <g key={`h-${it.gr?.key}`} className={s.groupHead}>
+              <line x1={0} x2={W - M.r} y1={it.y + HEAD / 2} y2={it.y + HEAD / 2} />
             </g>
           );
           if (it.type === "sub") return (
@@ -318,14 +447,20 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
               <g key={f.family} transform={`translate(0,${it.y})`} className={s.row} data-stop data-family={f.family}
                 onPointerDown={() => { tip.hide(); dispatch({ type: "toggleFamily", family: f.family }); }}
                 onPointerMove={(e) => tip.show(famTip(f), e)} onPointerLeave={tip.hide}>
-                <rect className={`${s.hit} ${sel && !genus ? s.hitSel : ""}`} x={0} width={W - M.r} height={ROW} rx={4} />
+                <rect className={`${s.hit} ${sel && !genus ? s.hitSel : ""}`} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
                 {f.phylopic?.svg && (
                   <image className={`sil ${s.rowSil} ${!on && !sel ? s.dim : ""}`} href={silhouetteUrl(f.phylopic.svg)}
-                    x={0} y={(ROW - SIL.h) / 2} width={SIL.w} height={SIL.h} preserveAspectRatio="xMidYMid meet" />
+                    x={GUT} y={(ROW - SIL.h) / 2} width={SIL.w} height={SIL.h} preserveAspectRatio="xMidYMid meet" />
                 )}
                 <text className={s.chev} x={nameX} y={ROW / 2} dominantBaseline="central">
-                  {hasGenera ? (expanded.includes(f.family) ? "▾" : "▸") : ""}
+                  {hasGenera ? (open.has(f.family) ? "▾" : "▸") : ""}
                 </text>
+                {hasGenera && (
+                  <rect className={s.chevHit} x={nameX - 5} y={0} width={16} height={ROW}
+                    onPointerDown={(e) => { e.stopPropagation(); tip.hide(); dispatch({ type: "fold", family: f.family, open: !open.has(f.family) }); }}>
+                    <title>{open.has(f.family) ? "Fold its genera" : "Unfold its genera"}</title>
+                  </rect>
+                )}
                 <text className={`${s.rowLabel} ${!on ? s.labelDim : ""} ${sel ? s.labelSel : ""}`} x={nameX + 12} y={ROW / 2}
                   dominantBaseline="central" style={compact ? { fontSize: 11 } : undefined}>{f.family}</text>
                 {vis(f.range_ma[0], f.range_ma[1]) && (
@@ -336,7 +471,17 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
               </g>
             );
           }
+          if (it.type === "more") return (
+            <g key={`${it.f.family}//more`} transform={`translate(0,${it.y})`} className={s.moreRow}>
+              <line className={s.guide} x1={nameX + 4} x2={nameX + 4} y1={0} y2={MORE / 2} />
+              <text x={nameX + 16} y={MORE / 2} dominantBaseline="central">+{fNum(it.count)} {it.count === 1 ? "genus" : "genera"} outside this time window</text>
+            </g>
+          );
           const { f, gn } = it, on = isAlive(gn.range_ma, t), sel = gn.genus === genus && f.family === selected;
+          const spText = showSpecies && gn.species.length
+            ? gn.species.slice(0, 4).map((sp) => sp.name.replace(/^(\S)\S*\s/, "$1. ")).join(", ") + (gn.species.length > 4 ? ` +${gn.species.length - 4}` : "")
+            : "";
+          const xe = x(gn.range_ma[1]), spRight = xe + 6 + spText.length * 5.6 < W - M.r;
           return (
             <g key={`${f.family}/${gn.genus}`} transform={`translate(0,${it.y})`} className={s.row} data-stop data-genus={gn.genus}
               onPointerDown={() => { tip.hide(); dispatch({ type: "genus", family: f.family, genus: gn.genus }); }}
@@ -349,6 +494,10 @@ function Timeline({ animateTo, zoomBy }: { animateTo: (to: Range) => void; zoomB
                 <rect className={`${s.gbar} ${!on ? s.barDim : ""}`} clipPath={`url(#${clip})`}
                   x={x(gn.range_ma[0])} width={Math.max(3, x(gn.range_ma[1]) - x(gn.range_ma[0]))}
                   y={(GROW - 7) / 2} height={7} rx={3.5} fill={dietOf(f).color} />
+              )}
+              {spText && vis(gn.range_ma[0], gn.range_ma[1]) && (
+                <text className={s.species} x={spRight ? xe + 6 : x(gn.range_ma[0]) - 6} y={GROW / 2} dominantBaseline="central"
+                  textAnchor={spRight ? "start" : "end"} clipPath={`url(#${clip})`}>{spText}</text>
               )}
             </g>
           );

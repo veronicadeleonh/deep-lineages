@@ -4,7 +4,6 @@ import { silhouetteUrl } from "../data";
 import { byCount, fMa, fNum, fRange, isAlive } from "../format";
 import { useStore } from "../state";
 import type { AppData, Family, Genus, Phylopic, Wikipedia } from "../types";
-import { CladeTree } from "./CladeTree";
 import { Lineage, type Step } from "./Lineage";
 import { ancestry } from "../tree";
 import s from "./FamilyPanel.module.css";
@@ -50,8 +49,6 @@ function AliveNow() {
     </div>
   );
 }
-
-const gs = (fg?: { genera: Genus[] }) => fg?.genera ?? [];
 
 /** Silhouette + hover credit for one step of the ancestry line. */
 type Sil = { svg?: string | null; depicts?: string | null; source?: string; attribution?: string | null; license?: string | null } | null | undefined;
@@ -107,7 +104,6 @@ function Profile({ f }: { f: Family }) {
       {note && <p className={`${s.meta} ${s.disputed}`}>{note}</p>}
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
-      <CladeTree key={f.family} f={f} />
       <Lineage key={f.family} steps={familySteps(f, data)} />
 
       <p className={s.meta}><b>Fossils by continent:</b> {byCount(f.continents).map((c) => `${c} ${fNum(f.continents[c])}`).join(" · ")}</p>
@@ -128,7 +124,6 @@ function Profile({ f }: { f: Family }) {
 /* ---------- genus ---------- */
 function GenusProfile({ f, g }: { f: Family; g: Genus }) {
   const { data, dispatch } = useStore();
-  const fg = data.genera[f.family];
   const own = g.phylopic?.svg ? g.phylopic : null;
   const sil = own ?? f.phylopic;
   const w = g.wikipedia;
@@ -164,7 +159,6 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
 
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
-      {gs(fg).length > 1 && <CladeTree key={`${f.family}/${g.genus}`} f={f} genus={g.genus} />}
       <Lineage key={`${f.family}/${g.genus}`} steps={steps} />
 
       <p className={s.meta}><b>Fossils by continent:</b> {byCount(g.continents).map((c) => `${c} ${fNum(g.continents[c])}`).join(" · ")}</p>
@@ -210,7 +204,7 @@ function Credits({ ph, silOf, w }: { ph: Phylopic | null | undefined; silOf: str
           <a href={ph.page} target="_blank" rel="noopener">PhyloPic</a><br />
         </>
       )}
-      {Object.keys(data.clades).length > 0 && <>Group silhouettes in the tree and ancestry: PhyloPic contributors (hover one for its author and license)<br /></>}
+      {Object.keys(data.clades).length > 0 && <>Group silhouettes in the ancestry: PhyloPic contributors (hover one for its author and license)<br /></>}
       {w?.extract && <>Text: Wikipedia ({w.lang}) · CC BY-SA 4.0 · </>}Data: Paleobiology Database · CC BY 4.0
     </p>
   );

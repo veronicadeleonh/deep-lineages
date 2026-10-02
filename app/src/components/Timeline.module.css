@@ -35,12 +35,12 @@
 .extinction text { fill: var(--extinct); font-size: 10.5px; font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
 
 /* rows */
-.groupHead text { fill: var(--text); font-size: 12px; font-weight: 650; }
-.groupHead .groupHint { fill: var(--text-3); font-weight: 400; font-size: 11.5px; }
 .groupHead line { stroke: var(--line); }
+.lineage text { fill: var(--text-2); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.lineage line { stroke: var(--line); stroke-width: 1.5; }
 .row { cursor: pointer; }
 .hit { fill: transparent; }
-.row:hover .hit, .hitSel { fill: var(--surface-2); }
+.row:hover .hit, .hitSel { fill: var(--surface-2); fill-opacity: .75; }
 .rowSil { transition: opacity .15s; }
 .dim { opacity: .3; }
 .chev { fill: var(--text-3); font-size: 10px; pointer-events: none; }
@@ -62,3 +62,15 @@
 .genusLabel.labelSel { fill: var(--text); font-weight: 650; }
 .subHead text { fill: var(--text-2); font-size: 10.5px; font-weight: 600; letter-spacing: .02em; }
 .subHead .subCount { fill: var(--text-3); font-weight: 400; }
+
+/* family tree over the rows */
+.branch { stroke: var(--text-3); stroke-width: 1; opacity: .7; }
+.branchHot { stroke: var(--text); stroke-width: 1.6; }
+.node { fill: var(--text-3); }
+.nodeHot { fill: var(--text); }
+.clade { fill: var(--text-3); font-size: 9.5px; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.cladeHot { composes: clade; fill: var(--text-2); font-weight: 600; }
+.chevHit { fill: transparent; cursor: pointer; }
+.moreRow text { fill: var(--text-3); font-size: 10.5px; font-style: italic; }
+.species { fill: var(--text-3); font-size: 10px; font-style: italic; pointer-events: none; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.ghost { stroke-dasharray: 2 3; }

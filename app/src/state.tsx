@@ -8,13 +8,15 @@ export interface State {
   t: number;                 // cursor position
   selected: string | null;   // selected family
   genus: string | null;      // selected genus (within the selected family)
-  expanded: string[];        // families unfolded into their genera
+  expanded: string[];        // families the user unfolded into their genera
+  collapsed: string[];       // families the user folded (overrides the automatic unfolding when zoomed in)
   view: Range;               // visible time window [older, younger]
 }
 
 export type Action =
   | { type: "time"; t: number }
   | { type: "toggleFamily"; family: string }   // select + unfold, or deselect + fold
+  | { type: "fold"; family: string; open: boolean } // unfold/fold without touching the selection
   | { type: "select"; family: string | null }  // select without touching the folds (panel chips)
   | { type: "genus"; family: string; genus: string }
   | { type: "clearGenus" }                     // back from a genus to its family
@@ -53,13 +55,21 @@ function makeReducer(data: AppData) {
         const deselect = a.family === null || state.selected === a.family;
         const fam = deselect ? null : a.family;
         let expanded = state.expanded;
+        let collapsed = state.collapsed;
         if (a.type === "toggleFamily" && a.family) {
           expanded = deselect ? expanded.filter((f) => f !== a.family) : [...new Set([...expanded, a.family])];
+          collapsed = deselect ? [...new Set([...collapsed, a.family])] : collapsed.filter((f) => f !== a.family);
         }
-        let next: State = { ...state, selected: fam, genus: null, expanded };
+        let next: State = { ...state, selected: fam, genus: null, expanded, collapsed };
         const r = fam ? famRange(fam) : undefined;
         if (r && !isAlive(r, state.t)) next = goTo(next, mid(r)); // jump to when the family lived
         return next;
+      }
+      case "fold": {
+        const without = (l: string[]) => l.filter((f) => f !== a.family);
+        return a.open
+          ? { ...state, expanded: [...without(state.expanded), a.family], collapsed: without(state.collapsed) }
+          : { ...state, expanded: without(state.expanded), collapsed: [...without(state.collapsed), a.family] };
       }
       case "clearGenus":
         return { ...state, genus: null };
@@ -78,7 +88,7 @@ const Ctx = createContext<{ data: AppData; state: State; dispatch: Dispatch<Acti
 
 export function StoreProvider({ data, children }: { data: AppData; children: ReactNode }) {
   const reducer = useMemo(() => makeReducer(data), [data]);
-  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], view: [...TIME] as Range });
+  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range });
   const value = useMemo(() => ({ data, state, dispatch }), [data, state]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

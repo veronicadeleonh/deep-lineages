@@ -1,4 +1,4 @@
-/* Time-calibrated cladograms for the profile panel: families within Dinosauria, genera within a family. */
+/* Time-calibrated cladograms drawn into the timeline: families within each lineage, genera within an open family. */
 import type { AppData, Family, Genus, Range } from "./types";
 
 export const WELL_KNOWN = new Set(["Dinosauria", "Saurischia", "Theropoda", "Sauropodomorpha", "Sauropoda", "Ornithischia", "Ornithopoda", "Ceratopsia", "Thyreophora", "Ankylosauria", "Stegosauria", "Coelurosauria", "Tetanurae"]);
@@ -10,7 +10,6 @@ export interface TNode {
   t: number;                // branching age (internal nodes) or first appearance (leaves), in Ma
   family?: Family;          // family leaf
   genus?: Genus;            // genus leaf
-  count?: number;           // summary leaf: a whole group folded into one row
   y?: number;               // row position, set by layout()
 }
 
@@ -31,7 +30,6 @@ function fromPaths(rootName: string, items: { path: string[]; node: TNode }[]): 
   return root;
 }
 
-/** The PBDB places Theropoda directly under Dinosauria; conventionally (and in Brusatte) it sits inside Saurischia. */
 /** Ancestry of a family, root first. The PBDB places Theropoda directly under Dinosauria; conventionally (and in Brusatte) it sits inside Saurischia. */
 export function ancestry(fam: string, data: AppData): string[] {
   const path = [...(data.genera[fam]?.path ?? [])];
@@ -54,8 +52,14 @@ export function genusTree(fam: Family, data: AppData): TNode {
   return fromPaths(fam.family, gs.map((g) => ({ path: [fam.family, ...(g.below ?? []).map((b) => b.name), g.genus], node: leaf(g.genus, g.range_ma, { genus: g }) })));
 }
 
+/** Same tree keeping only the leaves that pass `keep` (empty groups are dropped). */
+export function prune(n: TNode, keep: (leaf: TNode) => boolean): TNode | null {
+  if (!n.children.length) return keep(n) ? n : null;
+  const children = n.children.map((c) => prune(c, keep)).filter((c): c is TNode => !!c);
+  return children.length ? { ...n, children } : null;
+}
+
 export const leaves = (n: TNode): TNode[] => (n.children.length ? n.children.flatMap(leaves) : [n]);
-const contains = (n: TNode, name: string): boolean => n.name === name || n.children.some((c) => contains(c, name));
 
 /** Chain of nodes from the root down to `name` (empty if absent). */
 export function pathTo(n: TNode, name: string): TNode[] {
@@ -65,28 +69,6 @@ export function pathTo(n: TNode, name: string): TNode[] {
     if (p.length) return [n, ...p];
   }
   return [];
-}
-
-/** Smallest group around `name` holding at least `min` leaves (a "close relatives" view). */
-export function neighbourhood(root: TNode, name: string, min = 4): TNode {
-  const p = pathTo(root, name);
-  for (let i = p.length - 2; i >= 0; i--) if (leaves(p[i]).length >= min) return p[i];
-  return root;
-}
-
-/** Folds every sibling group that does not hold `focus` into a single summary row, when the tree is too tall. */
-export function fold(n: TNode, focus: string, max = 30): TNode {
-  if (leaves(n).length <= max) return n;
-  return {
-    ...n,
-    children: n.children.map((c) => {
-      if (!c.children.length) return c;
-      if (contains(c, focus)) return fold(c, focus, max);
-      const ls = leaves(c);
-      const range: Range = [Math.max(...ls.map((l) => l.range![0])), Math.min(...ls.map((l) => l.range![1]))];
-      return leaf(c.name, range, { count: ls.length });
-    }),
-  };
 }
 
 /** Drops internal nodes with a single child (they are just points along a branch), dates the splits and orders the rows. */
