@@ -106,3 +106,20 @@
 .stageNow { fill: var(--cursor); fill-opacity: .28; stroke: var(--cursor); stroke-opacity: .6; }
 .stageNow:hover { fill: var(--cursor); fill-opacity: .4; }
 .stageLabelNow { fill: var(--text); font-weight: 650; }
+
+/* collapsing: a whole lineage from its side label, and slim rows for families outside the window */
+.lineageBtn { cursor: pointer; }
+.lineageBtn:hover text { fill: var(--cursor); }
+.lineageBtn:hover line { stroke: var(--cursor); }
+.foldRow { cursor: pointer; }
+.foldLabel { fill: var(--text); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.foldCount { fill: var(--text-3); font-weight: 400; letter-spacing: 0; text-transform: none; }
+.slimLabel { fill: var(--text-3); font-size: 10.5px; }
+.slim:hover .slimLabel { fill: var(--text-2); }
+/* list mode, right above the families */
+.listBar { display: inline-flex; margin: 10px 0 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.listBar button { flex: 1; font: inherit; font-size: 12px; color: var(--text-2); background: none; border: 0; padding: 4px 12px; cursor: pointer; white-space: nowrap; }
+.listBar button + button { border-left: 1px solid var(--line); }
+.listBar button:hover { color: var(--text); }
+.listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--cursor); font-weight: 700; }
+.listN { opacity: .7; font-variant-numeric: tabular-nums; margin-left: 3px; }

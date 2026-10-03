@@ -9,3 +9,5 @@
 .lines { fill: none; stroke: var(--text-3); stroke-width: .8; }
 .dot { fill: var(--dot); opacity: .55; }
 .dotHi { opacity: 1; stroke: var(--surface); stroke-width: 1.5; }
+.deck figcaption.hint { color: var(--text-3); white-space: normal; line-height: 15px; }
+.hint button { font: inherit; color: var(--cursor); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }

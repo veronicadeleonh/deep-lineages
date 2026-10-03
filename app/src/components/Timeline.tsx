@@ -18,7 +18,7 @@ import { useTooltip } from "./Tooltip";
 import s from "./Timeline.module.css";
 
 const M = { r: 18, t: 26 };
-const BAND = 22, STAGE = 18, AREA = 84, GAP = 16, AXIS = 26, HEAD = 14, GROW = 22, SUB = 20, MORE = 18;
+const BAND = 22, STAGE = 18, AREA = 84, GAP = 16, AXIS = 26, HEAD = 14, GROW = 22, SUB = 20, MORE = 18, SLIM = 14;
 export const AUTO_SPAN = 45;    // at or below this many Myr on screen, families that fill the window unfold by themselves
 const TAIL = 6;          // Myr of fade after the last fossil
 const AUTO_MAX = 3;      // …but no more than this many at once, to keep the page readable
@@ -27,7 +27,8 @@ const FULL_SPAN = TIME[0] - TIME[1];
 
 type Item =
   | { type: "head"; gr: Group | null; y: number }
-  | { type: "fam"; f: Family; y: number }
+  | { type: "fam"; f: Family; y: number; h: number }                       // h: row height (slim when outside the window)
+  | { type: "fold"; gr: Group; n: number; fams: Family[]; y: number }      // a collapsed lineage
   | { type: "sub"; f: Family; name: string; count: number; y: number }   // subfamily/tribe header inside an unfolded family
   | { type: "genus"; f: Family; gn: Genus; y: number }
   | { type: "more"; key: string; count: number; y: number }               // genera of an open row outside the window
@@ -162,10 +163,20 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
     const items: Item[] = [], trees: Tree[] = [];
     let y = rowsTop;
     const inView = (g: Genus) => { const r = genusRecord(g); return r[0] > view[1] && r[1] < view[0]; };
+    const inWindow = (r: Range) => r[0] > view[1] && r[1] < view[0];
+    const zoomedIn = view[0] - view[1] < FULL_SPAN - 0.1;
+    const selFam = data.families.find((f) => f.family === selected);
     [...GROUPS, null].forEach((gr) => {
       const lineageOf = (l: TNode) => l.family ?? data.families.find((f) => f.family === l.rel?.group.families[0]);
       const sub = prune(famTree, (l) => { const f = lineageOf(l); return !!f && (groupOf(f) ?? null) === gr; });
       if (!sub) return;
+      // a collapsed lineage is one row (the selection keeps it open)
+      if (gr && state.foldedLineages.includes(gr.key) && !(selFam && groupOf(selFam)?.key === gr.key)) {
+        const fams = leaves(sub).filter((l) => l.family).map((l) => l.family!);
+        items.push({ type: "head", gr, y }); y += HEAD;
+        items.push({ type: "fold", gr, n: fams.length, fams, y }); y += ROW;
+        return;
+      }
       const { root } = layout(sub);
       trees.push({ root });
       items.push({ type: "head", gr, y }); y += HEAD;
@@ -181,9 +192,14 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
           continue;
         }
         const f = lf.family!;
-        items.push({ type: "fam", f, y }); y += ROW;
+        // zoomed in, a family with no fossils in the window shrinks to a slim row: still there, out of the way
+        // …and with "only alive now" on, so does every family without fossils at the cursor
+        const away = (zoomedIn && !inWindow(famRecord(f))) || (state.focusNow && !isAlive(f.range_ma, t));
+        const slim = away && f.family !== selected && !open.has(f.family);
+        const h = slim ? SLIM : ROW;
+        items.push({ type: "fam", f, y, h }); y += h;
         if (!open.has(f.family)) continue;
-        const famY = y - ROW / 2;
+        const famY = y - h / 2;
         const all = data.genera[f.family]?.genera ?? [];
         const gt = prune(genusTree(f, data), (l) => !!l.genus && inView(l.genus));
         const shown = gt ? leaves(gt).length : 0;
@@ -208,9 +224,10 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
     });
     // vertical extent of each lineage, for its label in the gutter
     const heads = items.filter((i) => i.type === "head");
-    const spans = heads.map((h, k) => ({ gr: (h as { gr: Group | null }).gr, y0: h.y + HEAD, y1: k + 1 < heads.length ? heads[k + 1].y : y }));
+    const spans = heads.map((h, k) => ({ gr: (h as { gr: Group | null }).gr, y0: h.y + HEAD, y1: k + 1 < heads.length ? heads[k + 1].y : y }))
+      .filter((sp) => !items.some((i) => i.type === "fold" && i.gr === sp.gr));
     return { items, spans, trees, H: y + AXIS };
-  }, [data, famTree, open, view, rowsTop, ROW]);
+  }, [data, famTree, open, view, rowsTop, ROW, state.foldedLineages, selected, state.focusNow, state.focusNow ? t : 0]);
 
   const x = useMemo(() => scaleLinear().domain(view).range([L, W - M.r]), [view, L, W]);
   const yDiv = useMemo(
@@ -230,8 +247,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
     const bars: { y: number; a: number; b: number; h: number }[] = [];
     for (const it of items) {
       if (it.type === "fam") {
-        rowY.set(it.f.family, it.y + ROW / 2);
-        bars.push({ y: it.y + ROW / 2, a: x(famRecord(it.f)[0]), b: x(famRecord(it.f)[1]) + 20, h: 7 });
+        rowY.set(it.f.family, it.y + it.h / 2);
+        bars.push({ y: it.y + it.h / 2, a: x(famRecord(it.f)[0]), b: x(famRecord(it.f)[1]) + 20, h: 7 });
       } else if (it.type === "rel") {
         const leafName = relLeafName(it.clade);
         rowY.set(leafName, it.y + ROW / 2);
@@ -452,6 +469,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
       ))}
     </g>
   );
+  const aliveN = data.families.filter((f) => isAlive(f.range_ma, t)).length;
   const svgEvents = { onPointerDown, onPointerMove, onPointerUp, onPointerCancel: onPointerUp };
   const mapW = L - 12, mapH = rowsTop - 10;
 
@@ -510,6 +528,18 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
         </div>
       </div>
 
+      {/* how to show the list: everything, or only the families with fossils at the cursor (the rest collapses to slim rows).
+          "Fossils at", not "alive at": the record shows where fossils were found, not when a group lived */}
+      <div className={s.listBar} style={{ marginLeft: GUT, width: Math.max(220, L - GUT - 8) }} role="radiogroup" aria-label="Families in the list">
+        {[false, true].map((on) => (
+          <button key={String(on)} role="radio" aria-checked={state.focusNow === on} className={state.focusNow === on ? s.listOn : undefined}
+            onClick={() => dispatch({ type: "focusNow", on })}
+            title={on ? "Collapse the families with no fossils at the cursor; follows the cursor as you move through time" : undefined}>
+            {on ? <>Fossils at {fMa(t)} Ma <span className={s.listN}>{aliveN}</span></> : <>All families <span className={s.listN}>{data.families.length}</span></>}
+          </button>
+        ))}
+      </div>
+
       <svg viewBox={`0 ${rowsTop} ${W} ${H - rowsTop}`} width={W} height={H - rowsTop} {...svgEvents}>
         <defs>
           {/* one fade per diet color (a gradient's currentColor would come from <defs>, not from the bar using it) */}
@@ -525,8 +555,9 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
         {spans.map(({ gr, y0, y1 }) => {
           const mid = (y0 + y1) / 2, lx = GUT - 8;
           return (
-            <g key={`lab-${gr?.key}`} className={s.lineage}>
-              <title>{gr ? `${gr.label}: ${gr.clade.toLowerCase()} · ${gr.hint}` : "Other"}</title>
+            <g key={`lab-${gr?.key}`} className={`${s.lineage} ${gr ? s.lineageBtn : ""}`} onPointerDown={() => gr && dispatch({ type: "foldLineage", lineage: gr.key })}>
+              <title>{gr ? `${gr.label}: ${gr.clade.toLowerCase()} · ${gr.hint} · click to collapse` : "Other"}</title>
+              <rect x={0} y={y0} width={GUT} height={Math.max(0, y1 - y0)} fill="transparent" />
               <line x1={GUT - 3} x2={GUT - 3} y1={y0 + 3} y2={y1 - 3} />
               <text transform={`translate(${lx},${mid}) rotate(-90)`} textAnchor="middle">{gr?.label ?? "Other"}</text>
             </g>
@@ -542,7 +573,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
             const sel = it.type === "fam" ? it.f.family === selected && !genus : it.type === "genus" && it.f.family === selected && it.gn.genus === genus;
             if (k !== hoverKey && !sel) return null;
             const wide = it.type === "fam" || it.type === "rel";
-            return <rect key={`hl-${k}`} className={s.rowHighlight} x={wide ? GUT : nameX} y={it.y} width={W - M.r - (wide ? GUT : nameX)} height={wide ? ROW : GROW} rx={4} />;
+            return <rect key={`hl-${k}`} className={s.rowHighlight} x={wide ? GUT : nameX} y={it.y} width={W - M.r - (wide ? GUT : nameX)} height={it.type === "fam" ? it.h : wide ? ROW : GROW} rx={4} />;
           })}
         </g>
 
@@ -565,9 +596,37 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
               <text x={nameX + 16} y={SUB - 6}>{it.name} <tspan className={s.subCount}>· {it.count}</tspan></text>
             </g>
           );
+          if (it.type === "fold") return (
+            <g key={`fold-${it.gr.key}`} transform={`translate(0,${it.y})`} className={`${s.row} ${s.foldRow}`} data-stop
+              onPointerDown={() => dispatch({ type: "foldLineage", lineage: it.gr.key })}
+              onPointerEnter={() => setHoverKey(`fold:${it.gr.key}`)} onPointerLeave={leave}>
+              <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
+              <text className={s.chev} x={GUT + 4} y={ROW / 2} dominantBaseline="central">▸</text>
+              <text className={s.foldLabel} x={GUT + 16} y={ROW / 2} dominantBaseline="central">
+                {it.gr.label} <tspan className={s.foldCount}>· {it.n} families · click to show</tspan>
+              </text>
+              {/* the lineage at a glance: its families' bars, overlaid */}
+              <g clipPath={`url(#${clip})`}>
+                {it.fams.filter((f) => vis(f.range_ma[0], f.range_ma[1])).map((f) => (
+                  <rect key={f.family} x={x(f.range_ma[0])} width={Math.max(3, x(f.range_ma[1]) - x(f.range_ma[0]))} y={ROW / 2 - 4} height={8} rx={4}
+                    fill={dietOf(f).color} opacity={0.35} />
+                ))}
+              </g>
+            </g>
+          );
           if (it.type === "fam") {
             const f = it.f, on = isAlive(f.range_ma, t), sel = f.family === selected;
             const hasGenera = !!data.genera[f.family]?.genera.length;
+            const ROW = it.h, slim = it.h < 20; // eslint-disable-line @typescript-eslint/no-shadow
+            if (slim) return (
+              <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${s.slim}`} data-stop data-family={f.family}
+                onPointerDown={() => { tip.hide(); dispatch({ type: "toggleFamily", family: f.family }); }}
+                onPointerEnter={() => setHoverKey(f.family)} onPointerMove={(e) => tip.show(famTip(f), e)} onPointerLeave={leave}>
+                <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={3} />
+                <text className={s.slimLabel} x={nameX + 12} y={ROW / 2} dominantBaseline="central">{f.family}</text>
+                {rangeMarks({ core: f.range_ma, record: famRecord(f), y: ROW / 2, h: 4, color: dietOf(f).color, dim: true, className: s.bar })}
+              </g>
+            );
             return (
               <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && !sel ? s.faded : ""}`} data-stop data-family={f.family}
                 onPointerDown={() => { tip.hide(); dispatch({ type: "toggleFamily", family: f.family }); }}

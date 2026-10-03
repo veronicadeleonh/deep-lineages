@@ -1,5 +1,5 @@
 /* Profile panel: the selected family's profile, or the selected genus's. */
-import { LINEAGE_NOTES, dietOf, groupOf } from "../constants";
+import { LINEAGE_NOTES, SOCIAL, dietOf, groupOf, socialOf } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, famRecord, fMa, fNum, fRange, genusRecord } from "../format";
 import { useStore } from "../state";
@@ -47,7 +47,6 @@ function Profile({ f }: { f: Family }) {
   const fg = data.genera[f.family];
   const gs = fg?.genera ?? [];
   const note = LINEAGE_NOTES[f.family]?.disputed;
-  const diet = dietOf(f);
 
   // the genera with the oldest records (same criterion as the genus bars)
   const first = gs.length ? gs.filter((g) => g.range_ma[0] === gs[0].range_ma[0]).slice(0, 3) : [];
@@ -67,8 +66,8 @@ function Profile({ f }: { f: Family }) {
       <dl className={s.stats}>
         <div><dt>Fossil record</dt><dd>{fRange(famRecord(f))}</dd></div>
         <div><dt>Genera · fossils</dt><dd>{fNum(f.n_genera)} · {fNum(f.n_occurrences)}</dd></div>
-        <div><dt>Diet</dt><dd className={s.diet}><i className="swatch" style={{ background: diet.color }} />{diet.label}</dd></div>
       </dl>
+      <Traits f={f} />
 
       <p className={s.meta}>
         {fRange(famRecord(f)) !== fRange(f.range_ma) && <>Most fossils: {fRange(f.range_ma)}. </>}
@@ -86,7 +85,6 @@ function Profile({ f }: { f: Family }) {
           <span className="muted">(oldest records in the PBDB, not necessarily where the family originated)</span>
         </p>
       )}
-      {(p.life_habit || p.motility) && <p className={s.meta}><b>Lifestyle:</b> {[p.life_habit, p.motility].filter(Boolean).join(", ")}</p>}
       {gs.length > 0 && <p className={s.meta}><b>Genera ({fNum(gs.length)})</b> <span className="muted">· unfolded on the timeline; click one to see its profile and fossils</span></p>}
 
       <Credits ph={ph} silOf={f.family} w={w} />
@@ -129,6 +127,7 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
         <div><dt>Fossils</dt><dd>{fNum(g.n)}</dd></div>
         <div><dt>Species</dt><dd>{g.species.length ? fNum(g.species.length) : "—"}</dd></div>
       </dl>
+      <Traits f={f} inherited />
 
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
@@ -156,6 +155,19 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
 }
 
 /* ---------- shared pieces ---------- */
+/** Diet and social life as tags; for a genus they come from its family. */
+function Traits({ f, inherited }: { f: Family; inherited?: boolean }) {
+  const diet = dietOf(f), social = socialOf(f);
+  const src = `PBDB, for the whole family${inherited ? ` (${f.family})` : ""}`;
+  return (
+    <ul className={s.tags} aria-label="Traits">
+      <li className={s.tag} title={`Diet · ${src}`}><i className="swatch" style={{ background: diet.color }} />{diet.label}</li>
+      {social && <li className={s.tag} title={`Life habit · ${src}${social === "groups" ? "; usually inferred from bonebeds or trackways with many individuals" : ""}`}>{SOCIAL[social]}</li>}
+      {inherited && <li className={s.tagNote}>family traits</li>}
+    </ul>
+  );
+}
+
 function Silhouette({ ph, name, caption }: { ph: Phylopic | null | undefined; name: string; caption?: string }) {
   if (!ph?.svg) return <div className={s.noSil}>No PhyloPic silhouette</div>;
   return (

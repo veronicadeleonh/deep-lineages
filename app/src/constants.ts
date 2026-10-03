@@ -96,3 +96,12 @@ export const CLADE_NOTES: Record<string, string> = {
   Titanosauria: "the last sauropods, found on every continent",
   Lithostrotia: "titanosaurs with bony plates in the skin",
 };
+
+/** Social life, from the PBDB's life habit for the family ("gregarious" / "solitary"). The other lifestyle fields are
+ *  the same for every family here (ground dwelling, actively mobile), so they tell nothing apart. */
+export type Social = "groups" | "solitary";
+export const socialOf = (f: Family): Social | null => {
+  const h = f.pbdb?.life_habit ?? "";
+  return h.includes("gregarious") ? "groups" : h.includes("solitary") ? "solitary" : null;
+};
+export const SOCIAL: Record<Social, string> = { groups: "Lived in groups", solitary: "Solitary" };

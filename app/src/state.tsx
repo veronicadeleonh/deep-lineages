@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useReducer, type Dispatch, type ReactNode } from "react";
 import { TIME } from "./constants";
 import { isAlive, round1 } from "./format";
-import type { AppData, Range } from "./types";
+import type { AppData, LineageKey, Range } from "./types";
 
 /** Everything the user can change. Time is in Ma (millions of years ago). */
 export interface State {
@@ -12,6 +12,8 @@ export interface State {
   collapsed: string[];       // families the user folded (overrides the automatic unfolding when zoomed in)
   view: Range;               // visible time window [older, younger]
   mode: "timeline" | "tree" | "guide"; // which view of the data
+  foldedLineages: LineageKey[]; // timeline: lineages collapsed into one row
+  focusNow: boolean;         // timeline: collapse the families with no fossils at the cursor
 }
 
 export type Action =
@@ -22,7 +24,9 @@ export type Action =
   | { type: "genus"; family: string; genus: string }
   | { type: "clearGenus" }                     // back from a genus to its family
   | { type: "view"; view: Range }
-  | { type: "mode"; mode: State["mode"] };
+  | { type: "mode"; mode: State["mode"] }
+  | { type: "foldLineage"; lineage: LineageKey }
+  | { type: "focusNow"; on: boolean };
 
 export const MIN_SPAN = 3; // maximum zoom: 3 million years on screen
 
@@ -50,6 +54,12 @@ function makeReducer(data: AppData) {
     switch (a.type) {
       case "time":
         return { ...state, t: clampT(a.t) };
+      case "focusNow":
+        return { ...state, focusNow: a.on };
+      case "foldLineage": {
+        const has = state.foldedLineages.includes(a.lineage);
+        return { ...state, foldedLineages: has ? state.foldedLineages.filter((k) => k !== a.lineage) : [...state.foldedLineages, a.lineage] };
+      }
       case "mode":
         return { ...state, mode: a.mode };
       case "view":
@@ -86,7 +96,7 @@ const Ctx = createContext<{ data: AppData; state: State; dispatch: Dispatch<Acti
 
 export function StoreProvider({ data, children }: { data: AppData; children: ReactNode }) {
   const reducer = useMemo(() => makeReducer(data), [data]);
-  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range, mode: "timeline" });
+  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range, mode: "timeline", foldedLineages: [], focusNow: false });
   const value = useMemo(() => ({ data, state, dispatch }), [data, state]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

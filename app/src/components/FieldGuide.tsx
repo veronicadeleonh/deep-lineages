@@ -1,7 +1,7 @@
 /* The third view: a field guide. One card per genus, grouped by family, with filters in one row above.
    It answers "what was this animal like?" in plain words; a card opens the same profile as the other views. */
 import { useMemo, useState } from "react";
-import { GROUPS, dietOf, groupOf } from "../constants";
+import { GROUPS, SOCIAL, dietOf, groupOf, socialOf, type Social } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, fMa, fNum, genusRecord } from "../format";
 import { useStore } from "../state";
@@ -24,6 +24,7 @@ export function FieldGuide() {
   const [diet, setDiet] = useState<string | null>(null);
   const [period, setPeriod] = useState<string | null>(null);
   const [continent, setContinent] = useState<string | null>(null);
+  const [social, setSocial] = useState<Social | null>(null);
   const [sort, setSort] = useState<Sort>("oldest");
   const [folded, setFolded] = useState<Set<string>>(new Set());
 
@@ -45,6 +46,7 @@ export function FieldGuide() {
     return fams.map((f) => {
       if (lineage && groupOf(f)?.key !== lineage) return { f, gs: [] as Genus[] };
       if (diet && (f.pbdb?.diet ?? "none") !== diet) return { f, gs: [] as Genus[] };
+      if (social && socialOf(f) !== social) return { f, gs: [] as Genus[] };
       const gs = (data.genera[f.family]?.genera ?? []).filter((g) =>
         (!period || periodOf(g) === period)
         && (!continent || g.continents[continent])
@@ -52,10 +54,10 @@ export function FieldGuide() {
           || g.species.some((sp) => sp.name.toLowerCase().includes(needle))));
       return { f, gs: gs.sort(order) };
     }).filter((x) => x.gs.length);
-  }, [data, q, lineage, diet, period, continent, sort]);
+  }, [data, q, lineage, diet, period, continent, social, sort]);
   const total = groups.reduce((n, g) => n + g.gs.length, 0);
-  const anyFilter = q || lineage || diet || period || continent;
-  const reset = () => { setQ(""); setLineage(null); setDiet(null); setPeriod(null); setContinent(null); };
+  const anyFilter = q || lineage || diet || period || continent || social;
+  const reset = () => { setQ(""); setLineage(null); setDiet(null); setPeriod(null); setContinent(null); setSocial(null); };
 
   const toggleFold = (fam: string) => setFolded((prev) => { const n = new Set(prev); n.has(fam) ? n.delete(fam) : n.add(fam); return n; });
   const Chip = ({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) =>
@@ -75,6 +77,8 @@ export function FieldGuide() {
                 <i className="swatch" style={{ background: d.key === "herbivore" ? "var(--herb)" : "var(--carn)" }} />{d.label}
               </Chip>
             ))}
+            <span className={s.divider} />
+            {(Object.keys(SOCIAL) as Social[]).map((k) => <Chip key={k} on={social === k} onClick={() => setSocial(social === k ? null : k)}>{SOCIAL[k]}</Chip>)}
             <span className={s.divider} />
             {PERIODS.map((p) => <Chip key={p} on={period === p} onClick={() => setPeriod(period === p ? null : p)}>{p}</Chip>)}
           </div>
@@ -140,7 +144,7 @@ function Card({ f, g, sel, onOpen }: { f: Family; g: Genus; sel: boolean; onOpen
       {g.wikipedia?.extract && <p className={s.blurb}>{firstSentence(g.wikipedia.extract)}</p>}
       <ul className={s.facts}>
         <li><b>{periodOf(g)}</b> · {fMa(r[0])}–{fMa(r[1])} Ma</li>
-        <li><i className="swatch" style={{ background: dietOf(f).color }} />{dietOf(f).label}</li>
+        <li><i className="swatch" style={{ background: dietOf(f).color }} />{dietOf(f).label}{socialOf(f) && <> · {SOCIAL[socialOf(f)!].toLowerCase()}</>}</li>
         <li>{where.slice(0, 2).join(", ")}{where.length > 2 ? ` +${where.length - 2}` : ""} · {fNum(g.n)} {g.n === 1 ? "fossil" : "fossils"}</li>
         {g.species.length > 0 && <li>{g.species.length === 1 ? <i>{g.species[0].name}</i> : `${g.species.length} species`}</li>}
       </ul>

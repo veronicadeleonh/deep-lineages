@@ -11,7 +11,7 @@ import s from "./PaleoMap.module.css";
 
 /** The paleomap inside the timeline deck: the world at the cursor's time, the selection's fossils in color. */
 export function DeckMap({ width, height }: { width: number; height: number }) {
-  const { data, state } = useStore();
+  const { data, state, dispatch } = useStore();
   const snap = data.nearestSnap(state.t);
 
   // coastlines + reconstructed localities of the current snapshot (cached per snapshot)
@@ -32,16 +32,32 @@ export function DeckMap({ width, height }: { width: number; height: number }) {
     [data.fossils, snap, genus, selected, label],
   );
   const nAll = useMemo(() => data.fossils.filter((f) => f.snap === snap).length, [data.fossils, snap]);
+  // when the selection has no fossils in this slice, point to the nearest slice that has some
+  // (a bar can span this time while its fossils, dated by whole stages, fall in the slices around it)
+  const nearest = useMemo(() => {
+    if (!label || nSel) return null;
+    const counts = new Map<number, number>();
+    for (const f of data.fossils) if (genus ? f.genus === genus : f.family === selected) counts.set(f.snap, (counts.get(f.snap) ?? 0) + 1);
+    const best = [...counts.entries()].sort((a, b) => Math.abs(a[0] - snap) - Math.abs(b[0] - snap) || b[1] - a[1])[0];
+    return best ? { snap: best[0], n: best[1] } : null;
+  }, [data.fossils, label, nSel, genus, selected, snap]);
+  const lines = label && !nSel ? 3 : 1; // the hint may wrap to two lines
 
   return (
     <figure className={s.deck} aria-label={`Paleomap, ${snap} million years ago`}>
-      <MapSvg W={width} H={height - 16} snap={snap} snapshot={current} fossils={data.fossils}
+      <MapSvg W={width} H={height - 16 * lines} snap={snap} snapshot={current} fossils={data.fossils}
         selected={selected} genus={genus} color={fam ? dietOf(fam).color : undefined} />
       <figcaption>
         <b>{snap} Ma</b> · {fNum(nAll)} fossils {lo}–{hi} Ma
         {label && <> · <span className={s.selCount}>{fNum(nSel)} {genus ? <i>{label}</i> : label}</span></>}
         {!current?.coast && " · no paleomap yet"}
       </figcaption>
+      {label && !nSel && (
+        <figcaption className={s.hint}>
+          No fossils of it in this slice
+          {nearest && <> · <button onClick={() => dispatch({ type: "time", t: nearest.snap })}>see its {fNum(nearest.n)} at {nearest.snap} Ma →</button></>}
+        </figcaption>
+      )}
     </figure>
   );
 }
