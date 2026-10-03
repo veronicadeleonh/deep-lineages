@@ -29,6 +29,7 @@ Run from the project root, in this order. Network steps cache every response in 
 .venv/bin/python scripts/build_families.py      # network (--offline: local data + cache only)
 .venv/bin/python scripts/build_genera.py        # network (--offline: local data + cache only)
 .venv/bin/python scripts/build_clades.py        # network (--offline: cache only)
+.venv/bin/python scripts/build_relatives.py     # network (--offline: cache only)
 .venv/bin/python scripts/build_timeline.py      # local
 .venv/bin/python scripts/build_paleomaps.py     # network (GPlates)
 ```
@@ -36,6 +37,8 @@ Run from the project root, in this order. Network steps cache every response in 
 **`build_families.py` → `families.json`.** For each period, the 2 families with the most genera in each lineage (theropods, sauropodomorphs, ornithischians; birds excluded; at least 3 genera in that period), plus a few iconic families (`ALWAYS`), minus doubtful ones (`EXCLUDE`). Footprints and eggs are excluded. Lineage comes from each family's parent groups in the PBDB. Enriched with PBDB (appearance, diet, life habit), PhyloPic (SVG silhouette, author, license; falls back to a genus or parent group when the family has none) and Wikipedia (en → es). Silhouette licenses are stored in the JSON and credited in the app.
 
 **`build_genera.py` → `genera.json`.** Genera and species of each selected family, its ancestry from Archosauria down (from the `pbdb_parents_*` cache), and the earliest genera. Each family's subtree from the PBDB adds subfamilies and tribes (used to group genera) and who named each genus and species. Each genus gets a Wikipedia summary and a PhyloPic silhouette when available. Genus ranges drop the most extreme 10% of fossils when there are 5 or more. A genus keeps a PhyloPic silhouette only if the image depicts that genus (PhyloPic sometimes shows a relative); otherwise the app uses the family's.
+
+**`build_relatives.py` → `relatives.json`.** Close relatives that no selected family covers: genera in each family's parent clade (e.g. Tyrannosauroidea for Tyrannosauridae: *Guanlong*, *Dilong*, *Yutyrannus*…) shown as an "Other …" row next to the family, so a lineage's early history has evidence and not only a dotted line. Each genus goes to the most specific clade; clades spanning several lineages are skipped.
 
 **`build_clades.py` → `clades.json`, `silhouettes/clades/`.** A PhyloPic silhouette for each group on the ancestry paths (Archosauria … subfamilies and tribes), used in the family tree and the ancestry line. PhyloPic's image for a group is always one of its members; `depicts` records which.
 

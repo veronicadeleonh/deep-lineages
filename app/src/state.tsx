@@ -11,6 +11,7 @@ export interface State {
   expanded: string[];        // families the user unfolded into their genera
   collapsed: string[];       // families the user folded (overrides the automatic unfolding when zoomed in)
   view: Range;               // visible time window [older, younger]
+  mode: "timeline" | "tree" | "guide"; // which view of the data
 }
 
 export type Action =
@@ -20,7 +21,8 @@ export type Action =
   | { type: "select"; family: string | null }  // select without touching the folds (panel chips)
   | { type: "genus"; family: string; genus: string }
   | { type: "clearGenus" }                     // back from a genus to its family
-  | { type: "view"; view: Range };
+  | { type: "view"; view: Range }
+  | { type: "mode"; mode: State["mode"] };
 
 export const MIN_SPAN = 3; // maximum zoom: 3 million years on screen
 
@@ -48,6 +50,8 @@ function makeReducer(data: AppData) {
     switch (a.type) {
       case "time":
         return { ...state, t: clampT(a.t) };
+      case "mode":
+        return { ...state, mode: a.mode };
       case "view":
         return { ...state, view: clampView(a.view) };
       case "select":
@@ -82,7 +86,7 @@ const Ctx = createContext<{ data: AppData; state: State; dispatch: Dispatch<Acti
 
 export function StoreProvider({ data, children }: { data: AppData; children: ReactNode }) {
   const reducer = useMemo(() => makeReducer(data), [data]);
-  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range });
+  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range, mode: "timeline" });
   const value = useMemo(() => ({ data, state, dispatch }), [data, state]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

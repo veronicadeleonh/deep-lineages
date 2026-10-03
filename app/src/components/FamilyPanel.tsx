@@ -1,7 +1,7 @@
 /* Profile panel: the selected family's profile, or the selected genus's. */
 import { LINEAGE_NOTES, dietOf, groupOf } from "../constants";
 import { silhouetteUrl } from "../data";
-import { byCount, fMa, fNum, fRange } from "../format";
+import { byCount, famRecord, fMa, fNum, fRange, genusRecord } from "../format";
 import { useStore } from "../state";
 import type { AppData, Family, Genus, Phylopic, Wikipedia } from "../types";
 import { Lineage, type Step } from "./Lineage";
@@ -65,11 +65,15 @@ function Profile({ f }: { f: Family }) {
       <Silhouette ph={ph} name={f.family} />
 
       <dl className={s.stats}>
-        <div><dt>Range</dt><dd>{fRange(f.range_ma)}</dd></div>
+        <div><dt>Fossil record</dt><dd>{fRange(famRecord(f))}</dd></div>
         <div><dt>Genera · fossils</dt><dd>{fNum(f.n_genera)} · {fNum(f.n_occurrences)}</dd></div>
         <div><dt>Diet</dt><dd className={s.diet}><i className="swatch" style={{ background: diet.color }} />{diet.label}</dd></div>
       </dl>
 
+      <p className={s.meta}>
+        {fRange(famRecord(f)) !== fRange(f.range_ma) && <>Most fossils: {fRange(f.range_ma)}. </>}
+        <span className="muted">A record, not a lifespan: the family surely appeared before its first known fossil and lasted after its last.</span>
+      </p>
       {note && <p className={`${s.meta} ${s.disputed}`}>{note}</p>}
       {w?.extract && <p className={s.extract}>{w.extract} <a href={w.url} target="_blank" rel="noopener">Wikipedia →</a></p>}
 
@@ -121,7 +125,7 @@ function GenusProfile({ f, g }: { f: Family; g: Genus }) {
       <Silhouette ph={sil} name={g.genus} caption={own ? undefined : sil?.svg ? `${f.family} silhouette` : undefined} />
 
       <dl className={s.stats}>
-        <div><dt>Range</dt><dd>{fRange(g.range_ma)}</dd></div>
+        <div><dt>Fossil record</dt><dd>{fRange(genusRecord(g))}</dd></div>
         <div><dt>Fossils</dt><dd>{fNum(g.n)}</dd></div>
         <div><dt>Species</dt><dd>{g.species.length ? fNum(g.species.length) : "—"}</dd></div>
       </dl>

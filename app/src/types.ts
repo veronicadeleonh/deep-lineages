@@ -85,6 +85,18 @@ export type GeneraByFamily = Record<string, FamilyGenera>;
 export interface CladeSilhouette { depicts?: string | null; uuid?: string; attribution?: string | null; license?: string | null; page?: string; svg: string }
 export type CladeSilhouettes = Record<string, CladeSilhouette>;
 
+/** A genus in a family's parent clade that belongs to no selected family (e.g. Guanlong, in Tyrannosauroidea). */
+export interface Relative {
+  genus: string;
+  family: string | null;    // its family in the PBDB, if any
+  range_ma: Range;          // without the most extreme 10% of fossils when it has 5+
+  record: Range;            // first to last fossil
+  n: number;
+  continents: Record<string, number>;
+}
+export interface RelativesGroup { families: string[]; path: string[]; genera: Relative[] }
+export type Relatives = Record<string, RelativesGroup>;
+
 export interface Interval { name: string; start: number; end: number }
 
 export interface DiversityPoint { ma: number; genera: number }
@@ -111,6 +123,7 @@ export interface AppData {
   families: Family[];
   genera: GeneraByFamily;
   clades: CladeSilhouettes;
+  relatives: Relatives;
   fossils: Fossil[];
   diversity: DiversityPoint[];
   periods: Interval[];

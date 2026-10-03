@@ -41,7 +41,7 @@
 .lineage line { stroke: var(--line); stroke-width: 1.5; }
 .row { cursor: pointer; }
 .hit { fill: transparent; }
-.row:hover .hit, .hitSel { fill: var(--surface-2); fill-opacity: .75; }
+.rowHighlight { fill: var(--surface-2); }
 .rowSil { transition: opacity .15s; }
 .dim { opacity: .3; }
 .chev { fill: var(--text-3); font-size: 10px; pointer-events: none; }
@@ -68,9 +68,9 @@
 .branch { stroke: var(--text-3); stroke-width: 1; opacity: .7; }
 .branchHot { stroke: var(--text); stroke-width: 1.6; }
 .node { fill: var(--text-3); }
-.nodeHot { fill: var(--text); }
+.nodeHot { fill: var(--surface); stroke: var(--text); stroke-width: 2; }
 .clade { fill: var(--text-3); font-size: 9.5px; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
-.cladeHot { composes: clade; fill: var(--text-2); font-weight: 600; }
+.cladeHot { composes: clade; fill: var(--text); font-size: 10.5px; font-weight: 700; }
 .chevHit { fill: transparent; cursor: pointer; }
 .moreRow text { fill: var(--text-3); font-size: 10.5px; font-style: italic; }
 .species { fill: var(--text-3); font-size: 10px; font-style: italic; pointer-events: none; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
@@ -92,7 +92,17 @@
 .faded .bar, .faded .gbar, .faded .rowLabel, .faded .genusLabel, .faded image { opacity: .3; }
 .branchFaded { stroke: var(--text-3); stroke-width: 1; opacity: .3; }
 .branchHot { stroke: var(--text); stroke-width: 2; }
-.cladeFaded { opacity: .35; }
-.lineageTrack line { stroke: var(--text); stroke-width: 2.5; stroke-linecap: round; }
-.lineageTrack circle { fill: var(--surface); stroke: var(--text); stroke-width: 2; }
-.lineageTrack text { fill: var(--text); font-size: 10.5px; font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+.recordLine { stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* other genera of a family's parent clade */
+.relLabel { fill: var(--text-2); font-size: 12px; font-style: italic; }
+.relCount { fill: var(--text-3); font-style: normal; }
+.relMark { opacity: .55; }
+.relRow:hover .relMark { opacity: .85; }
+
+/* the cursor's period and stage */
+.bandNow { fill: var(--cursor); fill-opacity: .09; pointer-events: none; }
+.periodNow { fill: var(--cursor); font-weight: 700; }
+.stageNow { fill: var(--cursor); fill-opacity: .28; stroke: var(--cursor); stroke-opacity: .6; }
+.stageNow:hover { fill: var(--cursor); fill-opacity: .4; }
+.stageLabelNow { fill: var(--text); font-weight: 650; }

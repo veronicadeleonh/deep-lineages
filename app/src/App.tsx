@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FamilyPanel } from "./components/FamilyPanel";
 import { TimelineCard } from "./components/Timeline";
+import { TreeCard } from "./components/TreeView";
+import { FieldGuide } from "./components/FieldGuide";
 import { TooltipProvider } from "./components/Tooltip";
 import { loadData } from "./data";
 import { fMa } from "./format";
@@ -46,20 +48,27 @@ function Layout() {
   }, [open, dispatch]);
   return (
     <main className={`${s.layout} ${open ? s.withPanel : ""}`}>
-      <TimelineCard />
+      {state.mode === "tree" ? <TreeCard /> : state.mode === "guide" ? <FieldGuide /> : <TimelineCard />}
       {open && <aside className={s.panel}><FamilyPanel /></aside>}
     </main>
   );
 }
 
 function Header() {
-  const { data, state } = useStore();
+  const { data, state, dispatch } = useStore();
   const period = data.periods.find((p) => state.t <= p.start && state.t >= p.end);
   return (
     <header className={s.top}>
       <div>
         <p className={s.eyebrow}><b>Deep Lineages</b> · dinosaur families of the Mesozoic</p>
         <h1>{fMa(state.t)} Ma {period && <span className={s.period}>· {period.name}</span>}</h1>
+      </div>
+      <div className={s.views} role="tablist" aria-label="View">
+        {(["timeline", "tree", "guide"] as const).map((m) => (
+          <button key={m} role="tab" aria-selected={state.mode === m} onClick={() => dispatch({ type: "mode", mode: m })}>
+            {m === "timeline" ? "Timeline" : m === "tree" ? "Family tree" : "Field guide"}
+          </button>
+        ))}
       </div>
       <p className={s.hint}>
         Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it

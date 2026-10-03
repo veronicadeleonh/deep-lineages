@@ -1,0 +1,64 @@
+.card { min-width: 0; }
+.head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.crumbs { font-size: 12.5px; color: var(--text-2); display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px; }
+.crumbs button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.crumbs button:hover { color: var(--text); }
+.crumbs b { color: var(--text); font-weight: 650; }
+.sep { margin: 0 5px; color: var(--text-3); }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; list-style: none; margin: 0; padding: 0; font-size: 12px; color: var(--text-2); }
+.legend li { display: flex; align-items: center; gap: 5px; }
+.legendTitle { color: var(--text-3); font-size: 11px; }
+.legendTitle:not(:first-child) { margin-left: 6px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+.stage { position: relative; }
+.svg { display: block; max-width: 100%; height: auto; }
+.map { position: absolute; left: 0; top: 0; z-index: 1; }
+
+.linArc path:first-child { fill: var(--surface-2); stroke: var(--surface); stroke-width: 2; }
+.linArc text { fill: var(--text-2); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; pointer-events: none; }
+.linArc { cursor: zoom-in; }
+.linArc:hover path:first-child { fill: var(--line); }
+.famArc { cursor: zoom-in; }
+.famArc path:first-child { stroke: var(--surface); stroke-width: 2; opacity: .8; }
+.famArc:hover path:first-child, .famSel path:first-child { opacity: 1; }
+.famArc text { fill: var(--bg); font-size: 10.5px; font-weight: 600; pointer-events: none; }
+
+.links path { fill: none; stroke: var(--text-3); stroke-width: 1; opacity: .7; }
+.links .linkHot { stroke: var(--text); stroke-width: 2.2; opacity: 1; }
+
+.node { cursor: zoom-in; }
+.node circle { fill: var(--surface); stroke: var(--text-3); stroke-width: 1.5; }
+.node text { fill: var(--text-2); font-size: 10px; font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.nodeHot circle { stroke: var(--text); fill: var(--text); }
+.nodeHot text { fill: var(--text); }
+.node:hover circle { stroke: var(--text); }
+.hitNode { fill: transparent; cursor: zoom-in; }
+.hitNode:hover { fill: var(--line); }
+
+.tip { cursor: pointer; }
+.tip circle { stroke: var(--surface); stroke-width: 1; }
+.tip:hover circle { stroke: var(--text); stroke-width: 1.5; }
+.tipSel circle { stroke: var(--text); stroke-width: 2; }
+.genusName { fill: var(--text-2); font-size: 11px; font-style: italic; }
+.famName { fill: var(--text-2); font-size: 11px; }
+.tip:hover .genusName, .tipSel .genusName { fill: var(--text); font-weight: 650; }
+.spp { fill: var(--text-3); font-style: normal; font-size: 10px; }
+
+.center { cursor: pointer; }
+.center circle { fill: var(--surface); stroke: var(--line); }
+.centerName { fill: var(--text); font-size: 12px; font-weight: 650; text-anchor: middle; }
+.centerBack { fill: var(--text-3); font-size: 10px; text-anchor: middle; }
+
+@media (max-width: 600px) { .map { position: static; margin-bottom: 8px; } .stage { flex-direction: column; align-items: center; } }
+.svg { overflow: hidden; touch-action: none; border-radius: var(--radius); }
+.grab { cursor: grab; }
+.grab:active { cursor: grabbing; }
+.controls { position: absolute; right: 0; bottom: 0; z-index: 1; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.controls button { font: inherit; font-size: 16px; width: 34px; height: 32px; color: var(--text); background: none; border: 0; cursor: pointer; }
+.controls button + button { border-top: 1px solid var(--line); }
+.controls button:hover:not(:disabled) { background: var(--surface-2); }
+.controls button:disabled { color: var(--text-3); cursor: default; }
+.hint { position: absolute; left: 0; bottom: 0; margin: 0; z-index: 1; color: var(--text-3); font-size: 12px; pointer-events: none; }
+.unnamed circle { fill: transparent; stroke: transparent; }
+.unnamed:hover circle { fill: var(--line); }

@@ -1,15 +1,17 @@
 /* Time-calibrated cladograms drawn into the timeline: families within each lineage, genera within an open family. */
-import type { AppData, Family, Genus, Range } from "./types";
+import { famRecord, genusRecord } from "./format";
+import type { AppData, Family, Genus, Range, RelativesGroup } from "./types";
 
 export const WELL_KNOWN = new Set(["Dinosauria", "Saurischia", "Theropoda", "Sauropodomorpha", "Sauropoda", "Ornithischia", "Ornithopoda", "Ceratopsia", "Thyreophora", "Ankylosauria", "Stegosauria", "Coelurosauria", "Tetanurae"]);
 
 export interface TNode {
   name: string;
   children: TNode[];
-  range?: Range;            // leaves: first → last appearance
+  range?: Range;            // leaves: first → last fossil on record
   t: number;                // branching age (internal nodes) or first appearance (leaves), in Ma
   family?: Family;          // family leaf
   genus?: Genus;            // genus leaf
+  rel?: { clade: string; group: RelativesGroup }; // leaf for the other genera of a clade (relatives.json)
   y?: number;               // row position, set by layout()
 }
 
@@ -44,12 +46,23 @@ function familyPath(fam: string, data: AppData): string[] {
   return i >= 0 ? p.slice(i) : ["Dinosauria", fam];
 }
 
-export const familyTree = (data: AppData) =>
-  fromPaths("Dinosauria", data.families.map((f) => ({ path: familyPath(f.family, data), node: leaf(f.family, f.range_ma, { family: f }) })));
+export const relLeafName = (clade: string) => `${clade} · others`;
+
+/** Families, plus one leaf per clade for its genera outside the selected families (when relatives.json exists). */
+export function familyTree(data: AppData): TNode {
+  const fams = data.families.map((f) => ({ path: familyPath(f.family, data), node: leaf(f.family, famRecord(f), { family: f }) }));
+  const rels = Object.entries(data.relatives).map(([clade, group]) => {
+    const p = familyPath(group.families[0], data);
+    const path = [...p.slice(0, p.indexOf(clade) + 1), relLeafName(clade)];
+    const range: Range = [Math.max(...group.genera.map((g) => g.record[0])), Math.min(...group.genera.map((g) => g.record[1]))];
+    return { path, node: leaf(relLeafName(clade), range, { rel: { clade, group } }) };
+  });
+  return fromPaths("Dinosauria", [...fams, ...rels]);
+}
 
 export function genusTree(fam: Family, data: AppData): TNode {
   const gs = data.genera[fam.family]?.genera ?? [];
-  return fromPaths(fam.family, gs.map((g) => ({ path: [fam.family, ...(g.below ?? []).map((b) => b.name), g.genus], node: leaf(g.genus, g.range_ma, { genus: g }) })));
+  return fromPaths(fam.family, gs.map((g) => ({ path: [fam.family, ...(g.below ?? []).map((b) => b.name), g.genus], node: leaf(g.genus, genusRecord(g), { genus: g }) })));
 }
 
 /** Same tree keeping only the leaves that pass `keep` (empty groups are dropped). */
@@ -98,4 +111,54 @@ export function layout(n: TNode): { root: TNode; rows: number } {
   };
   place(root);
   return { root, rows: row };
+}
+
+/* ---------- the whole tree, for the radial view ---------- */
+export interface RNode {
+  id: string;               // path of names from the root: unique even when two groups share a name
+  name: string;
+  children: RNode[];
+  family?: Family;          // the family's own node
+  genus?: Genus;            // genus leaf
+  famOf?: Family;           // genus leaf: its family
+}
+
+/** Dinosauria → … → families → subfamilies/tribes → genera. Groups with a single child are dropped (they are points
+ *  along a branch), except families, which the rings need; a dropped well-known name replaces a lesser one. */
+export function lifeTree(data: AppData): RNode {
+  const root: RNode = { id: "Dinosauria", name: "Dinosauria", children: [] };
+  const child = (parent: RNode, name: string): RNode => {
+    let c = parent.children.find((x) => x.name === name && !x.genus);
+    if (!c) parent.children.push((c = { id: `${parent.id}/${name}`, name, children: [] }));
+    return c;
+  };
+  for (const f of data.families) {
+    let cur = root;
+    for (const name of familyPath(f.family, data).slice(1)) cur = child(cur, name);
+    cur.family = f;
+    for (const g of data.genera[f.family]?.genera ?? []) {
+      let at = cur;
+      for (const b of g.below ?? []) at = child(at, b.name);
+      at.children.push({ id: `${at.id}/${g.genus}`, name: g.genus, children: [], genus: g, famOf: f });
+    }
+  }
+  const simplify = (n: RNode): RNode => {
+    if (!n.children.length) return n;
+    const kids = n.children.map(simplify);
+    if (kids.length === 1 && !n.family && n !== root && kids[0].children.length) {
+      const inner = kids[0];
+      return WELL_KNOWN.has(n.name) && !WELL_KNOWN.has(inner.name) && !inner.family ? { ...inner, name: n.name } : inner;
+    }
+    return { ...n, children: kids };
+  };
+  return simplify(root);
+}
+
+export const findNode = (n: RNode, id: string): RNode | null =>
+  n.id === id ? n : n.children.reduce<RNode | null>((hit, c) => hit ?? findNode(c, id), null);
+
+/** Period of a genus's first fossil: Triassic, Jurassic or Cretaceous. */
+export function periodOf(g: Genus): "Triassic" | "Jurassic" | "Cretaceous" {
+  const first = genusRecord(g)[0];
+  return first > 201.4 ? "Triassic" : first > 143.1 ? "Jurassic" : "Cretaceous";
 }
