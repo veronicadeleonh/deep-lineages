@@ -113,6 +113,7 @@ export interface Fossil {
   family: string | null;
   mid: number;              // midpoint of its dating (Ma)
   loc: number;              // locality id (index into FossilsFile.locs)
+  here: [number, number] | null; // where the locality is today [lng, lat]
   pbdb: [number, number] | null; // PBDB paleocoordinates [lng, lat], fallback when no paleomap
   snap: number;             // paleomap snapshot it belongs to (Ma)
 }

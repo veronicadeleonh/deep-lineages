@@ -5,6 +5,8 @@
 .sub { margin: 2px 0 0; color: var(--text-3); font-size: 12px; }
 .close { font: inherit; background: none; border: 1px solid var(--line); border-radius: 6px; color: var(--text-2); cursor: pointer; padding: 2px 8px; }
 .close:hover { color: var(--text); border-color: var(--text-3); }
+/* on a wide screen the panel folds instead (App's tab); the folded rail holds the close button */
+@media (min-width: 961px) { .close { display: none; } }
 .silhouette {
   height: 92px; margin: 12px 0 4px; background: var(--text);
   -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat;

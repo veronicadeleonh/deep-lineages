@@ -49,6 +49,7 @@ export async function loadData(): Promise<AppData> {
       family: (r[idx.family] as string | null) ?? null,
       mid,
       loc: r[idx.loc_id] as number,
+      here: fossilsFile.locs[r[idx.loc_id] as number] ?? null,
       pbdb: plng == null ? null : [plng, r[idx.pbdb_paleolat] as number],
       snap: nearestSnap(mid),
     };

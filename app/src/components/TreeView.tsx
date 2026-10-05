@@ -9,7 +9,7 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent as RPointerEven
 import { CLADE_NOTES, GROUPS, dietOf, groupOf } from "../constants";
 import { silhouetteUrl } from "../data";
 import { fNum, fRange, genusRecord } from "../format";
-import { useLatest, useWidth } from "../hooks";
+import { useLatest, useSize } from "../hooks";
 import { useStore } from "../state";
 import { findNode, lifeTree, periodOf, WELL_KNOWN, type RNode } from "../tree";
 import { DeckMap } from "./PaleoMap";
@@ -35,9 +35,10 @@ const pt = (a: number, r: number): [number, number] => [r * Math.sin(a), -r * Ma
 export function TreeCard() {
   const { data, state, dispatch } = useStore();
   const tip = useTooltip();
-  const wrap = useRef<HTMLDivElement>(null);
+  const wrap = useRef<HTMLDivElement>(null);   // the canvas: the poster is drawn to its size
   const svgRef = useRef<SVGSVGElement>(null);
-  const width = useWidth(wrap, 900);
+  const [width, height] = useSize(wrap, [900, 640]);
+  const [about, setAbout] = useState(false);
   const full = useMemo(() => lifeTree(data), [data]);
   const [focusId, setFocusId] = useState(full.id);
   const focus = findNode(full, focusId) ?? full;
@@ -46,9 +47,9 @@ export function TreeCard() {
   const latest = useRef<View>(REST);
   const setView = (v: View) => { latest.current = v; setViewState(v); };
 
-  // the canvas takes the card's whole width and most of the window's height; the poster fits its shorter side
+  // the canvas fills what the card leaves (the card fills the screen); on a phone it is square
   const W = width;
-  const H = Math.round(Math.min(width, Math.max(480, (typeof window !== "undefined" ? window.innerHeight : 900) - 170)));
+  const H = width < 520 ? width : Math.max(360, height);
   const hw = W / 2, hh = H / 2;
   const c = Math.min(hw, hh);                         // poster radius at rest
   const compact = c * 2 < 560;
@@ -232,6 +233,26 @@ export function TreeCard() {
     return out;
   }, [full, focus]);
 
+  /* ---------- the depth guide: from Dinosauria down to the selected genus (or the focus) and its species ---------- */
+  const ranks = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const fg of Object.values(data.genera)) for (const g of fg.genera) for (const b of g.below ?? []) m.set(b.name, b.rank);
+    return m;
+  }, [data]);
+  const ladder = useMemo(() => {
+    const target = (n: RNode) => (state.genus ? n.genus?.genus === state.genus && n.famOf?.family === state.selected
+      : state.selected ? !!n.family && n.family.family === state.selected : n.id === focus.id);
+    const out: RNode[] = [];
+    const walk = (n: RNode, trail: RNode[]): boolean => {
+      if (target(n)) { out.push(...trail, n); return true; }
+      return n.children.some((ch) => walk(ch, [...trail, n]));
+    };
+    if (!walk(full, [])) out.push(...crumbs);
+    return out;
+  }, [full, focus, crumbs, state.selected, state.genus]);
+  const rankOf = (n: RNode) => (n.genus ? "genus" : n.family ? "family" : ranks.get(n.name) ?? "group");
+  const ladderGenus = ladder.at(-1)?.genus;
+
   const genusTip = (n: RNode) => {
     const g = n.genus!, f = n.famOf!;
     return (
@@ -255,15 +276,6 @@ export function TreeCard() {
   return (
     <section className={`card ${s.card}`} aria-label="Family tree">
       <div className={s.head}>
-        <nav className={s.crumbs} aria-label="Zoom path">
-          {crumbs.map((n, i) => (
-            <span key={n.id}>
-              {i > 0 && <span className={s.sep}>›</span>}
-              {i < crumbs.length - 1 ? <button onClick={() => refocus(n)}>{n.name}</button> : <b>{n.name}</b>}
-            </span>
-          ))}
-          <span className="muted"> · {fNum(leaves.filter((l) => l.data.genus).length)} genera</span>
-        </nav>
         <ul className={s.legend}>
           <li className={s.legendTitle}>First fossil</li>
           {PERIODS.map((p) => <li key={p.key}><i className={s.dot} style={{ background: p.color }} />{p.key}</li>)}
@@ -273,15 +285,49 @@ export function TreeCard() {
         </ul>
       </div>
 
-      <div ref={wrap} className={s.stage}>
-        <div className={s.map} style={{ width: compact ? 150 : 230 }}>
-          <DeckMap width={compact ? 150 : 230} height={compact ? 92 : 132} />
-        </div>
+      <div className={s.stage}>
+        {/* the left column: the map, and how deep in the tree we are */}
+        <aside className={s.side}>
+          <DeckMap width={230} height={132} />
+          <nav className={s.ladder} aria-label="Depth in the tree">
+            <p className={s.ladderTitle}>Where you are <span>· level {ladder.length + (ladderGenus?.species.length ? 1 : 0)}</span></p>
+            <ol>
+              {ladder.map((n, i) => {
+                const isFocus = n.id === focus.id, inFocus = n.id.startsWith(focus.id);
+                const canFocus = n.children.length > 0;
+                return (
+                  <li key={n.id} className={`${isFocus ? s.stepFocus : ""} ${inFocus ? "" : s.stepAbove}`} style={{ ["--d" as string]: i }}>
+                    <span className={s.stepDot} />
+                    {canFocus && !isFocus
+                      ? <button onClick={() => refocus(n)} title="Center the tree on this group">{n.genus ? <i>{n.name}</i> : n.name}</button>
+                      : <b>{n.genus ? <i>{n.name}</i> : n.name}</b>}
+                    <span className={s.rank}>{isFocus ? "center" : rankOf(n)}</span>
+                  </li>
+                );
+              })}
+              {ladderGenus && ladderGenus.species.slice(0, 4).map((sp) => (
+                <li key={sp.name} className={s.stepSpecies}>
+                  <span className={s.stepDot} /><i>{sp.name}</i><span className={s.rank}>species</span>
+                </li>
+              ))}
+              {ladderGenus && ladderGenus.species.length > 4 && <li className={s.stepMore}>+{ladderGenus.species.length - 4} more species</li>}
+            </ol>
+            {!state.selected && <p className={s.ladderHint}>Click a genus on the rim to follow its path down to its species.</p>}
+            <p className={s.ladderCount}>{fNum(leaves.filter((l) => l.data.genus).length)} genera in this view</p>
+          </nav>
+        </aside>
+
+        <div ref={wrap} className={s.canvas}>
         <div className={s.controls} role="group" aria-label="Zoom">
           <button aria-label="Zoom in" onClick={() => zoomAt(1.8, 0, 0)}>+</button>
           <button aria-label="Zoom out" onClick={() => zoomAt(1 / 1.8, 0, 0)} disabled={!zoomed}>−</button>
           <button aria-label="Whole tree" title="Whole tree" onClick={() => setView(REST)} disabled={!zoomed}>⟲</button>
+          <button aria-label="How to read the tree" aria-expanded={about} onClick={() => setAbout(!about)} className={s.aboutBtn}>i</button>
         </div>
+        {about && <p className={s.aboutPop} role="note" onClick={() => setAbout(false)}>Branches show which groups sit inside which (PBDB classification), not when they split: here time is only the
+        shade of each genus's dot, the period of its first fossil. Rings: families in their diet color, and the three
+        lineages. Pinch to zoom and drag to move; names, silhouettes and species appear as you get closer. Click a ring or
+        a branch point to center the tree on that group, or a genus to open its profile and see its fossils on the map.</p>}
         <p className={s.hint}>{zoomed ? "Drag or scroll to move · pinch to zoom" : "Pinch or ⌘ + scroll to zoom in"}</p>
 
         <svg ref={svgRef} viewBox={`${-hw} ${-hh} ${W} ${H}`} width={W} height={H} className={`${s.svg} ${zoomed ? s.grab : ""}`}
@@ -368,13 +414,9 @@ export function TreeCard() {
             {(zoomed || crumbs.length > 1) && <text dy="1.2em" className={s.centerBack}>{zoomed ? "⟲ whole tree" : "↑ zoom out"}</text>}
           </g>
         </svg>
+        </div>
       </div>
-      <p className="note">
-        Branches show which groups sit inside which (PBDB classification), not when they split: here time is only the
-        shade of each genus's dot, the period of its first fossil. Rings: families in their diet color, and the three
-        lineages. Pinch to zoom and drag to move; names, silhouettes and species appear as you get closer. Click a ring or
-        a branch point to center the tree on that group, or a genus to open its profile and see its fossils on the map.
-      </p>
+
     </section>
   );
 }

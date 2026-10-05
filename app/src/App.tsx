@@ -5,7 +5,7 @@ import { TreeCard } from "./components/TreeView";
 import { FieldGuide } from "./components/FieldGuide";
 import { TimeMachine } from "./components/TimeMachine";
 import { TooltipProvider } from "./components/Tooltip";
-import { loadData } from "./data";
+import { loadData, silhouetteUrl } from "./data";
 import { fMa } from "./format";
 import { StoreProvider, useStore } from "./state";
 import type { AppData } from "./types";
@@ -36,11 +36,11 @@ export default function App() {
   );
 }
 
-/** The page. The time machine fills the screen exactly (header + map + controls); the other views scroll. */
+/** The page. Every view fills the screen exactly except the timeline, which scrolls. */
 function Shell() {
   const { state } = useStore();
   return (
-    <div className={state.mode === "machine" ? s.fullScreen : undefined}>
+    <div className={state.mode !== "timeline" ? s.fullScreen : undefined}>
       <Header />
       <Layout />
     </div>
@@ -49,7 +49,7 @@ function Shell() {
 
 /** Full-width timeline; the profile opens as a column on the right (a bottom sheet on phones) when something is selected. */
 function Layout() {
-  const { state, dispatch } = useStore();
+  const { data, state, dispatch } = useStore();
   const selected = state.selected != null;
   const open = selected && state.mode !== "machine"; // the time machine shows its own small card instead
   useEffect(() => {
@@ -58,10 +58,30 @@ function Layout() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [selected, dispatch]);
+  // the profile can be folded to a thin rail (to give the view room) and unfolded again; a new selection unfolds it
+  const [folded, setFolded] = useState(false);
+  useEffect(() => setFolded(false), [state.selected, state.genus]);
+  const fam = state.selected ? data.families.find((f) => f.family === state.selected) : undefined;
+  const sil = (state.genus && data.genera[state.selected ?? ""]?.genera.find((g) => g.genus === state.genus)?.phylopic?.svg) || fam?.phylopic?.svg;
   return (
-    <main className={`${s.layout} ${open ? s.withPanel : ""}`}>
+    <main className={`${s.layout} ${open ? (folded ? s.withRail : s.withPanel) : ""}`}>
       {state.mode === "machine" ? <TimeMachine /> : state.mode === "tree" ? <TreeCard /> : state.mode === "guide" ? <FieldGuide /> : <TimelineCard />}
-      {open && <aside className={s.panel}><FamilyPanel /></aside>}
+      {open && folded && (
+        <div className={s.rail}>
+          <button className={s.railOpen} onClick={() => setFolded(false)} aria-label="Show the profile" title="Show the profile">
+            <span className={s.railChev}>‹</span>
+            {sil && <i className={s.railSil} style={{ ["--src" as string]: `url("${silhouetteUrl(sil)}")` }} />}
+            <span className={s.railName}>{state.genus ? <i>{state.genus}</i> : state.selected}</span>
+          </button>
+          <button className={s.railClose} onClick={() => dispatch({ type: "select", family: null })} aria-label="Clear the selection" title="Clear the selection">✕</button>
+        </div>
+      )}
+      {open && !folded && (
+        <div className={s.panelCol}>
+          <button className={s.fold} onClick={() => setFolded(true)} aria-label="Hide the profile" title="Hide the profile">›</button>
+          <aside className={s.panel}><FamilyPanel /></aside>
+        </div>
+      )}
     </main>
   );
 }
