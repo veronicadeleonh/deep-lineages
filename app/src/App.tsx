@@ -5,6 +5,8 @@ import { TreeCard } from "./components/TreeView";
 import { FieldGuide } from "./components/FieldGuide";
 import { TimeMachine } from "./components/TimeMachine";
 import { TooltipProvider } from "./components/Tooltip";
+import { PLAY_EVENT } from "./components/TimeMachine";
+import { Welcome } from "./components/Welcome";
 import { loadData, silhouetteUrl } from "./data";
 import { fMa } from "./format";
 import { StoreProvider, useStore } from "./state";
@@ -38,14 +40,31 @@ export default function App() {
 
 /** The page. Every view fills the screen exactly except the timeline, which scrolls. */
 function Shell() {
-  const { state } = useStore();
+  const { state, dispatch } = useStore();
+  // the welcome screen: on the first visit in this browser, and whenever the title is clicked
+  const [welcome, setWelcome] = useState(() => { try { return !localStorage.getItem(SEEN); } catch { return true; } });
+  const close = () => { setWelcome(false); try { localStorage.setItem(SEEN, "1"); } catch { /* private mode */ } };
+  const start = () => {
+    close();
+    dispatch({ type: "mode", mode: "machine" });
+    dispatch({ type: "time", t: 252 });
+    setTimeout(() => window.dispatchEvent(new Event(PLAY_EVENT)), 300); // the time machine starts playing
+  };
   return (
     <div className={state.mode !== "timeline" ? s.fullScreen : undefined}>
-      <Header />
+      <Header onTitle={() => setWelcome(true)} />
       <Layout />
+      {/* credits, always there and quiet, in the gutter under the views */}
+      <footer className={s.footer} data-cinema="dim">
+        By <a href="https://veronicadeleonh.de/" target="_blank" rel="noopener">Verónica De León Hernández</a>
+        <span className={s.footSep}>·</span>Data: Paleobiology Database, PALEOMAP (Scotese), PhyloPic, Wikipedia
+      </footer>
+      {welcome && <Welcome onStart={start} onExplore={close} />}
     </div>
   );
 }
+
+const SEEN = "deep-lineages:welcome-seen";
 
 /** Full-width timeline; the profile opens as a column on the right (a bottom sheet on phones) when something is selected. */
 function Layout() {
@@ -86,13 +105,13 @@ function Layout() {
   );
 }
 
-function Header() {
+function Header({ onTitle }: { onTitle: () => void }) {
   const { data, state, dispatch } = useStore();
   const period = data.periods.find((p) => state.t <= p.start && state.t >= p.end);
   return (
     <header className={s.top} data-cinema="dim">
       <div>
-        <p className={s.eyebrow}><b>Deep Lineages</b> · dinosaur families of the Mesozoic</p>
+        <p className={s.eyebrow}><button className={s.home} onClick={onTitle} title="About Deep Lineages">🦕 <b>Deep Lineages</b></button> · dinosaur families of the Mesozoic</p>
         <h1>{fMa(state.t)} Ma {period && <span className={s.period}>· {period.name}</span>}</h1>
       </div>
       <div className={s.views} role="tablist" aria-label="View">

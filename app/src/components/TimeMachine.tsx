@@ -13,6 +13,9 @@ import { MachineCard } from "./MachineCard";
 import { FOSSIL_WINDOW, MachineMap } from "./MachineMap";
 import s from "./TimeMachine.module.css";
 
+/** Fired (on window) to start playing, e.g. from the welcome screen. */
+export const PLAY_EVENT = "deep-lineages:play";
+
 const SPEEDS = [1, 2, 4];
 const ABOUT = "Press play (or the space bar) to travel from the first dinosaurs to the asteroid; drag the bar to go anywhere. "
   + "Continents: present-day coastlines moved to their past position (PALEOMAP, every 10 million years, crossfading from one to the next); "
@@ -65,6 +68,12 @@ export function TimeMachine() {
     hold.current = 0;
     setPlaying(!playing);
   };
+  // the welcome screen's "Start the journey"
+  useEffect(() => {
+    const onPlay = () => { hold.current = 0; setPlaying(true); };
+    window.addEventListener(PLAY_EVENT, onPlay);
+    return () => window.removeEventListener(PLAY_EVENT, onPlay);
+  }, []);
   // space bar plays and pauses
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

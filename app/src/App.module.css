@@ -4,6 +4,8 @@
 }
 .eyebrow { margin: 0; color: var(--text-3); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
 .period { color: var(--text-2); font-weight: 450; }
+.home { font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.home:hover b { color: var(--text); }
 .hint { margin: 0; color: var(--text-3); font-size: 12px; }
 .views { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); margin-left: auto; }
 .views button { font: inherit; font-size: 13px; color: var(--text-2); background: none; border: 0; padding: 5px 14px; cursor: pointer; }
@@ -36,10 +38,18 @@
   .fullScreen .panel { max-height: none; height: 100%; }
   .fullScreen .rail { height: 100%; position: static; }
 }
+.footer {
+  position: fixed; right: 24px; bottom: 5px; z-index: 5; font-size: 11px; line-height: 14px; color: var(--text-3);
+  background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 0 6px; border-radius: 4px; white-space: nowrap;
+}
+.footer a { color: var(--text-2); text-decoration: none; }
+.footer a:hover { color: var(--cursor); text-decoration: underline; text-underline-offset: 2px; }
+.footSep { margin: 0 6px; }
 .loading { padding: 24px; color: var(--text-3); }
 
 @media (max-width: 700px) {
   .fullScreen { height: auto; display: block; }
+  .footer { position: static; display: block; white-space: normal; text-align: center; padding: 0 16px 16px; background: none; }
 }
 
 @media (max-width: 960px) {

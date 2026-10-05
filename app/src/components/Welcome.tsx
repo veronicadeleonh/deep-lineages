@@ -1,0 +1,90 @@
+/* The welcome screen: what this is, in a few lines, over the continents drifting from Pangaea to the end of the
+   Cretaceous. Shown on the first visit (remembered in this browser) and whenever the title is clicked. */
+import { geoEqualEarth, geoPath } from "d3";
+import { useEffect, useMemo, useState } from "react";
+import { loadSnapshot, type Snapshot } from "../data";
+import { fNum } from "../format";
+import { useStore } from "../state";
+import s from "./Welcome.module.css";
+
+const VIEWS = [
+  { icon: "▶", name: "Time machine", text: "Watch the story, from the first dinosaurs to the asteroid." },
+  { icon: "☰", name: "Timeline", text: "When each family lived, and how they branch." },
+  { icon: "✺", name: "Family tree", text: "Who is related to whom, down to the species." },
+  { icon: "◎", name: "Field guide", text: "What lived where: pick any place on Earth." },
+] as const;
+
+export function Welcome({ onStart, onExplore }: { onStart: () => void; onExplore: () => void }) {
+  const { data } = useStore();
+  const genera = useMemo(() => Object.values(data.genera).reduce((n, fg) => n + fg.genera.length, 0), [data]);
+
+  // the background: one reconstruction after another, oldest first, crossfading
+  const times = useMemo(() => [...data.times].sort((a, b) => b - a), [data.times]);
+  const [i, setI] = useState(0);
+  const [snaps, setSnaps] = useState<Record<number, Snapshot>>({});
+  useEffect(() => {
+    for (const t of times) loadSnapshot(t, data.paleo).then((sn) => setSnaps((p) => ({ ...p, [t]: sn })));
+  }, [times, data.paleo]);
+  useEffect(() => {
+    const id = setInterval(() => setI((x) => (x + 1) % times.length), 2600);
+    return () => clearInterval(id);
+  }, [times.length]);
+  const W = 1600, H = 820;
+  const path = useMemo(() => geoPath(geoEqualEarth().fitExtent([[0, 0], [W, H]], { type: "Sphere" })), []);
+  const shapes = useMemo(() => {
+    const out: Record<number, string> = {};
+    for (const [t, sn] of Object.entries(snaps)) if (sn.coast) out[+t] = sn.coast.features.map((f) => path(f) ?? "").join(" ");
+    return out;
+  }, [snaps, path]);
+  const t = times[i];
+
+  // Esc or Enter: straight in
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onExplore(); else if (e.key === "Enter") onStart(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onStart, onExplore]);
+
+  return (
+    <div className={s.welcome} role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+      <svg className={s.bg} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden>
+        <path className={s.sphere} d={path({ type: "Sphere" }) ?? ""} />
+        {times.map((x) => shapes[x] && <path key={x} className={s.land} d={shapes[x]} style={{ opacity: x === t ? 1 : 0 }} />)}
+      </svg>
+      <span className={s.clock} aria-hidden>{t} million years ago</span>
+
+      <div className={s.content}>
+        <p className={s.eyebrow}>Deep Lineages <span>🦕</span></p>
+        <h1 id="welcome-title">186 million years of dinosaurs</h1>
+        <p className={s.lede}>
+          Travel from the first dinosaurs to the asteroid, on maps of the world as it was. Every dot is a real fossil,
+          placed where it lay when the animal was alive.
+        </p>
+        <p className={s.stats}>
+          <span><b>{fNum(data.families.length)}</b> families</span>
+          <span><b>{fNum(genera)}</b> genera</span>
+          <span><b>{fNum(data.fossils.length)}</b> fossils</span>
+        </p>
+
+        <div className={s.actions}>
+          <button className={s.start} onClick={onStart} autoFocus>▶ Start the journey</button>
+          <button className={s.explore} onClick={onExplore}>Explore on my own</button>
+        </div>
+
+        <ul className={s.views}>
+          {VIEWS.map((v) => (
+            <li key={v.name}><span className={s.icon} aria-hidden>{v.icon}</span><b>{v.name}</b><span>{v.text}</span></li>
+          ))}
+        </ul>
+
+        <p className={s.credits}>
+          Inspired by Steve Brusatte's <i>The Rise and Fall of the Dinosaurs</i>. Data: Paleobiology Database ·
+          PALEOMAP (C. R. Scotese) via GPlates · silhouettes from PhyloPic · texts from Wikipedia.
+        </p>
+        <p className={s.byline}>
+          By <a href="https://veronicadeleonh.de/" target="_blank" rel="noopener">Verónica De León Hernández</a>
+        </p>
+      </div>
+    </div>
+  );
+}
