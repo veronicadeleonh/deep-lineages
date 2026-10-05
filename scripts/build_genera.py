@@ -19,7 +19,7 @@ Usage:  .venv/bin/python scripts/build_genera.py [--offline]
 """
 import json, urllib.parse
 from pathlib import Path
-from build_families import load, get_json, phylopic, OFFLINE, SIL, CACHE
+from build_families import load, get_json, get_file, phylopic, OFFLINE, SIL, CACHE
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data/processed"
@@ -95,19 +95,49 @@ def attr(tree, name):
 
 # ---------- Wikipedia: genus summary ----------
 
-def genus_phylopic(g):
-    """Genus silhouette, only if the PhyloPic image really depicts that genus.
-    A genus node's primary image can belong to a relative (e.g. Tarbosaurus -> "Tyrannosaurus magnus");
-    those are dropped so the app falls back to the family silhouette."""
+def genus_phylopic(g, species=()):
+    """Genus silhouette, only if the PhyloPic image really depicts that genus (or one of its species).
+    A genus node's primary image can belong to a relative (e.g. Tarbosaurus -> "Tyrannosaurus magnus"); then every
+    other image in the genus's clade is checked, and the first that is of the genus is used. If none is, the genus
+    gets no silhouette and the app falls back to the family's.
+    PhyloPic sometimes files a species under an older or lumped genus name (Tarbosaurus bataar as "Tyrannosaurus
+    bataar", Gorgosaurus libratus as "Albertosaurus libratus"): same species epithet = same animal, so it counts."""
+    epithets = {n.split()[-1] for n in species if " " in n}
+    depicts = lambda title: title == g or title.startswith(g + " ") or (title.count(" ") == 1 and title.split()[1] in epithets)
     ph = phylopic(g)
-    if not ph:
-        return None
-    f = CACHE / f"phylopic_img_{g}.json"
-    links = (json.loads(f.read_text()) if f.exists() else {}).get("_links", {})
-    titles = [(links.get(k) or {}).get("title") or "" for k in ("specificNode", "generalNode")]
-    if any(t == g or t.startswith(g + " ") for t in titles):
-        return ph
+    if ph:
+        f = CACHE / f"phylopic_img_{g}.json"
+        links = (json.loads(f.read_text()) if f.exists() else {}).get("_links", {})
+        if any(depicts((links.get(k) or {}).get("title") or "") for k in ("specificNode", "generalNode")):
+            return ph
     (SIL / f"{g}.svg").unlink(missing_ok=True)
+    return genus_phylopic_other(g, depicts)
+
+
+def genus_phylopic_other(g, depicts):
+    """Every image in the genus node's clade (not only the primary one): the first that depicts the genus."""
+    f = CACHE / f"phylopic_node_{g}.json"                 # the genus's node, already fetched by phylopic()
+    items = ((json.loads(f.read_text()) if f.exists() else {}).get("_embedded") or {}).get("items") or []
+    href = ((items[0].get("_links") or {}).get("cladeImages") or {}).get("href") if items else None
+    if not href:
+        return None
+    sep = "&" if "?" in href else "?"
+    imgs = get_json(f"https://api.phylopic.org{href}{sep}page=0&embed_items=true", f"phylopic_clade_imgs_{g}")
+    for img in ((imgs or {}).get("_embedded") or {}).get("items") or []:
+        links = img.get("_links", {})
+        if not depicts((links.get("specificNode") or {}).get("title") or ""):
+            continue
+        svg = (links.get("vectorFile") or {}).get("href")
+        if not (svg and get_file(svg, SIL / f"{g}.svg")):
+            continue
+        return {
+            "source": g,
+            "uuid": img.get("uuid"),
+            "attribution": img.get("attribution"),
+            "license": (links.get("license") or {}).get("href"),
+            "page": f"https://www.phylopic.org/images/{img.get('uuid')}",
+            "svg": f"silhouettes/{g}.svg",
+        }
     return None
 
 def genus_wikipedia(genus):
@@ -158,7 +188,7 @@ def main():
                 "pbdb_range": [t["firstapp_max_ma"], t["lastapp_min_ma"]] if "firstapp_max_ma" in t and "lastapp_min_ma" in t else None,
                 "species": [{"name": n, "n": int(c), "attr": attr(tree, n)} for n, c in sp.items()],
                 "wikipedia": genus_wikipedia(g),
-                "phylopic": genus_phylopic(g),
+                "phylopic": genus_phylopic(g, list(sp.index)),
             })
             done += 1
             if not OFFLINE and done % 25 == 0:

@@ -25,6 +25,8 @@ const PERIODS = [
   { key: "Cretaceous", color: "var(--cre)" },
 ] as const;
 const periodColor = (g: RNode["genus"]) => PERIODS.find((p) => g && p.key === periodOf(g))!.color;
+/** The silhouette for the center: the focused family's, or the focused group's (PhyloPic, via clades.json). */
+const centerSilOf = (n: RNode, clades: Record<string, { svg?: string | null }>) => n.family?.phylopic?.svg ?? clades[n.name]?.svg ?? null;
 const MAIN = new Set(["Theropoda", "Sauropodomorpha", "Ornithischia"]);
 const K_MAX = 40;
 const REST: View = { k: 1, x: 0, y: 0 };
@@ -63,10 +65,10 @@ export function TreeCard() {
     const band = labelsAtRest ? (silsAtRest ? (compact ? 120 : 178) : (compact ? 92 : 128)) : 0;
     const rTips = c - 6 - 40 - 6 - band;             // rings take 40px outside the names
     const root = cluster<RNode>().size([2 * Math.PI, rTips]).separation((a, b) => (a.parent === b.parent ? 1 : 1.8))(h);
-    const r0 = compact ? 40 : 52;                    // keep the first splits clear of the center button
+    const r0 = (compact ? 40 : 52) + (centerSilOf(focus, data.clades) ? 14 : 0); // keep the first splits clear of the center button
     root.each((nd) => { if (nd !== root) nd.y = r0 + (nd.y * (rTips - r0)) / rTips; });
     return { root, leaves: root.leaves(), rTips, labelsAtRest };
-  }, [focus, c, compact]);
+  }, [focus, c, compact, data.clades]);
   const step = leaves.length > 1 ? (2 * Math.PI) / leaves.length : 2 * Math.PI;
 
   // a new focus starts from the whole poster
@@ -257,21 +259,30 @@ export function TreeCard() {
     const g = n.genus!, f = n.famOf!;
     return (
       <>
-        {g.phylopic?.svg && <img className="sil" src={silhouetteUrl(g.phylopic.svg)} alt="" />}
+        {g.phylopic?.svg ? <img className="sil" src={silhouetteUrl(g.phylopic.svg)} alt="" />
+          : f.phylopic?.svg && <img className="sil" src={silhouetteUrl(f.phylopic.svg)} alt="" style={{ opacity: 0.35 }} title="Family silhouette" />}
         <b><i>{g.genus}</i></b> <span>· {f.family}</span><br />
+        {!g.phylopic?.svg && f.phylopic?.svg && <><span>(silhouette of its family)</span><br /></>}
         <span>Fossil record {fRange(genusRecord(g))} · first in the {periodOf(g)}</span><br />
         <span>{fNum(g.n)} fossils · {g.species.length ? `${g.species.length} species` : "species undetermined"}</span><br />
         <span>Click to see its profile</span>
       </>
     );
   };
+  /** A tooltip silhouette for a group: its own family's, or the clade's (PhyloPic, via clades.json). */
+  const groupSil = (n: RNode) => {
+    const svg = centerSilOf(n, data.clades);
+    return svg ? <img className="sil" src={silhouetteUrl(svg)} alt="" /> : null;
+  };
   const cladeTip = (n: RNode, leavesN: number) => (
     <>
+      {groupSil(n)}
       <b>{n.name}</b>{CLADE_NOTES[n.name] && <><br /><span>{CLADE_NOTES[n.name]}</span></>}<br />
       <span>{fNum(leavesN)} genera · click to center on it</span>
     </>
   );
   const [ccx, ccy] = tx([0, 0]);
+  const centerSil = centerSilOf(focus, data.clades);
 
   return (
     <section className={`card ${s.card}`} aria-label="Family tree">
@@ -282,6 +293,7 @@ export function TreeCard() {
           <li className={s.legendTitle}>Ring</li>
           <li><i className="swatch" style={{ background: "var(--herb)" }} />Herbivore</li>
           <li><i className="swatch" style={{ background: "var(--carn)" }} />Carnivore</li>
+          <li><i className="swatch" style={{ background: "var(--unknown)" }} />No data</li>
         </ul>
       </div>
 
@@ -338,7 +350,8 @@ export function TreeCard() {
           {/* rings, in screen space so they keep their thickness */}
           {ringsVisible && <g transform={`translate(${view.x},${view.y})`}>
             {linArcs.map(({ gr, ns, a }) => (
-              <g key={gr.key} className={s.linArc} onClick={click(() => refocus(lca(ns).data))}>
+              <g key={gr.key} className={s.linArc} onClick={click(() => refocus(lca(ns).data))}
+                onPointerMove={hover(<>{groupSil(lca(ns).data)}<b>{gr.label}</b><br /><span>{gr.hint} · click to center on them</span></>)} onPointerLeave={tip.hide}>
                 <path d={arcPath(a[0], a[1], rLinS, rLinS + 16)} />
                 <path id={`lin-${gr.key}`} d={textArc(a[0], a[1], rLinS + 8)} fill="none" />
                 {(a[1] - a[0]) * (rLinS + 8) > gr.label.length * 7 + 10 && (
@@ -351,7 +364,7 @@ export function TreeCard() {
               const id = `fam-${n.data.id.replace(/\W/g, "_")}`, sel = state.selected === f.family;
               return (
                 <g key={n.data.id} className={`${s.famArc} ${sel ? s.famSel : ""}`} onClick={click(() => refocus(n.data))}
-                  onPointerMove={hover(<><b>{f.family}</b><br /><span>{fNum(n.leaves().length)} genera · {dietOf(f).label.toLowerCase()} · click to center on it</span></>)}
+                  onPointerMove={hover(<>{groupSil(n.data)}<b>{f.family}</b><br /><span>{fNum(n.leaves().length)} genera · {dietOf(f).label.toLowerCase()} · click to center on it</span></>)}
                   onPointerLeave={tip.hide}>
                   <path d={arcPath(a[0], a[1], rFamS, rFamS + 20)} style={{ fill: dietOf(f).color }} />
                   <path id={id} d={textArc(a[0], a[1], rFamS + 10)} fill="none" />
@@ -409,9 +422,23 @@ export function TreeCard() {
           {/* center: the focus, and a way back out */}
           <g className={s.center} transform={`translate(${ccx},${ccy})`}
             onClick={click(() => (zoomed ? setView(REST) : crumbs.length > 1 && refocus(crumbs[crumbs.length - 2])))}>
-            <circle r={compact ? 30 : 40} />
-            <text dy={zoomed || crumbs.length > 1 ? "-0.2em" : "0.35em"} className={s.centerName}>{focus.name}</text>
-            {(zoomed || crumbs.length > 1) && <text dy="1.2em" className={s.centerBack}>{zoomed ? "⟲ whole tree" : "↑ zoom out"}</text>}
+            {centerSil ? (
+              /* the group's silhouette in the middle: the genera around it without a drawing of their own look like this */
+              <>
+                <circle r={compact ? 40 : 54} />
+                <image className="sil" href={silhouetteUrl(centerSil)} x={compact ? -26 : -34} y={compact ? -30 : -40} width={compact ? 52 : 68} height={compact ? 26 : 34} preserveAspectRatio="xMidYMid meet">
+                  <title>{`${focus.name} silhouette (PhyloPic)`}</title>
+                </image>
+                <text y={compact ? 10 : 12} className={s.centerName}>{focus.name}</text>
+                {(zoomed || crumbs.length > 1) && <text y={compact ? 22 : 27} className={s.centerBack}>{zoomed ? "⟲ whole tree" : "↑ zoom out"}</text>}
+              </>
+            ) : (
+              <>
+                <circle r={compact ? 30 : 40} />
+                <text dy={zoomed || crumbs.length > 1 ? "-0.2em" : "0.35em"} className={s.centerName}>{focus.name}</text>
+                {(zoomed || crumbs.length > 1) && <text dy="1.2em" className={s.centerBack}>{zoomed ? "⟲ whole tree" : "↑ zoom out"}</text>}
+              </>
+            )}
           </g>
         </svg>
         </div>
