@@ -1,27 +1,28 @@
-/* Design tokens, base styles and shared pieces. Component styles live in *.module.css.
-   One theme: a deep night blue, with bright, friendly accents. */
+/* Design tokens, base styles and shared pieces. Component styles live in *.module.css. */
 :root {
-  color-scheme: dark;
-  --bg: #0b1426;          /* night blue, not black */
-  --surface: #111d36;
-  --surface-2: #18284a;
-  --line: #24365c;
-  --text: #f2f5ff;
-  --text-2: #b8c3e0;
-  --text-3: #7f8db3;
-  --ocean: #142a52;
-  --land: #3b5788;
-  --area: #24508f;
-  --area-edge: #7fb6ff;
-  --herb: #20a874;        /* diet pair validated on --surface: CVD ΔE 8.4, normal 28 */
-  --carn: #e9603c;
-  --unknown: #7f8db3;
-  --extinct: #ff6b8b;
-  --cursor: #ffd166;      /* sunny yellow: the "now" of the timeline */
-  --dot: #b8c3e0;
-  --tri: #4b4a9e; --jur: #8a7ff0; --cre: #c9c2ff; /* ordinal: period of a genus's first fossil (older recedes) */
+  color-scheme: light;
+  --bg: #eef2f4;
+  --surface: #ffffff;
+  --surface-2: #f1f5f7;
+  --line: #d8e0e5;
+  --text: #18222b;
+  --text-2: #4a5763;
+  --text-3: #7d8a96;
+  --ocean: #d9e9f2;       /* pale sea */
+  --land: #b4c79e;        /* sage green */
+  --area: #d3dde4;
+  --area-edge: #6d8394;
+  --herb: #14946e;        /* diet pair validated on --surface: CVD ΔE 8.4, normal 28 */
+  --carn: #e2582f;
+  --unknown: #7d8a96;
+  --extinct: #c4285a;
+  --cursor: #b87700;      /* amber: the "now" of the timeline */
+  --dot: #4a5763;
+  --tri: #a99ee6; --jur: #7467d0; --cre: #40349a; /* ordinal: period of a genus's first fossil (older recedes) */
+  --map-ink: var(--text); --map-ink-2: var(--text-2); --map-halo: var(--surface); --map-dot: var(--text);
+  --sil-filter: none;
   --radius: 14px;
-  --font: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
 }
 * { box-sizing: border-box; }
@@ -49,5 +50,9 @@ kbd { font: 11px var(--mono); border: 1px solid var(--line); border-bottom-width
 .chip:hover { border-color: var(--text-3); }
 .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
 
-/* PhyloPic silhouettes are black: light on the night-blue theme */
-.sil { pointer-events: none; filter: invert(1); }
+.sil { pointer-events: none; filter: var(--sil-filter); }
+
+/* cinema mode (the time machine while playing): the header and side lists step back; hover brings them back */
+[data-cinema="dim"] { transition: opacity .8s ease; }
+body.cinema [data-cinema="dim"] { opacity: .15; }
+body.cinema [data-cinema="dim"]:hover, body.cinema [data-cinema="dim"]:focus-within { opacity: 1; transition-duration: .2s; }

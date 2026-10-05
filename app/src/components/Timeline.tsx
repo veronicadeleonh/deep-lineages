@@ -530,7 +530,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
 
       {/* how to show the list: everything, or only the families with fossils at the cursor (the rest collapses to slim rows).
           "Fossils at", not "alive at": the record shows where fossils were found, not when a group lived */}
-      <div className={s.listBar} style={{ marginLeft: GUT, width: Math.max(220, L - GUT - 8) }} role="radiogroup" aria-label="Families in the list">
+      <div className={s.listBar} style={{ marginLeft: GUT }} role="radiogroup" aria-label="Families in the list">
         {[false, true].map((on) => (
           <button key={String(on)} role="radio" aria-checked={state.focusNow === on} className={state.focusNow === on ? s.listOn : undefined}
             onClick={() => dispatch({ type: "focusNow", on })}

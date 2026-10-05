@@ -20,3 +20,21 @@ export function useLatest<T>(value: T) {
   r.current = value;
   return r;
 }
+
+/** Width and height of an element, kept up to date. */
+export function useSize(ref: RefObject<HTMLElement | null>, fallback: [number, number] = [800, 500]) {
+  const [size, setSize] = useState(fallback);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const read = () => setSize((prev) => {
+      const w = el.clientWidth || prev[0], h = el.clientHeight || prev[1];
+      return w === prev[0] && h === prev[1] ? prev : [w, h];
+    });
+    read();
+    const ro = new ResizeObserver(read);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [ref]); // eslint-disable-line react-hooks/exhaustive-deps
+  return size;
+}

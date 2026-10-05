@@ -11,7 +11,7 @@ export interface State {
   expanded: string[];        // families the user unfolded into their genera
   collapsed: string[];       // families the user folded (overrides the automatic unfolding when zoomed in)
   view: Range;               // visible time window [older, younger]
-  mode: "timeline" | "tree" | "guide"; // which view of the data
+  mode: "machine" | "timeline" | "tree" | "guide"; // which view of the data
   foldedLineages: LineageKey[]; // timeline: lineages collapsed into one row
   focusNow: boolean;         // timeline: collapse the families with no fossils at the cursor
 }
@@ -96,7 +96,7 @@ const Ctx = createContext<{ data: AppData; state: State; dispatch: Dispatch<Acti
 
 export function StoreProvider({ data, children }: { data: AppData; children: ReactNode }) {
   const reducer = useMemo(() => makeReducer(data), [data]);
-  const [state, dispatch] = useReducer(reducer, { t: 150, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range, mode: "timeline", foldedLineages: [], focusNow: false });
+  const [state, dispatch] = useReducer(reducer, { t: 252, selected: null, genus: null, expanded: [], collapsed: [], view: [...TIME] as Range, mode: "machine", foldedLineages: [], focusNow: true });
   const value = useMemo(() => ({ data, state, dispatch }), [data, state]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
