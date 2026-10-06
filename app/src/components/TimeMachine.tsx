@@ -99,9 +99,15 @@ export function TimeMachine() {
   const selAround = around.find((x) => x.f.family === state.selected);
   if (selAround && !shown.includes(selAround)) shown.push(selAround);
   const hidden = around.length - shown.length;
-  // chosen in another view, with no fossils right now: it still gets its row (with no count) and its card
-  const selFam = state.selected != null && !selAround ? data.families.find((x) => x.family === state.selected) : undefined;
-  if (selFam) shown.unshift({ f: selFam, n: 0 });
+  // followed (chosen in another view) but with no fossils right now: not "on the map"; a note says when it was
+  const absent = state.selected != null && !selAround;
+  const absentWhen = useMemo(() => {
+    if (!absent) return null;
+    const mine = data.fossils.filter((fo) => fo.family === state.selected && (!state.genus || fo.genus === state.genus));
+    if (!mine.length) return null;
+    const near = mine.reduce((b, fo) => (Math.abs(fo.mid - t) < Math.abs(b - t) ? fo.mid : b), mine[0].mid);
+    return Math.round(near);
+  }, [absent, data.fossils, state.selected, state.genus, tKey]); // eslint-disable-line react-hooks/exhaustive-deps
   const genera = data.diversity.find((d) => d.ma === Math.round(t))?.genera ?? 0;
 
   const chapter = chapterAt(t);
@@ -151,6 +157,12 @@ export function TimeMachine() {
         <div className={s.right}>
           <span className={s.counter}><b>{fNum(genera)}</b> genera on record · <b>{fNum(nFossils)}</b> fossils on the map</span>
           <div className={s.around}>
+            {absent && (
+              <p className={s.absent}>
+                <b>{state.genus ? <i>{state.genus}</i> : state.selected}</b> has no fossils around {fMa(Math.round(t))} Ma.
+                {absentWhen != null && <> <button onClick={() => dispatch({ type: "time", t: absentWhen })}>Go to {fMa(absentWhen)} Ma →</button></>}
+              </p>
+            )}
             <span className={s.aroundLabel}>On the map now</span>
             {around.length === 0 && <span className={s.aroundNone}>No fossils of these families in this slice of time</span>}
             {/* the selected family stays in the list (even past the limit) and its card unfolds right below it */}
