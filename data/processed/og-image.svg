@@ -1,0 +1,39 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1F2A"/>
+      <stop offset="1" stop-color="#1D3F4A"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1A2E36"/>
+      <stop offset="1" stop-color="#0E232D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="940" cy="120" r="120" fill="#D6F1FF" fill-opacity="0.12"/>
+  <circle cx="1015" cy="190" r="90" fill="#87D5D4" fill-opacity="0.10"/>
+  <rect x="70" y="90" width="1060" height="450" rx="28" fill="url(#panel)" stroke="#9CC2CD" stroke-opacity="0.32"/>
+  <text x="110" y="180" fill="#EAF8FF" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="2">DEEP LINEAGES</text>
+  <text x="110" y="265" fill="#F7FBFF" font-family="Arial, sans-serif" font-size="68" font-weight="700">Dinosaurs</text>
+  <text x="110" y="335" fill="#F7FBFF" font-family="Arial, sans-serif" font-size="68" font-weight="700">through time</text>
+  <text x="110" y="395" fill="#B9DDE8" font-family="Arial, sans-serif" font-size="28">Fossil maps • family timelines • tree of life</text>
+  <g transform="translate(770 190)">
+    <path d="M82 162C45 158 15 134 0 101C34 81 52 54 57 11C90 21 123 39 140 58C156 78 165 107 162 136C159 153 145 170 123 177C111 182 95 176 82 162Z" fill="#E8F7FF" fill-opacity="0.95"/>
+    <circle cx="52" cy="40" r="17" fill="#D1EAF8"/>
+    <circle cx="110" cy="52" r="14" fill="#D1EAF8"/>
+    <path d="M63 122L43 166" stroke="#B7D7E5" stroke-width="8" stroke-linecap="round"/>
+    <path d="M111 122L132 170" stroke="#B7D7E5" stroke-width="8" stroke-linecap="round"/>
+    <path d="M101 100L123 90" stroke="#B7D7E5" stroke-width="7" stroke-linecap="round"/>
+    <path d="M39 100L18 87" stroke="#B7D7E5" stroke-width="7" stroke-linecap="round"/>
+    <path d="M82 52L82 103" stroke="#B7D7E5" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M110 470C275 470 371 478 447 505" stroke="#7AD4B2" stroke-width="8" stroke-linecap="round"/>
+    <path d="M447 505C551 454 619 406 676 398" stroke="#7AD4B2" stroke-width="8" stroke-linecap="round"/>
+    <path d="M676 398C742 390 822 431 875 470" stroke="#7AD4B2" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="110" cy="470" r="7" fill="#F5C26B"/>
+    <circle cx="447" cy="505" r="7" fill="#F5C26B"/>
+    <circle cx="676" cy="398" r="7" fill="#F5C26B"/>
+    <circle cx="875" cy="470" r="7" fill="#F5C26B"/>
+  </g>
+</svg>
