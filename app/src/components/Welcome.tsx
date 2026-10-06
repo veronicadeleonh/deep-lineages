@@ -54,7 +54,7 @@ export function Welcome({ onStart, onExplore }: { onStart: () => void; onExplore
       <span className={s.clock} aria-hidden>{t} million years ago</span>
 
       <div className={s.content}>
-        <p className={s.eyebrow}>Deep Lineages <span>🦕</span></p>
+        <p className={s.eyebrow}>🦕 Deep Lineages</p>
         <h1 id="welcome-title">186 million years of dinosaurs</h1>
         <p className={s.lede}>
           Travel from the first dinosaurs to the asteroid, on maps of the world as it was. Every dot is a real fossil,
@@ -81,9 +81,48 @@ export function Welcome({ onStart, onExplore }: { onStart: () => void; onExplore
           Inspired by Steve Brusatte's <i>The Rise and Fall of the Dinosaurs</i>. Data: Paleobiology Database ·
           PALEOMAP (C. R. Scotese) via GPlates · silhouettes from PhyloPic · texts from Wikipedia.
         </p>
-        <p className={s.byline}>
-          By <a href="https://veronicadeleonh.de/" target="_blank" rel="noopener">Verónica De León Hernández</a>
+      </div>
+    </div>
+  );
+}
+
+/** The welcome again, compact: a dialog over the app, opened from the title. */
+export function About({ onClose, onReplay }: { onClose: () => void; onReplay: () => void }) {
+  const { data } = useStore();
+  const genera = useMemo(() => Object.values(data.genera).reduce((n, fg) => n + fg.genera.length, 0), [data]);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { e.stopImmediatePropagation(); onClose(); } };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [onClose]);
+  return (
+    <div className={s.aboutBackdrop} onClick={onClose}>
+      <div className={s.about} role="dialog" aria-modal="true" aria-labelledby="about-title" onClick={(e) => e.stopPropagation()}>
+        <button className={s.aboutClose} onClick={onClose} aria-label="Close">✕</button>
+        <h2 id="about-title" className={s.aboutTitle}>🦕 Deep Lineages</h2>
+        <p className={s.aboutCaption}>Dinosaur families of the Mesozoic</p>
+        <p className={s.aboutLede}>
+          186 million years of dinosaurs, from the first ones to the asteroid, on maps of the world as it was. Every dot
+          is a real fossil, placed where it lay when the animal was alive.
         </p>
+        <p className={s.stats}>
+          <span><b>{fNum(data.families.length)}</b> families</span>
+          <span><b>{fNum(genera)}</b> genera</span>
+          <span><b>{fNum(data.fossils.length)}</b> fossils</span>
+        </p>
+        <ul className={`${s.views} ${s.aboutViews}`}>
+          {VIEWS.map((v) => (
+            <li key={v.name}><span className={s.icon} aria-hidden>{v.icon}</span><b>{v.name}</b><span>{v.text}</span></li>
+          ))}
+        </ul>
+        <p className={s.credits}>
+          Inspired by Steve Brusatte's <i>The Rise and Fall of the Dinosaurs</i>. Data: Paleobiology Database ·
+          PALEOMAP (C. R. Scotese) via GPlates · silhouettes from PhyloPic · texts from Wikipedia.
+        </p>
+        <div className={s.aboutActions}>
+          <button className={s.start} onClick={onReplay} autoFocus>▶ Start the journey</button>
+          <button className={s.explore} onClick={onClose}>Explore on my own</button>
+        </div>
       </div>
     </div>
   );

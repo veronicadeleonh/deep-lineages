@@ -340,7 +340,6 @@ export function TreeCard() {
         shade of each genus's dot, the period of its first fossil. Rings: families in their diet color, and the three
         lineages. Pinch to zoom and drag to move; names, silhouettes and species appear as you get closer. Click a ring or
         a branch point to center the tree on that group, or a genus to open its profile and see its fossils on the map.</p>}
-        <p className={s.hint}>{zoomed ? "Drag or scroll to move · pinch to zoom" : "Pinch or ⌘ + scroll to zoom in"}</p>
 
         <svg ref={svgRef} viewBox={`${-hw} ${-hh} ${W} ${H}`} width={W} height={H} className={`${s.svg} ${zoomed ? s.grab : ""}`}
           role="img" aria-label={`Radial family tree of ${focus.name}`}

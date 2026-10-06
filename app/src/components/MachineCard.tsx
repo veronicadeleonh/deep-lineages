@@ -8,6 +8,12 @@ import { byCount, famRecord, fNum, fRange, genusRecord } from "../format";
 import { useStore } from "../state";
 import s from "./TimeMachine.module.css";
 
+const DIVES = [
+  { mode: "timeline", icon: "☰", name: "Timeline", ask: "When did it live?" },
+  { mode: "tree", icon: "✺", name: "Family tree", ask: "Who are its relatives?" },
+  { mode: "guide", icon: "◎", name: "Field guide", ask: "Where was it found?" },
+] as const;
+
 /** First sentence of a Wikipedia summary. */
 const firstSentence = (t?: string) => (t ? (t.match(/^.+?[.!?](\s|$)/)?.[0] ?? t).trim() : "");
 
@@ -44,7 +50,15 @@ export function MachineCard({ compact = false }: { compact?: boolean }) {
         {where.length > 0 && !compact && <div className={s.mcardWide}><dt>Found in</dt><dd>{where.slice(0, 3).join(", ")}{where.length > 3 ? ` +${where.length - 3}` : ""}</dd></div>}
       </dl>
       {blurb && !compact && <p className={s.mcardBlurb}>{blurb}</p>}
-      <button className={s.mcardMore} onClick={() => dispatch({ type: "mode", mode: "timeline" })}>Full profile in the timeline →</button>
+      {/* go deeper, in whichever view: no order implied */}
+      <div className={s.mcardDive}>
+        <span>Dive deeper</span>
+        {DIVES.map((d) => (
+          <button key={d.mode} onClick={() => dispatch({ type: "mode", mode: d.mode })} title={d.ask}>
+            <i aria-hidden>{d.icon}</i>{d.name}
+          </button>
+        ))}
+      </div>
     </article>
   );
 }

@@ -100,11 +100,11 @@ export function TimelineCard() {
         </div>
       } />
       <p className="note">
-        Bars: where most of a family's fossils fall (periods holding ≥5% of them; for genera, without the most extreme 10%).
-        Thin line: first to last fossil on record, isolated or doubtful finds included. The fade after it is a reminder that a
-        group surely lived on after its last known fossil: these are records, not lifespans. Branches: each split is drawn just before
-        the oldest fossil of its group (a minimum age); dotted where a lineage must have existed but has no fossils yet.
-        Area: genera on record (first → last appearance), excluding footprints and eggs. Map: each dot is a fossil from the
+        <strong>Bars:</strong> where most of a family's fossils fall (periods holding ≥5% of them; for genera, without the most extreme 10%).
+        <strong> Thin line:</strong> first to last fossil on record, isolated or doubtful finds included. The fade after it is a reminder that a
+        group surely lived on after its last known fossil: these are records, not lifespans. <strong>Branches:</strong> each split is drawn just before
+        the oldest fossil of its group (a minimum age); dotted where a lineage must have existed but has no fossils yet. 
+        <strong> Area:</strong> genera on record (first → last appearance), excluding footprints and eggs. <strong>Map:</strong> each dot is a fossil from the
         10-Myr slice around the cursor, placed where that spot was at the time; continents are present-day coastlines moved to
         their past position ({data.paleo?.model ?? "PALEOMAP"} model, GPlates), so inland seas of the time are not shown.
       </p>
@@ -137,7 +137,10 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
   const stageTop = M.t + BAND, areaTop = stageTop + STAGE, rowsTop = areaTop + AREA + GAP;
 
   // which families are unfolded: the ones the user opened, plus (when zoomed in) the ones filling the window
-  const famTree = useMemo(() => familyTree(data), [data]);
+  // the "Other …" rows (close relatives outside the chosen families): hidden by default, one click shows them
+  const [showRel, setShowRel] = useState(false);
+  const nRel = Object.keys(data.relatives).length;
+  const famTree = useMemo(() => familyTree(data, showRel), [data, showRel]);
   const open = useMemo(() => {
     const set = new Set(expanded);
     if (span <= AUTO_SPAN) {
@@ -168,7 +171,9 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
     const selFam = data.families.find((f) => f.family === selected);
     [...GROUPS, null].forEach((gr) => {
       const lineageOf = (l: TNode) => l.family ?? data.families.find((f) => f.family === l.rel?.group.families[0]);
-      const sub = prune(famTree, (l) => { const f = lineageOf(l); return !!f && (groupOf(f) ?? null) === gr; });
+      // relatives follow the list's filter: with "Fossils at" on, a group shows only if one of its genera has fossils then
+      const relNow = (l: TNode) => !l.rel || !state.focusNow || l.rel.group.genera.some((r) => isAlive(r.record, t));
+      const sub = prune(famTree, (l) => { const f = lineageOf(l); return !!f && (groupOf(f) ?? null) === gr && relNow(l); });
       if (!sub) return;
       // a collapsed lineage is one row (the selection keeps it open)
       if (gr && state.foldedLineages.includes(gr.key) && !(selFam && groupOf(selFam)?.key === gr.key)) {
@@ -530,7 +535,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
 
       {/* how to show the list: everything, or only the families with fossils at the cursor (the rest collapses to slim rows).
           "Fossils at", not "alive at": the record shows where fossils were found, not when a group lived */}
-      <div className={s.listBar} style={{ marginLeft: GUT }} role="radiogroup" aria-label="Families in the list">
+      <div className={s.listRow} style={{ marginLeft: GUT }}>
+      <div className={s.listBar} role="radiogroup" aria-label="Families in the list">
         {[false, true].map((on) => (
           <button key={String(on)} role="radio" aria-checked={state.focusNow === on} className={state.focusNow === on ? s.listOn : undefined}
             onClick={() => dispatch({ type: "focusNow", on })}
@@ -538,6 +544,13 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
             {on ? <>Fossils at {fMa(t)} Ma <span className={s.listN}>{aliveN}</span></> : <>All families <span className={s.listN}>{data.families.length}</span></>}
           </button>
         ))}
+      </div>
+      {nRel > 0 && (
+        <label className={s.relToggle} title="Genera of each family's parent group that belong to none of the families here (e.g. early tyrannosaur relatives like Guanlong)">
+          <input type="checkbox" checked={showRel} onChange={(e) => setShowRel(e.target.checked)} />
+          Show close relatives <span className={s.listN}>{nRel} groups</span>
+        </label>
+      )}
       </div>
 
       <svg viewBox={`0 ${rowsTop} ${W} ${H - rowsTop}`} width={W} height={H - rowsTop} {...svgEvents}>

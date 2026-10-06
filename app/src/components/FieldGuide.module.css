@@ -79,6 +79,7 @@
 .label { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 3px 0; }
 .sil { width: 36px; height: 20px; flex: none; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .silBorrowed { opacity: .3; }
+.silNone { background: none; }
 .names { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
 .names i { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .names small { font-size: 10.5px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -87,6 +88,11 @@
 .notice { margin: 8px 0; padding: 10px 12px; font-size: 13px; line-height: 1.5; color: var(--text-2); background: color-mix(in srgb, var(--cursor) 10%, transparent); border: 1px solid color-mix(in srgb, var(--cursor) 35%, transparent); border-radius: 8px; }
 .notice b { color: var(--text); }
 .notice button { font: inherit; font-weight: 650; color: var(--cursor); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.othersToggle { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; color: var(--text-2); cursor: pointer; }
+.othersToggle input { accent-color: var(--cursor); margin: 0; }
+.othersToggle span { color: var(--text-3); }
+.itemOther .names i { font-weight: 500; color: var(--text-2); }
+.itemOther .bar rect { opacity: .55; }
 .empty { color: var(--text-3); padding: 24px 0; }
 
 /* narrow card (the profile is open): give the list more room */

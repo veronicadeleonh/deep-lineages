@@ -49,9 +49,9 @@ function familyPath(fam: string, data: AppData): string[] {
 export const relLeafName = (clade: string) => `${clade} · others`;
 
 /** Families, plus one leaf per clade for its genera outside the selected families (when relatives.json exists). */
-export function familyTree(data: AppData): TNode {
+export function familyTree(data: AppData, withRelatives = true): TNode {
   const fams = data.families.map((f) => ({ path: familyPath(f.family, data), node: leaf(f.family, famRecord(f), { family: f }) }));
-  const rels = Object.entries(data.relatives).map(([clade, group]) => {
+  const rels = Object.entries(withRelatives ? data.relatives : {}).map(([clade, group]) => {
     const p = familyPath(group.families[0], data);
     const path = [...p.slice(0, p.indexOf(clade) + 1), relLeafName(clade)];
     const range: Range = [Math.max(...group.genera.map((g) => g.record[0])), Math.min(...group.genera.map((g) => g.record[1]))];

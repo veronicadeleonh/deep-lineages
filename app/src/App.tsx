@@ -6,7 +6,7 @@ import { FieldGuide } from "./components/FieldGuide";
 import { TimeMachine } from "./components/TimeMachine";
 import { TooltipProvider } from "./components/Tooltip";
 import { PLAY_EVENT } from "./components/TimeMachine";
-import { Welcome } from "./components/Welcome";
+import { About, Welcome } from "./components/Welcome";
 import { loadData, silhouetteUrl } from "./data";
 import { fMa } from "./format";
 import { StoreProvider, useStore } from "./state";
@@ -38,11 +38,69 @@ export default function App() {
   );
 }
 
+/* ---------- the lens: what is selected, and the four ways to look at it ---------- */
+const VIEWS = [
+  { mode: "machine", icon: "▶", name: "Time machine", ask: "Watch the story" },
+  { mode: "timeline", icon: "☰", name: "Timeline", ask: "When did they live?" },
+  { mode: "tree", icon: "✺", name: "Family tree", ask: "How are they related?" },
+  { mode: "guide", icon: "◎", name: "Field guide", ask: "What lived where?" },
+] as const;
+
+/** The selection, followed across views. */
+function useFollowed() {
+  const { data, state } = useStore();
+  const fam = state.selected ? data.families.find((f) => f.family === state.selected) : undefined;
+  const g = fam && state.genus ? data.genera[fam.family]?.genera.find((x) => x.genus === state.genus) : undefined;
+  return { fam, g };
+}
+
+function Following() {
+  const { dispatch } = useStore();
+  const { fam, g } = useFollowed();
+  const sil = g?.phylopic?.svg ?? fam?.phylopic?.svg;
+  return (
+    <div className={s.following} aria-live="polite">
+      {fam ? (
+        <>
+          <span className={s.followLabel}>Following</span>
+          <span className={s.chip}>
+            {sil && <i className={s.chipSil} style={{ ["--src" as string]: `url("${silhouetteUrl(sil)}")` }} />}
+            {g ? <i>{g.genus}</i> : fam.family}
+            <button onClick={() => dispatch({ type: "select", family: null })} aria-label="Stop following" title="Stop following (Esc)">✕</button>
+          </span>
+          <span className={s.followHint}>in every view</span>
+        </>
+      ) : <span className={s.followHint}>Pick a dinosaur in any view: it follows you to the others</span>}
+    </div>
+  );
+}
+
+function Views() {
+  const { state, dispatch } = useStore();
+  const button = (v: (typeof VIEWS)[number]) => (
+    <button key={v.mode} role="tab" aria-selected={state.mode === v.mode} onClick={() => dispatch({ type: "mode", mode: v.mode })} title={v.ask}>
+      <span className={s.viewIcon} aria-hidden>{v.icon}</span>{v.name}
+    </button>
+  );
+  // the story first; the three deep dives grouped after it
+  return (
+    <nav className={s.views} role="tablist" aria-label="Views">
+      {button(VIEWS[0])}
+      <div className={s.dive} role="group" aria-label="Deep dive">
+        <span className={s.diveLabel}>Deep dive</span>
+        {VIEWS.slice(1).map(button)}
+      </div>
+    </nav>
+  );
+}
+
+
 /** The page. Every view fills the screen exactly except the timeline, which scrolls. */
 function Shell() {
   const { state, dispatch } = useStore();
-  // the welcome screen: on the first visit in this browser, and whenever the title is clicked
+  // the welcome screen: on the first visit in this browser
   const [welcome, setWelcome] = useState(() => { try { return !localStorage.getItem(SEEN); } catch { return true; } });
+  const [about, setAbout] = useState(false); // the title opens a compact "about"
   const close = () => { setWelcome(false); try { localStorage.setItem(SEEN, "1"); } catch { /* private mode */ } };
   const start = () => {
     close();
@@ -52,14 +110,15 @@ function Shell() {
   };
   return (
     <div className={state.mode !== "timeline" ? s.fullScreen : undefined}>
-      <Header onTitle={() => setWelcome(true)} />
+      <Header onAbout={() => setAbout(true)} />
       <Layout />
       {/* credits, always there and quiet, in the gutter under the views */}
-      <footer className={s.footer} data-cinema="dim">
+      <footer className={s.footer}>
         By <a href="https://veronicadeleonh.de/" target="_blank" rel="noopener">Verónica De León Hernández</a>
         <span className={s.footSep}>·</span>Data: Paleobiology Database, PALEOMAP (Scotese), PhyloPic, Wikipedia
       </footer>
       {welcome && <Welcome onStart={start} onExplore={close} />}
+      {about && <About onClose={() => setAbout(false)} onReplay={() => { setAbout(false); start(); }} />}
     </div>
   );
 }
@@ -105,26 +164,21 @@ function Layout() {
   );
 }
 
-function Header({ onTitle }: { onTitle: () => void }) {
-  const { data, state, dispatch } = useStore();
+function Header({ onAbout }: { onAbout: () => void }) {
+  const { data, state } = useStore();
   const period = data.periods.find((p) => state.t <= p.start && state.t >= p.end);
+  // a grid, so the right side lines up with the left: brand / following, time / views, keys / (nothing)
   return (
-    <header className={s.top} data-cinema="dim">
-      <div>
-        <p className={s.eyebrow}><button className={s.home} onClick={onTitle} title="About Deep Lineages">🦕 <b>Deep Lineages</b></button> · dinosaur families of the Mesozoic</p>
-        <h1>{fMa(state.t)} Ma {period && <span className={s.period}>· {period.name}</span>}</h1>
-      </div>
-      <div className={s.views} role="tablist" aria-label="View">
-        {(["machine", "timeline", "tree", "guide"] as const).map((m) => (
-          <button key={m} role="tab" aria-selected={state.mode === m} onClick={() => dispatch({ type: "mode", mode: m })}>
-            {m === "machine" ? "Time machine" : m === "timeline" ? "Timeline" : m === "tree" ? "Family tree" : "Field guide"}
-          </button>
-        ))}
-      </div>
+    <header className={s.top}>
+      <p className={s.eyebrow}><button className={s.home} onClick={onAbout} title="About Deep Lineages">🦕 <b>Deep Lineages</b></button><span className={s.tagline}> · dinosaur families of the Mesozoic</span></p>
+      <Following />
+      <h1>{fMa(state.t)} Ma {period && <span className={s.period}>· {period.name}</span>}</h1>
+      <Views />
+      {/* the row is always there (empty in the views without keys), so the header keeps its height in every view */}
       <p className={s.hint}>
-        {state.mode === "machine"
-          ? <><kbd>Space</kbd> plays and pauses · drag the bar to travel · click a family · <kbd>Esc</kbd> closes it</>
-          : <>Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it</>}
+        {state.mode === "machine" && <><kbd>Space</kbd> plays and pauses · drag the bar to travel · click a family · <kbd>Esc</kbd> closes it</>}
+        {state.mode === "tree" && <>Pinch or <kbd>⌘</kbd> + scroll to zoom · drag to move · click a group to center the tree on it · <kbd>Esc</kbd> closes it</>}
+        {state.mode === "timeline" && <>Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it</>}
       </p>
     </header>
   );

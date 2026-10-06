@@ -29,7 +29,11 @@ const km = ([lo1, la1]: [number, number], [lo2, la2]: [number, number]) => {
   return 12742 * Math.asin(Math.sqrt(a));
 };
 
-interface Row { g: Genus | null; genus: string; f: Family; first: number; last: number; n: number }
+/** One genus found in the region. `f` is set when its family is one of the app's; otherwise `pfam` is its PBDB family
+    (or null) and the row has no profile: it is listed so that "what lived here" is the whole answer. */
+interface Row { g: Genus | null; genus: string; f: Family | null; pfam: string | null; first: number; last: number; n: number }
+/** A genus outside the app's families, picked in this view (it has no profile, so it stays local to the field guide). */
+interface Pinned { genus: string; family: string | null }
 
 export function FieldGuide() {
   const { data, state, dispatch } = useStore();
@@ -40,14 +44,17 @@ export function FieldGuide() {
     for (const fo of data.fossils) if (fo.here && isSel(fo)) n.set(continentOf(fo.here), (n.get(continentOf(fo.here)) ?? 0) + 1);
     return [...n].sort((a, b) => b[1] - a[1]);
   }, [data, state.selected, state.genus]); // eslint-disable-line react-hooks/exhaustive-deps
-  // arriving with a selection: start where it has the most fossils
-  const [region, setRegion] = useState<Region>(() => ({ kind: "continent", name: selWhere[0]?.[0] ?? "North America" }));
+  // start with the whole world (a selection is always in it); continents and zones narrow it down
+  const [region, setRegion] = useState<Region>({ kind: "world" });
   const [zoneKm, setZoneKm] = useState(1000);
   const [lineage, setLineage] = useState<string | null>(null);
   const [diet, setDiet] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<Sort>("first");
   const [hover, setHover] = useState<string | null>(null);
+  const [others, setOthers] = useState(true);              // list genera outside the app's families too
+  const [pinned, setPinned] = useState<Pinned | null>(null);
+  useEffect(() => { if (state.selected) setPinned(null); }, [state.selected, state.genus]);
 
   // today's land, loaded once
   const [land, setLand] = useState<GeoPermissibleObjects | null>(null);
@@ -67,8 +74,9 @@ export function FieldGuide() {
     if (region.kind === "continent") return continentOf(fo.here) === region.name;
     return km(fo.here, [region.lon, region.lat]) <= region.km;
   };
-  const found = useMemo(() => data.fossils.filter((fo) => fo.family && famBy.has(fo.family) && inRegion(fo)),
-    [data, famBy, region]); // eslint-disable-line react-hooks/exhaustive-deps
+  const known = (fo: Fossil) => !!fo.family && famBy.has(fo.family);
+  const found = useMemo(() => data.fossils.filter((fo) => (others || known(fo)) && inRegion(fo)),
+    [data, famBy, region, others]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ---------- one row per genus: its oldest and youngest fossil here ---------- */
   const rows = useMemo(() => {
@@ -76,13 +84,17 @@ export function FieldGuide() {
     for (const fo of found) {
       const r = by.get(fo.genus);
       if (r) { r.first = Math.max(r.first, fo.mid); r.last = Math.min(r.last, fo.mid); r.n++; }
-      else by.set(fo.genus, { g: genusBy.get(fo.genus) ?? null, genus: fo.genus, f: famBy.get(fo.family!)!, first: fo.mid, last: fo.mid, n: 1 });
+      else {
+        const f = fo.family ? famBy.get(fo.family) ?? null : null;
+        by.set(fo.genus, { g: f ? genusBy.get(fo.genus) ?? null : null, genus: fo.genus, f, pfam: fo.family, first: fo.mid, last: fo.mid, n: 1 });
+      }
     }
     const needle = q.trim().toLowerCase();
+    // lineage and diet are only known for the app's families: those filters keep only them
     const out = [...by.values()].filter((r) =>
-      (!lineage || groupOf(r.f)?.key === lineage)
-      && (!diet || (r.f.pbdb?.diet ?? "none") === diet)
-      && (!needle || r.genus.toLowerCase().includes(needle) || r.f.family.toLowerCase().includes(needle)));
+      (!lineage || (!!r.f && groupOf(r.f)?.key === lineage))
+      && (!diet || (!!r.f && (r.f.pbdb?.diet ?? "none") === diet))
+      && (!needle || r.genus.toLowerCase().includes(needle) || (r.pfam ?? "").toLowerCase().includes(needle)));
     return out.sort((a, b) => sort === "name" ? a.genus.localeCompare(b.genus) : sort === "fossils" ? b.n - a.n : b.first - a.first || b.n - a.n);
   }, [found, genusBy, famBy, lineage, diet, q, sort]);
 
@@ -96,7 +108,7 @@ export function FieldGuide() {
   const sites = useMemo(() => {
     const m = new Map<number, { xy: [number, number]; inside: boolean; genera: Set<string>; families: Set<string> }>();
     for (const fo of data.fossils) {
-      if (!fo.here || !fo.family || !famBy.has(fo.family)) continue;
+      if (!fo.here || !(others || known(fo))) continue;
       let site = m.get(fo.loc);
       if (!site) {
         const p = proj(fo.here);
@@ -104,12 +116,12 @@ export function FieldGuide() {
         m.set(fo.loc, (site = { xy: p as [number, number], inside: inRegion(fo), genera: new Set(), families: new Set() }));
       }
       site.genera.add(fo.genus);
-      site.families.add(fo.family);
+      if (fo.family) site.families.add(fo.family);
     }
     return [...m.values()];
-  }, [data, famBy, proj, region]); // eslint-disable-line react-hooks/exhaustive-deps
-  const lit = hover ?? state.genus;
-  const litFamily = !hover && !state.genus ? state.selected : null; // a family selection lights all its sites
+  }, [data, famBy, proj, region, others]); // eslint-disable-line react-hooks/exhaustive-deps
+  const lit = hover ?? pinned?.genus ?? state.genus;
+  const litFamily = !hover && !pinned && !state.genus ? state.selected : null; // a family selection lights all its sites
   const isLit = (site: { genera: Set<string>; families: Set<string> }) => (lit ? site.genera.has(lit) : !!litFamily && site.families.has(litFamily));
   const zonePath = region.kind === "zone" ? path(geoCircle().center([region.lon, region.lat]).radius(region.km / 111.2)()) ?? "" : "";
 
@@ -123,19 +135,21 @@ export function FieldGuide() {
   /** A suggestion was picked: select it and go where most of its fossils are. */
   const pick = (sg: Suggestion) => {
     setQ(""); setLineage(null); setDiet(null);
-    dispatch(sg.genus ? { type: "genus", family: sg.family, genus: sg.genus } : { type: "select", family: sg.family });
+    if (sg.outside) { setOthers(true); setPinned({ genus: sg.genus!, family: sg.family || null }); }
+    else dispatch(sg.genus ? { type: "genus", family: sg.family, genus: sg.genus } : { type: "select", family: sg.family });
     const n = new Map<string, number>();
-    for (const fo of data.fossils) if (fo.here && fo.family === sg.family && (!sg.genus || fo.genus === sg.genus)) n.set(continentOf(fo.here), (n.get(continentOf(fo.here)) ?? 0) + 1);
+    for (const fo of data.fossils) if (fo.here && (sg.outside ? fo.genus === sg.genus : fo.family === sg.family && (!sg.genus || fo.genus === sg.genus))) n.set(continentOf(fo.here), (n.get(continentOf(fo.here)) ?? 0) + 1);
     const best = [...n].sort((a, b) => b[1] - a[1])[0]?.[0];
     const here = region.kind === "world" || (region.kind === "continent" && n.has(region.name));
     if (best && !here) setRegion({ kind: "continent", name: best });
   };
 
   /* ---------- the selection in the list: highlighted, and scrolled into view ---------- */
-  const isSelRow = (r: Row) => !!state.selected && r.f.family === state.selected && (!state.genus || r.genus === state.genus);
+  const isSelRow = (r: Row) => pinned ? r.genus === pinned.genus
+    : !!state.selected && r.f?.family === state.selected && (!state.genus || r.genus === state.genus);
   const firstSel = rows.find(isSelRow);
   const selRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => { selRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }, [state.selected, state.genus, region]);
+  useEffect(() => { selRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }, [state.selected, state.genus, pinned, region]);
 
   /* ---------- the list's time axis ---------- */
   const listWrap = useRef<HTMLDivElement>(null);
@@ -145,7 +159,8 @@ export function FieldGuide() {
 
   const title = region.kind === "world" ? "The whole world" : region.kind === "continent" ? region.name
     : `${fNum(region.km)} km around ${Math.abs(region.lat).toFixed(0)}°${region.lat >= 0 ? "N" : "S"}, ${Math.abs(region.lon).toFixed(0)}°${region.lon >= 0 ? "E" : "W"}`;
-  const nFamilies = new Set(rows.map((r) => r.f.family)).size;
+  const nFamilies = new Set(rows.map((r) => r.pfam).filter(Boolean)).size;
+  const nOutside = rows.filter((r) => !r.f).length;
 
   const Chip = ({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) =>
     <button className={`${s.chip} ${on ? s.chipOn : ""}`} aria-pressed={on} onClick={onClick}>{children}</button>;
@@ -192,6 +207,10 @@ export function FieldGuide() {
         <header className={s.whoHead}>
           <h3>{title}</h3>
           <p><b>{fNum(rows.length)}</b> genera · <b>{fNum(nFamilies)}</b> families · <b>{fNum(rows.reduce((n, r) => n + r.n, 0))}</b> fossils</p>
+          <label className={s.othersToggle}>
+            <input type="checkbox" checked={others} onChange={(e) => setOthers(e.target.checked)} />
+            Include families not in the timeline{others && nOutside > 0 && <span> · {fNum(nOutside)} genera</span>}
+          </label>
         </header>
         <div className={s.filters}>
           <Search value={q} onChange={setQ} onPick={pick} />
@@ -231,7 +250,7 @@ export function FieldGuide() {
 
         <div className={s.list}>
           {/* the selection: where it is in this list, or where else to look for it */}
-          {state.selected && !rows.some(isSelRow) && (
+          {state.selected && !pinned && !rows.some(isSelRow) && (
             <div className={s.notice}>
               <b>{state.genus ? <i>{state.genus}</i> : state.selected}</b>{" "}
               {selWhere.length === 0 ? "has no fossil sites on the map." : <>has no fossils {region.kind === "zone" ? "in this zone" : `in ${title}`}{q || lineage || diet ? " that match the filters" : ""}. Found in{" "}
@@ -242,21 +261,23 @@ export function FieldGuide() {
           )}
           {rows.length === 0 && <p className={s.empty}>No dinosaur fossils match here. Try a bigger zone or another place.</p>}
           {rows.map((r) => {
-            const own = r.g?.phylopic?.svg, sil = own ?? r.f.phylopic?.svg;
+            const own = r.g?.phylopic?.svg, sil = own ?? r.f?.phylopic?.svg;
             const sel = isSelRow(r);
+            const famLabel = r.f ? r.f.family : r.pfam ? `${r.pfam} · no profile` : "family unknown · no profile";
             return (
-              <button key={r.genus} ref={sel && r === firstSel ? selRef : undefined} className={`${s.item} ${sel ? s.itemSel : ""}`} style={{ ["--lw" as string]: `${LABEL}px` }}
+              <button key={r.genus} ref={sel && r === firstSel ? selRef : undefined} className={`${s.item} ${sel ? s.itemSel : ""} ${r.f ? "" : s.itemOther}`} style={{ ["--lw" as string]: `${LABEL}px` }}
                 onMouseEnter={() => setHover(r.genus)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(r.genus)} onBlur={() => setHover(null)}
-                onClick={() => (r.g ? dispatch({ type: "genus", family: r.f.family, genus: r.genus }) : dispatch({ type: "select", family: r.f.family }))}
-                title={`${r.genus} · ${r.f.family} · ${fNum(r.n)} ${r.n === 1 ? "fossil" : "fossils"} here, ${fMa(Math.round(r.first * 10) / 10)}–${fMa(Math.round(r.last * 10) / 10)} Ma`}>
+                onClick={() => (!r.f ? setPinned(pinned?.genus === r.genus ? null : { genus: r.genus, family: r.pfam })
+                  : r.g ? dispatch({ type: "genus", family: r.f.family, genus: r.genus }) : dispatch({ type: "select", family: r.f.family }))}
+                title={`${r.genus} · ${famLabel} · ${fNum(r.n)} ${r.n === 1 ? "fossil" : "fossils"} here, ${fMa(Math.round(r.first * 10) / 10)}–${fMa(Math.round(r.last * 10) / 10)} Ma${r.f ? "" : " · no profile in this app"}`}>
                 <span className={s.label}>
-                  <i className={`${s.sil} ${own ? "" : s.silBorrowed}`} style={sil ? { ["--src" as string]: `url("${silhouetteUrl(sil)}")` } : undefined}
-                    title={own ? undefined : "Family silhouette: there is no drawing of this genus"} />
-                  <span className={s.names}><i>{r.genus}</i><small>{r.f.family}</small></span>
+                  <i className={`${s.sil} ${own ? "" : s.silBorrowed} ${sil ? "" : s.silNone}`} style={sil ? { ["--src" as string]: `url("${silhouetteUrl(sil)}")` } : undefined}
+                    title={own ? undefined : sil ? "Family silhouette: there is no drawing of this genus" : undefined} />
+                  <span className={s.names}><i>{r.genus}</i><small>{famLabel}</small></span>
                 </span>
                 <svg className={s.bar} width={listW - LABEL} height={22} viewBox={`${LABEL} 0 ${listW - LABEL} 22`}>
                   <line x1={x(state.t)} x2={x(state.t)} y1={0} y2={22} className={s.cursorFaint} />
-                  <rect x={x(r.first) - 1.5} width={Math.max(3, x(r.last) - x(r.first) + 3)} y={8} height={6} rx={3} fill={dietOf(r.f).color} />
+                  <rect x={x(r.first) - 1.5} width={Math.max(3, x(r.last) - x(r.first) + 3)} y={8} height={6} rx={3} fill={r.f ? dietOf(r.f).color : "var(--unknown)"} />
                   <text x={Math.max(x(r.first), x(r.last)) + 8} y={14.5} className={s.n}>{fNum(r.n)}</text>
                 </svg>
               </button>
@@ -313,7 +334,7 @@ function Through({ found, famBy, width, t }: { found: Fossil[]; famBy: Map<strin
 }
 
 /* ---------- the search box, with suggestions: genera, families and species, forgiving with hard names ---------- */
-interface Suggestion { kind: "genus" | "family" | "species"; label: string; family: string; genus?: string; sil?: string | null; own: boolean; note: string }
+interface Suggestion { kind: "genus" | "family" | "species"; label: string; family: string; genus?: string; sil?: string | null; own: boolean; note: string; outside?: boolean }
 
 /** How well a name matches what was typed: start of the name > start of a word > anywhere > letters in order. */
 const score = (name: string, needle: string) => {
@@ -340,6 +361,15 @@ function Search({ value, onChange, onPick }: { value: string; onChange: (v: stri
         for (const sp of g.species) out.push({ kind: "species", label: sp.name, family: f.family, genus: g.genus, sil, own: !!g.phylopic?.svg, note: `species of ${g.genus}` });
       }
     }
+    // genera outside the app's families: they have fossils on the map, but no profile
+    const inApp = new Set(out.filter((x) => x.kind === "genus").map((x) => x.label));
+    const seen = new Set<string>();
+    for (const fo of data.fossils) {
+      if (inApp.has(fo.genus) || seen.has(fo.genus)) continue;
+      seen.add(fo.genus);
+      out.push({ kind: "genus", label: fo.genus, family: fo.family ?? "", genus: fo.genus, sil: null, own: false, outside: true,
+        note: fo.family ? `${fo.family} · not in the timeline` : "family unknown" });
+    }
     return out;
   }, [data]);
   const needle = value.trim().toLowerCase();
@@ -347,7 +377,7 @@ function Search({ value, onChange, onPick }: { value: string; onChange: (v: stri
     if (needle.length < 2) return [];
     const rank = { genus: 0, family: 1, species: 2 } as const;
     return all.map((sg) => ({ sg, sc: score(sg.label, needle) })).filter((x) => x.sc > 0)
-      .sort((a, b) => b.sc - a.sc || rank[a.sg.kind] - rank[b.sg.kind] || a.sg.label.length - b.sg.label.length)
+      .sort((a, b) => b.sc - a.sc || Number(!!a.sg.outside) - Number(!!b.sg.outside) || rank[a.sg.kind] - rank[b.sg.kind] || a.sg.label.length - b.sg.label.length)
       .slice(0, 8).map((x) => x.sg);
   }, [all, needle]);
   const show = open && hits.length > 0;
@@ -376,7 +406,7 @@ function Search({ value, onChange, onPick }: { value: string; onChange: (v: stri
           {hits.map((sg, i) => (
             <li key={`${sg.kind}-${sg.label}-${sg.genus ?? ""}`} id={`fg-sg-${i}`} role="option" aria-selected={i === active}
               className={i === active ? s.sgOn : undefined} onMouseEnter={() => setActive(i)} onMouseDown={(e) => { e.preventDefault(); choose(sg); }}>
-              <i className={`${s.sgSil} ${sg.own ? "" : s.silBorrowed}`} style={sg.sil ? { ["--src" as string]: `url("${silhouetteUrl(sg.sil)}")` } : undefined} />
+              <i className={`${s.sgSil} ${sg.own ? "" : s.silBorrowed} ${sg.sil ? "" : s.silNone}`} style={sg.sil ? { ["--src" as string]: `url("${silhouetteUrl(sg.sil)}")` } : undefined} />
               <span className={s.sgName}>{sg.kind === "family" ? mark(sg.label) : <i>{mark(sg.label)}</i>}</span>
               <span className={s.sgNote}>{sg.note}</span>
             </li>

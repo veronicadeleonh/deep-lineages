@@ -57,11 +57,6 @@ export function TimeMachine() {
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [playing, dispatch, latest]);
-  // cinema mode: while playing, everything but the map, the clock and the story steps back
-  useEffect(() => {
-    document.body.classList.toggle("cinema", playing);
-    return () => document.body.classList.remove("cinema");
-  }, [playing]);
 
   const play = () => {
     if (!playing && t <= TIME[1] + 0.05) dispatch({ type: "time", t: TIME[0] }); // from the start again
@@ -153,7 +148,7 @@ export function TimeMachine() {
         </div>
 
         {/* the right column: who is around right now, and the selected animal's card */}
-        <div className={s.right} data-cinema="dim">
+        <div className={s.right}>
           <span className={s.counter}><b>{fNum(genera)}</b> genera on record · <b>{fNum(nFossils)}</b> fossils on the map</span>
           <div className={s.around}>
             <span className={s.aroundLabel}>On the map now</span>

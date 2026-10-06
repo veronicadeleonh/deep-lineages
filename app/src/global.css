@@ -27,6 +27,7 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
+html { scrollbar-gutter: stable; } /* the timeline scrolls, the other views don't: keep the same width in all */
 body {
   background: var(--bg);
   color: var(--text);
@@ -51,8 +52,3 @@ kbd { font: 11px var(--mono); border: 1px solid var(--line); border-bottom-width
 .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
 
 .sil { pointer-events: none; filter: var(--sil-filter); }
-
-/* cinema mode (the time machine while playing): the header and side lists step back; hover brings them back */
-[data-cinema="dim"] { transition: opacity .8s ease; }
-body.cinema [data-cinema="dim"] { opacity: .15; }
-body.cinema [data-cinema="dim"]:hover, body.cinema [data-cinema="dim"]:focus-within { opacity: 1; transition-duration: .2s; }

@@ -27,11 +27,11 @@
 .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 28px; }
 .start {
   font: inherit; font-size: 16px; font-weight: 700; color: var(--surface); background: var(--cursor); border: 0;
-  border-radius: 999px; padding: 12px 24px; cursor: pointer;
+  border-radius: 8px; padding: 12px 24px; cursor: pointer;
 }
 .start:hover { filter: brightness(1.08); }
 .start:focus-visible { outline: 3px solid color-mix(in srgb, var(--cursor) 40%, transparent); outline-offset: 3px; }
-.explore { font: inherit; font-size: 15px; font-weight: 600; color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; cursor: pointer; }
+.explore { font: inherit; font-size: 15px; font-weight: 600; color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: 8px; padding: 11px 20px; cursor: pointer; }
 .explore:hover { color: var(--text); border-color: var(--text-3); }
 
 .views { list-style: none; margin: 0 0 22px; padding: 18px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
@@ -41,9 +41,6 @@
 .icon { grid-row: span 2; color: var(--cursor); font-size: 14px; line-height: 1.5; text-align: center; }
 .credits { margin: 0; font-size: 11.5px; line-height: 1.5; color: var(--text-3); }
 
-.byline { margin: 8px 0 0; font-size: 12px; color: var(--text-2); }
-.byline a { color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--cursor); text-underline-offset: 3px; }
-.byline a:hover { color: var(--cursor); }
 
 @media (max-width: 600px) {
   .welcome { align-items: flex-start; padding: 16px; }
@@ -51,3 +48,19 @@
   .views { grid-template-columns: minmax(0, 1fr); }
   .clock { display: none; }
 }
+
+/* About: a compact dialog over the app (which stays visible, dimmed) */
+.aboutBackdrop { position: fixed; inset: 0; z-index: 50; background: color-mix(in srgb, var(--text) 28%, transparent); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fadeIn .2s ease-out; }
+.about { width: min(560px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 26px 22px; box-shadow: 0 24px 60px rgb(0 0 0 / .18); animation: rise .2s ease-out; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+.about { position: relative; padding: 26px 28px 24px; }
+.aboutClose { position: absolute; right: 14px; top: 14px; font: inherit; font-size: 14px; color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: 8px; width: 32px; height: 32px; cursor: pointer; }
+.aboutClose:hover { color: var(--text); border-color: var(--text-3); }
+.aboutTitle { margin: 0 44px 4px 0; font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text); }
+.aboutCaption { margin: 0 0 14px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--cursor); }
+.aboutLede { margin: 0 0 12px; font-size: 14.5px; line-height: 1.55; color: var(--text-2); }
+.about .stats { margin-bottom: 18px; }
+.aboutViews { margin-bottom: 16px; }
+.aboutActions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+.aboutActions .start { font-size: 15px; padding: 10px 20px; }
+.aboutActions .explore { font-size: 14px; padding: 9px 18px; }
