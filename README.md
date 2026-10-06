@@ -1,71 +1,61 @@
 # 🦕 Deep Lineages
 
-*186 million years of dinosaurs, on maps of the world as it was.*
+_186 million years of dinosaurs, on maps of the world as it was._
 
-I read Steve Brusatte's *The Rise and Fall of the Dinosaurs* and kept wanting to **see** it: who lived when, who
+I read Steve Brusatte's _The Rise and Fall of the Dinosaurs_ and kept wanting to **see** it: who lived when, who
 was related to whom, and where on Earth (on the Earth of back then) their bones turned up. So I built that. It's
-a small, very personal data project that turned into a playful app: 29 dinosaur families, 531 genera and
-7,043 real fossils from the Paleobiology Database.
+a small, very personal data project that turned into a playful app: 29 dinosaur families and their 531 genera
+in depth, plus every one of the 7,043 fossils (over 1,500 genera) from the Paleobiology Database on the map.
 
-**👉 Try it: [deep-lineages.vercel.app](https://deep-lineages.vercel.app)**
+**Live Demo: [deep-lineages.vercel.app](https://deep-lineages.vercel.app)**
 
-<!-- 📸 SCREENSHOT (hero): the welcome screen, or the time machine mid-journey (e.g. 150 Ma, "The age of giants").
-     Save as docs/screenshots/hero.png and uncomment:
 ![Deep Lineages](docs/screenshots/hero.png)
--->
 
 ---
 
 ## What's inside
 
-There are four ways in. Whatever you pick in one (a moment in time, a family, a genus) comes with you to the next.
+The **Time machine** tells the story; the other three are a **deep dive** into it. Whatever you pick (a moment in
+time, a family, a genus) comes with you from one view to the next: the header shows what you're _following_, so
+you can look at the same animal as a story, a timeline, a tree and a map.
 
 ### ▶ Time machine
 
 Press play and travel from the Great Dying (252 Ma) to the asteroid (66 Ma). The continents drift, fossils pop up
 where they were buried, and the story is told in ten short chapters, like a little documentary. Each chapter
 shows big events pulsing on the map (Siberian Traps, Chicxulub…), a mini chart of how many genera were around,
-and the dinosaur with the most fossils in that stretch of time. While it plays, everything else fades back:
-cinema mode.
+and the dinosaur with the most fossils in that stretch of time. On the right, the families on the map right now;
+pick one and a small card unfolds with the essentials and a way to dive deeper.
 
-<!-- 📸 SCREENSHOT: time machine at 66 Ma with Chicxulub and the Deccan Traps pulsing.
-     Save as docs/screenshots/time-machine.png and uncomment:
 ![Time machine](docs/screenshots/time-machine.png)
--->
 
 ### ☰ Timeline
 
 When each family lived, with its family tree drawn right into the timeline. Zoom in with the trackpad and
 families open into their genera, then species. Bars show where most of the fossils are, a thin line shows the
 full record, and a fade after the last fossil reminds you that a family didn't vanish the day its last known bone
-was buried.
+was buried. "Fossils at X Ma" (on by default) keeps only what was around at the cursor, and "Show close relatives"
+adds each lineage's early cousins, like the little Jurassic tyrannosaur _Guanlong_.
 
-<!-- 📸 SCREENSHOT: timeline with Tyrannosauridae selected and its lineage lit up.
-     Save as docs/screenshots/timeline.png and uncomment:
 ![Timeline](docs/screenshots/timeline.png)
--->
 
 ### ✺ Family tree
 
 The whole tree as a round poster: Dinosauria in the middle, every genus on the rim, rings for families (in their
-diet color) and the three big lineages. Pinch to zoom. A "Where you are" guide on the side shows how deep you
-are, from Dinosauria all the way down to a single species.
+diet color) and the three big lineages. Pinch to zoom; click a group to center the tree on it, with its silhouette
+in the middle. A "Where you are" guide on the side shows how deep you are, from Dinosauria all the way down to a
+single species.
 
-<!-- 📸 SCREENSHOT: family tree with Tyrannosaurus selected and the "Where you are" ladder visible.
-     Save as docs/screenshots/family-tree.png and uncomment:
 ![Family tree](docs/screenshots/family-tree.png)
--->
 
 ### ◎ Field guide: "What lived here?"
 
-Pick a continent or click anywhere on today's map to draw a zone (S, M or L) and see which dinosaurs were found
-there, and when. Hover a name to light up its sites. The search box autocompletes, because nobody can spell
-*Mamenchisaurus* on the first try.
+Start with the whole world, pick a continent, or click anywhere on today's map to draw a zone (S, M or L) and see
+which dinosaurs were found there, and when: all of them, including families that aren't in the timeline (those
+have no profile, but they're on the list). Hover a name to light up its sites. The search box autocompletes,
+because nobody can spell _Mamenchisaurus_ on the first try.
 
-<!-- 📸 SCREENSHOT: field guide with a zone drawn over Montana/Alberta and the list next to it.
-     Save as docs/screenshots/field-guide.png and uncomment:
 ![Field guide](docs/screenshots/field-guide.png)
--->
 
 ---
 
@@ -118,11 +108,13 @@ curl -o data/raw/dinos_pbdb.csv "https://paleobiodb.org/data1.2/occs/list.csv?ba
   the PBDB (diet, life habit), PhyloPic (silhouette, author, license) and Wikipedia.
 - **`build_genera.py` → `genera.json`.** Genera and species of each family, their ancestry from Archosauria down,
   subfamilies and tribes, who named each one, a Wikipedia summary and a silhouette. A genus keeps a PhyloPic
-  silhouette only if the image really is that genus; otherwise the app borrows the family's (shown fainter).
+  silhouette only if the image really is that genus or one of its species (also when PhyloPic files it under an
+  older name, like _Tarbosaurus bataar_ as "Tyrannosaurus bataar"); otherwise the app borrows the family's, shown
+  fainter. About a third of the genera have their own.
 - **`build_clades.py` → `clades.json`, `silhouettes/clades/`.** A silhouette for each group along the ancestry
   paths.
 - **`build_relatives.py` → `relatives.json`.** Close relatives that no chosen family covers (e.g. early
-  tyrannosauroids like *Guanlong* or *Yutyrannus*), so a lineage's early history has evidence and not just a
+  tyrannosauroids like _Guanlong_ or _Yutyrannus_), so a lineage's early history has evidence and not just a
   dotted line.
 - **`build_timeline.py` → `fossils.json`, `diversity.json`, `periods.json`, `stages.json`.** Body fossils for the
   maps, genus diversity per million years, and the periods and ICS stages the PBDB uses.
@@ -156,7 +148,9 @@ prototype/           the very first version (plain HTML + D3), kept for nostalgi
 - **A fossil record isn't a lifespan.** Families surely appeared before their first known fossil and lasted
   after their last. The fades in the timeline are there to remind you.
 - **The record is biased.** Big animals with sturdy bones, living where sediments piled up, fossilize much
-  better. That's why a genus known almost only from teeth (*Richardoestesia*) can "win" a chapter.
+  better. That's why a genus known almost only from teeth (_Richardoestesia_) can "win" a chapter.
+- **Sizes aren't here (yet).** Lengths and weights you read online are estimates from partial skeletons, and
+  vary a lot between sources; if they come, they'll come from one scientific dataset, with its uncertainty.
 - **The maps are approximate.** Continents jump every 10 million years (with a crossfade in between), and the
   positions of the events on the map are estimated from nearby fossil sites.
 
@@ -169,8 +163,4 @@ prototype/           the very first version (plain HTML + D3), kept for nostalgi
 - Silhouettes: [PhyloPic](https://www.phylopic.org) (each image has its own license, credited in the app)
 - Summaries: [Wikipedia](https://www.wikipedia.org) (CC BY-SA 4.0)
 - Today's map: [Natural Earth](https://www.naturalearthdata.com) (public domain)
-- Inspiration: Steve Brusatte, *The Rise and Fall of the Dinosaurs* (2018)
-
-Made by [Verónica De León Hernández](https://veronicadeleonh.de/) 🦕
-
-Code under the [MIT license](LICENSE). Data and images keep their original licenses (above).
+- Inspiration: Steve Brusatte, _The Rise and Fall of the Dinosaurs_ (2018)

@@ -1,0 +1,5720 @@
+{
+ "Hadrosauroidea": {
+  "families": [
+   "Hadrosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Ornithischia",
+   "Neornithischia",
+   "Pyrodontia",
+   "Cerapoda",
+   "Ornithopoda",
+   "Iguanodontia",
+   "Euiguanodontia",
+   "Dryomorpha",
+   "Ankylopollexia",
+   "Styracosterna",
+   "Hadrosauriformes",
+   "Hadrosauroidea"
+  ],
+  "genera": [
+   {
+    "genus": "Cedrorestes",
+    "family": null,
+    "range_ma": [
+     137.1,
+     132.6
+    ],
+    "record": [
+     137.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Portellsaurus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Cariocecus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Morelladon",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Haolong",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Sirindhorna",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Koshisaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Penelopognathus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Ratchasimasaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Xuwulong",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Fukuisaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Jintasaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Probactrosaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     100.5
+    ],
+    "record": [
+     121.4,
+     100.5
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Eolambia",
+    "family": null,
+    "range_ma": [
+     100.5,
+     93.9
+    ],
+    "record": [
+     121.4,
+     93.9
+    ],
+    "n": 12,
+    "continents": {
+     "North America": 12
+    }
+   },
+   {
+    "genus": "Gongpoquansaurus",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Equijubus",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Shuangmiaosaurus",
+    "family": null,
+    "range_ma": [
+     106.3,
+     100.5
+    ],
+    "record": [
+     106.3,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Protohadros",
+    "family": null,
+    "range_ma": [
+     100.5,
+     93.9
+    ],
+    "record": [
+     100.5,
+     93.9
+    ],
+    "n": 4,
+    "continents": {
+     "North America": 4
+    }
+   },
+   {
+    "genus": "Gobihadros",
+    "family": null,
+    "range_ma": [
+     100.5,
+     83.6
+    ],
+    "record": [
+     100.5,
+     83.6
+    ],
+    "n": 6,
+    "continents": {
+     "Asia": 6
+    }
+   },
+   {
+    "genus": "Zuoyunlong",
+    "family": null,
+    "range_ma": [
+     100.5,
+     83.6
+    ],
+    "record": [
+     100.5,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Yunganglong",
+    "family": null,
+    "range_ma": [
+     100.5,
+     83.6
+    ],
+    "record": [
+     100.5,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Datonglong",
+    "family": null,
+    "range_ma": [
+     100.5,
+     72.2
+    ],
+    "record": [
+     100.5,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Qianjiangsaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     66.0
+    ],
+    "record": [
+     100.5,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Nanningosaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     66.0
+    ],
+    "record": [
+     100.5,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Bactrosaurus",
+    "family": null,
+    "range_ma": [
+     95.9,
+     70.3
+    ],
+    "record": [
+     100.5,
+     66.0
+    ],
+    "n": 8,
+    "continents": {
+     "Asia": 8
+    }
+   },
+   {
+    "genus": "Jeyawati",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Levnesovia",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Nanyangosaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     72.2
+    ],
+    "record": [
+     93.9,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Claosaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     72.2
+    ],
+    "record": [
+     89.8,
+     72.2
+    ],
+    "n": 3,
+    "continents": {
+     "North America": 3
+    }
+   },
+   {
+    "genus": "Tanius",
+    "family": null,
+    "range_ma": [
+     89.8,
+     72.2
+    ],
+    "record": [
+     89.8,
+     72.2
+    ],
+    "n": 5,
+    "continents": {
+     "Asia": 5
+    }
+   },
+   {
+    "genus": "Huehuecanauhtlus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Zhanghenglong",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Batyrosaurus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     72.2
+    ],
+    "record": [
+     85.7,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Plesiohadros",
+    "family": null,
+    "range_ma": [
+     85.7,
+     72.2
+    ],
+    "record": [
+     85.7,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Gilmoreosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Tethyshadros",
+    "family": "Telmatosauridae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Telmatosaurus",
+    "family": "Telmatosauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 23,
+    "continents": {
+     "Europe": 23
+    }
+   },
+   {
+    "genus": "Gonkoken",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Fylax",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Kryptohadros",
+    "family": "Telmatosauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   }
+  ]
+ },
+ "Flagellicaudata": {
+  "families": [
+   "Diplodocidae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Saurischia",
+   "Sauropodomorpha",
+   "Massopoda",
+   "Sauropodiformes",
+   "Sauropoda",
+   "Gravisauria",
+   "Eusauropoda",
+   "Neosauropoda",
+   "Diplodocoidea",
+   "Diplodocimorpha",
+   "Flagellicaudata"
+  ],
+  "genera": [
+   {
+    "genus": "Lingwulong",
+    "family": null,
+    "range_ma": [
+     174.7,
+     161.5
+    ],
+    "record": [
+     174.7,
+     161.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Cetiosauriscus",
+    "family": null,
+    "range_ma": [
+     165.3,
+     161.5
+    ],
+    "record": [
+     165.3,
+     161.5
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Dicraeosaurus",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     152.2,
+     143.1
+    ],
+    "record": [
+     161.5,
+     143.1
+    ],
+    "n": 19,
+    "continents": {
+     "Africa": 19
+    }
+   },
+   {
+    "genus": "Kaatedocus",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     154.8,
+     149.2
+    ],
+    "record": [
+     154.8,
+     149.2
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Brachytrachelopan",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     154.8,
+     145.1
+    ],
+    "record": [
+     154.8,
+     145.1
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Suuwassea",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     154.8,
+     143.1
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Dyslocosaurus",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     154.8,
+     143.1
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Smitanosaurus",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     152.2,
+     145.1
+    ],
+    "record": [
+     152.2,
+     145.1
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Athenar",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     149.2,
+     145.1
+    ],
+    "record": [
+     149.2,
+     145.1
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Bajadasaurus",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     139.1,
+     132.6
+    ],
+    "record": [
+     139.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Pilmatueia",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     137.1,
+     132.6
+    ],
+    "record": [
+     137.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Amargasaurus",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Amargatitanis",
+    "family": "Dicraeosauridae",
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   }
+  ]
+ },
+ "Somphospondyli": {
+  "families": [
+   "Euhelopodidae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Saurischia",
+   "Sauropodomorpha",
+   "Massopoda",
+   "Sauropodiformes",
+   "Sauropoda",
+   "Gravisauria",
+   "Eusauropoda",
+   "Neosauropoda",
+   "Macronaria",
+   "Titanosauriformes",
+   "Somphospondyli"
+  ],
+  "genera": [
+   {
+    "genus": "Malakhelisaurus",
+    "family": null,
+    "range_ma": [
+     174.7,
+     161.5
+    ],
+    "record": [
+     174.7,
+     161.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Australodocus",
+    "family": null,
+    "range_ma": [
+     149.2,
+     143.1
+    ],
+    "record": [
+     149.2,
+     143.1
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Triunfosaurus",
+    "family": null,
+    "range_ma": [
+     143.1,
+     125.8
+    ],
+    "record": [
+     143.1,
+     125.8
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Aegyptosaurus",
+    "family": null,
+    "range_ma": [
+     125.2,
+     93.9
+    ],
+    "record": [
+     143.1,
+     93.9
+    ],
+    "n": 7,
+    "continents": {
+     "Africa": 7
+    }
+   },
+   {
+    "genus": "Ninjatitan",
+    "family": null,
+    "range_ma": [
+     139.1,
+     132.6
+    ],
+    "record": [
+     139.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Hamititan",
+    "family": null,
+    "range_ma": [
+     137.1,
+     132.6
+    ],
+    "record": [
+     137.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Tengrisaurus",
+    "family": null,
+    "range_ma": [
+     137.1,
+     132.6
+    ],
+    "record": [
+     137.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Padillasaurus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Garumbatitan",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Dongbeititan",
+    "family": null,
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Europatitan",
+    "family": null,
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Huanghetitan",
+    "family": null,
+    "range_ma": [
+     125.8,
+     113.2
+    ],
+    "record": [
+     125.8,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Sibirotitan",
+    "family": null,
+    "range_ma": [
+     125.8,
+     113.2
+    ],
+    "record": [
+     125.8,
+     113.2
+    ],
+    "n": 4,
+    "continents": {
+     "Asia": 4
+    }
+   },
+   {
+    "genus": "Tastavinsaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     119.6
+    ],
+    "record": [
+     121.4,
+     119.6
+    ],
+    "n": 2,
+    "continents": {
+     "Europe": 2
+    }
+   },
+   {
+    "genus": "Karongasaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 2,
+    "continents": {
+     "Africa": 2
+    }
+   },
+   {
+    "genus": "Tapuiasaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Malawisaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 8,
+    "continents": {
+     "Africa": 8
+    }
+   },
+   {
+    "genus": "Liubangosaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Brontomerus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     100.5
+    ],
+    "record": [
+     121.4,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Mongolosaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     100.5
+    ],
+    "record": [
+     121.4,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Yunmenglong",
+    "family": null,
+    "range_ma": [
+     121.4,
+     100.5
+    ],
+    "record": [
+     121.4,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Mnyamawamtuka",
+    "family": null,
+    "range_ma": [
+     121.4,
+     93.9
+    ],
+    "record": [
+     121.4,
+     93.9
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Sauroposeidon",
+    "family": null,
+    "range_ma": [
+     120.5,
+     93.9
+    ],
+    "record": [
+     121.4,
+     93.9
+    ],
+    "n": 6,
+    "continents": {
+     "North America": 6
+    }
+   },
+   {
+    "genus": "Dasosaurus",
+    "family": null,
+    "range_ma": [
+     119.6,
+     113.2
+    ],
+    "record": [
+     119.6,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Chubutisaurus",
+    "family": null,
+    "range_ma": [
+     119.6,
+     110.1
+    ],
+    "record": [
+     119.6,
+     110.1
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Andesaurus",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Astrophocaudia",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Ligabuesaurus",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Patagotitan",
+    "family": null,
+    "range_ma": [
+     113.2,
+     100.5
+    ],
+    "record": [
+     113.2,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Tiamat",
+    "family": null,
+    "range_ma": [
+     113.2,
+     93.9
+    ],
+    "record": [
+     113.2,
+     93.9
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Chucarosaurus",
+    "family": null,
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Normanniasaurus",
+    "family": null,
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 2,
+    "continents": {
+     "Europe": 2
+    }
+   },
+   {
+    "genus": "Argentinosaurus",
+    "family": null,
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Choconsaurus",
+    "family": null,
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Bustingorrytitan",
+    "family": null,
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Borealosaurus",
+    "family": null,
+    "range_ma": [
+     106.3,
+     100.5
+    ],
+    "record": [
+     106.3,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Austrosaurus",
+    "family": null,
+    "range_ma": [
+     106.3,
+     100.5
+    ],
+    "record": [
+     106.3,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Oceania": 1
+    }
+   },
+   {
+    "genus": "Paralititan",
+    "family": null,
+    "range_ma": [
+     100.5,
+     93.9
+    ],
+    "record": [
+     100.5,
+     93.9
+    ],
+    "n": 2,
+    "continents": {
+     "Africa": 2
+    }
+   },
+   {
+    "genus": "Wintonotitan",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 7,
+    "continents": {
+     "Oceania": 7
+    }
+   },
+   {
+    "genus": "Sarmientosaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Diamantinasaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 6,
+    "continents": {
+     "Oceania": 6
+    }
+   },
+   {
+    "genus": "Savannasaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 3,
+    "continents": {
+     "Oceania": 3
+    }
+   },
+   {
+    "genus": "Jiangshanosaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Gandititan",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Drusilasaura",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Dongyangosaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Epachthosaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     89.8
+    ],
+    "record": [
+     100.5,
+     89.8
+    ],
+    "n": 3,
+    "continents": {
+     "South America": 3
+    }
+   },
+   {
+    "genus": "Udelartitan",
+    "family": null,
+    "range_ma": [
+     100.5,
+     83.6
+    ],
+    "record": [
+     100.5,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Rukwatitan",
+    "family": null,
+    "range_ma": [
+     100.5,
+     72.2
+    ],
+    "record": [
+     100.5,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Shingopana",
+    "family": null,
+    "range_ma": [
+     100.5,
+     72.2
+    ],
+    "record": [
+     100.5,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Rapetosaurus",
+    "family": null,
+    "range_ma": [
+     89.2,
+     66.0
+    ],
+    "record": [
+     100.5,
+     66.0
+    ],
+    "n": 5,
+    "continents": {
+     "Africa": 5
+    }
+   },
+   {
+    "genus": "Atacamatitan",
+    "family": null,
+    "range_ma": [
+     100.5,
+     66.0
+    ],
+    "record": [
+     100.5,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Quetecsaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Dzharatitanis",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Futalognkosaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     85.7
+    ],
+    "record": [
+     93.9,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Baalsaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     85.7
+    ],
+    "record": [
+     93.9,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Baotianmansaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     72.2
+    ],
+    "record": [
+     93.9,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Barrosasaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     72.2
+    ],
+    "record": [
+     93.9,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Mendozasaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     85.7
+    ],
+    "record": [
+     89.8,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Kaijutitan",
+    "family": null,
+    "range_ma": [
+     89.8,
+     85.7
+    ],
+    "record": [
+     89.8,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Elaltitan",
+    "family": null,
+    "range_ma": [
+     89.8,
+     85.7
+    ],
+    "record": [
+     89.8,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Malarguesaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     85.7
+    ],
+    "record": [
+     89.8,
+     85.7
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Angolatitan",
+    "family": null,
+    "range_ma": [
+     89.8,
+     85.7
+    ],
+    "record": [
+     89.8,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Petrobrasaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     83.6
+    ],
+    "record": [
+     89.8,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Muyelensaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     83.6
+    ],
+    "record": [
+     89.8,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Notocolossus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     83.6
+    ],
+    "record": [
+     89.8,
+     83.6
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Nemegtosaurus",
+    "family": "Nemegtosauridae",
+    "range_ma": [
+     89.8,
+     66.0
+    ],
+    "record": [
+     89.8,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Antarctosaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     66.0
+    ],
+    "record": [
+     89.8,
+     66.0
+    ],
+    "n": 8,
+    "continents": {
+     "South America": 5,
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Overosaurus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Rinconsaurus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Traukutitan",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Inawentu",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Bonitasaura",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Yeneen",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Abdarainurus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     72.2
+    ],
+    "record": [
+     85.7,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Mesetasaurus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     72.2
+    ],
+    "record": [
+     85.7,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Sonidosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Mansourasaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Narambuenatitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Chadititan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Pitekunsaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Puertasaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Garrigatitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Atsinganosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Dreadnoughtus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Quaesitosaurus",
+    "family": "Nemegtosauridae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Laplatasaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Argyrosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Brasilotitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Arrudatitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Bravasaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Punatitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Maxakalisaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "South America": 3
+    }
+   },
+   {
+    "genus": "Austroposeidon",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Lirainosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 10,
+    "continents": {
+     "Europe": 10
+    }
+   },
+   {
+    "genus": "Ampelosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 5,
+    "continents": {
+     "Europe": 5
+    }
+   },
+   {
+    "genus": "Lohuecotitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Gondwanatitan",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Aeolosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 6,
+    "continents": {
+     "South America": 6
+    }
+   },
+   {
+    "genus": "Arackar",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Marisaurus",
+    "family": "Balochisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 5,
+    "continents": {
+     "Asia": 5
+    }
+   },
+   {
+    "genus": "Balochisaurus",
+    "family": "Balochisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 12,
+    "continents": {
+     "Asia": 12
+    }
+   },
+   {
+    "genus": "Qaikshaheen",
+    "family": "Balochisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Gspsaurus",
+    "family": "Gspsauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 7,
+    "continents": {
+     "Asia": 7
+    }
+   },
+   {
+    "genus": "Ikqaumishan",
+    "family": "Gspsauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Saraikimasoom",
+    "family": "Gspsauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 12,
+    "continents": {
+     "Asia": 12
+    }
+   },
+   {
+    "genus": "Imrankhanhero",
+    "family": "Pakisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Sulaimanisaurus",
+    "family": "Pakisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 6,
+    "continents": {
+     "Asia": 6
+    }
+   },
+   {
+    "genus": "Khanazeem",
+    "family": "Pakisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Khetranisaurus",
+    "family": "Pakisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 4,
+    "continents": {
+     "Asia": 4
+    }
+   },
+   {
+    "genus": "Pakisaurus",
+    "family": "Pakisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 12,
+    "continents": {
+     "Asia": 12
+    }
+   },
+   {
+    "genus": "Dgkhansaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Uberabatitan",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Phosphatotitan",
+    "family": "Argentinosauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Pashtosaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Magyarosaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 11,
+    "continents": {
+     "Europe": 11
+    }
+   },
+   {
+    "genus": "Petrustitan",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "Europe": 3
+    }
+   },
+   {
+    "genus": "Paludititan",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 2,
+    "continents": {
+     "Europe": 2
+    }
+   },
+   {
+    "genus": "Menucocelsior",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Titanomachya",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Isisaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 7,
+    "continents": {
+     "Asia": 7
+    }
+   },
+   {
+    "genus": "Nullotitan",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "South America": 3
+    }
+   },
+   {
+    "genus": "Pellegrinisaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Panamericansaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Baurutitan",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 4,
+    "continents": {
+     "South America": 4
+    }
+   },
+   {
+    "genus": "Caieiria",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Uriash",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Jainosaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Vahiny",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 2,
+    "continents": {
+     "Africa": 2
+    }
+   },
+   {
+    "genus": "Gannansaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Jiangxititan",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   }
+  ]
+ },
+ "Titanosauriformes": {
+  "families": [
+   "Brachiosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Saurischia",
+   "Sauropodomorpha",
+   "Massopoda",
+   "Sauropodiformes",
+   "Sauropoda",
+   "Gravisauria",
+   "Eusauropoda",
+   "Neosauropoda",
+   "Macronaria",
+   "Titanosauriformes"
+  ],
+  "genera": [
+   {
+    "genus": "Fushanosaurus",
+    "family": null,
+    "range_ma": [
+     161.5,
+     154.8
+    ],
+    "record": [
+     161.5,
+     154.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Duriatitan",
+    "family": null,
+    "range_ma": [
+     153.0,
+     137.1
+    ],
+    "record": [
+     154.8,
+     137.1
+    ],
+    "n": 8,
+    "continents": {
+     "Europe": 8
+    }
+   },
+   {
+    "genus": "Oceanotitan",
+    "family": null,
+    "range_ma": [
+     152.2,
+     149.2
+    ],
+    "record": [
+     152.2,
+     149.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Ornithopsis",
+    "family": null,
+    "range_ma": [
+     138.8,
+     119.6
+    ],
+    "record": [
+     145.1,
+     119.6
+    ],
+    "n": 6,
+    "continents": {
+     "Europe": 6
+    }
+   },
+   {
+    "genus": "Pelorosaurus",
+    "family": null,
+    "range_ma": [
+     145.1,
+     110.1
+    ],
+    "record": [
+     145.1,
+     110.1
+    ],
+    "n": 3,
+    "continents": {
+     "Europe": 3
+    }
+   },
+   {
+    "genus": "Liaoningotitan",
+    "family": null,
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Titanosaurimanus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     100.5
+    ],
+    "record": [
+     125.8,
+     100.5
+    ],
+    "n": 3,
+    "continents": {
+     "Europe": 3
+    }
+   },
+   {
+    "genus": "Fusuisaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Fukuititan",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   }
+  ]
+ },
+ "Stegosauria": {
+  "families": [
+   "Stegosauridae",
+   "Huayangosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Ornithischia",
+   "Parapredentata",
+   "Saphornithischia",
+   "Prionodontia",
+   "Genasauria",
+   "Thyreophora",
+   "Thyreophoroidea",
+   "Eurypoda",
+   "Stegosauria"
+  ],
+  "genera": [
+   {
+    "genus": "Garbina",
+    "family": null,
+    "range_ma": [
+     148.3,
+     121.4
+    ],
+    "record": [
+     174.7,
+     121.4
+    ],
+    "n": 8,
+    "continents": {
+     "Oceania": 8
+    }
+   }
+  ]
+ },
+ "Deinonychosauria": {
+  "families": [
+   "Troodontidae",
+   "Dromaeosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Theropoda",
+   "Neotheropoda",
+   "Averostra",
+   "Tetanurae",
+   "Coelurosauria",
+   "Maniraptora",
+   "Paraves",
+   "Deinonychosauria"
+  ],
+  "genera": [
+   {
+    "genus": "Pamparaptor",
+    "family": null,
+    "range_ma": [
+     93.9,
+     85.7
+    ],
+    "record": [
+     93.9,
+     85.7
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   }
+  ]
+ },
+ "Dryomorpha": {
+  "families": [
+   "Dryosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Ornithischia",
+   "Neornithischia",
+   "Pyrodontia",
+   "Cerapoda",
+   "Ornithopoda",
+   "Iguanodontia",
+   "Euiguanodontia",
+   "Dryomorpha"
+  ],
+  "genera": [
+   {
+    "genus": "Camptosaurus",
+    "family": null,
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     157.9,
+     143.1
+    ],
+    "n": 42,
+    "continents": {
+     "North America": 40,
+     "Europe": 2
+    }
+   },
+   {
+    "genus": "Iguanodon",
+    "family": null,
+    "range_ma": [
+     143.1,
+     119.6
+    ],
+    "record": [
+     154.8,
+     66.0
+    ],
+    "n": 133,
+    "continents": {
+     "Europe": 129,
+     "Asia": 2,
+     "Africa": 1,
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Hesperonyx",
+    "family": null,
+    "range_ma": [
+     152.2,
+     149.2
+    ],
+    "record": [
+     152.2,
+     149.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Cumnoria",
+    "family": null,
+    "range_ma": [
+     152.2,
+     149.2
+    ],
+    "record": [
+     152.2,
+     149.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Oblitosaurus",
+    "family": null,
+    "range_ma": [
+     152.2,
+     143.1
+    ],
+    "record": [
+     152.2,
+     143.1
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Draconyx",
+    "family": null,
+    "range_ma": [
+     149.2,
+     145.1
+    ],
+    "record": [
+     149.2,
+     145.1
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Owenodon",
+    "family": null,
+    "range_ma": [
+     146.1,
+     137.1
+    ],
+    "record": [
+     149.2,
+     137.1
+    ],
+    "n": 6,
+    "continents": {
+     "Europe": 6
+    }
+   },
+   {
+    "genus": "Hypselospinus",
+    "family": null,
+    "range_ma": [
+     137.5,
+     132.6
+    ],
+    "record": [
+     139.1,
+     132.6
+    ],
+    "n": 9,
+    "continents": {
+     "Europe": 9
+    }
+   },
+   {
+    "genus": "Iguanacolossus",
+    "family": null,
+    "range_ma": [
+     139.1,
+     132.6
+    ],
+    "record": [
+     139.1,
+     132.6
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Hippodraco",
+    "family": null,
+    "range_ma": [
+     137.1,
+     132.6
+    ],
+    "record": [
+     137.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Dakotadon",
+    "family": null,
+    "range_ma": [
+     137.1,
+     132.6
+    ],
+    "record": [
+     137.1,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Barilium",
+    "family": "Iguanodontidae",
+    "range_ma": [
+     137.1,
+     125.9
+    ],
+    "record": [
+     137.1,
+     121.4
+    ],
+    "n": 5,
+    "continents": {
+     "Europe": 5
+    }
+   },
+   {
+    "genus": "Istiorachis",
+    "family": null,
+    "range_ma": [
+     132.6,
+     121.4
+    ],
+    "record": [
+     132.6,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Magnamanus",
+    "family": null,
+    "range_ma": [
+     132.6,
+     121.4
+    ],
+    "record": [
+     132.6,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Delapparentia",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 2,
+    "continents": {
+     "Europe": 2
+    }
+   },
+   {
+    "genus": "Brighstoneus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Comptonatus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Bolong",
+    "family": "Iguanodontidae",
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Jinzhousaurus",
+    "family": "Iguanodontidae",
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Lanzhousaurus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     113.2
+    ],
+    "record": [
+     125.8,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Bayannurosaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     119.6
+    ],
+    "record": [
+     121.4,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Napaisaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Siamodon",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Theiophytalia",
+    "family": null,
+    "range_ma": [
+     121.4,
+     100.5
+    ],
+    "record": [
+     121.4,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Ouranosaurus",
+    "family": null,
+    "range_ma": [
+     121.4,
+     90.2
+    ],
+    "record": [
+     121.4,
+     66.0
+    ],
+    "n": 8,
+    "continents": {
+     "Africa": 8
+    }
+   },
+   {
+    "genus": "Proa",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Altirhinus",
+    "family": null,
+    "range_ma": [
+     110.1,
+     100.5
+    ],
+    "record": [
+     110.1,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Lophorhothon",
+    "family": null,
+    "range_ma": [
+     85.7,
+     72.2
+    ],
+    "record": [
+     85.7,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Calvarius",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Riabininohadros",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   }
+  ]
+ },
+ "Ceratopsia": {
+  "families": [
+   "Ceratopsidae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Ornithischia",
+   "Neornithischia",
+   "Pyrodontia",
+   "Cerapoda",
+   "Marginocephalia",
+   "Ceratopsia"
+  ],
+  "genera": [
+   {
+    "genus": "Hualianceratops",
+    "family": "Chaoyangsauridae",
+    "range_ma": [
+     161.5,
+     154.8
+    ],
+    "record": [
+     161.5,
+     154.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Yinlong",
+    "family": "Chaoyangsauridae",
+    "range_ma": [
+     161.5,
+     154.8
+    ],
+    "record": [
+     161.5,
+     154.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Psittacosaurus",
+    "family": null,
+    "range_ma": [
+     143.1,
+     100.5
+    ],
+    "record": [
+     161.5,
+     66.0
+    ],
+    "n": 70,
+    "continents": {
+     "Asia": 69,
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Xuanhuaceratops",
+    "family": "Chaoyangsauridae",
+    "range_ma": [
+     152.2,
+     132.6
+    ],
+    "record": [
+     152.2,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Chaoyangsaurus",
+    "family": "Chaoyangsauridae",
+    "range_ma": [
+     152.2,
+     132.6
+    ],
+    "record": [
+     152.2,
+     132.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Stenopelix",
+    "family": "Chaoyangsauridae",
+    "range_ma": [
+     139.1,
+     137.1
+    ],
+    "record": [
+     139.1,
+     137.1
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Albalophosaurus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Liaoceratops",
+    "family": null,
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Serendipaceratops",
+    "family": null,
+    "range_ma": [
+     121.4,
+     119.6
+    ],
+    "record": [
+     121.4,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Oceania": 1
+    }
+   },
+   {
+    "genus": "Archaeoceratops",
+    "family": null,
+    "range_ma": [
+     121.4,
+     110.1
+    ],
+    "record": [
+     121.4,
+     110.1
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Helioceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     121.4,
+     100.5
+    ],
+    "record": [
+     121.4,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Protoceratops",
+    "family": "Protoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     121.4,
+     66.0
+    ],
+    "n": 38,
+    "continents": {
+     "Asia": 38
+    }
+   },
+   {
+    "genus": "Auroraceratops",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Sasayamagnomus",
+    "family": null,
+    "range_ma": [
+     113.2,
+     110.1
+    ],
+    "record": [
+     113.2,
+     110.1
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Koreaceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     113.2,
+     100.5
+    ],
+    "record": [
+     113.2,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Aquilops",
+    "family": null,
+    "range_ma": [
+     110.1,
+     100.5
+    ],
+    "record": [
+     110.1,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Beg",
+    "family": null,
+    "range_ma": [
+     106.3,
+     93.9
+    ],
+    "record": [
+     106.3,
+     93.9
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Asiaceratops",
+    "family": null,
+    "range_ma": [
+     100.5,
+     93.9
+    ],
+    "record": [
+     100.5,
+     93.9
+    ],
+    "n": 8,
+    "continents": {
+     "Asia": 7,
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Graciliceratops",
+    "family": null,
+    "range_ma": [
+     100.5,
+     83.6
+    ],
+    "record": [
+     100.5,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Turanoceratops",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 6,
+    "continents": {
+     "Asia": 6
+    }
+   },
+   {
+    "genus": "Zuniceratops",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 3,
+    "continents": {
+     "North America": 3
+    }
+   },
+   {
+    "genus": "Mosaiceratops",
+    "family": null,
+    "range_ma": [
+     93.9,
+     72.2
+    ],
+    "record": [
+     93.9,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Micropachycephalosaurus",
+    "family": null,
+    "range_ma": [
+     89.8,
+     83.6
+    ],
+    "record": [
+     89.8,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Gryphoceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Ajkaceratops",
+    "family": null,
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Yamaceratops",
+    "family": null,
+    "range_ma": [
+     85.7,
+     72.2
+    ],
+    "record": [
+     85.7,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Breviceratops",
+    "family": "Protoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Gremlin",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Zhuchengceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Ischioceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Prenoceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Cerasinops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 3,
+    "continents": {
+     "North America": 3
+    }
+   },
+   {
+    "genus": "Unescoceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Udanoceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Bagaceratops",
+    "family": "Protoceratopsidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 18,
+    "continents": {
+     "Asia": 18
+    }
+   },
+   {
+    "genus": "Montanoceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     83.6,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "North America": 3
+    }
+   },
+   {
+    "genus": "Leptoceratops",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 8,
+    "continents": {
+     "North America": 8
+    }
+   },
+   {
+    "genus": "Ferrisaurus",
+    "family": "Leptoceratopsidae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Notoceratops",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Ferenceratops",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 9,
+    "continents": {
+     "Europe": 9
+    }
+   }
+  ]
+ },
+ "Tyrannosauroidea": {
+  "families": [
+   "Tyrannosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Theropoda",
+   "Neotheropoda",
+   "Averostra",
+   "Tetanurae",
+   "Coelurosauria",
+   "Tyrannosauroidea"
+  ],
+  "genera": [
+   {
+    "genus": "Proceratosaurus",
+    "family": "Proceratosauridae",
+    "range_ma": [
+     168.2,
+     165.3
+    ],
+    "record": [
+     168.2,
+     165.3
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Kileskus",
+    "family": "Proceratosauridae",
+    "range_ma": [
+     168.2,
+     165.3
+    ],
+    "record": [
+     168.2,
+     165.3
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Guanlong",
+    "family": "Proceratosauridae",
+    "range_ma": [
+     161.5,
+     154.8
+    ],
+    "record": [
+     161.5,
+     154.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Stokesosaurus",
+    "family": null,
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     154.8,
+     143.1
+    ],
+    "n": 6,
+    "continents": {
+     "North America": 6
+    }
+   },
+   {
+    "genus": "Juratyrant",
+    "family": null,
+    "range_ma": [
+     145.1,
+     143.1
+    ],
+    "record": [
+     145.1,
+     143.1
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Eotyrannus",
+    "family": null,
+    "range_ma": [
+     132.6,
+     121.4
+    ],
+    "record": [
+     132.6,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Dilong",
+    "family": null,
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Yutyrannus",
+    "family": "Proceratosauridae",
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Calamosaurus",
+    "family": null,
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Raptorex",
+    "family": null,
+    "range_ma": [
+     125.8,
+     66.0
+    ],
+    "record": [
+     125.8,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Sinotyrannus",
+    "family": "Proceratosauridae",
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Xiongguanlong",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Theroplantigrada",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Timimus",
+    "family": null,
+    "range_ma": [
+     113.2,
+     93.9
+    ],
+    "record": [
+     113.2,
+     93.9
+    ],
+    "n": 2,
+    "continents": {
+     "Oceania": 2
+    }
+   },
+   {
+    "genus": "Dryptosaurus",
+    "family": null,
+    "range_ma": [
+     83.6,
+     66.0
+    ],
+    "record": [
+     113.2,
+     66.0
+    ],
+    "n": 13,
+    "continents": {
+     "North America": 13
+    }
+   },
+   {
+    "genus": "Gualicho",
+    "family": null,
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Moros",
+    "family": null,
+    "range_ma": [
+     100.5,
+     93.9
+    ],
+    "record": [
+     100.5,
+     93.9
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Khankhuuluu",
+    "family": null,
+    "range_ma": [
+     100.5,
+     83.6
+    ],
+    "record": [
+     100.5,
+     83.6
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Jinbeisaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     72.2
+    ],
+    "record": [
+     100.5,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Alectrosaurus",
+    "family": null,
+    "range_ma": [
+     100.5,
+     72.2
+    ],
+    "record": [
+     100.5,
+     72.2
+    ],
+    "n": 19,
+    "continents": {
+     "Asia": 19
+    }
+   },
+   {
+    "genus": "Timurlengia",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Suskityrannus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Appalachiosaurus",
+    "family": null,
+    "range_ma": [
+     85.7,
+     69.1
+    ],
+    "record": [
+     85.7,
+     66.0
+    ],
+    "n": 6,
+    "continents": {
+     "North America": 6
+    }
+   },
+   {
+    "genus": "Bellatoripes",
+    "family": "Tyrannosauripodidae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Nanotyrannus",
+    "family": "Nanotyrannidae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 6,
+    "continents": {
+     "North America": 6
+    }
+   },
+   {
+    "genus": "Teihivenator",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   }
+  ]
+ },
+ "Megalosauroidea": {
+  "families": [
+   "Megalosauridae",
+   "Spinosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Theropoda",
+   "Neotheropoda",
+   "Averostra",
+   "Tetanurae",
+   "Megalosauroidea"
+  ],
+  "genera": [
+   {
+    "genus": "Piatnitzkysaurus",
+    "family": "Piatnitzkysauridae",
+    "range_ma": [
+     182.9,
+     180.4
+    ],
+    "record": [
+     182.9,
+     180.4
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Condorraptor",
+    "family": "Piatnitzkysauridae",
+    "range_ma": [
+     180.4,
+     168.6
+    ],
+    "record": [
+     180.4,
+     168.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Xuanhanosaurus",
+    "family": "Piatnitzkysauridae",
+    "range_ma": [
+     170.9,
+     168.2
+    ],
+    "record": [
+     170.9,
+     168.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Streptospondylus",
+    "family": null,
+    "range_ma": [
+     165.3,
+     159.0
+    ],
+    "record": [
+     165.3,
+     159.0
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Marshosaurus",
+    "family": "Piatnitzkysauridae",
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     154.8,
+     143.1
+    ],
+    "n": 3,
+    "continents": {
+     "North America": 3
+    }
+   },
+   {
+    "genus": "Sciurumimus",
+    "family": null,
+    "range_ma": [
+     152.2,
+     149.2
+    ],
+    "record": [
+     152.2,
+     149.2
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   }
+  ]
+ },
+ "Allosauroidea": {
+  "families": [
+   "Metriacanthosauridae",
+   "Carcharodontosauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Theropoda",
+   "Neotheropoda",
+   "Averostra",
+   "Tetanurae",
+   "Allosauroidea"
+  ],
+  "genera": [
+   {
+    "genus": "Asfaltovenator",
+    "family": null,
+    "range_ma": [
+     180.4,
+     168.6
+    ],
+    "record": [
+     180.4,
+     168.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Monolophosaurus",
+    "family": null,
+    "range_ma": [
+     165.3,
+     161.5
+    ],
+    "record": [
+     165.3,
+     161.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Allosaurus",
+    "family": null,
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     161.5,
+     137.1
+    ],
+    "n": 147,
+    "continents": {
+     "North America": 137,
+     "Europe": 10
+    }
+   },
+   {
+    "genus": "Saurophaganax",
+    "family": "Allosauridae",
+    "range_ma": [
+     152.2,
+     143.1
+    ],
+    "record": [
+     152.2,
+     143.1
+    ],
+    "n": 2,
+    "continents": {
+     "North America": 2
+    }
+   },
+   {
+    "genus": "Lusovenator",
+    "family": null,
+    "range_ma": [
+     152.2,
+     143.1
+    ],
+    "record": [
+     152.2,
+     143.1
+    ],
+    "n": 2,
+    "continents": {
+     "Europe": 2
+    }
+   },
+   {
+    "genus": "Fukuiraptor",
+    "family": "Neovenatoridae",
+    "range_ma": [
+     132.6,
+     113.2
+    ],
+    "record": [
+     132.6,
+     113.2
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Neovenator",
+    "family": "Neovenatoridae",
+    "range_ma": [
+     125.8,
+     121.4
+    ],
+    "record": [
+     125.8,
+     121.4
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Datanglong",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Siamraptor",
+    "family": null,
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Ulughbegsaurus",
+    "family": null,
+    "range_ma": [
+     93.9,
+     89.8
+    ],
+    "record": [
+     93.9,
+     89.8
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Chilantaisaurus",
+    "family": "Neovenatoridae",
+    "range_ma": [
+     93.9,
+     83.6
+    ],
+    "record": [
+     93.9,
+     83.6
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   }
+  ]
+ },
+ "Ceratosauria": {
+  "families": [
+   "Abelisauridae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Theropoda",
+   "Neotheropoda",
+   "Averostra",
+   "Ceratosauria"
+  ],
+  "genera": [
+   {
+    "genus": "Saltriovenator",
+    "family": null,
+    "range_ma": [
+     199.5,
+     192.9
+    ],
+    "record": [
+     199.5,
+     192.9
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Berberosaurus",
+    "family": "Ceratosauridae",
+    "range_ma": [
+     192.9,
+     174.7
+    ],
+    "record": [
+     192.9,
+     174.7
+    ],
+    "n": 1,
+    "continents": {
+     "Africa": 1
+    }
+   },
+   {
+    "genus": "Himalayadrinda",
+    "family": "Noasauridae",
+    "range_ma": [
+     174.7,
+     161.5
+    ],
+    "record": [
+     174.7,
+     161.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Samanadrinda",
+    "family": "Vitakrisauridae",
+    "range_ma": [
+     174.7,
+     161.5
+    ],
+    "record": [
+     174.7,
+     161.5
+    ],
+    "n": 1,
+    "continents": {
+     "Asia": 1
+    }
+   },
+   {
+    "genus": "Limusaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     161.5,
+     154.8
+    ],
+    "record": [
+     161.5,
+     154.8
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Spinostropheus",
+    "family": null,
+    "range_ma": [
+     161.5,
+     93.9
+    ],
+    "record": [
+     161.5,
+     93.9
+    ],
+    "n": 3,
+    "continents": {
+     "Africa": 3
+    }
+   },
+   {
+    "genus": "Ceratosaurus",
+    "family": null,
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     157.9,
+     143.1
+    ],
+    "n": 29,
+    "continents": {
+     "North America": 19,
+     "Europe": 5,
+     "Africa": 3,
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Fosterovenator",
+    "family": "Ceratosauridae",
+    "range_ma": [
+     154.8,
+     143.1
+    ],
+    "record": [
+     154.8,
+     143.1
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Elaphrosaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     154.8,
+     93.9
+    ],
+    "record": [
+     154.8,
+     93.9
+    ],
+    "n": 4,
+    "continents": {
+     "Africa": 3,
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Ligabueino",
+    "family": "Noasauridae",
+    "range_ma": [
+     125.8,
+     119.6
+    ],
+    "record": [
+     125.8,
+     119.6
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Kiyacursor",
+    "family": "Noasauridae",
+    "range_ma": [
+     121.4,
+     113.2
+    ],
+    "record": [
+     121.4,
+     113.2
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Vespersaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     121.4,
+     72.2
+    ],
+    "record": [
+     121.4,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Berthasaura",
+    "family": "Noasauridae",
+    "range_ma": [
+     121.4,
+     72.2
+    ],
+    "record": [
+     121.4,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Genyodectes",
+    "family": null,
+    "range_ma": [
+     113.2,
+     100.5
+    ],
+    "record": [
+     113.2,
+     100.5
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Huinculsaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     110.1,
+     106.3
+    ],
+    "record": [
+     110.1,
+     106.3
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Deltadromeus",
+    "family": "Noasauridae",
+    "range_ma": [
+     100.5,
+     93.9
+    ],
+    "record": [
+     100.5,
+     93.9
+    ],
+    "n": 6,
+    "continents": {
+     "Africa": 6
+    }
+   },
+   {
+    "genus": "Velocisaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     85.7,
+     83.6
+    ],
+    "record": [
+     85.7,
+     83.6
+    ],
+    "n": 2,
+    "continents": {
+     "South America": 2
+    }
+   },
+   {
+    "genus": "Austrocheirus",
+    "family": "Noasauridae",
+    "range_ma": [
+     83.6,
+     72.2
+    ],
+    "record": [
+     83.6,
+     72.2
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Noasaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 1,
+    "continents": {
+     "South America": 1
+    }
+   },
+   {
+    "genus": "Masiakasaurus",
+    "family": "Noasauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 29,
+    "continents": {
+     "Africa": 29
+    }
+   },
+   {
+    "genus": "Laevisuchus",
+    "family": "Noasauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 2,
+    "continents": {
+     "Asia": 2
+    }
+   },
+   {
+    "genus": "Vitakrisaurus",
+    "family": "Vitakrisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 3,
+    "continents": {
+     "Asia": 3
+    }
+   },
+   {
+    "genus": "Vitakridrinda",
+    "family": "Vitakrisauridae",
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 8,
+    "continents": {
+     "Asia": 8
+    }
+   },
+   {
+    "genus": "Chenanisaurus",
+    "family": null,
+    "range_ma": [
+     72.2,
+     66.0
+    ],
+    "record": [
+     72.2,
+     66.0
+    ],
+    "n": 2,
+    "continents": {
+     "Africa": 2
+    }
+   }
+  ]
+ },
+ "Coelophysoidea": {
+  "families": [
+   "Coelophysidae"
+  ],
+  "path": [
+   "Archosauria",
+   "Avemetatarsalia",
+   "Ornithodira",
+   "Dinosauromorpha",
+   "Dinosauriformes",
+   "Dinosauria",
+   "Theropoda",
+   "Neotheropoda",
+   "Coelophysoidea"
+  ],
+  "genera": [
+   {
+    "genus": "Pendraig",
+    "family": null,
+    "range_ma": [
+     237.0,
+     227.3
+    ],
+    "record": [
+     237.0,
+     227.3
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Gojirasaurus",
+    "family": null,
+    "range_ma": [
+     227.3,
+     205.7
+    ],
+    "record": [
+     227.3,
+     205.7
+    ],
+    "n": 1,
+    "continents": {
+     "North America": 1
+    }
+   },
+   {
+    "genus": "Lophostropheus",
+    "family": null,
+    "range_ma": [
+     205.7,
+     199.5
+    ],
+    "record": [
+     205.7,
+     199.5
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Syntarsus",
+    "family": null,
+    "range_ma": [
+     201.4,
+     184.2
+    ],
+    "record": [
+     205.7,
+     184.2
+    ],
+    "n": 11,
+    "continents": {
+     "North America": 7,
+     "Africa": 4
+    }
+   },
+   {
+    "genus": "Dracoraptor",
+    "family": null,
+    "range_ma": [
+     201.4,
+     199.5
+    ],
+    "record": [
+     201.4,
+     199.5
+    ],
+    "n": 1,
+    "continents": {
+     "Europe": 1
+    }
+   },
+   {
+    "genus": "Sarcosaurus",
+    "family": null,
+    "range_ma": [
+     201.4,
+     192.9
+    ],
+    "record": [
+     201.4,
+     192.9
+    ],
+    "n": 4,
+    "continents": {
+     "Europe": 4
+    }
+   }
+  ]
+ }
+}
