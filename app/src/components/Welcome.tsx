@@ -67,8 +67,8 @@ export function Welcome({ onStart, onExplore }: { onStart: () => void; onExplore
         </p>
 
         <div className={s.actions}>
-          <button className={s.start} onClick={onStart} autoFocus>▶ Start the journey</button>
           <button className={s.explore} onClick={onExplore}>Explore on my own</button>
+          <button className={s.start} onClick={onStart} autoFocus>Start the journey</button>
         </div>
 
         <ul className={s.views}>
@@ -78,8 +78,11 @@ export function Welcome({ onStart, onExplore }: { onStart: () => void; onExplore
         </ul>
 
         <p className={s.credits}>
-          Inspired by Steve Brusatte's <i>The Rise and Fall of the Dinosaurs</i>. Data: Paleobiology Database ·
-          PALEOMAP (C. R. Scotese) via GPlates · silhouettes from PhyloPic · texts from Wikipedia.
+          Inspired by Steve Brusatte’s <strong><i>The Rise and Fall of the Dinosaurs</i></strong>.<br />
+          <strong>Data:</strong> <a href="https://paleobiodb.org" target="_blank" rel="noopener">Paleobiology Database</a> ·
+          <a href="https://gwsdoc.gplates.org" target="_blank" rel="noopener"> PALEOMAP (C. R. Scotese)</a> via GPlates ·
+          silhouettes from <a href="https://www.phylopic.org" target="_blank" rel="noopener">PhyloPic</a> ·
+          texts from <a href="https://www.wikipedia.org" target="_blank" rel="noopener">Wikipedia</a>.
         </p>
       </div>
     </div>
@@ -116,11 +119,14 @@ export function About({ onClose, onReplay }: { onClose: () => void; onReplay: ()
           ))}
         </ul>
         <p className={s.credits}>
-          Inspired by Steve Brusatte's <i>The Rise and Fall of the Dinosaurs</i>. Data: Paleobiology Database ·
-          PALEOMAP (C. R. Scotese) via GPlates · silhouettes from PhyloPic · texts from Wikipedia.
+          Inspired by Steve Brusatte’s <strong><i>The Rise and Fall of the Dinosaurs</i></strong>.<br />
+          <strong>Data:</strong> <a href="https://paleobiodb.org" target="_blank" rel="noopener">Paleobiology Database</a> ·
+          <a href="https://gwsdoc.gplates.org" target="_blank" rel="noopener"> PALEOMAP (C. R. Scotese)</a> via GPlates ·
+          silhouettes from <a href="https://www.phylopic.org" target="_blank" rel="noopener">PhyloPic</a> ·
+          texts from <a href="https://www.wikipedia.org" target="_blank" rel="noopener">Wikipedia</a>.
         </p>
         <div className={s.aboutActions}>
-          <button className={s.start} onClick={onReplay} autoFocus>▶ Start the journey</button>
+          <button className={s.start} onClick={onReplay} autoFocus>Start the journey</button>
           <button className={s.explore} onClick={onClose}>Explore on my own</button>
         </div>
       </div>

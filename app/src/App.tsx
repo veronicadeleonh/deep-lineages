@@ -115,7 +115,13 @@ function Shell() {
       {/* credits, always there and quiet, in the gutter under the views */}
       <footer className={s.footer}>
         By <a href="https://veronicadeleonh.de/" target="_blank" rel="noopener">Verónica De León Hernández</a>
-        <span className={s.footSep}>·</span>Data: Paleobiology Database, PALEOMAP (Scotese), PhyloPic, Wikipedia
+        <span className={s.footSep}>·</span>
+        <span>
+          Data: <a href="https://paleobiodb.org" target="_blank" rel="noopener">Paleobiology Database</a>,
+          <a href="https://gwsdoc.gplates.org" target="_blank" rel="noopener"> PALEOMAP (Scotese)</a>,
+          <a href="https://www.phylopic.org" target="_blank" rel="noopener"> PhyloPic</a>,
+          <a href="https://www.wikipedia.org" target="_blank" rel="noopener"> Wikipedia</a>
+        </span>
       </footer>
       {welcome && <Welcome onStart={start} onExplore={close} />}
       {about && <About onClose={() => setAbout(false)} onReplay={() => { setAbout(false); start(); }} />}
