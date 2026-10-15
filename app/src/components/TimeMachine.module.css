@@ -17,57 +17,57 @@
 /* the left column over the ocean: the clock and the story, like a film's narration */
 .left { position: absolute; left: 24px; top: 18px; bottom: 12px; width: min(380px, 30%); display: flex; flex-direction: column; gap: 18px; pointer-events: none; }
 .clock { display: flex; flex-direction: column; flex: none; }
-.ma { font-size: clamp(40px, 6vw, 72px); font-weight: 800; line-height: 1; color: var(--map-clock, var(--cursor)); font-variant-numeric: tabular-nums; }
-.unit { font-size: 13px; color: var(--map-ink-2); margin-top: 2px; }
-.period { font-size: 18px; font-weight: 700; color: var(--map-ink); margin-top: 6px; }
+.ma { font-size: var(--fs-clock); font-weight: 800; line-height: 1; color: var(--map-clock, var(--cursor)); font-variant-numeric: tabular-nums; }
+.unit { font-size: var(--fs-md); color: var(--map-ink-2); margin-top: 2px; }
+.period { font-size: var(--fs-xl); font-weight: 700; color: var(--map-ink); margin-top: 6px; }
 .story { animation: scene 1.1s ease-out both; }
 @keyframes scene { from { opacity: 0; transform: translateY(14px); filter: blur(2px); } }
-.storyWhen { margin: 0 0 6px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--cursor); }
-.story h2 { margin: 0 0 10px; font-size: clamp(24px, 2.4vw, 34px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; color: var(--map-ink); }
-.storyText { margin: 0; font-size: clamp(16px, 1.45vw, 20px); line-height: 1.5; color: var(--map-ink); font-weight: 450; }
+.storyWhen { margin: 0 0 6px; font-size: var(--fs-xs); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--cursor); }
+.story h2 { margin: 0 0 10px; font-size: var(--fs-heading); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; color: var(--map-ink); }
+.storyText { margin: 0; font-size: var(--fs-narration); line-height: 1.5; color: var(--map-ink); font-weight: 450; }
 
 /* the chapter's most-found animal: a credit line with its silhouette */
-.starring { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font: inherit; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--map-ink-2); background: none; border: 0; padding: 0; cursor: pointer; pointer-events: auto; }
-.starring i { text-transform: none; letter-spacing: 0; font-size: 14px; font-weight: 700; color: var(--map-ink); }
-.starN { font-size: 12px; letter-spacing: 0; color: var(--map-ink-2); font-variant-numeric: tabular-nums; margin-left: -3px; }
+.starring { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font: inherit; font-size: var(--fs-sm); letter-spacing: .08em; text-transform: uppercase; color: var(--map-ink-2); background: none; border: 0; padding: 0; cursor: pointer; pointer-events: auto; }
+.starring i { text-transform: none; letter-spacing: 0; font-size: var(--fs-base); font-weight: 700; color: var(--map-ink); }
+.starN { font-size: var(--fs-sm); letter-spacing: 0; color: var(--map-ink-2); font-variant-numeric: tabular-nums; margin-left: -3px; }
 .starSil { width: 44px; height: 24px; flex: none; background: var(--map-ink); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .starring:hover i { color: var(--cursor); text-decoration: underline; text-underline-offset: 3px; }
 
 /* the story's chart: genera through time, as far as the journey has gone */
 .chart { margin: 0; width: 100%; max-width: 320px; }
-.chart figcaption { font-size: 12.5px; color: var(--map-ink-2); margin-bottom: 4px; }
-.chart figcaption b { color: var(--map-ink); font-size: 15px; }
+.chart figcaption { font-size: var(--fs-md); color: var(--map-ink-2); margin-bottom: 4px; }
+.chart figcaption b { color: var(--map-ink); font-size: var(--fs-lg); }
 .chart svg { display: block; overflow: visible; }
 .chartAll { fill: color-mix(in srgb, var(--map-ink) 10%, transparent); }
 .chartPast { fill: color-mix(in srgb, var(--map-ink) 38%, transparent); }
 .chartBand { fill: var(--cursor); fill-opacity: .14; }
 .chartBase { stroke: color-mix(in srgb, var(--map-ink) 35%, transparent); stroke-width: 1; }
 .chartDot { fill: var(--cursor); stroke: var(--surface); stroke-width: 1.5; }
-.chartTick { font-size: 10px; fill: var(--map-ink-2); }
+.chartTick { font-size: var(--fs-2xs); fill: var(--map-ink-2); }
 
 /* events on the map: an impact, an eruption */
 .event { pointer-events: none; }
 .eventCore { fill: var(--extinct); stroke: var(--surface); stroke-width: 1.5; }
 .eventPulse { fill: none; stroke: var(--extinct); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse 1.8s ease-out infinite; }
 @keyframes pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(4.5); opacity: 0; } }
-.eventLabel { font-size: 13px; font-weight: 700; fill: var(--extinct); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.eventLabel { font-size: var(--fs-md); font-weight: 700; fill: var(--extinct); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
 
 /* short screens: a tighter narration so the chart still fits */
 @media (max-height: 800px) and (min-width: 701px) {
   .left { gap: 10px; }
-  .ma { font-size: clamp(36px, 5vw, 56px); }
-  .period { font-size: 16px; margin-top: 4px; }
-  .story h2 { font-size: 24px; margin-bottom: 6px; }
-  .storyText { font-size: 15.5px; line-height: 1.45; }
+  .ma { font-size: var(--fs-clock-compact); }
+  .period { font-size: var(--fs-lg); margin-top: 4px; }
+  .story h2 { font-size: var(--fs-2xl); margin-bottom: 6px; }
+  .storyText { font-size: var(--fs-lg); line-height: 1.45; }
 }
 
 /* the right column: who is around, and the selected animal */
 .right { position: absolute; right: 20px; top: 18px; bottom: 16px; width: 330px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none; }
-.counter { font-size: 12px; color: var(--map-ink-2); flex: none; }
+.counter { font-size: var(--fs-sm); color: var(--map-ink-2); flex: none; }
 .counter b { color: var(--map-ink); }
 
 .who {
-  font: inherit; font-size: 12px; color: var(--text); background: var(--surface-2); border: 1px solid var(--line);
+  font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: 1px solid var(--line);
   border-radius: 8px; padding: 3px 9px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
 }
 .who:hover { border-color: var(--cursor); }
@@ -79,15 +79,15 @@
 
 /* who is around: listed under the clock, in the map's empty corner */
 .around { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; pointer-events: auto; min-height: 0; overflow-y: auto; flex: 0 1 auto; padding: 2px; margin: -2px; }
-.aroundLabel { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--map-ink-2); font-weight: 700; margin-bottom: 2px; }
-.aroundNone { font-size: 12px; color: var(--map-ink-2); max-width: 200px; text-align: right; }
+.aroundLabel { font-size: var(--fs-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--map-ink-2); font-weight: 700; margin-bottom: 2px; }
+.aroundNone { font-size: var(--fs-sm); color: var(--map-ink-2); max-width: 200px; text-align: right; }
 .around .who { background: color-mix(in srgb, var(--surface) 85%, transparent); padding: 2px 8px; flex: none; }
 .whoChev { width: 10px; height: 6px; fill: none; stroke: var(--text-2); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; margin-left: 2px; }
-.absent { margin: 0 0 6px; max-width: 300px; pointer-events: auto; text-align: right; font-size: 12.5px; line-height: 1.45; color: var(--text-2); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.absent { margin: 0 0 6px; max-width: 300px; pointer-events: auto; text-align: right; font-size: var(--fs-md); line-height: 1.45; color: var(--text-2); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
 .absent b { color: var(--text); }
 .absent button { font: inherit; font-weight: 650; color: var(--cursor); background: none; border: 0; padding: 0; cursor: pointer; }
 .absent button:hover { text-decoration: underline; text-underline-offset: 3px; }
-.aroundMore { font: inherit; font-size: 12px; color: var(--map-ink); background: none; border: 0; padding: 2px 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; flex: none; }
+.aroundMore { font: inherit; font-size: var(--fs-sm); color: var(--map-ink); background: none; border: 0; padding: 2px 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; flex: none; }
 .aroundMore:hover { color: var(--cursor); }
 
 /* the selected animal: a small card unfolding under its family in the list */
@@ -97,28 +97,28 @@
 }
 @keyframes unfold { from { opacity: 0; transform: translateY(-4px) scaleY(.96); } }
 .mcardHead { display: flex; align-items: center; gap: 10px; }
-.mcardHead h3 { margin: 0; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.2; }
+.mcardHead h3 { margin: 0; font-size: var(--fs-xl); font-weight: 700; color: var(--text); line-height: 1.2; }
 .mcardSil { width: 56px; height: 36px; flex: none; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
-.mcardSub { margin: 2px 0 0; font-size: 12px; color: var(--text-3); }
+.mcardSub { margin: 2px 0 0; font-size: var(--fs-sm); color: var(--text-3); }
 .mcardTags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.mcardTags span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 2px 8px; }
+.mcardTags span { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 2px 8px; }
 .mcardFacts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin: 10px 0 0; }
-.mcardFacts dt { font-size: 11px; color: var(--text-3); }
-.mcardFacts dd { margin: 0; font-size: 13px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.mcardFacts dt { font-size: var(--fs-xs); color: var(--text-3); }
+.mcardFacts dd { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
 .mcardWide { grid-column: 1 / -1; }
-.mcardBlurb { margin: 10px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.mcardDive { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
-.mcardDive > span { width: 100%; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--text-3); }
-.mcardDive button { font: inherit; font-size: 11.5px; font-weight: 600; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 3px 6px; white-space: nowrap; cursor: pointer; display: inline-flex; gap: 5px; align-items: center; }
+.mcardBlurb { margin: 10px 0 0; font-size: var(--fs-md); line-height: 1.45; color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.mcardDive { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.mcardDive > span { grid-column: 1 / -1; font-size: var(--fs-2xs); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--text-3); }
+.mcardDive button { font: inherit; font-size: var(--fs-sm); font-weight: 600; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 3px 4px; white-space: nowrap; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
 .mcardDive button i { font-style: normal; color: var(--cursor); }
 .mcardDive button:hover { border-color: var(--cursor); }
 
 /* the "about the map" note, behind a small i */
-.about { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--text-3); font: italic 600 12px/1 Georgia, serif; cursor: help; }
+.about { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--text-3); font: italic 600 var(--fs-sm)/1 Georgia, serif; cursor: help; }
 .about[aria-expanded="true"] { color: var(--surface); background: var(--text-2); border-color: var(--text-2); }
 .aboutPop {
   position: absolute; right: 16px; bottom: calc(100% + 8px); width: min(420px, calc(100% - 32px)); margin: 0; z-index: 2; cursor: pointer;
-  padding: 12px 14px; font-size: 12.5px; line-height: 1.5; color: var(--text-2);
+  padding: 12px 14px; font-size: var(--fs-md); line-height: 1.5; color: var(--text-2);
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); animation: rise .2s ease-out;
 }
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
@@ -128,19 +128,19 @@
 .controls { position: relative; display: flex; gap: 12px; align-items: center; padding: 10px 16px; flex: none; }
 .play {
   width: 48px; height: 48px; flex: none; border-radius: 50%; border: 0; cursor: pointer;
-  background: var(--cursor); color: var(--bg); font-size: 16px; font-weight: 800; 
+  background: var(--cursor); color: var(--bg); font-size: var(--fs-lg); font-weight: 800; 
 }
 .play:hover { filter: brightness(1.08); }
 .play:active { transform: scale(.96); }
 .speed { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); flex: none; }
-.speed button { font: inherit; font-size: 12px; color: var(--text-2); background: none; border: 0; padding: 4px 9px; cursor: pointer; }
+.speed button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: none; border: 0; padding: 4px 9px; cursor: pointer; }
 .speed button + button { border-left: 1px solid var(--line); }
 .speed button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: 700; }
 .scrubber { flex: 1; min-width: 0; cursor: pointer; touch-action: none; }
 .scrubber svg { display: block; overflow: visible; }
 .band { fill: var(--surface-2); }
 .bandAlt { fill: transparent; }
-.bandLabel { fill: var(--text-2); font-size: 10.5px; font-weight: 700; pointer-events: none; }
+.bandLabel { fill: var(--text-2); font-size: var(--fs-xs); font-weight: 700; pointer-events: none; }
 .area { fill: var(--area); opacity: .8; }
 .stop { cursor: pointer; }
 .stop circle { fill: var(--surface); stroke: var(--text-3); stroke-width: 1.5; }
@@ -149,7 +149,7 @@
 .cursor { stroke: var(--cursor); stroke-width: 2; }
 .handle { fill: var(--cursor); stroke: var(--bg); stroke-width: 2; }
 .tipSil { display: block; width: 72px; height: 32px; margin-bottom: 4px; background: var(--text); -webkit-mask: var(--src) left center / contain no-repeat; mask: var(--src) left center / contain no-repeat; }
-.tick { fill: var(--text-3); font-size: 10px; }
+.tick { fill: var(--text-3); font-size: var(--fs-2xs); }
 
 @media (max-width: 700px) {
   .card { height: auto; min-height: 0; }

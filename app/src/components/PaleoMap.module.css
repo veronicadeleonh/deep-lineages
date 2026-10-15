@@ -1,6 +1,6 @@
 .deck { margin: 0; }
 .deck svg { display: block; }
-.deck figcaption { font-size: 10.5px; color: var(--text-3); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.deck figcaption { font-size: var(--fs-xs); color: var(--text-3); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
 .deck figcaption b { color: var(--text-2); font-weight: 600; }
 .selCount { color: var(--text); font-weight: 600; }
 .sphere { fill: var(--ocean); stroke: var(--line); }

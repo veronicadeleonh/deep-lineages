@@ -659,7 +659,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
                   </rect>
                 )}
                 <text className={`${s.rowLabel} ${!on ? s.labelDim : ""} ${sel ? s.labelSel : ""}`} x={nameX + 12} y={ROW / 2}
-                  dominantBaseline="central" style={compact ? { fontSize: 11 } : undefined}>{f.family}</text>
+                  dominantBaseline="central" style={compact ? { fontSize: "var(--fs-xs)" } : undefined}>{f.family}</text>
                 {rangeMarks({ core: f.range_ma, record: famRecord(f), y: ROW / 2, h: 12, color: dietOf(f).color, dim: !on && !sel, className: s.bar })}
               </g>
             );
@@ -675,7 +675,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
                 <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
                 {sil && <image className={`sil ${s.rowSil} ${s.dim}`} href={silhouetteUrl(sil)} x={GUT} y={(ROW - SIL.h) / 2} width={SIL.w} height={SIL.h} preserveAspectRatio="xMidYMid meet" />}
                 <text className={s.chev} x={nameX} y={ROW / 2} dominantBaseline="central">{isOpen ? "▾" : "▸"}</text>
-                <text className={s.relLabel} x={nameX + 12} y={ROW / 2} dominantBaseline="central" style={compact ? { fontSize: 11 } : undefined}>
+                <text className={s.relLabel} x={nameX + 12} y={ROW / 2} dominantBaseline="central" style={compact ? { fontSize: "var(--fs-xs)" } : undefined}>
                   Other {it.clade} <tspan className={s.relCount}>· {n}</tspan>
                 </text>
                 {/* each genus as a short mark: scattered evidence of the lineage, not one continuous range */}
