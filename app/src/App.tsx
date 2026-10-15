@@ -9,7 +9,7 @@ import { PLAY_EVENT } from "./components/TimeMachine";
 import { About, Welcome } from "./components/Welcome";
 import { loadData, silhouetteUrl } from "./data";
 import { fMa } from "./format";
-import { StoreProvider, useStore } from "./state";
+import { StoreProvider, hasUrlState, useStore } from "./state";
 import type { AppData } from "./types";
 import s from "./App.module.css";
 
@@ -99,7 +99,8 @@ function Views() {
 function Shell() {
   const { state, dispatch } = useStore();
   // the welcome screen: on the first visit in this browser
-  const [welcome, setWelcome] = useState(() => { try { return !localStorage.getItem(SEEN); } catch { return true; } });
+  // (not when the address already points somewhere: a shared link goes straight there)
+  const [welcome, setWelcome] = useState(() => { if (hasUrlState()) return false; try { return !localStorage.getItem(SEEN); } catch { return true; } });
   const [about, setAbout] = useState(false); // the title opens a compact "about"
   const close = () => { setWelcome(false); try { localStorage.setItem(SEEN, "1"); } catch { /* private mode */ } };
   const start = () => {
