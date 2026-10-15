@@ -3,13 +3,13 @@
   padding: 18px 24px 12px;
 }
 .top h1 { margin: 0; }
-.eyebrow { margin: 0; color: var(--text-3); font-size: var(--fs-sm); letter-spacing: .04em; text-transform: uppercase; }
+.eyebrow { margin: 0; color: var(--text-3); font-size: var(--fs-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
 .period { color: var(--text-2); font-weight: var(--fw-medium); }
 .home { font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 .home:hover b { color: var(--accent-text); }
 .hint { margin: 0; color: var(--text-3); font-size: var(--fs-sm); min-height: 20px; }
 .following { justify-self: end; display: flex; align-items: center; gap: 8px; height: 28px; font-size: var(--fs-md); }
-.followLabel { font-size: var(--fs-xs); letter-spacing: .08em; text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
+.followLabel { font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
 .followHint { color: var(--text-3); }
 .chip {
   display: inline-flex; align-items: center; gap: 8px; padding: 2px 4px 2px 10px; border-radius: var(--radius-full);
@@ -23,7 +23,7 @@
 /* the views: the story on its own, then the three deep dives grouped; buttons of one fixed size */
 .views { justify-self: end; grid-row: span 2; align-self: center; display: flex; align-items: center; gap: 14px; }
 .dive { position: relative; display: flex; gap: 6px; padding-left: 14px; border-left: 1px solid var(--line); }
-.diveLabel { position: absolute; left: 14px; top: -17px; font-size: var(--fs-2xs); letter-spacing: .1em; text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
+.diveLabel { position: absolute; left: 14px; top: -17px; font-size: var(--fs-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
 .views button {
   font: inherit; font-size: var(--fs-base); font-weight: var(--fw-semibold); width: 142px; height: 36px; display: inline-flex; align-items: center; justify-content: center; gap: 7px;
   color: var(--text-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); cursor: pointer; white-space: nowrap;
@@ -39,7 +39,7 @@
 /* the profile column, with a tab on its left edge to fold it */
 .panelCol { position: sticky; top: 16px; min-width: 0; }
 .fold, .rail { font: inherit; color: var(--text-2); background: var(--surface); border: 1px solid var(--line); cursor: pointer; }
-.fold { position: absolute; z-index: 2; left: -14px; top: 18px; width: 26px; height: 32px; border-radius: var(--radius-md); font-size: var(--fs-xl); line-height: 1; padding: 0 0 2px; }
+.fold { position: absolute; z-index: 2; left: -14px; top: 18px; width: 26px; height: 32px; border-radius: var(--radius-md); font-size: var(--fs-xl); line-height: var(--lh-none); padding: 0 0 2px; }
 .fold:hover { color: var(--text); border-color: var(--text-3); }
 /* the folded profile: a thin rail with the selection's name, read top to bottom */
 .rail { position: sticky; top: 16px; width: 44px; display: flex; flex-direction: column; align-items: stretch; padding: 0; border-radius: var(--radius-lg); overflow: hidden; cursor: default; }
@@ -47,7 +47,7 @@
 .railOpen:hover { background: var(--surface-2); color: var(--text); }
 .railClose { flex: none; font: inherit; font-size: var(--fs-md); color: var(--text-3); background: none; border: 0; border-top: 1px solid var(--line); height: 40px; cursor: pointer; }
 .railClose:hover { color: var(--text); background: var(--surface-2); }
-.railChev { font-size: var(--fs-xl); line-height: 1; }
+.railChev { font-size: var(--fs-xl); line-height: var(--lh-none); }
 .railSil { width: 30px; height: 30px; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .railName { writing-mode: vertical-rl; font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); white-space: nowrap; max-height: 60vh; overflow: hidden; text-overflow: ellipsis; }
 /* the profile column: stays on screen and scrolls on its own */
@@ -61,7 +61,7 @@
   .fullScreen .rail { height: 100%; position: static; }
 }
 .footer {
-  position: fixed; right: 24px; bottom: 5px; z-index: 5; font-size: var(--fs-xs); line-height: 14px; color: var(--text-3);
+  position: fixed; right: 24px; bottom: 5px; z-index: 5; font-size: var(--fs-xs); line-height: var(--lh-snug); color: var(--text-3);
   background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 0 6px; border-radius: var(--radius-sm); white-space: nowrap;
 }
 .footer a { color: var(--text-2); text-decoration: none; }
@@ -97,7 +97,7 @@
   .views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 18px; }
   .dive { display: contents; }
   .diveLabel { display: none; }
-  .views button { width: auto; height: auto; min-height: 40px; flex-direction: column; gap: 0; padding: 4px 2px; font-size: var(--fs-sm); white-space: normal; line-height: 1.15; }
+  .views button { width: auto; height: auto; min-height: 40px; flex-direction: column; gap: 0; padding: 4px 2px; font-size: var(--fs-sm); white-space: normal; line-height: var(--lh-tight); }
   .followHint { display: none; }
   .following .followHint:only-child { display: inline; }
   .top h1 { font-size: var(--fs-2xl); }

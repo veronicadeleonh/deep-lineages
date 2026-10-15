@@ -12,6 +12,8 @@ const KINDS = {
   Colors: (g: string) => isColor(g),
   "Font weight": (g: string) => g === "Font weight",
   "Type scale": (g: string) => g === "Type scale",
+  "Letter spacing": (g: string) => g === "Letter spacing",
+  "Line height": (g: string) => g === "Line height",
   Radius: (g: string) => g === "Radius",
   Shadow: (g: string) => g === "Shadow",
   "Border width": (g: string) => g === "Border width",

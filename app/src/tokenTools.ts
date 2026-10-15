@@ -26,6 +26,8 @@ function groupOf(name: string, raw: string): string {
   if (name.startsWith("--fw-")) return "Font weight";
   if (name.startsWith("--radius")) return "Radius";
   if (name.startsWith("--border-")) return "Border width";
+  if (name.startsWith("--tracking-")) return "Letter spacing";
+  if (name.startsWith("--lh-")) return "Line height";
   if (name.startsWith("--shadow")) return "Shadow";
   if (name === "--font" || name === "--mono") return "Font family";
   const color = CSS.supports("color", raw) || /^var\(|^color-mix/.test(raw);

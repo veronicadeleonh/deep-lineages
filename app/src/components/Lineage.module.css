@@ -9,7 +9,7 @@
 .toggle:hover, .more:hover { color: var(--text); border-color: var(--text-3); }
 
 .line { list-style: none; margin: 0; padding: 0; }
-.step { position: relative; padding: 0 0 9px 20px; min-height: 26px; font-size: var(--fs-sm); line-height: 1.35; }
+.step { position: relative; padding: 0 0 9px 20px; min-height: 26px; font-size: var(--fs-sm); line-height: var(--lh-snug); }
 /* the connector: a line from this dot down to the next one */
 .step::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: -6px; width: 1.5px; background: var(--text-3); opacity: .55; }
 .step:last-child::before { content: none; }
@@ -27,7 +27,7 @@
 .name { color: var(--text-2); font-weight: var(--fw-semibold); }
 .landmark .name { color: var(--text); font-weight: var(--fw-bold); }
 .current .name { color: var(--text); font-weight: var(--fw-bold); font-size: var(--fs-md); }
-.rank { margin-left: 6px; color: var(--text-3); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .04em; }
+.rank { margin-left: 6px; color: var(--text-3); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
 .note { display: block; color: var(--text-3); font-size: var(--fs-sm); }
 .sil {
   float: right; width: 52px; height: 26px; margin: 0 0 0 10px; background: var(--text-3); opacity: .75;

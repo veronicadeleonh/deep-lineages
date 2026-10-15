@@ -88,6 +88,18 @@
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
+  /* letter spacing */
+  --tracking-display: -.02em;  /* the welcome headline */
+  --tracking-tight: -.01em;    /* headings */
+  --tracking-wide: .04em;      /* small labels */
+  --tracking-caps: .08em;      /* UPPERCASE labels */
+  --tracking-caps-wide: .12em; /* UPPERCASE eyebrows */
+  /* line heights */
+  --lh-none: 1;        /* icons, the clock: one line, no extra room */
+  --lh-tight: 1.1;     /* headlines */
+  --lh-snug: 1.3;      /* short text, lists, captions */
+  --lh-normal: 1.5;    /* body: WCAG 1.4.8 asks for at least 1.5 in paragraphs */
+  --lh-relaxed: 1.55;  /* long paragraphs */
   /* fluid sizes, for the big moments */
   --fs-title: clamp(22px, 3vw, 28px);        /* dialog title */
   --fs-heading: clamp(24px, 2.4vw, 34px);    /* chapter title */
@@ -105,10 +117,10 @@ html { scrollbar-gutter: stable; } /* the timeline scrolls, the other views don'
 body {
   background: var(--bg);
   color: var(--text);
-  font: var(--fs-base)/1.45 var(--font);
+  font: var(--fs-base)/var(--lh-normal) var(--font);
   -webkit-font-smoothing: antialiased;
 }
-h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight); font-variant-numeric: tabular-nums; }
 h2 { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-2); }
 kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0 4px; color: var(--text-2); background: var(--surface); }
 

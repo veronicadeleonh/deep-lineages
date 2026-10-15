@@ -37,7 +37,7 @@
 
 /* rows */
 .groupHead line { stroke: var(--line); }
-.lineage text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: .06em; text-transform: uppercase; }
+.lineage text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
 .lineage line { stroke: var(--line); stroke-width: 1.5; }
 .row { cursor: pointer; }
 .hit { fill: transparent; }
@@ -61,7 +61,7 @@
 .cursorLabel { fill: var(--surface); font-size: var(--fs-xs); font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; }
 .cursorCount { fill: var(--text); font-size: var(--fs-xs); font-weight: var(--fw-semibold); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
 .genusLabel.labelSel { fill: var(--text); font-weight: var(--fw-bold); }
-.subHead text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-semibold); letter-spacing: .02em; }
+.subHead text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-wide); }
 .subHead .subCount { fill: var(--text-3); font-weight: var(--fw-regular); }
 
 /* family tree over the rows */
@@ -112,7 +112,7 @@
 .lineageBtn:hover text { fill: var(--accent-text); }
 .lineageBtn:hover line { stroke: var(--cursor); }
 .foldRow { cursor: pointer; }
-.foldLabel { fill: var(--text); font-size: var(--fs-sm); font-weight: var(--fw-bold); letter-spacing: .04em; text-transform: uppercase; }
+.foldLabel { fill: var(--text); font-size: var(--fs-sm); font-weight: var(--fw-bold); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
 .foldCount { fill: var(--text-3); font-weight: var(--fw-regular); letter-spacing: 0; text-transform: none; }
 .slimLabel { fill: var(--text-3); font-size: var(--fs-xs); }
 .slim:hover .slimLabel { fill: var(--text-2); }

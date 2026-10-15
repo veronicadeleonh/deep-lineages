@@ -1,6 +1,6 @@
 .deck { margin: 0; }
 .deck svg { display: block; }
-.deck figcaption { font-size: var(--fs-xs); color: var(--text-3); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.deck figcaption { font-size: var(--fs-xs); color: var(--text-3); line-height: var(--lh-normal); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
 .deck figcaption b { color: var(--text-2); font-weight: var(--fw-semibold); }
 .selCount { color: var(--text); font-weight: var(--fw-semibold); }
 .sphere { fill: var(--ocean); stroke: var(--line); }
@@ -9,5 +9,5 @@
 .lines { fill: none; stroke: var(--text-3); stroke-width: .8; }
 .dot { fill: var(--dot); opacity: .55; }
 .dotHi { opacity: 1; stroke: var(--surface); stroke-width: 1.5; }
-.deck figcaption.hint { color: var(--text-3); white-space: normal; line-height: 15px; }
+.deck figcaption.hint { color: var(--text-3); white-space: normal; line-height: var(--lh-snug); }
 .hint button { font: inherit; color: var(--accent-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
