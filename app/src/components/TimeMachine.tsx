@@ -2,7 +2,7 @@
    at each turning point. Continents drift between snapshots, fossils pop up, and the families on record at each
    moment wait to be opened. The timeline below works like a video's progress bar. */
 import { area, max, scaleLinear } from "d3";
-import { Fragment, useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent } from "react";
 import { TIME, dietOf } from "../constants";
 import { silhouetteUrl } from "../data";
 import { fMa, fNum } from "../format";
@@ -72,7 +72,10 @@ export function TimeMachine() {
   // space bar plays and pauses
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.code === "Space" && !(e.target instanceof HTMLInputElement)) { e.preventDefault(); play(); }
+      // not when a control has the focus: there Space presses the control itself
+      const el = e.target as HTMLElement;
+      if (el.closest?.("button, a, input, select, textarea, [contenteditable]")) return;
+      if (e.code === "Space") { e.preventDefault(); play(); }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -220,9 +223,30 @@ function Scrubber({ t, onScrub }: { t: number; onScrub: (t: number) => void }) {
   const down = (e: PointerEvent<HTMLDivElement>) => { drag.current = true; e.currentTarget.setPointerCapture(e.pointerId); onScrub(toT(e.clientX)); };
   const move = (e: PointerEvent<HTMLDivElement>) => { if (drag.current) onScrub(toT(e.clientX)); };
   const up = () => { drag.current = false; };
+  // the keyboard, like the Timeline's: arrows move 1 Myr (10 with Shift), Page Up/Down jump between chapters
+  const clamp = (v: number) => Math.max(TIME[1], Math.min(TIME[0], v));
+  const onKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    const step = e.shiftKey ? 10 : 1;
+    const eps = 1e-6;
+    const next = CHAPTERS.find((c) => c.t < t - eps);                       // the next chapter, toward the present
+    const prev = [...CHAPTERS].reverse().find((c) => c.t > t + eps);        // the previous one, back in time
+    const keys: Record<string, () => number | undefined> = {
+      ArrowLeft: () => t + step, ArrowDown: () => t + step,
+      ArrowRight: () => t - step, ArrowUp: () => t - step,
+      PageDown: () => next?.t, PageUp: () => prev?.t,
+      Home: () => TIME[0], End: () => TIME[1],
+    };
+    if (!keys[e.key]) return;
+    e.preventDefault();
+    const v = keys[e.key]();
+    if (v != null) onScrub(clamp(v));
+  };
+  const ch = chapterAt(t);
   return (
     <div ref={ref} className={s.scrubber} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
-      role="slider" aria-label="Time" aria-valuemin={TIME[1]} aria-valuemax={TIME[0]} aria-valuenow={t}>
+      tabIndex={0} onKeyDown={onKeyDown}
+      role="slider" aria-label="Time" aria-valuemin={TIME[1]} aria-valuemax={TIME[0]} aria-valuenow={Math.round(t)}
+      aria-valuetext={`${fMa(t)} million years ago · chapter ${CHAPTERS.indexOf(ch) + 1}: ${ch.title}`}>
       <svg width={W} height={H}>
         {data.periods.map((p, i) => (
           <g key={p.name}>

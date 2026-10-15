@@ -30,7 +30,6 @@
   border-radius: var(--radius-md); padding: 8px 16px; cursor: pointer;
 }
 .start:hover { filter: brightness(1.08); }
-/* .start:focus-visible { outline: 2px solid color-mix(in srgb, var(--cursor) 40%, transparent); outline-offset: 2px; } */
 .explore { font: inherit; font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 8px 16px; cursor: pointer; }
 .explore:hover { color: var(--text); border-color: var(--text-3); }
 

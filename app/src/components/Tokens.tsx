@@ -65,7 +65,7 @@ export function Tokens() {
   const groups = useMemo(() => {
     const g = new Map<string, Token[]>();
     for (const t of tokens) g.set(t.group, [...(g.get(t.group) ?? []), t]);
-    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Shadow", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
+    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Shadow", "Focus", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
   }, [tokens]);
   const raw = useMemo(() => rawValues(src), [src]);
   const loaded = Object.keys(src).length > 0;
@@ -179,6 +179,7 @@ function preview(g: string, t: Token) {
   if (g === "Radius") return <span className={s.box} style={{ borderRadius: v }} />;
   if (g === "Letter spacing") return <span style={{ letterSpacing: v, textTransform: t.name.includes("caps") ? "uppercase" : undefined, fontSize: "var(--fs-sm)" }}>{t.name.includes("caps") ? "On the map now" : "Tyrannosaurus"}</span>;
   if (g === "Line height") return <span style={{ display: "block", lineHeight: v, fontSize: "var(--fs-sm)", maxWidth: 180, background: "var(--surface-2)" }}>The Atlantic begins to open between two continents.</span>;
+  if (g === "Focus") return <span className={s.box} style={{ display: "inline-block", outline: "var(--focus-ring)", outlineOffset: "var(--focus-offset)", borderRadius: "var(--radius-md)", height: 24 }} />;
   if (g === "Border width") return <span className={s.box} style={{ borderWidth: v, borderColor: "var(--text)" }} />;
   if (g === "Shadow") return <span className={s.box} style={{ boxShadow: v, border: 0 }} />;
   return null;

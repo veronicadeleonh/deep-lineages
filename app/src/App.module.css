@@ -29,9 +29,9 @@
   color: var(--text-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); cursor: pointer; white-space: nowrap;
 }
 .views button:hover { color: var(--text); border-color: var(--text-3); }
-.views button[aria-selected="true"] { color: var(--text); font-weight: var(--fw-bold); background: color-mix(in srgb, var(--cursor) 12%, var(--surface)); border-color: var(--cursor); }
+.views button[aria-current="true"] { color: var(--text); font-weight: var(--fw-bold); background: color-mix(in srgb, var(--cursor) 12%, var(--surface)); border-color: var(--cursor); }
 .viewIcon { font-size: var(--fs-sm); color: var(--text-3); }
-.views button[aria-selected="true"] .viewIcon { color: var(--cursor); }
+.views button[aria-current="true"] .viewIcon { color: var(--cursor); }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 0 24px 24px; align-items: start; }
 .withPanel { grid-template-columns: minmax(0, 1fr) 400px; }

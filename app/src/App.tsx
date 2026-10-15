@@ -78,16 +78,16 @@ function Following() {
 function Views() {
   const { state, dispatch } = useStore();
   const button = (v: (typeof VIEWS)[number]) => (
-    <button key={v.mode} role="tab" aria-selected={state.mode === v.mode} onClick={() => dispatch({ type: "mode", mode: v.mode })} title={v.ask}>
+    <button key={v.mode} aria-current={state.mode === v.mode} onClick={() => dispatch({ type: "mode", mode: v.mode })} title={v.ask}>
       <span className={s.viewIcon} aria-hidden>{v.icon}</span>{v.name}
     </button>
   );
   // the story first; the three deep dives grouped after it
   return (
-    <nav className={s.views} role="tablist" aria-label="Views">
+    <nav className={s.views} aria-label="Views">
       {button(VIEWS[0])}
       <div className={s.dive} role="group" aria-label="Deep dive">
-        <span className={s.diveLabel}>Deep dive</span>
+        <span className={s.diveLabel} aria-hidden>Deep dive</span>
         {VIEWS.slice(1).map(button)}
       </div>
     </nav>
@@ -182,7 +182,7 @@ function Header({ onAbout }: { onAbout: () => void }) {
       <Views />
       {/* the row is always there (empty in the views without keys), so the header keeps its height in every view */}
       <p className={s.hint}>
-        {state.mode === "machine" && <><kbd>Space</kbd> plays and pauses · drag the bar to travel · click a family · <kbd>Esc</kbd> closes it</>}
+        {state.mode === "machine" && <><kbd>Space</kbd> plays and pauses · drag the bar or use <kbd>←</kbd> <kbd>→</kbd> to travel · click a family · <kbd>Esc</kbd> closes it</>}
         {state.mode === "tree" && <>Pinch or <kbd>⌘</kbd> + scroll to zoom · drag to move · click a group to center the tree on it · <kbd>Esc</kbd> closes it</>}
         {state.mode === "timeline" && <>Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it</>}
       </p>

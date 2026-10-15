@@ -19,7 +19,7 @@
 /* chart */
 .timeline { width: 100%; touch-action: none; user-select: none; }
 .timeline svg { display: block; width: 100%; height: auto; overflow: visible; }
-.timeline:focus-visible { outline: 2px solid var(--area-edge); outline-offset: 4px; border-radius: var(--radius-md); }
+.timeline:focus-visible { border-radius: var(--radius-md); }
 .band { fill: var(--surface-2); }
 .bandAlt { fill: transparent; }
 .periodLabel { fill: var(--text-2); font-size: var(--fs-xs); }

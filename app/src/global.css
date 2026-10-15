@@ -100,6 +100,9 @@
   --lh-snug: 1.3;      /* short text, lists, captions */
   --lh-normal: 1.5;    /* body: WCAG 1.4.8 asks for at least 1.5 in paragraphs */
   --lh-relaxed: 1.55;  /* long paragraphs */
+  /* keyboard focus: one ring for the whole app, shown only when navigating with the keyboard */
+  --focus-ring: 2px solid var(--cursor); /* --cursor keeps 3:1 on every surface (WCAG 2.4.7 / 1.4.11) */
+  --focus-offset: 2px;                    /* a gap, so it reads apart from selection borders that hug the element */
   /* stacking layers, bottom to top: what sits on what when things overlap */
   --z-raised: 1;    /* controls floating over a canvas or chart */
   --z-footer: 3;    /* the fixed credits footer */
@@ -145,3 +148,6 @@ kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bott
 .swatch { width: 8px; height: 8px; border-radius: var(--radius-xs); display: inline-block; flex: none; }
 
 .sil { pointer-events: none; }
+
+/* keyboard focus, everywhere (outline is reserved for focus; selection uses borders and box-shadow) */
+:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }

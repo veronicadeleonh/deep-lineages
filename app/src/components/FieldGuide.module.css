@@ -25,6 +25,9 @@
 .seg button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: var(--surface); border: 0; padding: 2px 9px; cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: var(--fw-bold); }
+.seg button:focus-visible { outline-offset: calc(var(--focus-offset) * -1); } /* the group clips its edges: draw the ring inside */
+.seg button:first-child { border-radius: calc(var(--radius-md) - var(--border-thin)) 0 0 calc(var(--radius-md) - var(--border-thin)); } /* so the inner ring follows the group's corners */
+.seg button:last-child { border-radius: 0 calc(var(--radius-md) - var(--border-thin)) calc(var(--radius-md) - var(--border-thin)) 0; }
 .through { margin: 6px 0 0; }
 .through figcaption { font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); margin-bottom: 4px; }
 .through figcaption span { font-weight: var(--fw-regular); color: var(--text-3); }
@@ -44,7 +47,6 @@
   border-radius: var(--radius-md); padding: 6px 12px; width: 100%;
 }
 .search::placeholder { color: var(--text-3); }
-.search:focus { outline: 2px solid var(--cursor); outline-offset: 1px; }
 .searchBox { position: relative; }
 .suggest {
   position: absolute; z-index: var(--z-popover); left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none;

@@ -29,7 +29,8 @@ function groupOf(name: string, raw: string): string {
   if (name.startsWith("--tracking-")) return "Letter spacing";
   if (name.startsWith("--lh-")) return "Line height";
   if (name.startsWith("--z-")) return "Layer (z-index)";
-  if (name.startsWith("--shadow")) return "Shadow";
+  if (name.startsWith("--focus-")) return "Focus";
+  if (name.startsWith("--shadow") && name !== "--shadow-color") return "Shadow";
   if (name === "--font" || name === "--mono") return "Font family";
   const color = CSS.supports("color", raw) || /^var\(|^color-mix/.test(raw);
   if (color && /^--[a-z]+-\d+$/.test(name) && !raw.startsWith("var(")) return "Primitive colors"; // --gray-100, --amber-600…
