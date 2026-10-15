@@ -9,7 +9,7 @@
 .legend li { display: flex; align-items: center; gap: 5px; }
 .legendTitle { color: var(--text-3); font-size: var(--fs-xs); }
 .legendTitle:not(:first-child) { margin-left: 6px; }
-.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot { width: 9px; height: 9px; border-radius: var(--radius-full); display: inline-block; }
 
 .stage { position: relative; flex: 1; min-height: 0; display: flex; gap: 16px; }
 /* the left column: the map, then the depth guide */
@@ -26,7 +26,7 @@
 /* the line that joins the steps */
 .ladder li::before { content: ""; position: absolute; left: calc(3.5px + min(var(--d, 0), 8) * 4px); top: -6px; bottom: 50%; border-left: 1px solid var(--line); }
 .ladder li:first-child::before { display: none; }
-.stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--text-3); }
+.stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: .62em; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--surface); border: 1.5px solid var(--text-3); }
 .ladder li button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
 .ladder li button:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .ladder li b { font-weight: var(--fw-bold); color: var(--text); }
@@ -83,10 +83,10 @@
   .side { width: auto; }
   .ladder { max-height: 220px; }
 }
-.svg { overflow: hidden; touch-action: none; border-radius: var(--radius); }
+.svg { overflow: hidden; touch-action: none; border-radius: var(--radius-lg); }
 .grab { cursor: grab; }
 .grab:active { cursor: grabbing; }
-.controls { position: absolute; right: 0; bottom: 0; z-index: 1; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.controls { position: absolute; right: 0; bottom: 0; z-index: 1; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
 .controls button { font: inherit; font-size: var(--fs-lg); width: 34px; height: 32px; color: var(--text); background: none; border: 0; cursor: pointer; }
 .controls button + button { border-top: 1px solid var(--line); }
 .controls button:hover:not(:disabled) { background: var(--surface-2); }
@@ -99,5 +99,5 @@
 .aboutPop {
   position: absolute; right: 44px; bottom: 0; z-index: 2; width: min(420px, calc(100% - 60px)); margin: 0; cursor: pointer;
   padding: 12px 14px; font-size: var(--fs-md); line-height: 1.5; color: var(--text-2);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
 }

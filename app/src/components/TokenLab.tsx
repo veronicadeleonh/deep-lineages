@@ -12,6 +12,7 @@ const KINDS = {
   Colors: (g: string) => isColor(g),
   "Font weight": (g: string) => g === "Font weight",
   "Type scale": (g: string) => g === "Type scale",
+  Radius: (g: string) => g === "Radius",
   All: () => true,
 };
 type Kind = keyof typeof KINDS;
@@ -94,7 +95,8 @@ export function TokenLab() {
                 <label style={{ ...st.sw, background: `var(${t.name})` }} title="Pick a color">
                   <input type="color" value={toHex(c)} onChange={(e) => set(t.name, e.target.value)} style={st.hiddenInput} />
                 </label>
-              ) : t.group === "Font weight" ? <span style={{ ...st.swNone, ...st.aa, fontWeight: `var(${t.name})` }} aria-hidden>Aa</span>
+              ) : t.group === "Radius" ? <span style={{ ...st.swNone, ...st.radiusBox, borderRadius: `var(${t.name})` }} aria-hidden />
+                : t.group === "Font weight" ? <span style={{ ...st.swNone, ...st.aa, fontWeight: `var(${t.name})` }} aria-hidden>Aa</span>
                 : <span style={st.swNone} />}
               <div style={st.mid}>
                 <code style={st.name}>{t.name}</code>
@@ -146,6 +148,7 @@ const st: Record<string, React.CSSProperties> = {
   bar: { display: "flex", alignItems: "center", gap: 6, padding: "4px 12px", flexWrap: "wrap" },
   search: { flex: 1, font, padding: "4px 8px", border: "1px solid #c9d2d9", borderRadius: 6 },
   select: { font, padding: "3px 6px", border: "1px solid #c9d2d9", borderRadius: 6, background: "#fff" },
+  radiusBox: { height: 22, background: "#eef2f4", border: "1.5px solid #6d8394" },
   aa: { fontSize: 16, lineHeight: "26px", textAlign: "center", color: "#18222b", fontFamily: "var(--font)" },
   check: { display: "inline-flex", alignItems: "center", gap: 4, color: "#3d4954" },
   btn: { font, color: "#18222b", background: "#f1f4f6", border: "1px solid #c9d2d9", borderRadius: 6, padding: "3px 8px", cursor: "pointer" },

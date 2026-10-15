@@ -55,7 +55,13 @@
   /* data: period of a genus's first fossil (ordinal: older recedes) */
   --period-tri: var(--violet-400); --period-jur: var(--violet-500); --period-cre: var(--violet-800);
 
-  --radius: 14px;
+  /* corner radii */
+  --radius-xs: 2px;     /* legend swatches: small squares that must stay square */
+  --radius-sm: 4px;     /* kbd keys */
+  --radius-md: 8px;     /* buttons, inputs, chips */
+  --radius-lg: 14px;    /* cards, dialogs */
+  --radius-xl: 20px;    /* the welcome panel */
+  --radius-full: 999px; /* pills and circles */
   /* type scale: every font size in the app comes from here */
   --fs-2xs: 10px;   /* axis ticks */
   --fs-xs: 11px;    /* captions, small caps labels */
@@ -93,19 +99,19 @@ body {
 }
 h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
 h2 { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-2); }
-kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; color: var(--text-2); background: var(--surface); }
+kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0 4px; color: var(--text-2); background: var(--surface); }
 
 /* shared pieces */
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; min-width: 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; min-width: 0; }
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
 .muted { color: var(--text-3); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
 .note { margin: 8px 0 0; color: var(--text-3); font-size: var(--fs-sm); }
 .chip {
   font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2);
-  border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px 3px 8px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius-full); padding: 3px 10px 3px 8px; cursor: pointer;
   display: inline-flex; align-items: center; gap: 6px;
 }
 .chip:hover { border-color: var(--text-3); }
-.swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
+.swatch { width: 8px; height: 8px; border-radius: var(--radius-xs); display: inline-block; flex: none; }
 
 .sil { pointer-events: none; }
