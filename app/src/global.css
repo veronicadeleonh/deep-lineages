@@ -12,15 +12,16 @@
   --gray-500: #6d8394;
   --gray-600: #5f6b76;
   --gray-700: #4a5763;
+  --gray-800: #434f5a;
   --gray-900: #18222b;
-  --amber-600: #b87700;
+  --amber-600: #b57500;
   --amber-700: #966100;  /* the darker amber: for amber that carries text */
   --green-600: #14946e;
   --orange-500: #e2582f;
   --crimson-600: #c4285a;
   --blue-100: #d9e9f2;
   --sage-300: #b4c79e;
-  --violet-300: #a99ee6;
+  --violet-400: #9284dc;
   --violet-500: #7467d0;
   --violet-800: #40349a;
 
@@ -41,7 +42,7 @@
   /* maps */
   --ocean: var(--blue-100);
   --land: var(--sage-300);
-  --map-ink: var(--text); --map-ink-2: var(--text-2); --map-dot: var(--map-ink);
+  --map-ink: var(--text); --map-ink-2: var(--gray-800); --map-dot: var(--map-ink);
   --dot: var(--text-2);
   /* data: the diversity curves */
   --area: var(--gray-250);
@@ -52,7 +53,7 @@
   --diet-other: var(--gray-400);   /* omnivore, no data */
   --extinct: var(--crimson-600);
   /* data: period of a genus's first fossil (ordinal: older recedes) */
-  --period-tri: var(--violet-300); --period-jur: var(--violet-500); --period-cre: var(--violet-800);
+  --period-tri: var(--violet-400); --period-jur: var(--violet-500); --period-cre: var(--violet-800);
 
   --radius: 14px;
   /* type scale: every font size in the app comes from here */
