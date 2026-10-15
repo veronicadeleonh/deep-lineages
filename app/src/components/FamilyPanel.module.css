@@ -1,5 +1,5 @@
 .panel { min-width: 0; }
-.title { margin: 0; font-size: var(--fs-xl); font-weight: 650; }
+.title { margin: 0; font-size: var(--fs-xl); font-weight: var(--fw-bold); }
 
 .head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
 .sub { margin: 2px 0 0; color: var(--text-3); font-size: var(--fs-sm); }
@@ -15,12 +15,12 @@
 
 .stats { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; margin: 12px 0; }
 .stats dt { color: var(--text-3); font-size: var(--fs-xs); }
-.stats dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stats dd { margin: 0; font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; }
 
 .extract { color: var(--text-2); margin: 0 0 10px; }
 .extract a, .credits a { color: inherit; }
 .meta { font-size: var(--fs-sm); color: var(--text-2); margin: 4px 0; }
-.meta b { color: var(--text); font-weight: 600; }
+.meta b { color: var(--text); font-weight: var(--fw-semibold); }
 .disputed { color: var(--text-3); font-style: italic; margin-bottom: 10px; }
 
 

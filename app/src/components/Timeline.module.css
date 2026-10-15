@@ -33,11 +33,11 @@
 .area { fill: var(--area); opacity: .7; }
 .areaLine { fill: none; stroke: var(--area-edge); stroke-width: 2; }
 .extinction line { stroke: var(--extinct); stroke-width: 1.5; stroke-dasharray: 4 3; }
-.extinction text { fill: var(--extinct); font-size: var(--fs-xs); font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.extinction text { fill: var(--extinct); font-size: var(--fs-xs); font-weight: var(--fw-semibold); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
 
 /* rows */
 .groupHead line { stroke: var(--line); }
-.lineage text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.lineage text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: .06em; text-transform: uppercase; }
 .lineage line { stroke: var(--line); stroke-width: 1.5; }
 .row { cursor: pointer; }
 .hit { fill: transparent; }
@@ -47,7 +47,7 @@
 .chev { fill: var(--text-3); font-size: var(--fs-2xs); pointer-events: none; }
 .rowLabel { fill: var(--text-2); font-size: var(--fs-sm); }
 .labelDim { fill: var(--text-3); }
-.labelSel { fill: var(--text); font-weight: 650; }
+.labelSel { fill: var(--text); font-weight: var(--fw-bold); }
 .bar, .gbar { transition: opacity .15s; }
 .barDim { opacity: .28; }
 .guide { stroke: var(--line); }
@@ -58,11 +58,11 @@
 /* cursor */
 .cursorLine { stroke: var(--cursor); stroke-width: 1.5; }
 .cursorHandle { fill: var(--accent-bg); }
-.cursorLabel { fill: var(--surface); font-size: var(--fs-xs); font-weight: 600; font-variant-numeric: tabular-nums; }
-.cursorCount { fill: var(--text); font-size: var(--fs-xs); font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
-.genusLabel.labelSel { fill: var(--text); font-weight: 650; }
-.subHead text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: 600; letter-spacing: .02em; }
-.subHead .subCount { fill: var(--text-3); font-weight: 400; }
+.cursorLabel { fill: var(--surface); font-size: var(--fs-xs); font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; }
+.cursorCount { fill: var(--text); font-size: var(--fs-xs); font-weight: var(--fw-semibold); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.genusLabel.labelSel { fill: var(--text); font-weight: var(--fw-bold); }
+.subHead text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-semibold); letter-spacing: .02em; }
+.subHead .subCount { fill: var(--text-3); font-weight: var(--fw-regular); }
 
 /* family tree over the rows */
 .branch { stroke: var(--text-3); stroke-width: 1; opacity: .7; }
@@ -70,7 +70,7 @@
 .node { fill: var(--text-3); }
 .nodeHot { fill: var(--surface); stroke: var(--text); stroke-width: 2; }
 .clade { fill: var(--text-3); font-size: var(--fs-2xs); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
-.cladeHot { composes: clade; fill: var(--text); font-size: var(--fs-xs); font-weight: 700; }
+.cladeHot { composes: clade; fill: var(--text); font-size: var(--fs-xs); font-weight: var(--fw-bold); }
 .chevHit { fill: transparent; cursor: pointer; }
 .moreRow text { fill: var(--text-3); font-size: var(--fs-xs); font-style: italic; }
 .species { fill: var(--text-3); font-size: var(--fs-2xs); font-style: italic; pointer-events: none; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
@@ -102,18 +102,18 @@
 
 /* the cursor's period and stage */
 .bandNow { fill: var(--cursor); fill-opacity: .09; pointer-events: none; }
-.periodNow { fill: var(--accent-text); font-weight: 700; }
+.periodNow { fill: var(--accent-text); font-weight: var(--fw-bold); }
 .stageNow { fill: var(--cursor); fill-opacity: .28; stroke: var(--cursor); stroke-opacity: .6; }
 .stageNow:hover { fill: var(--cursor); fill-opacity: .4; }
-.stageLabelNow { fill: var(--text); font-weight: 650; }
+.stageLabelNow { fill: var(--text); font-weight: var(--fw-bold); }
 
 /* collapsing: a whole lineage from its side label, and slim rows for families outside the window */
 .lineageBtn { cursor: pointer; }
 .lineageBtn:hover text { fill: var(--accent-text); }
 .lineageBtn:hover line { stroke: var(--cursor); }
 .foldRow { cursor: pointer; }
-.foldLabel { fill: var(--text); font-size: var(--fs-sm); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-.foldCount { fill: var(--text-3); font-weight: 400; letter-spacing: 0; text-transform: none; }
+.foldLabel { fill: var(--text); font-size: var(--fs-sm); font-weight: var(--fw-bold); letter-spacing: .04em; text-transform: uppercase; }
+.foldCount { fill: var(--text-3); font-weight: var(--fw-regular); letter-spacing: 0; text-transform: none; }
 .slimLabel { fill: var(--text-3); font-size: var(--fs-xs); }
 .slim:hover .slimLabel { fill: var(--text-2); }
 /* list mode, right above the families */
@@ -124,5 +124,5 @@
 .listBar button { flex: 1; font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: none; border: 0; padding: 4px 12px; cursor: pointer; white-space: nowrap; }
 .listBar button + button { border-left: 1px solid var(--line); }
 .listBar button:hover { color: var(--text); }
-.listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--accent-bg); font-weight: 700; }
+.listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--accent-bg); font-weight: var(--fw-bold); }
 .listN { opacity: .7; font-variant-numeric: tabular-nums; margin-left: 3px; }

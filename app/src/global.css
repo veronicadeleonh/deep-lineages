@@ -66,6 +66,11 @@
   --fs-xl: 18px;
   --fs-2xl: 22px;
   --fs-3xl: 28px;
+  /* font weights: IBM Plex Sans is loaded in exactly these four (index.html) */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
   /* fluid sizes, for the big moments */
   --fs-title: clamp(22px, 3vw, 28px);        /* dialog title */
   --fs-heading: clamp(24px, 2.4vw, 34px);    /* chapter title */
@@ -86,8 +91,8 @@ body {
   font: var(--fs-base)/1.45 var(--font);
   -webkit-font-smoothing: antialiased;
 }
-h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: 650; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
-h2 { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--text-2); }
+h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+h2 { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-2); }
 kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; color: var(--text-2); background: var(--surface); }
 
 /* shared pieces */

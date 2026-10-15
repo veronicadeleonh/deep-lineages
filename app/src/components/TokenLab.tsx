@@ -6,6 +6,15 @@ import { useEffect, useMemo, useState } from "react";
 import { checkRole, clearTokens, findToken, isColor, ratio, readTokens, toHex, toRgb } from "../tokenTools";
 
 const KEY = "deep-lineages:token-lab";
+
+/** Which tokens the panel lists. */
+const KINDS = {
+  Colors: (g: string) => isColor(g),
+  "Font weight": (g: string) => g === "Font weight",
+  "Type scale": (g: string) => g === "Type scale",
+  All: () => true,
+};
+type Kind = keyof typeof KINDS;
 const load = (): Record<string, string> => { try { return JSON.parse(localStorage.getItem(KEY) ?? "{}"); } catch { return {}; } };
 const save = (o: Record<string, string>) => { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch { /* private mode */ } };
 const root = document.documentElement;
@@ -14,7 +23,7 @@ export function TokenLab() {
   const [open, setOpen] = useState(false);
   const [over, setOver] = useState<Record<string, string>>(load);
   const [q, setQ] = useState("");
-  const [colorsOnly, setColorsOnly] = useState(true);
+  const [kind, setKind] = useState<Kind>("Colors");
   const [found, setFound] = useState<string | null>(null);
   const [onScreen, setOnScreen] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -42,7 +51,7 @@ export function TokenLab() {
   const probe = useMemo(() => { const d = document.createElement("span"); d.style.display = "none"; d.dataset.tokenLab = ""; document.body.appendChild(d); return d; }, []);
   const rgb = (n: string) => toRgb(`var(${n})`, probe);
   const bg = rgb("--bg"), surface = rgb("--surface");
-  const list = tokens.filter((t) => (!colorsOnly || isColor(t.group)) && t.name.includes(q.trim()));
+  const list = tokens.filter((t) => KINDS[kind](t.group) && t.name.includes(q.trim()));
   const changed = Object.keys(over).length;
 
   const copy = () => {
@@ -65,7 +74,9 @@ export function TokenLab() {
       </div>
       <div style={st.bar}>
         <input style={st.search} placeholder="Filter: --text, --map…" value={q} onChange={(e) => setQ(e.target.value)} />
-        <label style={st.check}><input type="checkbox" checked={colorsOnly} onChange={(e) => setColorsOnly(e.target.checked)} /> colors</label>
+        <select style={st.select} value={kind} onChange={(e) => setKind(e.target.value as Kind)} aria-label="Which tokens">
+          {(Object.keys(KINDS) as Kind[]).map((k) => <option key={k}>{k}</option>)}
+        </select>
       </div>
       <div style={st.bar}>
         <button style={st.btn} onClick={copy} disabled={!changed}>{copied ? "Copied ✓" : `Copy changes (${changed})`}</button>
@@ -83,12 +94,17 @@ export function TokenLab() {
                 <label style={{ ...st.sw, background: `var(${t.name})` }} title="Pick a color">
                   <input type="color" value={toHex(c)} onChange={(e) => set(t.name, e.target.value)} style={st.hiddenInput} />
                 </label>
-              ) : <span style={st.swNone} />}
+              ) : t.group === "Font weight" ? <span style={{ ...st.swNone, ...st.aa, fontWeight: `var(${t.name})` }} aria-hidden>Aa</span>
+                : <span style={st.swNone} />}
               <div style={st.mid}>
                 <code style={st.name}>{t.name}</code>
-                <input style={st.val} defaultValue={cur} key={cur}
+                {t.group === "Font weight" ? (
+                  <select style={st.val} value={cur} onChange={(e) => set(t.name, e.target.value)} title="IBM Plex Sans is loaded in these four weights">
+                    {[...new Set(["400", "500", "600", "700", cur])].map((w) => <option key={w}>{w}</option>)}
+                  </select>
+                ) : <input style={st.val} defaultValue={cur} key={cur}
                   onKeyDown={(e) => { if (e.key === "Enter") set(t.name, (e.target as HTMLInputElement).value.trim()); }}
-                  onBlur={(e) => { const v = e.target.value.trim(); if (v && v !== cur) set(t.name, v); }} />
+                  onBlur={(e) => { const v = e.target.value.trim(); if (v && v !== cur) set(t.name, v); }} />}
               </div>
               <div style={st.cr}>
                 {(() => {
@@ -129,6 +145,8 @@ const st: Record<string, React.CSSProperties> = {
   dim: { color: "#5b6773", fontSize: 11 },
   bar: { display: "flex", alignItems: "center", gap: 6, padding: "4px 12px", flexWrap: "wrap" },
   search: { flex: 1, font, padding: "4px 8px", border: "1px solid #c9d2d9", borderRadius: 6 },
+  select: { font, padding: "3px 6px", border: "1px solid #c9d2d9", borderRadius: 6, background: "#fff" },
+  aa: { fontSize: 16, lineHeight: "26px", textAlign: "center", color: "#18222b", fontFamily: "var(--font)" },
   check: { display: "inline-flex", alignItems: "center", gap: 4, color: "#3d4954" },
   btn: { font, color: "#18222b", background: "#f1f4f6", border: "1px solid #c9d2d9", borderRadius: 6, padding: "3px 8px", cursor: "pointer" },
   found: { color: "#8a0f8a", fontSize: 11 },

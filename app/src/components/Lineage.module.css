@@ -1,6 +1,6 @@
 .wrap { margin: 12px 0; }
 .head { margin: 0 0 6px; font-size: var(--fs-sm); color: var(--text-2); display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap; }
-.head b { color: var(--text); font-weight: 600; }
+.head b { color: var(--text); font-weight: var(--fw-semibold); }
 .toggle, .more {
   font: inherit; font-size: var(--fs-xs); color: var(--text-2); background: none; border: 1px solid var(--line);
   border-radius: 6px; padding: 1px 8px; cursor: pointer;
@@ -24,9 +24,9 @@
 .gap::after { content: none; }
 .gap { padding-left: 16px; }
 
-.name { color: var(--text-2); font-weight: 550; }
-.landmark .name { color: var(--text); font-weight: 650; }
-.current .name { color: var(--text); font-weight: 700; font-size: var(--fs-md); }
+.name { color: var(--text-2); font-weight: var(--fw-semibold); }
+.landmark .name { color: var(--text); font-weight: var(--fw-bold); }
+.current .name { color: var(--text); font-weight: var(--fw-bold); font-size: var(--fs-md); }
 .rank { margin-left: 6px; color: var(--text-3); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .04em; }
 .note { display: block; color: var(--text-3); font-size: var(--fs-sm); }
 .sil {

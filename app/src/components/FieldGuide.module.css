@@ -3,14 +3,14 @@
 
 /* ---------- where ---------- */
 .where { min-width: 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-.question { margin: 2px 0 0; font-size: var(--fs-2xl); font-weight: 750; color: var(--text); letter-spacing: -.01em; }
+.question { margin: 2px 0 0; font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--text); letter-spacing: -.01em; }
 .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chip {
   font: inherit; font-size: var(--fs-md); color: var(--text-2); background: var(--surface-2); border: 1px solid var(--line);
   border-radius: 8px; padding: 3px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
 }
 .chip:hover { color: var(--text); border-color: var(--text-3); }
-.chipOn, .chipOn:hover { color: var(--surface); background: var(--accent-bg); border-color: var(--accent-bg); font-weight: 700; }
+.chipOn, .chipOn:hover { color: var(--surface); background: var(--accent-bg); border-color: var(--accent-bg); font-weight: var(--fw-bold); }
 .mapBox { min-width: 0; }
 .map { display: block; width: 100%; height: auto; cursor: crosshair; }
 .sphere { fill: var(--ocean); stroke: var(--line); }
@@ -24,10 +24,10 @@
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .seg button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: var(--surface); border: 0; padding: 2px 9px; cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
-.seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: 700; }
+.seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: var(--fw-bold); }
 .through { margin: 6px 0 0; }
-.through figcaption { font-size: var(--fs-md); font-weight: 650; color: var(--text); margin-bottom: 4px; }
-.through figcaption span { font-weight: 400; color: var(--text-3); }
+.through figcaption { font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); margin-bottom: 4px; }
+.through figcaption span { font-weight: var(--fw-regular); color: var(--text-3); }
 .through svg { display: block; overflow: visible; }
 .tick { font-size: var(--fs-2xs); fill: var(--text-3); text-anchor: middle; }
 .scale { font-size: var(--fs-2xs); fill: var(--text-3); }
@@ -35,7 +35,7 @@
 
 /* ---------- who, and when ---------- */
 .who { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
-.whoHead h3 { margin: 2px 0 2px; font-size: var(--fs-2xl); font-weight: 750; color: var(--text); letter-spacing: -.01em; }
+.whoHead h3 { margin: 2px 0 2px; font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--text); letter-spacing: -.01em; }
 .whoHead p { margin: 0; font-size: var(--fs-md); color: var(--text-2); }
 .whoHead b { color: var(--text); }
 .filters { display: grid; gap: 8px; margin: 12px 0 10px; }
@@ -54,7 +54,7 @@
 .sgOn { background: var(--surface-2); }
 .sgSil { width: 34px; height: 18px; flex: none; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .sgName { color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sgName b { font-weight: 750; text-decoration: underline; text-decoration-color: var(--cursor); text-underline-offset: 3px; }
+.sgName b { font-weight: var(--fw-bold); text-decoration: underline; text-decoration-color: var(--cursor); text-underline-offset: 3px; }
 .sgNote { margin-left: auto; padding-left: 8px; font-size: var(--fs-sm); color: var(--text-3); white-space: nowrap; }
 .divider { width: 1px; height: 18px; background: var(--line); margin: 0 2px; }
 .spacer { flex: 1; }
@@ -65,7 +65,7 @@
 .axis svg { display: block; }
 .band { fill: var(--surface-2); }
 .bandAlt { fill: transparent; }
-.bandLabel { fill: var(--text-2); font-size: var(--fs-2xs); font-weight: 700; text-anchor: middle; }
+.bandLabel { fill: var(--text-2); font-size: var(--fs-2xs); font-weight: var(--fw-bold); text-anchor: middle; }
 .cursor { stroke: var(--cursor); stroke-width: 2; }
 .cursorFaint { stroke: var(--cursor); stroke-width: 1; opacity: .35; }
 
@@ -81,17 +81,17 @@
 .silBorrowed { opacity: .3; }
 .silNone { background: none; }
 .names { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
-.names i { font-size: var(--fs-md); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.names i { font-size: var(--fs-md); font-weight: var(--fw-semibold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .names small { font-size: var(--fs-xs); color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar { display: block; overflow: visible; }
 .n { font-size: var(--fs-xs); fill: var(--text-3); font-variant-numeric: tabular-nums; }
 .notice { margin: 8px 0; padding: 10px 12px; font-size: var(--fs-md); line-height: 1.5; color: var(--text-2); background: color-mix(in srgb, var(--cursor) 10%, transparent); border: 1px solid color-mix(in srgb, var(--cursor) 35%, transparent); border-radius: 8px; }
 .notice b { color: var(--text); }
-.notice button { font: inherit; font-weight: 650; color: var(--accent-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.notice button { font: inherit; font-weight: var(--fw-bold); color: var(--accent-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .othersToggle { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: var(--fs-sm); color: var(--text-2); cursor: pointer; }
 .othersToggle input { accent-color: var(--cursor); margin: 0; }
 .othersToggle span { color: var(--text-3); }
-.itemOther .names i { font-weight: 500; color: var(--text-2); }
+.itemOther .names i { font-weight: var(--fw-medium); color: var(--text-2); }
 .itemOther .bar rect { opacity: .55; }
 .empty { color: var(--text-3); padding: 24px 0; }
 
