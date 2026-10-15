@@ -100,6 +100,13 @@
   --lh-snug: 1.3;      /* short text, lists, captions */
   --lh-normal: 1.5;    /* body: WCAG 1.4.8 asks for at least 1.5 in paragraphs */
   --lh-relaxed: 1.55;  /* long paragraphs */
+  /* stacking layers, bottom to top: what sits on what when things overlap */
+  --z-raised: 1;    /* controls floating over a canvas or chart */
+  --z-footer: 3;    /* the fixed credits footer */
+  --z-popover: 5;   /* "i" popovers, the search dropdown */
+  --z-sheet: 10;    /* the panel as a bottom sheet on mobile */
+  --z-tooltip: 20;  /* tooltips: above everything but dialogs */
+  --z-dialog: 50;   /* welcome and About */
   /* fluid sizes, for the big moments */
   --fs-title: clamp(22px, 3vw, 28px);        /* dialog title */
   --fs-heading: clamp(24px, 2.4vw, 34px);    /* chapter title */

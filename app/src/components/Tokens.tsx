@@ -65,7 +65,7 @@ export function Tokens() {
   const groups = useMemo(() => {
     const g = new Map<string, Token[]>();
     for (const t of tokens) g.set(t.group, [...(g.get(t.group) ?? []), t]);
-    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Shadow", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
+    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Shadow", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
   }, [tokens]);
   const raw = useMemo(() => rawValues(src), [src]);
   const loaded = Object.keys(src).length > 0;

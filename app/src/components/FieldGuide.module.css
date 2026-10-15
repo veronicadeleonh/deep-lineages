@@ -47,7 +47,7 @@
 .search:focus { outline: 2px solid var(--cursor); outline-offset: 1px; }
 .searchBox { position: relative; }
 .suggest {
-  position: absolute; z-index: 5; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none;
+  position: absolute; z-index: var(--z-popover); left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-md);
 }
 .suggest li { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: var(--radius-md); cursor: pointer; font-size: var(--fs-base); }

@@ -1,6 +1,6 @@
 /* The welcome screen: a full-screen layer over the app, the drifting continents behind the text. */
 .welcome {
-  position: fixed; inset: 0; z-index: 50; overflow-y: auto; background: var(--bg);
+  position: fixed; inset: 0; z-index: var(--z-dialog); overflow-y: auto; background: var(--bg);
   display: flex; align-items: center; justify-content: center; padding: 40px 24px; animation: fadeIn .4s ease-out;
 }
 @keyframes fadeIn { from { opacity: 0; } }
@@ -52,7 +52,7 @@
 }
 
 /* About: a compact dialog over the app (which stays visible, dimmed) */
-.aboutBackdrop { position: fixed; inset: 0; z-index: 50; background: color-mix(in srgb, var(--text) 28%, transparent); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fadeIn .2s ease-out; }
+.aboutBackdrop { position: fixed; inset: 0; z-index: var(--z-dialog); background: color-mix(in srgb, var(--text) 28%, transparent); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fadeIn .2s ease-out; }
 .about { width: min(560px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px 26px 22px; box-shadow: var(--shadow-lg); animation: rise .2s ease-out; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 .about { position: relative; padding: 26px 28px 24px; }

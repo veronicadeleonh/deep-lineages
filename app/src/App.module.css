@@ -39,7 +39,7 @@
 /* the profile column, with a tab on its left edge to fold it */
 .panelCol { position: sticky; top: 16px; min-width: 0; }
 .fold, .rail { font: inherit; color: var(--text-2); background: var(--surface); border: 1px solid var(--line); cursor: pointer; }
-.fold { position: absolute; z-index: 2; left: -14px; top: 18px; width: 26px; height: 32px; border-radius: var(--radius-md); font-size: var(--fs-xl); line-height: var(--lh-none); padding: 0 0 2px; }
+.fold { position: absolute; z-index: var(--z-raised); left: -14px; top: 18px; width: 26px; height: 32px; border-radius: var(--radius-md); font-size: var(--fs-xl); line-height: var(--lh-none); padding: 0 0 2px; }
 .fold:hover { color: var(--text); border-color: var(--text-3); }
 /* the folded profile: a thin rail with the selection's name, read top to bottom */
 .rail { position: sticky; top: 16px; width: 44px; display: flex; flex-direction: column; align-items: stretch; padding: 0; border-radius: var(--radius-lg); overflow: hidden; cursor: default; }
@@ -61,7 +61,7 @@
   .fullScreen .rail { height: 100%; position: static; }
 }
 .footer {
-  position: fixed; right: 24px; bottom: 5px; z-index: 5; font-size: var(--fs-xs); line-height: var(--lh-snug); color: var(--text-3);
+  position: fixed; right: 24px; bottom: 5px; z-index: var(--z-footer); font-size: var(--fs-xs); line-height: var(--lh-snug); color: var(--text-3);
   background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 0 6px; border-radius: var(--radius-sm); white-space: nowrap;
 }
 .footer a { color: var(--text-2); text-decoration: none; }
@@ -87,7 +87,7 @@
   .panelCol { position: static; }
   /* phones and narrow windows: the profile is a bottom sheet over the timeline */
   .panel {
-    position: fixed; left: 0; right: 0; bottom: 0; top: auto; max-height: 50vh; z-index: 10;
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; max-height: 50vh; z-index: var(--z-sheet);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-lg-up); animation: sheetUp .2s ease-out;
   }
   @keyframes sheetUp { from { transform: translateY(24px); opacity: 0; } }
