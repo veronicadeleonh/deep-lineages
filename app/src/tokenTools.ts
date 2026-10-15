@@ -134,6 +134,7 @@ export const ROLES: Record<string, RoleInfo> = {
   "--text-3": { role: "text", on: PAPER },
   "--cursor": { role: "graphic", on: ["--surface", "--bg", "--ocean"], note: "Also the big year on the map (large text)" },
   "--accent-text": { role: "text", on: ["--surface", "--bg"] },
+  "--map-accent-text": { role: "text", on: MAP, note: "Chapter label and links over the map" },
   "--accent-bg": { role: "text", on: ["--surface", "--bg"], note: "Measured against the light text on top of it" },
   "--map-ink": { role: "text", on: MAP, note: "The story told over the map" },
   "--map-ink-2": { role: "text", on: MAP },

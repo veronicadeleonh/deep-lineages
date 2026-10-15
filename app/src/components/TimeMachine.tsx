@@ -193,7 +193,13 @@ export function TimeMachine() {
 
       {/* the controls: play, speed and the scrubber */}
       <div className={s.controls}>
-        <button className={s.play} onClick={play} aria-label={playing ? "Pause" : "Play"}>{playing ? "❚❚" : "▶"}</button>
+        <button className={s.play} onClick={play} aria-label={playing ? "Pause" : "Play"}>
+          {/* icons, not characters: a graphic needs 3:1 (WCAG 1.4.11), which the light amber keeps */}
+          <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden>
+            {playing ? <><rect x="3" y="2" width="3.5" height="12" rx="1" /><rect x="9.5" y="2" width="3.5" height="12" rx="1" /></>
+              : <path d="M4.5 2.2v11.6c0 .6.7 1 1.2.7l9-5.8c.5-.3.5-1 0-1.4l-9-5.8c-.5-.3-1.2.1-1.2.7z" />}
+          </svg>
+        </button>
         <div className={s.speed} role="group" aria-label="Speed">
           {SPEEDS.map((v) => <button key={v} aria-pressed={speed === v} onClick={() => setSpeed(v)}>{v}×</button>)}
         </div>

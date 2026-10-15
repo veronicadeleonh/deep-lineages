@@ -16,6 +16,7 @@
   --gray-900: #18222b;
   --amber-600: #b57500;
   --amber-700: #966100;  /* the darker amber: for amber that carries text */
+  --amber-800: #6e4600;  /* the darkest: amber text over the map (land and sea) */
   --green-600: #14946e;
   --orange-500: #e2582f;
   --crimson-600: #c4285a;
@@ -39,6 +40,7 @@
   --cursor: var(--amber-600);      /* lines, fills, dots, icons, big numbers: needs 3:1 */
   --accent-text: var(--amber-700); /* amber text at normal size: needs 4.5:1 */
   --accent-bg: var(--amber-700);   /* amber behind light text (buttons, badges): needs 4.5:1 */
+  --map-accent-text: var(--amber-800); /* amber text over the map: 4.5:1 on --ocean and --land */
   /* maps */
   --ocean: var(--blue-100);
   --land: var(--sage-300);

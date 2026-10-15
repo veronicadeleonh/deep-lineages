@@ -125,4 +125,5 @@
 .listBar button + button { border-left: 1px solid var(--line); }
 .listBar button:hover { color: var(--text); }
 .listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--accent-bg); font-weight: var(--fw-bold); }
-.listN { opacity: .7; font-variant-numeric: tabular-nums; margin-left: 3px; }
+.listN { color: var(--text-3); font-variant-numeric: tabular-nums; margin-left: 3px; } /* a token, not opacity: opacity makes colors outside the palette */
+.listOn .listN { color: inherit; }

@@ -75,7 +75,9 @@ export function MachineMap({ W, H }: { W: number; H: number }) {
   };
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className={s.map}>
+    // for screen readers, one sentence; the families are listed, as buttons, in "On the map now"
+    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className={s.map} role="img"
+      aria-label={`Map of the world ${fMa(t)} million years ago: ${visible.length} fossil site${visible.length === 1 ? "" : "s"}. The families are listed in On the map now.`}>
       <path className={s.sphere} d={path({ type: "Sphere" }) ?? ""} />
       <path className={s.graticule} d={path(geoGraticule10()) ?? ""} />
       {/* one reconstruction at a time, the nearest to t; when it changes, a short crossfade (no permanent double outline) */}

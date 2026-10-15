@@ -299,7 +299,7 @@ export function TreeCard() {
 
       <div className={s.stage}>
         {/* the left column: the map, and how deep in the tree we are */}
-        <aside className={s.side}>
+        <div className={s.side}>
           <DeckMap width={230} height={132} />
           <nav className={s.ladder} aria-label="Depth in the tree">
             <p className={s.ladderTitle}>Where you are <span>· level {ladder.length + (ladderGenus?.species.length ? 1 : 0)}</span></p>
@@ -327,7 +327,7 @@ export function TreeCard() {
             {!state.selected && <p className={s.ladderHint}>Click a genus on the rim to follow its path down to its species.</p>}
             <p className={s.ladderCount}>{fNum(leaves.filter((l) => l.data.genus).length)} genera in this view</p>
           </nav>
-        </aside>
+        </div>
 
         <div ref={wrap} className={s.canvas}>
         <div className={s.controls} role="group" aria-label="Zoom">
