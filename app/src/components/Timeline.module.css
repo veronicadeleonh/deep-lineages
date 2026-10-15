@@ -41,6 +41,8 @@
 .row { cursor: pointer; }
 .hit { fill: transparent; }
 .rowHighlight { fill: var(--surface-2); }
+.focusRow { fill: none; stroke: var(--cursor); stroke-width: 2; } /* the focus ring for rows: same color and width as --focus-ring */
+.row:focus, .lineage:focus { outline: none; } /* the ring above replaces it */
 .rowSil { transition: opacity .15s; }
 .dim { opacity: .3; }
 .chev { fill: var(--text-3); font-size: var(--fs-2xs); pointer-events: none; }

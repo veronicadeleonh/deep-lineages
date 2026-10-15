@@ -234,6 +234,147 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
     return { items, spans, trees, H: y + AXIS };
   }, [data, famTree, open, view, rowsTop, ROW, state.foldedLineages, selected, state.focusNow, state.focusNow ? t : 0]);
 
+  /* ---------- the rows as a tree, for the keyboard (ARIA tree pattern) ----------
+     One Tab stop: ↑ ↓ move between rows, → unfolds (or steps in), ← folds (or steps out), Enter selects,
+     Home / End jump to the ends. Lineages are level 1, families and relatives level 2, genera level 3. */
+  type Nav = { key: string; level: number; parent: string | null; label: string; expanded?: boolean;
+    box: { x: number; y: number; w: number; h: number }; enter?: () => void; setOpen?: (o: boolean) => void };
+  const nav = useMemo(() => {
+    const out: Nav[] = [];
+    let lin: string | null = null, fam: string | null = null;
+    items.forEach((it, i) => {
+      if (it.type === "head") {
+        const next = items[i + 1];
+        if (next?.type === "fold") return; // a folded lineage: its one row stands for it
+        const sp = spans.find((x) => x.gr === it.gr);
+        const n = items.slice(i + 1).findIndex((x) => x.type === "head");
+        const fams = items.slice(i + 1, n < 0 ? undefined : i + 1 + n).filter((x) => x.type === "fam").length;
+        lin = `lin:${it.gr?.key ?? "other"}`; fam = null;
+        const gr = it.gr;
+        out.push({ key: lin, level: 1, parent: null, expanded: true,
+          label: `${gr?.label ?? "Other"}, ${fams} ${fams === 1 ? "family" : "families"}`,
+          box: { x: 1, y: sp?.y0 ?? it.y, w: GUT - 2, h: sp ? sp.y1 - sp.y0 : HEAD },
+          setOpen: gr ? (o) => { if (!o) dispatch({ type: "foldLineage", lineage: gr.key }); } : undefined });
+      } else if (it.type === "fold") {
+        lin = `lin:${it.gr.key}`; fam = null;
+        const gr = it.gr;
+        out.push({ key: lin, level: 1, parent: null, expanded: false, label: `${gr.label}, ${it.n} families, folded`,
+          box: { x: GUT, y: it.y, w: W - M.r - GUT, h: ROW },
+          enter: () => dispatch({ type: "foldLineage", lineage: gr.key }),
+          setOpen: (o) => { if (o) dispatch({ type: "foldLineage", lineage: gr.key }); } });
+      } else if (it.type === "fam") {
+        const f = it.f, has = !!data.genera[f.family]?.genera.length;
+        fam = f.family;
+        out.push({ key: f.family, level: 2, parent: lin, expanded: has ? open.has(f.family) : undefined,
+          label: `${f.family}, ${dietOf(f).label.toLowerCase()}, fossils ${fRange(famRecord(f))}${has ? `, ${fNum(f.n_genera)} genera` : ""}`,
+          box: { x: GUT, y: it.y, w: W - M.r - GUT, h: it.h },
+          enter: () => dispatch({ type: "toggleFamily", family: f.family }),
+          setOpen: has ? (o) => dispatch({ type: "fold", family: f.family, open: o }) : undefined });
+      } else if (it.type === "rel") {
+        const key = `rel:${it.clade}`, isOpen = expanded.includes(key);
+        fam = key;
+        out.push({ key, level: 2, parent: lin, expanded: isOpen,
+          label: `Other ${it.clade}, ${it.group.genera.length} genera, close relatives`,
+          box: { x: GUT, y: it.y, w: W - M.r - GUT, h: ROW },
+          enter: () => dispatch({ type: "fold", family: key, open: !isOpen }),
+          setOpen: (o) => dispatch({ type: "fold", family: key, open: o }) });
+      } else if (it.type === "genus") {
+        const { f, gn } = it;
+        out.push({ key: `${f.family}/${gn.genus}`, level: 3, parent: fam,
+          label: `${gn.genus}, fossils ${fRange(genusRecord(gn))}, ${fNum(gn.n)} ${gn.n === 1 ? "fossil" : "fossils"}`,
+          box: { x: nameX, y: it.y, w: W - M.r - nameX, h: GROW },
+          enter: () => dispatch({ type: "genus", family: f.family, genus: gn.genus }) });
+      } else if (it.type === "relGenus") {
+        out.push({ key: `rel:${it.clade}/${it.r.genus}`, level: 3, parent: fam,
+          label: `${it.r.genus}, fossils ${fRange(it.r.record)}, close relative`,
+          box: { x: nameX, y: it.y, w: W - M.r - nameX, h: GROW } });
+      }
+    });
+    return out;
+  }, [items, spans, open, expanded, data, dispatch, GUT, ROW, W, nameX]);
+  // position in its set, for screen readers ("3 of 9")
+  const setInfo = useMemo(() => {
+    const m = new Map<string, { pos: number; size: number }>();
+    const byParent = new Map<string | null, string[]>();
+    nav.forEach((n) => byParent.set(n.parent, [...(byParent.get(n.parent) ?? []), n.key]));
+    byParent.forEach((keys) => keys.forEach((k, i) => m.set(k, { pos: i + 1, size: keys.length })));
+    return m;
+  }, [nav]);
+  // the row that holds the Tab stop (roving tabindex): the selection if it's listed, else the first row
+  const [activeKey, setActiveKey] = useState<string | null>(null);
+  const active = nav.find((n) => n.key === activeKey)?.key
+    ?? nav.find((n) => n.key === (genus && selected ? `${selected}/${genus}` : selected))?.key ?? nav[0]?.key;
+  const [ringKey, setRingKey] = useState<string | null>(null); // the row showing the focus ring (keyboard only)
+  const rowEls = useRef(new Map<string, SVGGElement>());
+  const rowRef = (key: string) => (el: SVGGElement | null) => { if (el) rowEls.current.set(key, el); else rowEls.current.delete(key); };
+  const pendingFocus = useRef<{ key: string; ring: boolean } | null>(null);
+  const focusRow = (key: string) => {
+    setActiveKey(key);
+    const el = rowEls.current.get(key);
+    if (!el) { pendingFocus.current = { key, ring: true }; return; }
+    el.focus({ preventScroll: true });
+    // keep it in sight: below the deck, which stays on screen, and above the bottom of the window
+    const r = el.getBoundingClientRect();
+    const deck = wrap.current?.querySelector(`.${s.deck}`)?.getBoundingClientRect().bottom ?? 0;
+    if (r.top < deck + 8) window.scrollBy({ top: r.top - deck - 8 });
+    else if (r.bottom > innerHeight - 8) window.scrollBy({ top: r.bottom - innerHeight + 8 });
+  };
+  useEffect(() => { // after a fold/unfold re-renders, the row we act on may be a new element: focus it again
+    const pf = pendingFocus.current;
+    if (!pf) return;
+    const el = rowEls.current.get(pf.key);
+    if (!el) return;
+    pendingFocus.current = null;
+    if (document.activeElement !== el) { el.focus({ preventScroll: true }); setRingKey(pf.ring ? pf.key : null); }
+  });
+  // the ring follows the real focus: when it leaves the rows (Tab, a click elsewhere, a row replaced), it goes away
+  useEffect(() => {
+    const on = (e: FocusEvent) => { if (!(e.target as Element | null)?.closest?.('[role="treeitem"]')) setRingKey(null); };
+    document.addEventListener("focusin", on);
+    return () => document.removeEventListener("focusin", on);
+  }, []);
+  const onTreeKey = (e: KeyboardEvent<SVGSVGElement>) => {
+    const i = nav.findIndex((n) => n.key === active);
+    const n = nav[i];
+    if (!n) return;
+    const go = (k?: string) => { if (k) focusRow(k); };
+    // folding a lineage swaps its label for a single row (a new element): bring the focus back to it after the re-render
+    const refocus = () => { pendingFocus.current = { key: n.key, ring: true }; };
+    const keys: Record<string, () => void> = {
+      ArrowDown: () => go(nav[i + 1]?.key),
+      ArrowUp: () => go(nav[i - 1]?.key),
+      Home: () => go(nav[0]?.key),
+      End: () => go(nav.at(-1)?.key),
+      ArrowRight: () => {
+        if (n.expanded === false && n.setOpen) { refocus(); n.setOpen(true); }
+        else if (n.expanded && nav[i + 1]?.parent === n.key) go(nav[i + 1].key);
+      },
+      ArrowLeft: () => {
+        if (n.expanded && n.setOpen) { refocus(); n.setOpen(false); }
+        else if (n.parent) go(n.parent);
+      },
+      Enter: () => { refocus(); n.enter?.(); },
+      " ": () => { refocus(); n.enter?.(); },
+    };
+    if (!keys[e.key]) return;
+    e.preventDefault(); e.stopPropagation(); tip.hide();
+    keys[e.key]();
+  };
+  // what every row needs to be a treeitem
+  const treeItem = (key: string) => {
+    const n = nav.find((x) => x.key === key);
+    if (!n) return {};
+    const si = setInfo.get(key);
+    return {
+      ref: rowRef(key), role: "treeitem", tabIndex: key === active ? 0 : -1, "aria-label": n.label, "aria-level": n.level,
+      "aria-expanded": n.expanded, "aria-posinset": si?.pos, "aria-setsize": si?.size,
+      "aria-selected": key === (genus && selected ? `${selected}/${genus}` : selected),
+      onFocus: (e: React.FocusEvent<SVGGElement>) => { setActiveKey(key); setRingKey(e.currentTarget.matches(":focus-visible") ? key : null); },
+      onBlur: () => setRingKey((k) => (k === key ? null : k)),
+    } as const;
+  };
+  const ring = nav.find((n) => n.key === ringKey);
+
   const x = useMemo(() => scaleLinear().domain(view).range([L, W - M.r]), [view, L, W]);
   const yDiv = useMemo(
     () => scaleLinear().domain([0, max(data.diversity, (d) => d.genera) ?? 1]).nice().range([areaTop + AREA, areaTop + 8]),
@@ -554,7 +695,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
       )}
       </div>
 
-      <svg viewBox={`0 ${rowsTop} ${W} ${H - rowsTop}`} width={W} height={H - rowsTop} {...svgEvents}>
+      <svg viewBox={`0 ${rowsTop} ${W} ${H - rowsTop}`} width={W} height={H - rowsTop} {...svgEvents}
+        role="tree" aria-label="Families by lineage" onKeyDown={onTreeKey}>
         <defs>
           {/* one fade per diet color (a gradient's currentColor would come from <defs>, not from the bar using it) */}
           {fadeColors.map((c, i) => (
@@ -569,7 +711,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
         {spans.map(({ gr, y0, y1 }) => {
           const mid = (y0 + y1) / 2, lx = GUT - 8;
           return (
-            <g key={`lab-${gr?.key}`} className={`${s.lineage} ${gr ? s.lineageBtn : ""}`} onPointerDown={() => gr && dispatch({ type: "foldLineage", lineage: gr.key })}>
+            <g key={`lab-${gr?.key}`} className={`${s.lineage} ${gr ? s.lineageBtn : ""}`} onPointerDown={(e) => { if (!gr) return; e.preventDefault(); pendingFocus.current = { key: `lin:${gr.key}`, ring: false }; dispatch({ type: "foldLineage", lineage: gr.key }); }}
+              {...treeItem(`lin:${gr?.key ?? "other"}`)}>
               <title>{gr ? `${gr.label}: ${gr.clade.toLowerCase()} · ${gr.hint} · click to collapse` : "Other"}</title>
               <rect x={0} y={y0} width={GUT} height={Math.max(0, y1 - y0)} fill="transparent" />
               <line x1={GUT - 3} x2={GUT - 3} y1={y0 + 3} y2={y1 - 3} />
@@ -611,8 +754,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
             </g>
           );
           if (it.type === "fold") return (
-            <g key={`fold-${it.gr.key}`} transform={`translate(0,${it.y})`} className={`${s.row} ${s.foldRow}`} data-stop
-              onPointerDown={() => dispatch({ type: "foldLineage", lineage: it.gr.key })}
+            <g key={`fold-${it.gr.key}`} transform={`translate(0,${it.y})`} className={`${s.row} ${s.foldRow}`} data-stop {...treeItem(`lin:${it.gr.key}`)}
+              onPointerDown={(e) => { e.preventDefault(); pendingFocus.current = { key: `lin:${it.gr.key}`, ring: false }; dispatch({ type: "foldLineage", lineage: it.gr.key }); }}
               onPointerEnter={() => setHoverKey(`fold:${it.gr.key}`)} onPointerLeave={leave}>
               <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
               <text className={s.chev} x={GUT + 4} y={ROW / 2} dominantBaseline="central">▸</text>
@@ -633,7 +776,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
             const hasGenera = !!data.genera[f.family]?.genera.length;
             const ROW = it.h, slim = it.h < 20; // eslint-disable-line @typescript-eslint/no-shadow
             if (slim) return (
-              <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${s.slim}`} data-stop data-family={f.family}
+              <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${s.slim}`} data-stop data-family={f.family} {...treeItem(f.family)}
                 onPointerDown={() => { tip.hide(); dispatch({ type: "toggleFamily", family: f.family }); }}
                 onPointerEnter={() => setHoverKey(f.family)} onPointerMove={(e) => tip.show(famTip(f), e)} onPointerLeave={leave}>
                 <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={3} />
@@ -642,7 +785,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
               </g>
             );
             return (
-              <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && !sel ? s.faded : ""}`} data-stop data-family={f.family}
+              <g key={f.family} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && !sel ? s.faded : ""}`} data-stop data-family={f.family} {...treeItem(f.family)}
                 onPointerDown={() => { tip.hide(); dispatch({ type: "toggleFamily", family: f.family }); }}
                 onPointerEnter={() => setHoverKey(f.family)} onPointerMove={(e) => tip.show(famTip(f), e)} onPointerLeave={leave}>
                 <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
@@ -670,7 +813,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
             const sil = data.clades[it.clade]?.svg;
             const n = it.group.genera.length;
             return (
-              <g key={key} transform={`translate(0,${it.y})`} className={`${s.row} ${s.relRow} ${selected && !it.group.families.includes(selected) ? s.faded : ""}`} data-stop data-rel={it.clade}
+              <g key={key} transform={`translate(0,${it.y})`} className={`${s.row} ${s.relRow} ${selected && !it.group.families.includes(selected) ? s.faded : ""}`} data-stop data-rel={it.clade} {...treeItem(key)}
                 onPointerDown={() => { tip.hide(); dispatch({ type: "fold", family: key, open: !isOpen }); }}
                 onPointerEnter={() => setHoverKey(key)} onPointerMove={(e) => tip.show(relTip(it.clade, it.group), e)} onPointerLeave={leave}>
                 <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={4} />
@@ -692,7 +835,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
           if (it.type === "relGenus") {
             const r = it.r, on = isAlive(r.range_ma, t);
             return (
-              <g key={`rel:${it.clade}/${r.genus}`} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && !data.relatives[it.clade]?.families.includes(selected) ? s.faded : ""}`} data-stop
+              <g key={`rel:${it.clade}/${r.genus}`} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && !data.relatives[it.clade]?.families.includes(selected) ? s.faded : ""}`} data-stop {...treeItem(`rel:${it.clade}/${r.genus}`)}
                 onPointerEnter={() => setHoverKey(`rel:${it.clade}/${r.genus}`)} onPointerMove={(e) => tip.show(relGenusTip(it.clade, r), e)} onPointerLeave={leave}>
                 <rect className={s.hit} x={nameX} width={W - M.r - nameX} height={GROW} rx={4} />
                 <line className={s.guide} x1={nameX + 4} x2={nameX + 4} y1={0} y2={GROW} />
@@ -714,7 +857,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
             : "";
           const xe = x(genusRecord(gn)[1]), spRight = xe + 6 + spText.length * 5.6 < W - M.r;
           return (
-            <g key={`${f.family}/${gn.genus}`} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && f.family !== selected ? s.faded : ""}`} data-stop data-genus={gn.genus}
+            <g key={`${f.family}/${gn.genus}`} transform={`translate(0,${it.y})`} className={`${s.row} ${selected && f.family !== selected ? s.faded : ""}`} data-stop data-genus={gn.genus} {...treeItem(`${f.family}/${gn.genus}`)}
               onPointerDown={() => { tip.hide(); dispatch({ type: "genus", family: f.family, genus: gn.genus }); }}
               onPointerEnter={() => setHoverKey(`${f.family}/${gn.genus}`)} onPointerMove={(e) => tip.show(genusTip(f, gn), e)} onPointerLeave={leave}>
               <rect className={s.hit} x={nameX} width={W - M.r - nameX} height={GROW} rx={4} />
@@ -737,6 +880,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
           {branches.labels.filter((l) => l.hot).map((l) => <text key={`${l.name}-${l.y}`} className={s.cladeHot} x={l.x} y={l.y} textAnchor="end">{l.name}</text>)}
         </g>
         {extinctions(rowsTop, H - AXIS, false)}
+        {/* the keyboard focus ring: SVG rows don't draw an outline of their own */}
+        {ring && <rect className={s.focusRow} x={ring.box.x} y={ring.box.y + 1} width={Math.max(0, ring.box.w)} height={Math.max(0, ring.box.h - 2)} rx={4} pointerEvents="none" />}
 
         {/* bottom axis: ticks adapt to the zoom */}
         <g transform={`translate(0,${H - AXIS + 4})`}>
