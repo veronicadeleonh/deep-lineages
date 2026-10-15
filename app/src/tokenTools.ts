@@ -25,6 +25,7 @@ function groupOf(name: string, raw: string): string {
   if (name.startsWith("--fs-")) return "Type scale";
   if (name.startsWith("--fw-")) return "Font weight";
   if (name.startsWith("--radius")) return "Radius";
+  if (name.startsWith("--border-")) return "Border width";
   if (name.startsWith("--shadow")) return "Shadow";
   if (name === "--font" || name === "--mono") return "Font family";
   const color = CSS.supports("color", raw) || /^var\(|^color-mix/.test(raw);
@@ -140,6 +141,7 @@ export const ROLES: Record<string, RoleInfo> = {
   "--diet-carn": { role: "graphic", on: ["--surface"] },
   "--diet-other": { role: "graphic", on: ["--surface"] },
   "--extinct": { role: "text", on: ["--surface"], note: "Labels like “K-Pg extinction”. On the map they get a --surface halo, so they're measured against that too" },
+  "--shadow-color": { role: "decorative", note: "Used at 8–18% opacity inside the --shadow-* tokens" },
   "--period-tri": { role: "graphic", on: ["--surface"] },
   "--period-jur": { role: "graphic", on: ["--surface"] },
   "--period-cre": { role: "graphic", on: ["--surface"] },

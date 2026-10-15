@@ -52,9 +52,20 @@
   --diet-carn: var(--orange-500);
   --diet-other: var(--gray-400);   /* omnivore, no data */
   --extinct: var(--crimson-600);
+  /* shadows */
+  --shadow-color: var(--gray-900); /* every shadow is this color at some opacity */
   /* data: period of a genus's first fossil (ordinal: older recedes) */
   --period-tri: var(--violet-400); --period-jur: var(--violet-500); --period-cre: var(--violet-800);
 
+  /* border widths (also used for selection rings drawn with box-shadow) */
+  --border-thin: 1px;
+  --border-thick: 1.5px;
+  /* shadows: how far something floats above the page */
+  --shadow-sm: 0 4px 16px color-mix(in srgb, var(--shadow-color) 12%, transparent);     /* tooltips */
+  --shadow-md: 0 8px 24px color-mix(in srgb, var(--shadow-color) 12%, transparent);     /* dropdowns, floating cards */
+  --shadow-lg: 0 24px 60px color-mix(in srgb, var(--shadow-color) 18%, transparent);    /* dialogs over the app */
+  --shadow-lg-up: 0 -8px 24px color-mix(in srgb, var(--shadow-color) 18%, transparent); /* the mobile sheet, rising from the bottom */
+  --shadow-soft: 0 20px 60px color-mix(in srgb, var(--shadow-color) 8%, transparent);  /* the welcome panel, light over the map */
   /* corner radii */
   --radius-xs: 2px;     /* legend swatches: small squares that must stay square */
   --radius-sm: 4px;     /* kbd keys */

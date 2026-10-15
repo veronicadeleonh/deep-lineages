@@ -88,7 +88,7 @@
   /* phones and narrow windows: the profile is a bottom sheet over the timeline */
   .panel {
     position: fixed; left: 0; right: 0; bottom: 0; top: auto; max-height: 50vh; z-index: 10;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -8px 24px rgb(0 0 0 / .18); animation: sheetUp .2s ease-out;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-lg-up); animation: sheetUp .2s ease-out;
   }
   @keyframes sheetUp { from { transform: translateY(24px); opacity: 0; } }
   .top { padding: 16px 16px 10px; }

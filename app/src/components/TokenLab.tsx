@@ -13,6 +13,8 @@ const KINDS = {
   "Font weight": (g: string) => g === "Font weight",
   "Type scale": (g: string) => g === "Type scale",
   Radius: (g: string) => g === "Radius",
+  Shadow: (g: string) => g === "Shadow",
+  "Border width": (g: string) => g === "Border width",
   All: () => true,
 };
 type Kind = keyof typeof KINDS;
@@ -95,7 +97,8 @@ export function TokenLab() {
                 <label style={{ ...st.sw, background: `var(${t.name})` }} title="Pick a color">
                   <input type="color" value={toHex(c)} onChange={(e) => set(t.name, e.target.value)} style={st.hiddenInput} />
                 </label>
-              ) : t.group === "Radius" ? <span style={{ ...st.swNone, ...st.radiusBox, borderRadius: `var(${t.name})` }} aria-hidden />
+              ) : t.group === "Shadow" ? <span style={{ ...st.swNone, height: 22, background: "#fff", borderRadius: 4, boxShadow: `var(${t.name})` }} aria-hidden />
+                : t.group === "Radius" ? <span style={{ ...st.swNone, ...st.radiusBox, borderRadius: `var(${t.name})` }} aria-hidden />
                 : t.group === "Font weight" ? <span style={{ ...st.swNone, ...st.aa, fontWeight: `var(${t.name})` }} aria-hidden>Aa</span>
                 : <span style={st.swNone} />}
               <div style={st.mid}>

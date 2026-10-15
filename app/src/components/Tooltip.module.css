@@ -1,7 +1,7 @@
 .tooltip {
   position: fixed; z-index: 10; pointer-events: none; max-width: 260px;
   background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius-md);
-  padding: 6px 9px; font-size: var(--fs-sm); box-shadow: 0 4px 16px rgb(0 0 0 / .12);
+  padding: 6px 9px; font-size: var(--fs-sm); box-shadow: var(--shadow-sm);
 }
 .tooltip b { font-weight: var(--fw-bold); }
 .tooltip span { color: var(--text-2); }

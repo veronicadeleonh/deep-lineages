@@ -35,6 +35,7 @@ function rawValues(src: Sources) {
       const text = full.replace(/:root\s*\{[^}]*\}/, "").replace(/\/\*[\s\S]*?\*\//g, "");
       for (const m of text.matchAll(re)) {
         const v = m[1].trim();
+        if (!v.replace(/var\(--[\w-]+\)/g, "").replace(/\b0\b/g, "").trim()) continue; // only tokens (and zeros): already tokenized
         const per = found.get(v) ?? new Map<string, number>();
         per.set(file, (per.get(file) ?? 0) + 1);
         found.set(v, per);
@@ -64,7 +65,7 @@ export function Tokens() {
   const groups = useMemo(() => {
     const g = new Map<string, Token[]>();
     for (const t of tokens) g.set(t.group, [...(g.get(t.group) ?? []), t]);
-    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Font family", "Radius", "Shadow", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
+    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Font family", "Radius", "Border width", "Shadow", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
   }, [tokens]);
   const raw = useMemo(() => rawValues(src), [src]);
   const loaded = Object.keys(src).length > 0;
@@ -176,6 +177,7 @@ function preview(g: string, t: Token) {
   if (g === "Font weight") return <span style={{ fontWeight: v }}>Tyrannosaurus</span>;
   if (g === "Font family") return <span style={{ fontFamily: v }}>Tyrannosaurus 66 Ma</span>;
   if (g === "Radius") return <span className={s.box} style={{ borderRadius: v }} />;
+  if (g === "Border width") return <span className={s.box} style={{ borderWidth: v, borderColor: "var(--text)" }} />;
   if (g === "Shadow") return <span className={s.box} style={{ boxShadow: v, border: 0 }} />;
   return null;
 }
