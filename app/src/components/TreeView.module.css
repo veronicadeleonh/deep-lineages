@@ -33,7 +33,7 @@
 .rank { margin-left: auto; padding-left: 6px; font-size: var(--fs-2xs); letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
 .stepAbove { opacity: .7; }
 .stepFocus .stepDot { background: var(--cursor); border-color: var(--cursor); }
-.stepFocus .rank { color: var(--cursor); font-weight: 700; }
+.stepFocus .rank { color: var(--accent-text); font-weight: 700; }
 .ladder li:last-of-type:not(.stepSpecies) .stepDot, .ladder li:has(+ .stepSpecies) .stepDot { background: var(--text); border-color: var(--text); }
 .stepSpecies { --d: 9; color: var(--text-2); }
 .stepSpecies .stepDot { width: 6px; height: 6px; top: .7em; border-width: 1px; }

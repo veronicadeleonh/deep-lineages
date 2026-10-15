@@ -10,10 +10,10 @@ export const EXTINCTIONS = [
 
 export interface Diet { label: string; color: string }
 export const DIET: Record<string, Diet> = {
-  herbivore: { label: "Herbivore", color: "var(--herb)" },
-  carnivore: { label: "Carnivore", color: "var(--carn)" },
-  omnivore: { label: "Omnivore", color: "var(--unknown)" },
-  none: { label: "No data", color: "var(--unknown)" },
+  herbivore: { label: "Herbivore", color: "var(--diet-herb)" },
+  carnivore: { label: "Carnivore", color: "var(--diet-carn)" },
+  omnivore: { label: "Omnivore", color: "var(--diet-other)" },
+  none: { label: "No data", color: "var(--diet-other)" },
 };
 export const dietOf = (f: Family): Diet => DIET[f.pbdb?.diet ?? "none"] ?? DIET.none;
 

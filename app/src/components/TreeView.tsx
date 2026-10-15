@@ -20,9 +20,9 @@ type P = HierarchyPointNode<RNode>;
 interface View { k: number; x: number; y: number } // zoom, and pan in screen pixels from the canvas center
 
 const PERIODS = [
-  { key: "Triassic", color: "var(--tri)" },
-  { key: "Jurassic", color: "var(--jur)" },
-  { key: "Cretaceous", color: "var(--cre)" },
+  { key: "Triassic", color: "var(--period-tri)" },
+  { key: "Jurassic", color: "var(--period-jur)" },
+  { key: "Cretaceous", color: "var(--period-cre)" },
 ] as const;
 const periodColor = (g: RNode["genus"]) => PERIODS.find((p) => g && p.key === periodOf(g))!.color;
 /** The silhouette for the center: the focused family's, or the focused group's (PhyloPic, via clades.json). */
@@ -291,9 +291,9 @@ export function TreeCard() {
           <li className={s.legendTitle}>First fossil</li>
           {PERIODS.map((p) => <li key={p.key}><i className={s.dot} style={{ background: p.color }} />{p.key}</li>)}
           <li className={s.legendTitle}>Ring</li>
-          <li><i className="swatch" style={{ background: "var(--herb)" }} />Herbivore</li>
-          <li><i className="swatch" style={{ background: "var(--carn)" }} />Carnivore</li>
-          <li><i className="swatch" style={{ background: "var(--unknown)" }} />No data</li>
+          <li><i className="swatch" style={{ background: "var(--diet-herb)" }} />Herbivore</li>
+          <li><i className="swatch" style={{ background: "var(--diet-carn)" }} />Carnivore</li>
+          <li><i className="swatch" style={{ background: "var(--diet-other)" }} />No data</li>
         </ul>
       </div>
 

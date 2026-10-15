@@ -217,8 +217,8 @@ export function FieldGuide() {
           <div className={s.row}>
             {GROUPS.map((g) => <Chip key={g.key} on={lineage === g.key} onClick={() => setLineage(lineage === g.key ? null : g.key)}>{g.label}</Chip>)}
             <span className={s.divider} />
-            <Chip on={diet === "herbivore"} onClick={() => setDiet(diet === "herbivore" ? null : "herbivore")}><i className="swatch" style={{ background: "var(--herb)" }} />Plant-eaters</Chip>
-            <Chip on={diet === "carnivore"} onClick={() => setDiet(diet === "carnivore" ? null : "carnivore")}><i className="swatch" style={{ background: "var(--carn)" }} />Meat-eaters</Chip>
+            <Chip on={diet === "herbivore"} onClick={() => setDiet(diet === "herbivore" ? null : "herbivore")}><i className="swatch" style={{ background: "var(--diet-herb)" }} />Plant-eaters</Chip>
+            <Chip on={diet === "carnivore"} onClick={() => setDiet(diet === "carnivore" ? null : "carnivore")}><i className="swatch" style={{ background: "var(--diet-carn)" }} />Meat-eaters</Chip>
             <span className={s.spacer} />
             <label className={s.sort}>Sort
               <select value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
@@ -277,7 +277,7 @@ export function FieldGuide() {
                 </span>
                 <svg className={s.bar} width={listW - LABEL} height={22} viewBox={`${LABEL} 0 ${listW - LABEL} 22`}>
                   <line x1={x(state.t)} x2={x(state.t)} y1={0} y2={22} className={s.cursorFaint} />
-                  <rect x={x(r.first) - 1.5} width={Math.max(3, x(r.last) - x(r.first) + 3)} y={8} height={6} rx={3} fill={r.f ? dietOf(r.f).color : "var(--unknown)"} />
+                  <rect x={x(r.first) - 1.5} width={Math.max(3, x(r.last) - x(r.first) + 3)} y={8} height={6} rx={3} fill={r.f ? dietOf(r.f).color : "var(--diet-other)"} />
                   <text x={Math.max(x(r.first), x(r.last)) + 8} y={14.5} className={s.n}>{fNum(r.n)}</text>
                 </svg>
               </button>
@@ -322,7 +322,7 @@ function Through({ found, famBy, width, t }: { found: Fossil[]; famBy: Map<strin
             if (!v) return null;
             const h = H - bottom - y(v), yy = base - h; // stacked from the baseline up
             base = yy;
-            return <rect key={`${b.start}${k}`} x={x(b.start)} width={w} y={yy} height={h} fill={k === "herb" ? "var(--herb)" : k === "carn" ? "var(--carn)" : "var(--unknown)"} />;
+            return <rect key={`${b.start}${k}`} x={x(b.start)} width={w} y={yy} height={h} fill={k === "herb" ? "var(--diet-herb)" : k === "carn" ? "var(--diet-carn)" : "var(--diet-other)"} />;
           });
         })}
         <line x1={x(t)} x2={x(t)} y1={top - 6} y2={H - bottom} className={s.cursor} />

@@ -10,7 +10,7 @@
   border-radius: 8px; padding: 3px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
 }
 .chip:hover { color: var(--text); border-color: var(--text-3); }
-.chipOn, .chipOn:hover { color: var(--surface); background: var(--cursor); border-color: var(--cursor); font-weight: 700; }
+.chipOn, .chipOn:hover { color: var(--surface); background: var(--accent-bg); border-color: var(--accent-bg); font-weight: 700; }
 .mapBox { min-width: 0; }
 .map { display: block; width: 100%; height: auto; cursor: crosshair; }
 .sphere { fill: var(--ocean); stroke: var(--line); }
@@ -87,7 +87,7 @@
 .n { font-size: var(--fs-xs); fill: var(--text-3); font-variant-numeric: tabular-nums; }
 .notice { margin: 8px 0; padding: 10px 12px; font-size: var(--fs-md); line-height: 1.5; color: var(--text-2); background: color-mix(in srgb, var(--cursor) 10%, transparent); border: 1px solid color-mix(in srgb, var(--cursor) 35%, transparent); border-radius: 8px; }
 .notice b { color: var(--text); }
-.notice button { font: inherit; font-weight: 650; color: var(--cursor); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.notice button { font: inherit; font-weight: 650; color: var(--accent-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .othersToggle { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: var(--fs-sm); color: var(--text-2); cursor: pointer; }
 .othersToggle input { accent-color: var(--cursor); margin: 0; }
 .othersToggle span { color: var(--text-3); }

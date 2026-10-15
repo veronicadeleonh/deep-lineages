@@ -1,26 +1,59 @@
 /* Design tokens, base styles and shared pieces. Component styles live in *.module.css. */
 :root {
   color-scheme: light;
-  --bg: #eef2f4;
-  --surface: #ffffff;
-  --surface-2: #f1f5f7;
-  --line: #d8e0e5;
-  --text: #18222b;
-  --text-2: #4a5763;
-  --text-3: #7d8a96;
-  --ocean: #d9e9f2;       /* pale sea */
-  --land: #b4c79e;        /* sage green */
-  --area: #d3dde4;
-  --area-edge: #6d8394;
-  --herb: #14946e;        /* diet pair validated on --surface: CVD ΔE 8.4, normal 28 */
-  --carn: #e2582f;
-  --unknown: #7d8a96;
-  --extinct: #c4285a;
-  --cursor: #b87700;      /* amber: the "now" of the timeline */
-  --dot: #4a5763;
-  --tri: #a99ee6; --jur: #7467d0; --cre: #40349a; /* ordinal: period of a genus's first fossil (older recedes) */
-  --map-ink: var(--text); --map-ink-2: var(--text-2); --map-halo: var(--surface); --map-dot: var(--text);
-  --sil-filter: none;
+
+  /* ---------- primitives: the palette. Named for what they look like; components never use them directly ---------- */
+  --gray-0: #ffffff;
+  --gray-50: #f1f5f7;
+  --gray-100: #eef2f4;
+  --gray-200: #d8e0e5;
+  --gray-250: #d3dde4;   /* almost --gray-200: candidate to merge */
+  --gray-400: #7d8a96;
+  --gray-500: #6d8394;
+  --gray-600: #5f6b76;
+  --gray-700: #4a5763;
+  --gray-900: #18222b;
+  --amber-600: #b87700;
+  --amber-700: #966100;  /* the darker amber: for amber that carries text */
+  --green-600: #14946e;
+  --orange-500: #e2582f;
+  --crimson-600: #c4285a;
+  --blue-100: #d9e9f2;
+  --sage-300: #b4c79e;
+  --violet-300: #a99ee6;
+  --violet-500: #7467d0;
+  --violet-800: #40349a;
+
+  /* ---------- semantic: named for what they do. This is what components use ---------- */
+  /* surfaces and lines */
+  --bg: var(--gray-100);
+  --surface: var(--gray-0);
+  --surface-2: var(--gray-50);
+  --line: var(--gray-200);
+  /* text */
+  --text: var(--gray-900);
+  --text-2: var(--gray-700);
+  --text-3: var(--gray-600);       /* was #7d8a96 (3.1–3.5:1), now AA on --bg and --surface */
+  /* accent: the amber "now" */
+  --cursor: var(--amber-600);      /* lines, fills, dots, icons, big numbers: needs 3:1 */
+  --accent-text: var(--amber-700); /* amber text at normal size: needs 4.5:1 */
+  --accent-bg: var(--amber-700);   /* amber behind light text (buttons, badges): needs 4.5:1 */
+  /* maps */
+  --ocean: var(--blue-100);
+  --land: var(--sage-300);
+  --map-ink: var(--text); --map-ink-2: var(--text-2); --map-dot: var(--map-ink);
+  --dot: var(--text-2);
+  /* data: the diversity curves */
+  --area: var(--gray-250);
+  --area-edge: var(--gray-500);
+  /* data: diet (validated on --surface: CVD ΔE 8.4, normal 28) */
+  --diet-herb: var(--green-600);
+  --diet-carn: var(--orange-500);
+  --diet-other: var(--gray-400);   /* omnivore, no data */
+  --extinct: var(--crimson-600);
+  /* data: period of a genus's first fossil (ordinal: older recedes) */
+  --period-tri: var(--violet-300); --period-jur: var(--violet-500); --period-cre: var(--violet-800);
+
   --radius: 14px;
   /* type scale: every font size in the app comes from here */
   --fs-2xs: 10px;   /* axis ticks */
@@ -69,4 +102,4 @@ kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bott
 .chip:hover { border-color: var(--text-3); }
 .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
 
-.sil { pointer-events: none; filter: var(--sil-filter); }
+.sil { pointer-events: none; }

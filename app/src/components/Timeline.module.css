@@ -57,7 +57,7 @@
 
 /* cursor */
 .cursorLine { stroke: var(--cursor); stroke-width: 1.5; }
-.cursorHandle { fill: var(--cursor); }
+.cursorHandle { fill: var(--accent-bg); }
 .cursorLabel { fill: var(--surface); font-size: var(--fs-xs); font-weight: 600; font-variant-numeric: tabular-nums; }
 .cursorCount { fill: var(--text); font-size: var(--fs-xs); font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
 .genusLabel.labelSel { fill: var(--text); font-weight: 650; }
@@ -102,14 +102,14 @@
 
 /* the cursor's period and stage */
 .bandNow { fill: var(--cursor); fill-opacity: .09; pointer-events: none; }
-.periodNow { fill: var(--cursor); font-weight: 700; }
+.periodNow { fill: var(--accent-text); font-weight: 700; }
 .stageNow { fill: var(--cursor); fill-opacity: .28; stroke: var(--cursor); stroke-opacity: .6; }
 .stageNow:hover { fill: var(--cursor); fill-opacity: .4; }
 .stageLabelNow { fill: var(--text); font-weight: 650; }
 
 /* collapsing: a whole lineage from its side label, and slim rows for families outside the window */
 .lineageBtn { cursor: pointer; }
-.lineageBtn:hover text { fill: var(--cursor); }
+.lineageBtn:hover text { fill: var(--accent-text); }
 .lineageBtn:hover line { stroke: var(--cursor); }
 .foldRow { cursor: pointer; }
 .foldLabel { fill: var(--text); font-size: var(--fs-sm); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
@@ -124,5 +124,5 @@
 .listBar button { flex: 1; font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: none; border: 0; padding: 4px 12px; cursor: pointer; white-space: nowrap; }
 .listBar button + button { border-left: 1px solid var(--line); }
 .listBar button:hover { color: var(--text); }
-.listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--cursor); font-weight: 700; }
+.listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--accent-bg); font-weight: 700; }
 .listN { opacity: .7; font-variant-numeric: tabular-nums; margin-left: 3px; }

@@ -1,0 +1,57 @@
+/* The tokens page. It styles itself with the tokens it shows. */
+.page { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+.head { margin-bottom: 24px; }
+.eyebrow { margin: 0 0 6px; font-size: var(--fs-md); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--accent-text); }
+.head h1 { margin: 0 0 8px; font-size: var(--fs-display); font-weight: 800; letter-spacing: -.02em; }
+.lede { margin: 0 0 16px; color: var(--text-2); max-width: 640px; }
+.lede a, .toc a { color: var(--text); text-decoration: underline; text-decoration-color: var(--cursor); text-underline-offset: 3px; }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: var(--fs-md); }
+code { font-family: var(--mono); font-size: var(--fs-sm); }
+
+.section { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 16px; scroll-margin-top: 16px; }
+.section h2 { margin: 0 0 10px; font-size: var(--fs-xl); font-weight: 700; color: var(--text); }
+.section h2 span, .raw h3 span { font-weight: 400; color: var(--text-2); font-size: var(--fs-md); margin-left: 6px; }
+.note { margin: 0 0 12px; color: var(--text-2); font-size: var(--fs-md); }
+
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-md); }
+.table th { text-align: left; font-weight: 600; color: var(--text-2); font-size: var(--fs-sm); padding: 4px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.table td { padding: 6px 8px; border-bottom: 1px solid var(--surface-2); vertical-align: top; }
+.name { font-weight: 600; color: var(--text); white-space: nowrap; }
+.preview { width: 220px; }
+.value code { color: var(--text); word-break: break-word; }
+.value small { display: block; color: var(--text-2); font-family: var(--mono); font-size: var(--fs-xs); }
+.sw { display: block; width: 56px; height: 24px; border-radius: 4px; border: 1px solid var(--line); }
+.box { display: block; width: 56px; height: 32px; background: var(--surface-2); border: 1px solid var(--line); }
+
+.cr { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cr b { font-size: var(--fs-xs); font-weight: 700; padding: 1px 5px; border-radius: 4px; margin-left: 4px; }
+.pass b { background: #dcf3e8; color: #0b5c40; }
+.large b { background: #fdf0d5; color: #7a4d00; }
+.fail b { background: #fbe1e6; color: #8f1538; }
+
+.uses { width: 150px; }
+.usesBtn { font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 2px 8px; cursor: pointer; }
+.usesBtn:hover:not(:disabled) { border-color: var(--text-2); }
+.unused { color: #8f1538; background: #fbe1e6; border-color: transparent; cursor: default; }
+.files { margin: 6px 0 0; padding: 0; list-style: none; font-family: var(--mono); font-size: var(--fs-xs); color: var(--text-2); }
+
+.raw { margin-top: 16px; }
+.raw h3 { margin: 0 0 6px; font-size: var(--fs-base); font-weight: 700; }
+.rawVal { white-space: nowrap; width: 260px; }
+.dotSw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--line); margin-right: 6px; vertical-align: -2px; }
+.count { width: 50px; font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
+.where { font-family: var(--mono); font-size: var(--fs-xs); color: var(--text-2); }
+.na { font-size: var(--fs-xs); color: var(--text-2); }
+.refs { width: 220px; }
+.refs code { display: inline-block; margin: 0 6px 2px 0; color: var(--text); }
+.refs .unused { font-size: var(--fs-xs); padding: 1px 6px; border-radius: 4px; }
+.role { display: inline-block; font-size: var(--fs-xs); font-weight: 600; padding: 1px 6px; border-radius: 4px; background: var(--surface-2); border: 1px solid var(--line); cursor: help; white-space: nowrap; }
+.need { display: block; margin-top: 2px; font-size: var(--fs-xs); color: var(--text-2); }
+.cr { display: block; }
+.pass b, .fail b { margin-left: 4px; }
+.roleNote { display: block; margin-top: 2px; font-size: var(--fs-xs); color: var(--text-2); max-width: 300px; }
+.ref { color: var(--text-2); font-variant-numeric: tabular-nums; }
+.ref span + span::before { content: " / "; }
+.summary { margin: 0 0 12px; padding: 8px 12px; border-radius: 8px; background: #fbe1e6; color: #8f1538; font-size: var(--fs-md); }
+.summary code { margin-left: 6px; font-weight: 600; }
+.summaryOk { background: #dcf3e8; color: #0b5c40; }
