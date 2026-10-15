@@ -81,7 +81,7 @@ export function TimelineCard() {
     <section className={`card ${s.card}`} aria-label="Timeline">
       <Timeline animateTo={animateTo} zoomBy={zoomBy} deckTop={
         <div className={s.zoomBar}>
-          <div className={s.zoom} role="group" aria-label="Timeline zoom">
+          <div className={`${s.zoom} segmented`} role="group" aria-label="Timeline zoom">
             <button aria-label="Zoom out" title="Zoom out (−)" onClick={() => zoomBy(2, state.t)} disabled={span >= FULL_SPAN - 0.01}>−</button>
             <button aria-label="Zoom in" title="Zoom in (+)" onClick={() => zoomBy(0.5, state.t)} disabled={span <= MIN_SPAN + 0.01}>+</button>
             <button title="Show all (0)" onClick={() => animateTo(TIME)} disabled={span >= FULL_SPAN - 0.01}>All</button>
@@ -480,14 +480,15 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
 
   return (
     <div
-      ref={wrap} className={s.timeline} tabIndex={0} role="slider" onKeyDown={onKeyDown}
-      aria-label="Time in millions of years" aria-valuenow={t} aria-valuemin={TIME[1]} aria-valuemax={TIME[0]}
-      aria-valuetext={`${fMa(t)} million years ago`}
+      ref={wrap} className={s.timeline}
     >
       {/* the deck stays on screen while the rows scroll: zoom controls, periods, stages, diversity, cursor and the paleomap */}
       <div className={s.deck}>
         {deckTop}
-        <div className={s.deckPlot}>
+        {/* the time axis is the slider (only it: the zoom buttons and the rows are controls of their own) */}
+        <div className={s.deckPlot} tabIndex={0} role="slider" onKeyDown={onKeyDown}
+          aria-label="Time in millions of years" aria-valuenow={Math.round(t)} aria-valuemin={TIME[1]} aria-valuemax={TIME[0]}
+          aria-valuetext={`${fMa(t)} million years ago`}>
           <svg viewBox={`0 0 ${W} ${rowsTop}`} width={W} height={rowsTop} {...svgEvents}>
             <defs><clipPath id={clip}><rect x={L} y={0} width={W - M.r - L} height={H} /></clipPath></defs>
             <g clipPath={`url(#${clip})`}>
@@ -536,7 +537,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
       {/* how to show the list: everything, or only the families with fossils at the cursor (the rest collapses to slim rows).
           "Fossils at", not "alive at": the record shows where fossils were found, not when a group lived */}
       <div className={s.listRow} style={{ marginLeft: GUT }}>
-      <div className={s.listBar} role="radiogroup" aria-label="Families in the list">
+      <div className={`${s.listBar} segmented`} role="radiogroup" aria-label="Families in the list">
         {[false, true].map((on) => (
           <button key={String(on)} role="radio" aria-checked={state.focusNow === on} className={state.focusNow === on ? s.listOn : undefined}
             onClick={() => dispatch({ type: "focusNow", on })}

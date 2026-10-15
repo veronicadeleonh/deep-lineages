@@ -110,14 +110,15 @@ export function clearTokens() {
 }
 
 /* ---------- what each semantic color is for: the role sets the WCAG requirement, `on` the backgrounds it really sits on ---------- */
-export type Role = "text" | "large text" | "graphic" | "background" | "decorative";
-export const NEED: Record<Role, number> = { text: 4.5, "large text": 3, graphic: 3, background: 0, decorative: 0 };
+export type Role = "text" | "large text" | "graphic" | "background" | "decorative" | "disabled";
+export const NEED: Record<Role, number> = { text: 4.5, "large text": 3, graphic: 3, background: 0, decorative: 0, disabled: 0 };
 export const ROLE_HELP: Record<Role, string> = {
   text: "Text at normal size: 4.5:1 (WCAG 1.4.3)",
   "large text": "Text ≥24px, or ≥18.66px bold: 3:1 (WCAG 1.4.3)",
   graphic: "Icons, data marks, UI edges, focus rings: 3:1 against what's next to them (WCAG 1.4.11)",
   background: "A surface others sit on: measured from the other side",
   decorative: "Doesn't carry information on its own: no requirement",
+  disabled: "Inactive controls: WCAG 1.4.3 exempts them, so they can look faded",
 };
 export type RoleInfo = { role: Role; on?: string[]; note?: string };
 const PAPER = ["--bg", "--surface", "--surface-2"];
@@ -132,6 +133,8 @@ export const ROLES: Record<string, RoleInfo> = {
   "--text": { role: "text", on: PAPER },
   "--text-2": { role: "text", on: PAPER },
   "--text-3": { role: "text", on: PAPER },
+  "--text-disabled": { role: "disabled" },
+  "--surface-disabled": { role: "disabled" },
   "--cursor": { role: "graphic", on: ["--surface", "--bg", "--ocean"], note: "Also the big year on the map (large text)" },
   "--accent-text": { role: "text", on: ["--surface", "--bg"] },
   "--map-accent-text": { role: "text", on: MAP, note: "Chapter label and links over the map" },

@@ -138,9 +138,6 @@
 .speed button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: none; border: 0; padding: 4px 9px; cursor: pointer; }
 .speed button + button { border-left: 1px solid var(--line); }
 .speed button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: var(--fw-bold); }
-.speed button:focus-visible { outline-offset: calc(var(--focus-offset) * -1); } /* the group clips its edges: draw the ring inside */
-.speed button:first-child { border-radius: calc(var(--radius-md) - var(--border-thin)) 0 0 calc(var(--radius-md) - var(--border-thin)); } /* so the inner ring follows the group's corners */
-.speed button:last-child { border-radius: 0 calc(var(--radius-md) - var(--border-thin)) calc(var(--radius-md) - var(--border-thin)) 0; }
 .scrubber { flex: 1; min-width: 0; cursor: pointer; touch-action: none; border-radius: var(--radius-md); }
 .scrubber svg { display: block; overflow: visible; }
 .band { fill: var(--surface-2); }

@@ -25,9 +25,6 @@
 .seg button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: var(--surface); border: 0; padding: 2px 9px; cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: var(--fw-bold); }
-.seg button:focus-visible { outline-offset: calc(var(--focus-offset) * -1); } /* the group clips its edges: draw the ring inside */
-.seg button:first-child { border-radius: calc(var(--radius-md) - var(--border-thin)) 0 0 calc(var(--radius-md) - var(--border-thin)); } /* so the inner ring follows the group's corners */
-.seg button:last-child { border-radius: 0 calc(var(--radius-md) - var(--border-thin)) calc(var(--radius-md) - var(--border-thin)) 0; }
 .through { margin: 6px 0 0; }
 .through figcaption { font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); margin-bottom: 4px; }
 .through figcaption span { font-weight: var(--fw-regular); color: var(--text-3); }

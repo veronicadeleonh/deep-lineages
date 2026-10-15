@@ -194,7 +194,7 @@ export function FieldGuide() {
         </div>
         <div className={s.zoneBar}>
           <span>Click the map to pick a zone around a point · size</span>
-          <span className={s.seg} role="group" aria-label="Zone size">
+          <span className={`${s.seg} segmented`} role="group" aria-label="Zone size">
             {ZONES.map((z) => <button key={z.km} aria-pressed={zoneKm === z.km} onClick={() => setZone(z.km)} title={`${fNum(z.km)} km`}>{z.label}</button>)}
           </span>
         </div>

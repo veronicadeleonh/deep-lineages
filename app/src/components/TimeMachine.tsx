@@ -200,7 +200,7 @@ export function TimeMachine() {
               : <path d="M4.5 2.2v11.6c0 .6.7 1 1.2.7l9-5.8c.5-.3.5-1 0-1.4l-9-5.8c-.5-.3-1.2.1-1.2.7z" />}
           </svg>
         </button>
-        <div className={s.speed} role="group" aria-label="Speed">
+        <div className={`${s.speed} segmented`} role="group" aria-label="Speed">
           {SPEEDS.map((v) => <button key={v} aria-pressed={speed === v} onClick={() => setSpeed(v)}>{v}×</button>)}
         </div>
         <Scrubber t={t} onScrub={(v) => { setPlaying(false); dispatch({ type: "time", t: v }); }} />

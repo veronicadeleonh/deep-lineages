@@ -91,7 +91,6 @@
 .controls button { font: inherit; font-size: var(--fs-lg); width: 34px; height: 32px; color: var(--text); background: none; border: 0; cursor: pointer; }
 .controls button + button { border-top: 1px solid var(--line); }
 .controls button:hover:not(:disabled) { background: var(--surface-2); }
-.controls button:disabled { color: var(--text-3); cursor: default; }
 .hint { position: absolute; left: 8px; bottom: 4px; margin: 0; z-index: var(--z-raised); color: var(--text-3); font-size: var(--fs-sm); pointer-events: none; }
 .unnamed circle { fill: transparent; stroke: transparent; }
 .unnamed:hover circle { fill: var(--line); }

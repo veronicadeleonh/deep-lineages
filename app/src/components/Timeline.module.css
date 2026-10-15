@@ -13,13 +13,12 @@
 }
 .zoom button:last-child { border-right: 0; }
 .zoom button:hover:not(:disabled) { background: var(--surface-2); }
-.zoom button:disabled { color: var(--text-3); cursor: default; }
 .zoomHint { color: var(--text-3); font-size: var(--fs-sm); }
 
 /* chart */
 .timeline { width: 100%; touch-action: none; user-select: none; }
 .timeline svg { display: block; width: 100%; height: auto; overflow: visible; }
-.timeline:focus-visible { border-radius: var(--radius-md); }
+.deckPlot:focus-visible { border-radius: var(--radius-md); }
 .band { fill: var(--surface-2); }
 .bandAlt { fill: transparent; }
 .periodLabel { fill: var(--text-2); font-size: var(--fs-xs); }
@@ -125,5 +124,6 @@
 .listBar button + button { border-left: 1px solid var(--line); }
 .listBar button:hover { color: var(--text); }
 .listBar .listOn, .listBar .listOn:hover { color: var(--bg); background: var(--accent-bg); font-weight: var(--fw-bold); }
+.listBar .listOn:focus-visible { outline-color: var(--surface); outline-offset: calc(var(--focus-offset) * -2); } /* amber on amber would vanish: a light ring, set in from the edge */
 .listN { color: var(--text-3); font-variant-numeric: tabular-nums; margin-left: 3px; } /* a token, not opacity: opacity makes colors outside the palette */
 .listOn .listN { color: inherit; }
