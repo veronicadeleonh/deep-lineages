@@ -55,3 +55,12 @@ code { font-family: var(--mono); font-size: var(--fs-sm); }
 .summary { margin: 0 0 12px; padding: 8px 12px; border-radius: var(--radius-md); background: #fbe1e6; color: #8f1538; font-size: var(--fs-md); }
 .summary code { margin-left: 6px; font-weight: var(--fw-semibold); }
 .summaryOk { background: #dcf3e8; color: #0b5c40; }
+
+/* focus previews: each token shows only its own part of the ring */
+.focusBox { display: inline-block; height: 24px; border-radius: var(--radius-md); outline-offset: 0; }
+.focusBar { display: inline-block; width: 56px; height: var(--focus-width); background: var(--cursor); vertical-align: middle; }
+.focusGap { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.focusIn { outline: var(--focus-ring); outline-offset: calc(var(--focus-offset) * -1); }
+.focusPair { display: inline-flex; gap: 20px; }
+.focusPair > span { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; }
+.focusPair small { font-size: var(--fs-xs); color: var(--text-2); }

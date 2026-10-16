@@ -179,9 +179,22 @@ function preview(g: string, t: Token) {
   if (g === "Radius") return <span className={s.box} style={{ borderRadius: v }} />;
   if (g === "Letter spacing") return <span style={{ letterSpacing: v, textTransform: t.name.includes("caps") ? "uppercase" : undefined, fontSize: "var(--fs-sm)" }}>{t.name.includes("caps") ? "On the map now" : "Tyrannosaurus"}</span>;
   if (g === "Line height") return <span style={{ display: "block", lineHeight: v, fontSize: "var(--fs-sm)", maxWidth: 180, background: "var(--surface-2)" }}>The Atlantic begins to open between two continents.</span>;
-  if (g === "Focus") return <span className={s.box} style={{ display: "inline-block", outline: "var(--focus-ring)", outlineOffset: "var(--focus-offset)", borderRadius: "var(--radius-md)", height: 24 }} />;
+  if (g === "Focus") return focusPreview(t.name);
   if (g === "Border width") return <span className={s.box} style={{ borderWidth: v, borderColor: "var(--text)" }} />;
   if (g === "Shadow") return <span className={s.box} style={{ boxShadow: v, border: 0 }} />;
+  return null;
+}
+
+/** Each focus token shows only its own part of the ring. */
+function focusPreview(name: string) {
+  if (name === "--focus-width") return <span className={s.focusBar} />;
+  if (name === "--focus-ring") return <span className={`${s.box} ${s.focusBox}`} style={{ outline: "var(--focus-ring)" }} />;
+  if (name === "--focus-offset") return (
+    <span className={s.focusPair}>
+      <span><span className={`${s.box} ${s.focusBox} ${s.focusGap}`} /><small>outside</small></span>
+      <span><span className={`${s.box} ${s.focusBox} ${s.focusIn}`} /><small>inside × -1</small></span>
+    </span>
+  );
   return null;
 }
 
