@@ -16,6 +16,7 @@
 .sphere { fill: var(--ocean); stroke: var(--line); }
 .graticule { fill: none; stroke: var(--surface); stroke-width: .6; opacity: .7; }
 .land { fill: var(--land); }
+.zoneLabel { font-size: var(--fs-xs); font-weight: var(--fw-semibold); fill: var(--map-ink); text-anchor: middle; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; paint-order: stroke; pointer-events: none; }
 .zone { fill: var(--cursor); fill-opacity: .12; stroke: var(--cursor); stroke-width: 1.5; stroke-dasharray: 4 3; pointer-events: none; }
 .siteOut { fill: var(--text-3); opacity: .25; pointer-events: none; }
 .siteIn { fill: var(--text); opacity: .75; pointer-events: none; }
@@ -58,7 +59,6 @@
 .divider { width: 1px; height: 18px; background: var(--line); margin: 0 2px; }
 .spacer { flex: 1; }
 .sort { font-size: var(--fs-md); color: var(--text-3); display: inline-flex; gap: 6px; align-items: center; }
-.sort select { font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 2px 6px; }
 
 .axis { flex: none; border-bottom: 1px solid var(--line); }
 .axis svg { display: block; }

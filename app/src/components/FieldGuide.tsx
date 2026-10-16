@@ -15,7 +15,41 @@ import { KeysHint, useKeysHint } from "./KeysHint";
 
 const CONTINENTS = ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"] as const;
 const ZONES = [{ km: 500, label: "S" }, { km: 1000, label: "M" }, { km: 2000, label: "L" }] as const;
-type Region = { kind: "world" } | { kind: "continent"; name: string } | { kind: "zone"; lon: number; lat: number; km: number };
+/** `spot`: the hotspot it was picked from (centered on it), or `near`: the hotspot closest to a click, if any. */
+type Region = { kind: "world" } | { kind: "continent"; name: string } | { kind: "zone"; lon: number; lat: number; km: number; spot?: string; near?: string };
+
+/** Where dinosaur fossils cluster, named so a zone can be picked from a menu (and read) instead of only clicked.
+    Centers come from the densest groups of sites in fossils.json. */
+const HOTSPOTS: { group: string; name: string; at: [number, number] }[] = [
+  { group: "North America", name: "Montana & Dakotas", at: [-107, 47] },
+  { group: "North America", name: "Alberta", at: [-112, 51] },
+  { group: "North America", name: "Colorado Plateau", at: [-108, 39] },
+  { group: "North America", name: "Texas & New Mexico", at: [-102, 32] },
+  { group: "North America", name: "US East Coast", at: [-76, 39.5] },
+  { group: "South America", name: "Patagonia", at: [-69, -41] },
+  { group: "South America", name: "NW Argentina", at: [-68, -30] },
+  { group: "South America", name: "Southern Brazil", at: [-52, -22] },
+  { group: "Europe", name: "England", at: [-1.5, 51.5] },
+  { group: "Europe", name: "France", at: [1, 45.5] },
+  { group: "Europe", name: "Iberia", at: [-3.5, 41] },
+  { group: "Europe", name: "Germany & Austria", at: [13, 48.5] },
+  { group: "Europe", name: "Romania (Hațeg)", at: [23, 45.5] },
+  { group: "Africa", name: "Morocco", at: [-4, 31] },
+  { group: "Africa", name: "Niger", at: [8, 17] },
+  { group: "Africa", name: "Tanzania", at: [36, -10] },
+  { group: "Africa", name: "South Africa & Lesotho", at: [27, -28.5] },
+  { group: "Africa", name: "Madagascar", at: [46.5, -16.5] },
+  { group: "Asia", name: "Gobi", at: [105, 42.5] },
+  { group: "Asia", name: "Liaoning & Inner Mongolia", at: [120, 41] },
+  { group: "Asia", name: "Sichuan & Yunnan", at: [104, 27] },
+  { group: "Asia", name: "Central Asia", at: [67, 42] },
+  { group: "Asia", name: "India", at: [77, 22] },
+  { group: "Asia", name: "Japan", at: [136, 36] },
+  { group: "Oceania", name: "Queensland", at: [143, -22] },
+  { group: "Antarctica", name: "Antarctic Peninsula", at: [-60, -65] },
+];
+const HOTSPOT_GROUPS = [...new Set(HOTSPOTS.map((h) => h.group))];
+const NEAR_KM = 300; // a click this close to a hotspot's center is named after it
 type Sort = "first" | "fossils" | "name";
 
 /** Same rule as scripts/build_families.py, so the continents match the rest of the app. */
@@ -129,8 +163,24 @@ export function FieldGuide() {
   const clickMap = (e: React.MouseEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     const ll = proj.invert?.([((e.clientX - r.left) / r.width) * mapW, ((e.clientY - r.top) / r.height) * mapH]);
-    if (ll && Number.isFinite(ll[0])) setRegion({ kind: "zone", lon: ll[0], lat: ll[1], km: zoneKm });
+    if (!ll || !Number.isFinite(ll[0])) return;
+    const at: [number, number] = [ll[0], ll[1]];
+    const near = HOTSPOTS.map((h) => ({ h, d: km(at, h.at) })).sort((a, b) => a.d - b.d)[0];
+    setRegion({ kind: "zone", lon: at[0], lat: at[1], km: zoneKm, near: near.d <= NEAR_KM ? near.h.name : undefined });
   };
+  const pickSpot = (name: string) => {
+    const h = HOTSPOTS.find((x) => x.name === name);
+    if (h) setRegion({ kind: "zone", lon: h.at[0], lat: h.at[1], km: zoneKm, spot: h.name });
+  };
+  // the zone's name, drawn just above its circle (or below, when the circle touches the top of the map)
+  const zoneLabel = (() => {
+    if (region.kind !== "zone") return null;
+    const name = region.spot ?? (region.near && `Near ${region.near}`);
+    const c = proj([region.lon, region.lat]), top = proj([region.lon, Math.min(89, region.lat + region.km / 111.2)]);
+    if (!name || !c || !top) return null;
+    const below = top[1] < 16, r = c[1] - top[1];
+    return { name, x: Math.min(mapW - 70, Math.max(70, c[0])), y: below ? c[1] + r + 14 : top[1] - 6 };
+  })();
   const setZone = (k: number) => { setZoneKm(k); if (region.kind === "zone") setRegion({ ...region, km: k }); };
 
   /** A suggestion was picked: select it and go where most of its fossils are. */
@@ -163,7 +213,9 @@ export function FieldGuide() {
   const x = scaleLinear().domain(TIME).range([LABEL + 6, listW - 34]);
 
   const title = region.kind === "world" ? "The whole world" : region.kind === "continent" ? region.name
-    : `${fNum(region.km)} km around ${Math.abs(region.lat).toFixed(0)}°${region.lat >= 0 ? "N" : "S"}, ${Math.abs(region.lon).toFixed(0)}°${region.lon >= 0 ? "E" : "W"}`;
+    : region.spot ? `${region.spot} · ${fNum(region.km)} km`
+      : `${fNum(region.km)} km around ${Math.abs(region.lat).toFixed(0)}°${region.lat >= 0 ? "N" : "S"}, ${Math.abs(region.lon).toFixed(0)}°${region.lon >= 0 ? "E" : "W"}${region.near ? ` · near ${region.near}` : ""}`;
+  const mapLabel = `Today's world with every dinosaur fossil site. Showing ${region.kind === "world" ? "the whole world" : region.kind === "zone" ? `a zone: ${title}` : region.name}, ${fNum(found.length)} fossils. Click to pick a zone, or choose a hotspot below.`;
   const nFamilies = new Set(rows.map((r) => r.pfam).filter(Boolean)).size;
   const nOutside = rows.filter((r) => !r.f).length;
 
@@ -197,11 +249,12 @@ export function FieldGuide() {
         </div>
         <div ref={mapWrap} className={s.mapBox}>
           <svg viewBox={`0 0 ${mapW} ${mapH}`} width={mapW} height={mapH} className={s.map} onClick={clickMap} role="img"
-            aria-label="Today's world with every dinosaur fossil site; click to pick a zone">
+            aria-label={mapLabel}>
             <path className={s.sphere} d={path({ type: "Sphere" }) ?? ""} />
             <path className={s.graticule} d={path(geoGraticule10()) ?? ""} />
             {land && <path className={s.land} d={path(land) ?? ""} />}
             {zonePath && <path className={s.zone} d={zonePath} />}
+            {zoneLabel && <text className={s.zoneLabel} x={zoneLabel.x} y={zoneLabel.y}>{zoneLabel.name}</text>}
             {sites.map((site, i) => (
               <circle key={i} cx={site.xy[0]} cy={site.xy[1]} r={site.inside ? 2.2 : 1.6}
                 className={isLit(site) ? s.siteLit : site.inside ? s.siteIn : s.siteOut} />
@@ -212,7 +265,17 @@ export function FieldGuide() {
           </svg>
         </div>
         <div className={s.zoneBar}>
-          <span>Click the map to pick a zone around a point · size</span>
+          <label className={s.sort}>Zone
+            <select className="select" value={region.kind === "zone" && region.spot ? region.spot : ""} onChange={(e) => pickSpot(e.target.value)}>
+              <option value="" disabled>{region.kind === "zone" ? "Custom zone" : "Pick a fossil hotspot"}</option>
+              {HOTSPOT_GROUPS.map((g) => (
+                <optgroup key={g} label={g}>
+                  {HOTSPOTS.filter((h) => h.group === g).map((h) => <option key={h.name} value={h.name}>{h.name}</option>)}
+                </optgroup>
+              ))}
+            </select>
+          </label>
+          <span>or click the map · size</span>
           <span className={`${s.seg} segmented`} role="group" aria-label="Zone size">
             {ZONES.map((z) => <button key={z.km} aria-pressed={zoneKm === z.km} onClick={() => setZone(z.km)} title={`${fNum(z.km)} km`}>{z.label}</button>)}
           </span>
@@ -240,7 +303,7 @@ export function FieldGuide() {
             <Chip on={diet === "carnivore"} onClick={() => setDiet(diet === "carnivore" ? null : "carnivore")}><i className="swatch" style={{ background: "var(--diet-carn)" }} />Meat-eaters</Chip>
             <span className={s.spacer} />
             <label className={s.sort}>Sort
-              <select value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
+              <select className="select" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
                 <option value="first">Oldest first</option>
                 <option value="fossils">Most fossils</option>
                 <option value="name">A–Z</option>
