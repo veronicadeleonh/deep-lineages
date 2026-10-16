@@ -1,15 +1,15 @@
-.wrap { margin: 12px 0; }
-.head { margin: 0 0 6px; font-size: var(--fs-sm); color: var(--text-2); display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap; }
+.wrap { margin: var(--space-3) 0; }
+.head { margin: 0 0 var(--space-1-5); font-size: var(--fs-sm); color: var(--text-2); display: flex; align-items: baseline; gap: var(--space-1); flex-wrap: wrap; }
 .head b { color: var(--text); font-weight: var(--fw-semibold); }
 .toggle, .more {
   font: inherit; font-size: var(--fs-xs); color: var(--text-2); background: none; border: var(--border-thin) solid var(--line);
-  border-radius: var(--radius-md); padding: 1px 8px; cursor: pointer;
+  border-radius: var(--radius-md); padding: 1px var(--space-2); cursor: pointer;
 }
 .toggle { margin-left: auto; }
 .toggle:hover, .more:hover { color: var(--text); border-color: var(--text-3); }
 
 .line { list-style: none; margin: 0; padding: 0; }
-.step { position: relative; padding: 0 0 9px 20px; min-height: 26px; font-size: var(--fs-sm); line-height: var(--lh-snug); }
+.step { position: relative; padding: 0 0 var(--space-2-5) var(--space-5); min-height: 26px; font-size: var(--fs-sm); line-height: var(--lh-snug); }
 /* the connector: a line from this dot down to the next one */
 .step::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: -6px; width: 1.5px; background: var(--text-3); opacity: .55; }
 .step:last-child::before { content: none; }
@@ -22,15 +22,15 @@
 .current::after { left: -1px; top: 2px; width: 12px; height: 12px; background: var(--text); border: calc(var(--border-thick) * 2) solid var(--surface); box-shadow: 0 0 0 var(--border-thick) var(--text); } /* the white border is the gap between the dot and its ring: twice the ring, so they scale together */
 .gap::before { background: none; border-left: var(--border-thick) dashed var(--text-3); width: 0; }
 .gap::after { content: none; }
-.gap { padding-left: 16px; }
+.gap { padding-left: var(--space-4); }
 
 .name { color: var(--text-2); font-weight: var(--fw-semibold); }
 .landmark .name { color: var(--text); font-weight: var(--fw-bold); }
 .current .name { color: var(--text); font-weight: var(--fw-bold); font-size: var(--fs-md); }
-.rank { margin-left: 6px; color: var(--text-3); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
+.rank { margin-left: var(--space-1-5); color: var(--text-3); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
 .note { display: block; color: var(--text-3); font-size: var(--fs-sm); }
 .sil {
-  float: right; width: 52px; height: 26px; margin: 0 0 0 10px; background: var(--text-3); opacity: .75;
+  float: right; width: 52px; height: 26px; margin: 0 0 0 var(--space-2-5); background: var(--text-3); opacity: .75;
   -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat;
 }
 .silCurrent { background: var(--text); opacity: 1; }

@@ -19,7 +19,7 @@ function countUses(src: Sources, name: string) {
 }
 
 /** Literal values written straight into the styles, outside the :root block. */
-const RAW_CHECKS: { label: string; re: RegExp; hint: string }[] = [
+const RAW_CHECKS: { label: string; re: RegExp; hint: string; ignore?: RegExp }[] = [
   { label: "font-weight", re: /font-weight:\s*(\d+)/g, hint: "candidates for --fw-*" },
   { label: "border-radius", re: /border-radius:\s*([\d.]+px|999px|50%)/g, hint: "candidates for --radius-*" },
   { label: "colors", re: /(#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\))/g, hint: "hex / rgb outside :root" },
@@ -27,16 +27,18 @@ const RAW_CHECKS: { label: string; re: RegExp; hint: string }[] = [
   { label: "z-index", re: /z-index:\s*(\d+)/g, hint: "candidates for --z-*" },
   { label: "letter-spacing", re: /letter-spacing:\s*(-?[\d.]+em)/g, hint: "candidates for --tracking-*" },
   { label: "line-height", re: /line-height:\s*([\d.]+)(?![\w%])/g, hint: "candidates for --lh-*" },
+  { label: "spacing", re: /(?<![\w-])(?:padding|margin|gap|row-gap|column-gap)(?:-(?:top|right|bottom|left|inline|block))?:\s*([^;}]*\dpx[^;}]*)/g, hint: "candidates for --space-* (1–3px tweaks inside small controls don't count)", ignore: /(?<![\w.])-?[13]px\b/g },
   { label: "border-width", re: /(?:border(?:-(?:top|right|bottom|left))?(?:-width)?|outline(?:-width)?):\s*(?:[^;}]*\s)?([1-9][\d.]*px|0?\.\d+px)/g, hint: "candidates for --border-*" },
 ];
 function rawValues(src: Sources) {
-  return RAW_CHECKS.map(({ label, re, hint }) => {
+  return RAW_CHECKS.map(({ label, re, hint, ignore }) => {
     const found = new Map<string, Map<string, number>>();
     for (const [file, full] of Object.entries(src)) {
       const text = full.replace(/:root\s*\{[^}]*\}/, "").replace(/\/\*[\s\S]*?\*\//g, "");
       for (const m of text.matchAll(re)) {
         const v = m[1].trim();
-        if (!v.replace(/var\(--[\w-]+\)/g, "").replace(/\b0\b/g, "").trim()) continue; // only tokens (and zeros): already tokenized
+        const rest = v.replace(ignore ?? /$^/g, "").replace(/var\(--[\w-]+\)/g, "").replace(/\b0\b/g, "");
+        if (!rest.trim() || (ignore && !/\dpx/.test(rest))) continue; // only tokens, zeros (and allowed tweaks): already tokenized
         const per = found.get(v) ?? new Map<string, number>();
         per.set(file, (per.get(file) ?? 0) + 1);
         found.set(v, per);
@@ -66,7 +68,7 @@ export function Tokens() {
   const groups = useMemo(() => {
     const g = new Map<string, Token[]>();
     for (const t of tokens) g.set(t.group, [...(g.get(t.group) ?? []), t]);
-    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Shadow", "Focus", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
+    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Spacing", "Shadow", "Focus", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
   }, [tokens]);
   const raw = useMemo(() => rawValues(src), [src]);
   const loaded = Object.keys(src).length > 0;
@@ -181,6 +183,7 @@ function preview(g: string, t: Token) {
   if (g === "Letter spacing") return <span style={{ letterSpacing: v, textTransform: t.name.includes("caps") ? "uppercase" : undefined, fontSize: "var(--fs-sm)" }}>{t.name.includes("caps") ? "On the map now" : "Tyrannosaurus"}</span>;
   if (g === "Line height") return <span style={{ display: "block", lineHeight: v, fontSize: "var(--fs-sm)", maxWidth: 180, background: "var(--surface-2)" }}>The Atlantic begins to open between two continents.</span>;
   if (g === "Focus") return focusPreview(t.name);
+  if (g === "Spacing") return <span className={s.spaceBar} style={{ width: v }} />;
   if (g === "Border width") return <span className={s.box} style={{ borderWidth: v, borderColor: "var(--text)" }} />;
   if (g === "Shadow") return <span className={s.box} style={{ boxShadow: v, border: 0 }} />;
   return null;

@@ -26,6 +26,7 @@ function groupOf(name: string, raw: string): string {
   if (name.startsWith("--fw-")) return "Font weight";
   if (name.startsWith("--radius")) return "Radius";
   if (name.startsWith("--border-")) return "Border width";
+  if (name.startsWith("--space-")) return "Spacing";
   if (name.startsWith("--tracking-")) return "Letter spacing";
   if (name.startsWith("--lh-")) return "Line height";
   if (name.startsWith("--z-")) return "Layer (z-index)";

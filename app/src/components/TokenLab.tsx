@@ -17,6 +17,7 @@ const KINDS = {
   Radius: (g: string) => g === "Radius",
   Shadow: (g: string) => g === "Shadow",
   "Border width": (g: string) => g === "Border width",
+  Spacing: (g: string) => g === "Spacing",
   All: () => true,
 };
 type Kind = keyof typeof KINDS;
@@ -102,6 +103,7 @@ export function TokenLab() {
               ) : t.group === "Shadow" ? <span style={{ ...st.swNone, height: 22, background: "#fff", borderRadius: 4, boxShadow: `var(${t.name})` }} aria-hidden />
                 : t.group === "Radius" ? <span style={{ ...st.swNone, ...st.radiusBox, borderRadius: `var(${t.name})` }} aria-hidden />
                 : t.group === "Font weight" ? <span style={{ ...st.swNone, ...st.aa, fontWeight: `var(${t.name})` }} aria-hidden>Aa</span>
+                : t.group === "Spacing" ? <span style={{ ...st.swNone, display: "flex", alignItems: "center" }} aria-hidden><span style={{ width: `var(${t.name})`, height: 10, background: "#b57500" }} /></span>
                 : <span style={st.swNone} />}
               <div style={st.mid}>
                 <code style={st.name}>{t.name}</code>

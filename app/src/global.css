@@ -66,6 +66,20 @@
   /* data: period of a genus's first fossil (ordinal: older recedes) */
   --period-tri: var(--violet-400); --period-jur: var(--violet-500); --period-cre: var(--violet-800);
 
+  /* spacing: a 4px scale with half steps. The name is how many 4px: --space-3 = 12px. 1–3px tweaks inside small
+     controls (centering text in a pill) stay as plain px on purpose */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-3-5: 14px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
   /* border widths (also used for selection rings drawn with box-shadow) */
   --border-thin: 1px;
   --border-thick: 1.5px;
@@ -140,19 +154,19 @@ body {
   font: var(--fs-base)/var(--lh-normal) var(--font);
   -webkit-font-smoothing: antialiased;
 }
-h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight); font-variant-numeric: tabular-nums; }
+h1 { margin: var(--space-0-5) 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight); font-variant-numeric: tabular-nums; }
 h2 { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-2); }
-kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--line); border-bottom-width: calc(var(--border-thin) * 2); border-radius: var(--radius-sm); padding: 0 4px; color: var(--text-2); background: var(--surface); }
+kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--line); border-bottom-width: calc(var(--border-thin) * 2); border-radius: var(--radius-sm); padding: 0 var(--space-1); color: var(--text-2); background: var(--surface); }
 
 /* shared pieces */
-.card { background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; min-width: 0; }
-.card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.card { background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); padding: var(--space-3-5) var(--space-4); min-width: 0; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2); flex-wrap: wrap; }
 .muted { color: var(--text-3); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
-.note { margin: 8px 0 0; color: var(--text-3); font-size: var(--fs-sm); }
+.note { margin: var(--space-2) 0 0; color: var(--text-3); font-size: var(--fs-sm); }
 .chip {
   font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2);
-  border: var(--border-thin) solid var(--line); border-radius: var(--radius-full); padding: 3px 10px 3px 8px; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 6px;
+  border: var(--border-thin) solid var(--line); border-radius: var(--radius-full); padding: 3px var(--space-2-5) 3px var(--space-2); cursor: pointer;
+  display: inline-flex; align-items: center; gap: var(--space-1-5);
 }
 .chip:hover { border-color: var(--text-3); }
 .swatch { width: 8px; height: 8px; border-radius: var(--radius-xs); display: inline-block; flex: none; }
@@ -171,7 +185,7 @@ kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--lin
    and phone pickers all keep working, because it is still a real <select>. */
 .select {
   appearance: none; font: inherit; font-size: var(--fs-md); color: var(--text); cursor: pointer;
-  background-color: var(--surface-2); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 3px 26px 3px 10px;
+  background-color: var(--surface-2); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 3px var(--space-6) 3px var(--space-2-5);
   /* the chevron, drawn with two gradients so its color is a token */
   background-image: linear-gradient(45deg, transparent 50%, var(--text-2) 50%), linear-gradient(135deg, var(--text-2) 50%, transparent 50%);
   background-position: calc(100% - 14px) 55%, calc(100% - 10px) 55%; background-size: 4px 4px; background-repeat: no-repeat;
@@ -181,13 +195,13 @@ kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--lin
   .select, .select::picker(select) { appearance: base-select; }
   .select::picker-icon { display: none; } /* the gradient chevron above is the one */
   .select::picker(select) {
-    margin-top: 4px; padding: 4px; max-height: min(420px, 60vh); overflow-y: auto;
+    margin-top: var(--space-1); padding: var(--space-1); max-height: min(420px, 60vh); overflow-y: auto;
     background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-md);
   }
-  .select optgroup { font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-3); padding-top: 6px; }
+  .select optgroup { font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-3); padding-top: var(--space-1-5); }
   .select option {
     font-size: var(--fs-md); font-weight: var(--fw-regular); letter-spacing: normal; text-transform: none; color: var(--text);
-    padding: 4px 10px; border-radius: var(--radius-sm); cursor: pointer;
+    padding: var(--space-1) var(--space-2-5); border-radius: var(--radius-sm); cursor: pointer;
   }
   .select option:hover { background: var(--surface-2); }
   .select option:focus-visible { outline-offset: calc(var(--focus-offset) * -1); } /* inside, so the list doesn't clip it */
@@ -196,7 +210,7 @@ kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--lin
   .select option:disabled { color: var(--text-disabled); cursor: default; }
   .select option:disabled:checked { display: none; } /* a placeholder ("Pick a…"): it names the menu when closed, not a choice in the list */
 }
-.skip { position: absolute; left: 16px; top: 8px; z-index: var(--z-dialog); padding: 8px 14px; border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-weight: var(--fw-bold); box-shadow: var(--shadow-md); transform: translateY(-200%); }
+.skip { position: absolute; left: 16px; top: 8px; z-index: var(--z-dialog); padding: var(--space-2) var(--space-3-5); border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-weight: var(--fw-bold); box-shadow: var(--shadow-md); transform: translateY(-200%); }
 .skip:focus { transform: none; }
 main:focus { outline: none; } /* the skip target: focus passes through it, nothing to ring */
 

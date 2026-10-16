@@ -1,8 +1,8 @@
 .tooltip {
   position: fixed; z-index: var(--z-tooltip); pointer-events: none; max-width: 260px;
   background: var(--surface); color: var(--text); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md);
-  padding: 6px 9px; font-size: var(--fs-sm); box-shadow: var(--shadow-sm);
+  padding: var(--space-1-5) var(--space-2-5); font-size: var(--fs-sm); box-shadow: var(--shadow-sm);
 }
 .tooltip b { font-weight: var(--fw-bold); }
 .tooltip span { color: var(--text-2); }
-.tooltip img { display: block; width: 120px; height: 52px; object-fit: contain; object-position: left center; margin-bottom: 4px; }
+.tooltip img { display: block; width: 120px; height: 52px; object-fit: contain; object-position: left center; margin-bottom: var(--space-1); }

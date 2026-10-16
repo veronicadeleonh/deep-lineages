@@ -1,37 +1,37 @@
 .card { min-width: 0; display: flex; flex-direction: column; height: 100%; min-height: 560px; }
-.head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
-.crumbs { font-size: var(--fs-md); color: var(--text-2); display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px; }
+.head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-1); }
+.crumbs { font-size: var(--fs-md); color: var(--text-2); display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-0-5); }
 .crumbs button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
 .crumbs button:hover { color: var(--text); }
 .crumbs b { color: var(--text); font-weight: var(--fw-bold); }
-.sep { margin: 0 5px; color: var(--text-3); }
-.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; list-style: none; margin: 0; padding: 0; font-size: var(--fs-sm); color: var(--text-2); }
-.legend li { display: flex; align-items: center; gap: 5px; }
+.sep { margin: 0 var(--space-1); color: var(--text-3); }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); list-style: none; margin: 0; padding: 0; font-size: var(--fs-sm); color: var(--text-2); }
+.legend li { display: flex; align-items: center; gap: var(--space-1); }
 .legendTitle { color: var(--text-3); font-size: var(--fs-xs); }
-.legendTitle:not(:first-child) { margin-left: 6px; }
+.legendTitle:not(:first-child) { margin-left: var(--space-1-5); }
 .dot { width: 9px; height: 9px; border-radius: var(--radius-full); display: inline-block; }
 
-.stage { position: relative; flex: 1; min-height: 0; display: flex; gap: 16px; }
+.stage { position: relative; flex: 1; min-height: 0; display: flex; gap: var(--space-4); }
 /* the left column: the map, then the depth guide */
-.side { flex: none; width: 230px; display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+.side { flex: none; width: 230px; display: flex; flex-direction: column; gap: var(--space-3-5); min-height: 0; }
 .canvas { position: relative; flex: 1; min-width: 0; min-height: 0; }
 .ladder { min-height: 0; overflow-y: auto; }
-.ladderTitle { margin: 0 0 8px; font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
+.ladderTitle { margin: 0 0 var(--space-2); font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
 .ladderTitle span { text-transform: none; letter-spacing: 0; font-weight: var(--fw-medium); }
 .ladder ol { list-style: none; margin: 0; padding: 0; position: relative; }
 .ladder li {
-  position: relative; display: flex; align-items: baseline; gap: 6px; padding: 4px 0 4px calc(14px + min(var(--d, 0), 8) * 4px);
+  position: relative; display: flex; align-items: baseline; gap: var(--space-1-5); padding: var(--space-1) 0 var(--space-1) calc(var(--space-3-5) + min(var(--d, 0), 8) * var(--space-1));
   font-size: var(--fs-md); line-height: var(--lh-snug); color: var(--text-2);
 }
 /* the line that joins the steps */
 .ladder li::before { content: ""; position: absolute; left: calc(3.5px + min(var(--d, 0), 8) * 4px); top: -6px; bottom: 50%; border-left: var(--border-thin) solid var(--line); }
 .ladder li:first-child::before { display: none; }
 .stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: calc(.62em + 1px); width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--surface); border: var(--border-thick) solid var(--text-3); }
-.ladder li button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 4px 4px; margin: -4px 0 -4px -4px; flex: 1; cursor: pointer; text-align: left; border-radius: var(--radius-sm); } /* the whole row is the target: 24px+ high (WCAG 2.5.8) */
+.ladder li button { font: inherit; color: var(--text-2); background: none; border: 0; padding: var(--space-1) var(--space-1); margin: calc(-1 * var(--space-1)) 0 calc(-1 * var(--space-1)) calc(-1 * var(--space-1)); flex: 1; cursor: pointer; text-align: left; border-radius: var(--radius-sm); } /* the whole row is the target: 24px+ high (WCAG 2.5.8) */
 .ladder li button:focus-visible { outline-offset: 0; } /* hugs the row, clear of the dots on its left */
 .ladder li button:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .ladder li b { font-weight: var(--fw-bold); color: var(--text); }
-.rank { margin-left: auto; padding-left: 6px; font-size: var(--fs-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.rank { margin-left: auto; padding-left: var(--space-1-5); font-size: var(--fs-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
 .stepAbove button, .stepAbove .rank { color: var(--text-3); } /* the levels above, quieter: a token, not opacity */
 .stepAbove .stepDot { opacity: .7; }
 .stepFocus .stepDot { background: var(--cursor); border-color: var(--cursor); }
@@ -39,9 +39,9 @@
 .ladder li:last-of-type:not(.stepSpecies) .stepDot, .ladder li:has(+ .stepSpecies) .stepDot { background: var(--text); border-color: var(--text); }
 .stepSpecies { --d: 9; color: var(--text-2); }
 .stepSpecies .stepDot { width: 6px; height: 6px; top: calc(.7em + 1px); border-width: var(--border-thin); }
-.stepMore { padding-left: 50px !important; font-size: var(--fs-sm); color: var(--text-3) !important; }
-.ladderHint { margin: 10px 0 0; font-size: var(--fs-sm); color: var(--text-3); line-height: var(--lh-snug); }
-.ladderCount { margin: 8px 0 0; font-size: var(--fs-sm); color: var(--text-3); }
+.stepMore { padding-left: calc(var(--space-3-5) + 9 * var(--space-1)) !important; /* lines up with the species: one step past their indent */ font-size: var(--fs-sm); color: var(--text-3) !important; }
+.ladderHint { margin: var(--space-2-5) 0 0; font-size: var(--fs-sm); color: var(--text-3); line-height: var(--lh-snug); }
+.ladderCount { margin: var(--space-2) 0 0; font-size: var(--fs-sm); color: var(--text-3); }
 .svg { display: block; max-width: 100%; height: auto; }
 
 .linArc path:first-child { fill: var(--surface-2); stroke: var(--surface); stroke-width: 2; }
@@ -99,7 +99,7 @@
 .aboutBtn[aria-expanded="true"] { background: var(--text-2) !important; color: var(--surface) !important; }
 .aboutPop {
   position: absolute; right: 44px; bottom: 0; z-index: var(--z-popover); width: min(420px, calc(100% - 60px)); margin: 0; cursor: pointer;
-  padding: 12px 14px; font-size: var(--fs-md); line-height: var(--lh-relaxed); color: var(--text-2);
+  padding: var(--space-3) var(--space-3-5); font-size: var(--fs-md); line-height: var(--lh-relaxed); color: var(--text-2);
   background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg);
 }
 
