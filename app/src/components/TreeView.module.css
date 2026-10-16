@@ -20,24 +20,25 @@
 .ladderTitle span { text-transform: none; letter-spacing: 0; font-weight: var(--fw-medium); }
 .ladder ol { list-style: none; margin: 0; padding: 0; position: relative; }
 .ladder li {
-  position: relative; display: flex; align-items: baseline; gap: 6px; padding: 3px 0 3px calc(14px + min(var(--d, 0), 8) * 4px);
+  position: relative; display: flex; align-items: baseline; gap: 6px; padding: 4px 0 4px calc(14px + min(var(--d, 0), 8) * 4px);
   font-size: var(--fs-md); line-height: var(--lh-snug); color: var(--text-2);
 }
 /* the line that joins the steps */
 .ladder li::before { content: ""; position: absolute; left: calc(3.5px + min(var(--d, 0), 8) * 4px); top: -6px; bottom: 50%; border-left: 1px solid var(--line); }
 .ladder li:first-child::before { display: none; }
-.stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: .62em; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--surface); border: 1.5px solid var(--text-3); }
-.ladder li button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: calc(.62em + 1px); width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--surface); border: 1.5px solid var(--text-3); }
+.ladder li button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 4px 4px; margin: -4px 0 -4px -4px; flex: 1; cursor: pointer; text-align: left; border-radius: var(--radius-sm); } /* the whole row is the target: 24px+ high (WCAG 2.5.8) */
+.ladder li button:focus-visible { outline-offset: 0; } /* hugs the row, clear of the dots on its left */
 .ladder li button:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .ladder li b { font-weight: var(--fw-bold); color: var(--text); }
-.rank { margin-left: auto; padding-left: 6px; font-size: var(--fs-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.rank { margin-left: auto; padding-left: 6px; font-size: var(--fs-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
 .stepAbove button, .stepAbove .rank { color: var(--text-3); } /* the levels above, quieter: a token, not opacity */
 .stepAbove .stepDot { opacity: .7; }
 .stepFocus .stepDot { background: var(--cursor); border-color: var(--cursor); }
 .stepFocus .rank { color: var(--accent-text); font-weight: var(--fw-bold); }
 .ladder li:last-of-type:not(.stepSpecies) .stepDot, .ladder li:has(+ .stepSpecies) .stepDot { background: var(--text); border-color: var(--text); }
 .stepSpecies { --d: 9; color: var(--text-2); }
-.stepSpecies .stepDot { width: 6px; height: 6px; top: .7em; border-width: 1px; }
+.stepSpecies .stepDot { width: 6px; height: 6px; top: calc(.7em + 1px); border-width: 1px; }
 .stepMore { padding-left: 50px !important; font-size: var(--fs-sm); color: var(--text-3) !important; }
 .ladderHint { margin: 10px 0 0; font-size: var(--fs-sm); color: var(--text-3); line-height: var(--lh-snug); }
 .ladderCount { margin: 8px 0 0; font-size: var(--fs-sm); color: var(--text-3); }

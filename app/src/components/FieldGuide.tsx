@@ -265,8 +265,8 @@ export function FieldGuide() {
           </svg>
         </div>
         <div className={s.zoneBar}>
-          <label className={s.sort}>Zone
-            <select className="select" value={region.kind === "zone" && region.spot ? region.spot : ""} onChange={(e) => pickSpot(e.target.value)}>
+          <label className={s.sort} htmlFor="fg-zone">Zone
+            <select id="fg-zone" className="select" value={region.kind === "zone" && region.spot ? region.spot : ""} onChange={(e) => pickSpot(e.target.value)}>
               <option value="" disabled>{region.kind === "zone" ? "Custom zone" : "Pick a fossil hotspot"}</option>
               {HOTSPOT_GROUPS.map((g) => (
                 <optgroup key={g} label={g}>
@@ -302,8 +302,8 @@ export function FieldGuide() {
             <Chip on={diet === "herbivore"} onClick={() => setDiet(diet === "herbivore" ? null : "herbivore")}><i className="swatch" style={{ background: "var(--diet-herb)" }} />Plant-eaters</Chip>
             <Chip on={diet === "carnivore"} onClick={() => setDiet(diet === "carnivore" ? null : "carnivore")}><i className="swatch" style={{ background: "var(--diet-carn)" }} />Meat-eaters</Chip>
             <span className={s.spacer} />
-            <label className={s.sort}>Sort
-              <select className="select" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
+            <label className={s.sort} htmlFor="fg-sort">Sort
+              <select id="fg-sort" className="select" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
                 <option value="first">Oldest first</option>
                 <option value="fossils">Most fossils</option>
                 <option value="name">A–Z</option>
@@ -486,7 +486,7 @@ function Search({ value, onChange, onPick }: { value: string; onChange: (v: stri
   };
   return (
     <div className={s.searchBox}>
-      <input className={s.search} type="search" placeholder="Find a dinosaur, family or species…" value={value} autoComplete="off"
+      <input className={s.search} type="search" placeholder="Find a dinosaur, family or species…" aria-label="Find a dinosaur, family or species" value={value} autoComplete="off"
         role="combobox" aria-expanded={show} aria-controls="fg-suggest" aria-autocomplete="list"
         aria-activedescendant={show ? `fg-sg-${active}` : undefined}
         onChange={(e) => { onChange(e.target.value); setOpen(true); setActive(0); }}

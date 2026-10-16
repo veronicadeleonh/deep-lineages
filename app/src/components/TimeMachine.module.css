@@ -108,9 +108,9 @@
 .mcardWide { grid-column: 1 / -1; }
 .mcardBlurb { margin: 10px 0 0; font-size: var(--fs-md); line-height: var(--lh-normal); color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .mcardDive { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
-.mcardDive > span { grid-column: 1 / -1; font-size: var(--fs-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
+.mcardDive > span { grid-column: 1 / -1; font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
 .mcardDive button { font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 3px 4px; white-space: nowrap; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
-.mcardDive button i { font-style: normal; color: var(--cursor); }
+.mcardDive button i { font-style: normal; color: var(--accent-text); }
 .mcardDive button:hover { border-color: var(--cursor); }
 
 /* the "about the map" note, behind a small i */

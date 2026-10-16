@@ -365,7 +365,8 @@ export function TreeCard() {
   const centerSil = centerSilOf(focus, data.clades);
 
   return (
-    <section className={`card ${s.card}`} aria-label="Family tree">
+    <section className={`card ${s.card}`} aria-labelledby="tree-title">
+      <h2 id="tree-title" className="sr-only">Family tree</h2>
       <div className={s.head}>
         <ul className={s.legend}>
           <li className={s.legendTitle}>First fossil</li>

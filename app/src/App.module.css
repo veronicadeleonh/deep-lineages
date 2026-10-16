@@ -31,7 +31,7 @@
 .views button:hover { color: var(--text); border-color: var(--text-3); }
 .views button[aria-current="true"] { color: var(--text); font-weight: var(--fw-bold); background: color-mix(in srgb, var(--cursor) 12%, var(--surface)); border-color: var(--cursor); }
 .viewIcon { font-size: var(--fs-sm); color: var(--text-3); }
-.views button[aria-current="true"] .viewIcon { color: var(--cursor); }
+.views button[aria-current="true"] .viewIcon { color: var(--accent-text); }
 /* the 1–4 shortcut keys, shown only while someone is using the keyboard */
 .views button { position: relative; }
 .viewKey { display: none; position: absolute; top: -8px; right: -6px; font-weight: var(--fw-regular); line-height: var(--lh-tight); }

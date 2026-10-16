@@ -79,7 +79,8 @@ export function TimelineCard() {
   const usedDiets = new Set(data.families.map((f) => dietOf(f).label));
 
   return (
-    <section className={`card ${s.card}`} aria-label="Timeline">
+    <section className={`card ${s.card}`} aria-labelledby="timeline-title">
+      <h2 id="timeline-title" className="sr-only">Timeline</h2>
       <Timeline animateTo={animateTo} zoomBy={zoomBy} deckTop={
         <div className={s.zoomBar}>
           <div className={`${s.zoom} segmented`} role="group" aria-label="Timeline zoom">
