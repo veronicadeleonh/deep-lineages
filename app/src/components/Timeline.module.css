@@ -38,6 +38,7 @@
 .groupHead line { stroke: var(--line); }
 .lineage text { fill: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
 .lineage line { stroke: var(--line); stroke-width: 1.5; }
+.lineage .linChev { fill: var(--text-3); font-size: var(--fs-2xs); letter-spacing: 0; } /* "this folds", like the families' ▸ ▾ */
 .row { cursor: pointer; }
 .hit { fill: transparent; }
 .rowHighlight { fill: var(--surface-2); }

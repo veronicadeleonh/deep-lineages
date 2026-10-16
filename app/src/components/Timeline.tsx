@@ -717,6 +717,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
               <rect x={0} y={y0} width={GUT} height={Math.max(0, y1 - y0)} fill="transparent" />
               <line x1={GUT - 3} x2={GUT - 3} y1={y0 + 3} y2={y1 - 3} />
               <text transform={`translate(${lx},${mid}) rotate(-90)`} textAnchor="middle">{gr?.label ?? "Other"}</text>
+              {/* a visible hint that the lineage folds, like the families' ▸ ▾ */}
+              {gr && <text className={s.linChev} x={lx} y={y0 + 10} textAnchor="middle" dominantBaseline="central" aria-hidden>▾</text>}
             </g>
           );
         })}

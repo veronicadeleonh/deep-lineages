@@ -184,7 +184,7 @@ function Header({ onAbout }: { onAbout: () => void }) {
       {/* the row is always there (empty in the views without keys), so the header keeps its height in every view */}
       <p className={s.hint}>
         {state.mode === "machine" && <><kbd>Space</kbd> plays and pauses · drag the bar or use <kbd>←</kbd> <kbd>→</kbd> to travel · click a family · <kbd>Esc</kbd> closes it</>}
-        {state.mode === "tree" && <>Pinch or <kbd>⌘</kbd> + scroll to zoom · drag to move · click a group to center the tree on it · <kbd>Esc</kbd> closes it</>}
+        {state.mode === "tree" && <>Pinch to zoom · click a group to center it · <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> move · type a name · <kbd>Esc</kbd> closes it</>}
         {state.mode === "timeline" && <>Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it</>}
       </p>
     </header>

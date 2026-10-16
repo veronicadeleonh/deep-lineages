@@ -281,6 +281,88 @@ export function TreeCard() {
       <span>{fNum(leavesN)} genera · click to center on it</span>
     </>
   );
+  /* ---------- the keyboard: walk the hierarchy (ARIA tree, one Tab stop) ----------
+     → first child · ← parent · ↑ ↓ previous / next sibling · Home / End first / last sibling ·
+     Enter: a group centers the tree on it, a genus opens its profile, the center steps back out */
+  const nodeById = useMemo(() => new Map(root.descendants().map((n) => [n.data.id, n])), [root]);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const active = (activeId && nodeById.get(activeId)) || (selId && nodeById.get(selId)) || root;
+  const [ring, setRing] = useState(false);
+  // a short reminder of the keys, shown when the tree gets the keyboard focus and gone after a few moves
+  const [keysHint, setKeysHint] = useState(false);
+  const moves = useRef(0);
+  useEffect(() => { if (!keysHint) return; const id = setTimeout(() => setKeysHint(false), 8000); return () => clearTimeout(id); }, [keysHint]);
+  const labelOf = (n: P) => {
+    const d = n.data, nG = n.leaves().length;
+    if (n === root) return `${d.name}, center of the tree, ${fNum(nG)} genera, ${zoomed ? "Enter shows the whole tree" : crumbs.length > 1 ? "Enter steps back out" : "Enter or → goes in"}`;
+    if (d.genus) return `${d.genus.genus}, genus of ${d.famOf?.family}, first fossil in the ${periodOf(d.genus)}, ${d.genus.species.length ? `${d.genus.species.length} species` : "species undetermined"}`;
+    if (d.family) return `${d.family.family}, family, ${dietOf(d.family).label.toLowerCase()}, ${fNum(nG)} genera`;
+    return `${d.name}, ${rankOf(d)}, ${fNum(nG)} genera${CLADE_NOTES[d.name] ? `: ${CLADE_NOTES[d.name]}` : ""}`;
+  };
+  const keepInSight = (n: P) => {
+    if (!zoomed) return;
+    const [x, y] = tx(pt(n.x, n.y)), mx = hw - 48, my = hh - 48;
+    const dx = x > mx ? x - mx : x < -mx ? x + mx : 0, dy = y > my ? y - my : y < -my ? y + my : 0;
+    if (dx || dy) setView({ ...latest.current, x: latest.current.x - dx, y: latest.current.y - dy });
+  };
+  const activate = (n: P) => {
+    tip.hide();
+    if (n === root) {
+      if (zoomed) setView(REST);                                                                   // like clicking the center: the whole tree again
+      else if (crumbs.length > 1) { refocus(crumbs[crumbs.length - 2]); setActiveId(null); }     // …or one level back out
+      else if (n.children?.[0]) { setActiveId(n.children[0].data.id); keepInSight(n.children[0]); } // at Dinosauria: step in
+      return;
+    }
+    if (n.children) { refocus(n.data); setActiveId(null); return; } // the new center takes the focus
+    if (n.data.genus) dispatch({ type: "genus", family: n.data.famOf!.family, genus: n.data.genus.genus });
+    else if (n.data.family) dispatch({ type: "select", family: n.data.family.family });
+  };
+  // what ← → walk around, by angle: on the rim, the genera; inside, every group you can see a name for
+  // (the labelled branch points and the families, whose names are on the ring), plus wherever you are now
+  const ringOf = (n: P) => {
+    if (!n.children) return leaves.slice().sort((a, b) => a.x - b.x);
+    const stops = internal.filter((x) => x === n || x.data.family || cladeNamed(x));
+    return stops.sort((a, b) => a.x - b.x || a.depth - b.depth);
+  };
+  // type to jump: letters typed within a moment build a search, matched against the names in view
+  const typed = useRef<{ q: string; at: number; from: P | null }>({ q: "", at: 0, from: null });
+  const findByName = (q: string, from: P) => {
+    const all = root.descendants(), start = all.indexOf(from);
+    const order = [...all.slice(start + 1), ...all.slice(0, start + 1)];
+    const lc = q.toLowerCase();
+    return order.find((x) => x.data.name.toLowerCase().startsWith(lc)) ?? order.find((x) => x.data.name.toLowerCase().includes(lc));
+  };
+  const go = (to?: P) => { if (to) { setActiveId(to.data.id); keepInSight(to); } };
+  const onTreeKey = (e: React.KeyboardEvent<SVGSVGElement>) => {
+    const n = active;
+    if (keysHint && ++moves.current >= 4) setKeysHint(false);
+    if (e.key === "ArrowUp") { e.preventDefault(); go(n.parent ?? undefined); return; }          // toward the center
+    if (e.key === "ArrowDown") {                                                                 // toward the rim: the child straight out
+      e.preventDefault();
+      go(n.children?.reduce((a, b) => (Math.abs(b.x - n.x) < Math.abs(a.x - n.x) ? b : a)));
+      return;
+    }
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {                                      // around the circle, at the same depth
+      e.preventDefault();
+      if (n === root) { go(n.children?.[0]); return; }
+      const ring = ringOf(n), i = ring.indexOf(n), d = e.key === "ArrowRight" ? 1 : -1;
+      go(ring[(i + d + ring.length) % ring.length]);
+      return;
+    }
+    if (e.key === "Home" || e.key === "End") { e.preventDefault(); go(e.key === "Home" ? root : leaves[0]); return; }
+    if (e.key === "Enter") { e.preventDefault(); typed.current.q = ""; activate(n); return; }
+    if (e.key === " " && !typed.current.q) { e.preventDefault(); activate(n); return; }
+    if (e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {                         // typing a name
+      e.preventDefault();
+      const now = Date.now();
+      const more = now - typed.current.at < 900 && typed.current.from;
+      typed.current = { q: (more ? typed.current.q : "") + e.key, at: now, from: more ? typed.current.from : n };
+      go(findByName(typed.current.q, typed.current.from ?? n)); // the search runs from where it started, so "thy" refines "t"
+    }
+  };
+  const si = active.parent?.children ?? [active];
+  const ringAt = tx(pt(active.x, active.y));
+
   const [ccx, ccy] = tx([0, 0]);
   const centerSil = centerSilOf(focus, data.clades);
 
@@ -330,7 +412,7 @@ export function TreeCard() {
         </div>
 
         <div ref={wrap} className={s.canvas}>
-        <div className={s.controls} role="group" aria-label="Zoom">
+        <div className={`${s.controls} segmented vertical`} role="group" aria-label="Zoom">
           <button aria-label="Zoom in" onClick={() => zoomAt(1.8, 0, 0)}>+</button>
           <button aria-label="Zoom out" onClick={() => zoomAt(1 / 1.8, 0, 0)} disabled={!zoomed}>−</button>
           <button aria-label="Whole tree" title="Whole tree" onClick={() => setView(REST)} disabled={!zoomed}>⟲</button>
@@ -339,10 +421,14 @@ export function TreeCard() {
         {about && <p className={s.aboutPop} role="note" onClick={() => setAbout(false)}>Branches show which groups sit inside which (PBDB classification), not when they split: here time is only the
         shade of each genus's dot, the period of its first fossil. Rings: families in their diet color, and the three
         lineages. Pinch to zoom and drag to move; names, silhouettes and species appear as you get closer. Click a ring or
-        a branch point to center the tree on that group, or a genus to open its profile and see its fossils on the map.</p>}
+        a branch point to center the tree on that group, or a genus to open its profile and see its fossils on the map. With the keyboard, Tab into the tree: ↑ moves toward the center, ↓ toward the rim, ← → around the circle; type a name to jump to it, and Enter centers a group or opens a genus.</p>}
 
         <svg ref={svgRef} viewBox={`${-hw} ${-hh} ${W} ${H}`} width={W} height={H} className={`${s.svg} ${zoomed ? s.grab : ""}`}
-          role="img" aria-label={`Radial family tree of ${focus.name}`}
+          role="tree" aria-label={`Family tree of ${focus.name}`} tabIndex={0} onKeyDown={onTreeKey}
+          aria-activedescendant={`tree-node-${active.data.id.replace(/\W/g, "_")}`}
+          aria-describedby="tree-keys"
+          onFocus={(e) => { const kb = e.currentTarget.matches(":focus-visible"); setRing(kb); if (kb) { moves.current = 0; setKeysHint(true); } }}
+          onBlur={() => { setRing(false); setKeysHint(false); }}
           onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}
           onDoubleClick={(e) => { const [sx, sy] = toLocal(e.clientX, e.clientY); zoomAt(2, sx, sy); }}>
 
@@ -418,8 +504,26 @@ export function TreeCard() {
             );
           })}
 
+          {/* the node the keyboard is on: one treeitem for screen readers (the drawing itself is a picture), and its ring */}
+          <g id={`tree-node-${active.data.id.replace(/\W/g, "_")}`} role="treeitem" aria-label={labelOf(active)} aria-level={active.depth + 1}
+            aria-posinset={si.indexOf(active) + 1} aria-setsize={si.length} aria-expanded={active.children ? true : undefined}
+            aria-selected={active.data.id === selId} />
+          {ring && active !== root && <circle className={s.focusNode} cx={ringAt[0]} cy={ringAt[1]} r={active.children ? 9 : 8} pointerEvents="none" />}
+          {/* …and its name, since many branch points carry none: you always see where you are */}
+          {ring && active !== root && (() => {
+            const text = `${active.data.name} · ${fNum(active.leaves().length)} ${active.leaves().length === 1 ? "genus" : "genera"}`;
+            const w = text.length * 7 + 16, left = ringAt[0] > hw - w - 24;
+            const x = left ? ringAt[0] - 14 - w : ringAt[0] + 14, y = ringAt[1] - 30;
+            return (
+              <g className={s.focusLabel} pointerEvents="none" aria-hidden>
+                <rect x={x} y={y} width={w} height={22} rx={6} />
+                <text x={x + 8} y={y + 11} dominantBaseline="central">{text}</text>
+              </g>
+            );
+          })()}
+
           {/* center: the focus, and a way back out */}
-          <g className={s.center} transform={`translate(${ccx},${ccy})`}
+          <g className={`${s.center} ${ring && active === root ? s.centerFocus : ""}`} transform={`translate(${ccx},${ccy})`}
             onClick={click(() => (zoomed ? setView(REST) : crumbs.length > 1 && refocus(crumbs[crumbs.length - 2])))}>
             {centerSil ? (
               /* the group's silhouette in the middle: the genera around it without a drawing of their own look like this */
@@ -440,6 +544,10 @@ export function TreeCard() {
             )}
           </g>
         </svg>
+        {/* the keys, in place: visible for a moment when the tree gets the keyboard focus; always there for screen readers */}
+        <p id="tree-keys" className={keysHint ? s.keysHint : "sr-only"}>
+          <kbd>↑</kbd> <kbd>↓</kbd> in / out · <kbd>←</kbd> <kbd>→</kbd> around · type a name · <kbd>Enter</kbd> centers
+        </p>
         </div>
       </div>
 

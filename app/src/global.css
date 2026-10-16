@@ -156,8 +156,14 @@ kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bott
 /* keyboard focus, everywhere (outline is reserved for focus; selection uses borders and box-shadow) */
 :focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 
+/* for screen readers only: read aloud, not shown */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
 /* segmented controls: a row of buttons inside one rounded box that clips its edges (speed, zone size, zoom, list) */
 .segmented > button:focus-visible { outline-offset: calc(var(--focus-offset) * -1); } /* the ring goes inside, or the box would clip it */
 .segmented > button:first-child { border-top-left-radius: calc(var(--radius-md) - var(--border-thin)); border-bottom-left-radius: calc(var(--radius-md) - var(--border-thin)); }
 .segmented > button:last-child { border-top-right-radius: calc(var(--radius-md) - var(--border-thin)); border-bottom-right-radius: calc(var(--radius-md) - var(--border-thin)); }
+/* …stacked: the first and last round their top and bottom corners instead */
+.segmented.vertical > button:first-child { border-radius: calc(var(--radius-md) - var(--border-thin)) calc(var(--radius-md) - var(--border-thin)) 0 0; }
+.segmented.vertical > button:last-child { border-radius: 0 0 calc(var(--radius-md) - var(--border-thin)) calc(var(--radius-md) - var(--border-thin)); }
 button:disabled { color: var(--text-disabled) !important; background: var(--surface-disabled) !important; cursor: default; }
