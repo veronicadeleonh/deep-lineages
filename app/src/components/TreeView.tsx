@@ -350,7 +350,7 @@ export function TreeCard() {
     if (e.key === "Home" || e.key === "End") { e.preventDefault(); go(e.key === "Home" ? root : leaves[0]); return; }
     if (e.key === "Enter") { e.preventDefault(); typed.current.q = ""; activate(n); return; }
     if (e.key === " " && !typed.current.q) { e.preventDefault(); activate(n); return; }
-    if (e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {                         // typing a name
+    if (e.key.length === 1 && /\p{L}/u.test(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey) { // typing a name (letters: digits switch views)
       e.preventDefault();
       const now = Date.now();
       const more = now - typed.current.at < 900 && typed.current.from;

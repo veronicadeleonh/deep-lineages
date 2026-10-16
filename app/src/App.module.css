@@ -32,6 +32,10 @@
 .views button[aria-current="true"] { color: var(--text); font-weight: var(--fw-bold); background: color-mix(in srgb, var(--cursor) 12%, var(--surface)); border-color: var(--cursor); }
 .viewIcon { font-size: var(--fs-sm); color: var(--text-3); }
 .views button[aria-current="true"] .viewIcon { color: var(--cursor); }
+/* the 1–4 shortcut keys, shown only while someone is using the keyboard */
+.views button { position: relative; }
+.viewKey { display: none; position: absolute; top: -8px; right: -6px; font-weight: var(--fw-regular); line-height: var(--lh-tight); }
+:global(body:has(:focus-visible)) .viewKey { display: inline-block; }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 0 24px 24px; align-items: start; }
 .withPanel { grid-template-columns: minmax(0, 1fr) 400px; }
@@ -47,6 +51,9 @@
 .railOpen:hover { background: var(--surface-2); color: var(--text); }
 .railClose { flex: none; font: inherit; font-size: var(--fs-md); color: var(--text-3); background: none; border: 0; border-top: 1px solid var(--line); height: 40px; cursor: pointer; }
 .railClose:hover { color: var(--text); background: var(--surface-2); }
+/* a stacked control (the ring goes inside), with the rail's larger corners */
+.rail > button:first-child { border-radius: calc(var(--radius-lg) - var(--border-thin)) calc(var(--radius-lg) - var(--border-thin)) 0 0 !important; }
+.rail > button:last-child { border-radius: 0 0 calc(var(--radius-lg) - var(--border-thin)) calc(var(--radius-lg) - var(--border-thin)) !important; }
 .railChev { font-size: var(--fs-xl); line-height: var(--lh-none); }
 .railSil { width: 30px; height: 30px; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .railName { writing-mode: vertical-rl; font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); white-space: nowrap; max-height: 60vh; overflow: hidden; text-overflow: ellipsis; }
@@ -97,6 +104,7 @@
   .views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 18px; }
   .dive { display: contents; }
   .diveLabel { display: none; }
+  .viewKey, :global(body:has(:focus-visible)) .viewKey { display: none; }
   .views button { width: auto; height: auto; min-height: 40px; flex-direction: column; gap: 0; padding: 4px 2px; font-size: var(--fs-sm); white-space: normal; line-height: var(--lh-tight); }
   .followHint { display: none; }
   .following .followHint:only-child { display: inline; }

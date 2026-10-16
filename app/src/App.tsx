@@ -78,8 +78,10 @@ function Following() {
 function Views() {
   const { state, dispatch } = useStore();
   const button = (v: (typeof VIEWS)[number]) => (
-    <button key={v.mode} aria-current={state.mode === v.mode} onClick={() => dispatch({ type: "mode", mode: v.mode })} title={v.ask}>
+    <button key={v.mode} aria-current={state.mode === v.mode} onClick={() => dispatch({ type: "mode", mode: v.mode })}
+      title={`${v.ask} · key ${VIEWS.indexOf(v) + 1}`} aria-keyshortcuts={String(VIEWS.indexOf(v) + 1)}>
       <span className={s.viewIcon} aria-hidden>{v.icon}</span>{v.name}
+      <kbd className={s.viewKey} aria-hidden>{VIEWS.indexOf(v) + 1}</kbd>
     </button>
   );
   // the story first; the three deep dives grouped after it
@@ -143,6 +145,22 @@ function Layout() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [selected, dispatch]);
+  // 1–4 switch views from anywhere (not while typing), and the focus goes to the start of the new view,
+  // so the next Tab is inside it instead of back at the top of a long panel
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = e.target as HTMLElement;
+      if (el.closest?.("input, textarea, select, [contenteditable]")) return;
+      const v = VIEWS[Number(e.key) - 1];
+      if (!v || !/^[1-4]$/.test(e.key)) return;
+      e.preventDefault();
+      dispatch({ type: "mode", mode: v.mode });
+      requestAnimationFrame(() => document.getElementById("content")?.focus());
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [dispatch]);
   // the profile can be folded to a thin rail (to give the view room) and unfolded again; a new selection unfolds it
   const [folded, setFolded] = useState(false);
   useEffect(() => setFolded(false), [state.selected, state.genus]);
@@ -153,7 +171,7 @@ function Layout() {
     <main id="content" tabIndex={-1} className={`${s.layout} ${open ? (folded ? s.withRail : s.withPanel) : ""}`}>
       {state.mode === "machine" ? <TimeMachine /> : state.mode === "tree" ? <TreeCard /> : state.mode === "guide" ? <FieldGuide /> : <TimelineCard />}
       {open && folded && (
-        <div className={s.rail}>
+        <div className={`${s.rail} segmented vertical`}>
           <button className={s.railOpen} onClick={() => setFolded(false)} aria-label="Show the profile" title="Show the profile">
             <span className={s.railChev}>‹</span>
             {sil && <i className={s.railSil} style={{ ["--src" as string]: `url("${silhouetteUrl(sil)}")` }} />}
