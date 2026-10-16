@@ -6,7 +6,7 @@
 .question { margin: 2px 0 0; font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--text); letter-spacing: var(--tracking-tight); }
 .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chip {
-  font: inherit; font-size: var(--fs-md); color: var(--text-2); background: var(--surface-2); border: 1px solid var(--line);
+  font: inherit; font-size: var(--fs-md); color: var(--text-2); background: var(--surface-2); border: var(--border-thin) solid var(--line);
   border-radius: var(--radius-md); padding: 3px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
 }
 .chip:hover { color: var(--text); border-color: var(--text-3); }
@@ -22,9 +22,9 @@
 .siteIn { fill: var(--text); opacity: .75; pointer-events: none; }
 .siteLit { fill: var(--cursor); stroke: var(--surface); stroke-width: 1; pointer-events: none; }
 .zoneBar { display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm); color: var(--text-3); flex-wrap: wrap; }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; }
+.seg { display: inline-flex; border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); overflow: hidden; }
 .seg button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: var(--surface); border: 0; padding: 2px 9px; cursor: pointer; }
-.seg button + button { border-left: 1px solid var(--line); }
+.seg button + button { border-left: var(--border-thin) solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: var(--fw-bold); }
 .through { margin: 6px 0 0; }
 .through figcaption { font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); margin-bottom: 4px; }
@@ -41,14 +41,14 @@
 .whoHead b { color: var(--text); }
 .filters { display: grid; gap: 8px; margin: 12px 0 10px; }
 .search {
-  font: inherit; font-size: var(--fs-base); color: var(--text); background: var(--surface-2); border: 1px solid var(--line);
+  font: inherit; font-size: var(--fs-base); color: var(--text); background: var(--surface-2); border: var(--border-thin) solid var(--line);
   border-radius: var(--radius-md); padding: 6px 12px; width: 100%;
 }
 .search::placeholder { color: var(--text-3); }
 .searchBox { position: relative; }
 .suggest {
   position: absolute; z-index: var(--z-popover); left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none;
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-md);
+  background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-md);
 }
 .suggest li { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: var(--radius-md); cursor: pointer; font-size: var(--fs-base); }
 .sgOn { background: var(--surface-2); }
@@ -60,7 +60,7 @@
 .spacer { flex: 1; }
 .sort { font-size: var(--fs-md); color: var(--text-3); display: inline-flex; gap: 6px; align-items: center; }
 
-.axis { flex: none; border-bottom: 1px solid var(--line); }
+.axis { flex: none; border-bottom: var(--border-thin) solid var(--line); }
 .axis svg { display: block; }
 .band { fill: var(--surface-2); }
 .bandAlt { fill: transparent; }
@@ -71,11 +71,11 @@
 .list { flex: 1; min-height: 0; overflow-y: auto; }
 .item {
   display: grid; grid-template-columns: var(--lw) 1fr; align-items: center; width: 100%; padding: 0; margin: 0;
-  font: inherit; text-align: left; color: var(--text); background: none; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent); cursor: pointer;
+  font: inherit; text-align: left; color: var(--text); background: none; border: 0; border-bottom: var(--border-thin) solid color-mix(in srgb, var(--line) 50%, transparent); cursor: pointer;
 }
 .item:hover { background: var(--surface-2); }
 .item:focus-visible { outline-offset: calc(var(--focus-offset) * -1); border-radius: var(--radius-sm); } /* the list scrolls and would clip a ring outside */
-.itemSel { background: color-mix(in srgb, var(--cursor) 12%, transparent); }
+.itemSel { background: var(--accent-soft); }
 .label { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 3px 0; }
 .sil { width: 36px; height: 20px; flex: none; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .silBorrowed { opacity: .3; }
@@ -85,7 +85,7 @@
 .names small { font-size: var(--fs-xs); color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar { display: block; overflow: visible; }
 .n { font-size: var(--fs-xs); fill: var(--text-3); font-variant-numeric: tabular-nums; }
-.notice { margin: 8px 0; padding: 10px 12px; font-size: var(--fs-md); line-height: var(--lh-relaxed); color: var(--text-2); background: color-mix(in srgb, var(--cursor) 10%, transparent); border: 1px solid color-mix(in srgb, var(--cursor) 35%, transparent); border-radius: var(--radius-md); }
+.notice { margin: 8px 0; padding: 10px 12px; font-size: var(--fs-md); line-height: var(--lh-relaxed); color: var(--text-2); background: var(--accent-soft); border: var(--border-thin) solid var(--accent-edge); border-radius: var(--radius-md); }
 .notice b { color: var(--text); }
 .notice button { font: inherit; font-weight: var(--fw-bold); color: var(--accent-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .othersToggle { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: var(--fs-sm); color: var(--text-2); cursor: pointer; }

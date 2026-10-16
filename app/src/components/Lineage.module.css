@@ -2,7 +2,7 @@
 .head { margin: 0 0 6px; font-size: var(--fs-sm); color: var(--text-2); display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap; }
 .head b { color: var(--text); font-weight: var(--fw-semibold); }
 .toggle, .more {
-  font: inherit; font-size: var(--fs-xs); color: var(--text-2); background: none; border: 1px solid var(--line);
+  font: inherit; font-size: var(--fs-xs); color: var(--text-2); background: none; border: var(--border-thin) solid var(--line);
   border-radius: var(--radius-md); padding: 1px 8px; cursor: pointer;
 }
 .toggle { margin-left: auto; }
@@ -16,11 +16,11 @@
 /* the dot */
 .step::after {
   content: ""; position: absolute; left: 1px; top: 4px; width: 8px; height: 8px; box-sizing: border-box;
-  border-radius: var(--radius-full); background: var(--surface); border: 1.5px solid var(--text-3);
+  border-radius: var(--radius-full); background: var(--surface); border: var(--border-thick) solid var(--text-3);
 }
 .landmark::after { background: var(--text-2); border-color: var(--text-2); }
-.current::after { left: -1px; top: 2px; width: 12px; height: 12px; background: var(--text); border: 3px solid var(--surface); box-shadow: 0 0 0 var(--border-thick) var(--text); }
-.gap::before { background: none; border-left: 1.5px dashed var(--text-3); width: 0; }
+.current::after { left: -1px; top: 2px; width: 12px; height: 12px; background: var(--text); border: calc(var(--border-thick) * 2) solid var(--surface); box-shadow: 0 0 0 var(--border-thick) var(--text); } /* the white border is the gap between the dot and its ring: twice the ring, so they scale together */
+.gap::before { background: none; border-left: var(--border-thick) dashed var(--text-3); width: 0; }
 .gap::after { content: none; }
 .gap { padding-left: 16px; }
 

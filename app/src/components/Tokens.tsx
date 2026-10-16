@@ -27,6 +27,7 @@ const RAW_CHECKS: { label: string; re: RegExp; hint: string }[] = [
   { label: "z-index", re: /z-index:\s*(\d+)/g, hint: "candidates for --z-*" },
   { label: "letter-spacing", re: /letter-spacing:\s*(-?[\d.]+em)/g, hint: "candidates for --tracking-*" },
   { label: "line-height", re: /line-height:\s*([\d.]+)(?![\w%])/g, hint: "candidates for --lh-*" },
+  { label: "border-width", re: /(?:border(?:-(?:top|right|bottom|left))?(?:-width)?|outline(?:-width)?):\s*(?:[^;}]*\s)?([1-9][\d.]*px|0?\.\d+px)/g, hint: "candidates for --border-*" },
 ];
 function rawValues(src: Sources) {
   return RAW_CHECKS.map(({ label, re, hint }) => {
@@ -123,7 +124,7 @@ export function Tokens() {
                     <td className={s.value}>
                       <code>{t.raw}</code>
                       {t.raw !== t.value && <small>→ {t.value}</small>}
-                      {c && !t.value.startsWith("#") && <small>→ {toHex(c)}</small>}
+                      {c && !t.value.startsWith("#") && <small>→ {toHex(c)}{(c[3] ?? 1) < 1 ? ` at ${Math.round((c[3] ?? 1) * 100)}%` : ""}</small>}
                     </td>
                     {g === "Semantic colors" && <RoleCells name={t.name} probe={probe} />}
                     {g === "Primitive colors" && <td className={s.ref}>{bgs.map((b) => c && b.c ? <span key={b.n}>{ratio(c, b.c).toFixed(2)}</span> : null)}</td>}

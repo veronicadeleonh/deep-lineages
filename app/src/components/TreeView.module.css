@@ -24,9 +24,9 @@
   font-size: var(--fs-md); line-height: var(--lh-snug); color: var(--text-2);
 }
 /* the line that joins the steps */
-.ladder li::before { content: ""; position: absolute; left: calc(3.5px + min(var(--d, 0), 8) * 4px); top: -6px; bottom: 50%; border-left: 1px solid var(--line); }
+.ladder li::before { content: ""; position: absolute; left: calc(3.5px + min(var(--d, 0), 8) * 4px); top: -6px; bottom: 50%; border-left: var(--border-thin) solid var(--line); }
 .ladder li:first-child::before { display: none; }
-.stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: calc(.62em + 1px); width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--surface); border: 1.5px solid var(--text-3); }
+.stepDot { position: absolute; left: calc(min(var(--d, 0), 8) * 4px); top: calc(.62em + 1px); width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--surface); border: var(--border-thick) solid var(--text-3); }
 .ladder li button { font: inherit; color: var(--text-2); background: none; border: 0; padding: 4px 4px; margin: -4px 0 -4px -4px; flex: 1; cursor: pointer; text-align: left; border-radius: var(--radius-sm); } /* the whole row is the target: 24px+ high (WCAG 2.5.8) */
 .ladder li button:focus-visible { outline-offset: 0; } /* hugs the row, clear of the dots on its left */
 .ladder li button:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
@@ -38,7 +38,7 @@
 .stepFocus .rank { color: var(--accent-text); font-weight: var(--fw-bold); }
 .ladder li:last-of-type:not(.stepSpecies) .stepDot, .ladder li:has(+ .stepSpecies) .stepDot { background: var(--text); border-color: var(--text); }
 .stepSpecies { --d: 9; color: var(--text-2); }
-.stepSpecies .stepDot { width: 6px; height: 6px; top: calc(.7em + 1px); border-width: 1px; }
+.stepSpecies .stepDot { width: 6px; height: 6px; top: calc(.7em + 1px); border-width: var(--border-thin); }
 .stepMore { padding-left: 50px !important; font-size: var(--fs-sm); color: var(--text-3) !important; }
 .ladderHint { margin: 10px 0 0; font-size: var(--fs-sm); color: var(--text-3); line-height: var(--lh-snug); }
 .ladderCount { margin: 8px 0 0; font-size: var(--fs-sm); color: var(--text-3); }
@@ -88,9 +88,9 @@
 .svg { overflow: hidden; touch-action: none; border-radius: var(--radius-lg); }
 .grab { cursor: grab; }
 .grab:active { cursor: grabbing; }
-.controls { position: absolute; right: 0; bottom: 0; z-index: var(--z-raised); display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
+.controls { position: absolute; right: 0; bottom: 0; z-index: var(--z-raised); display: flex; flex-direction: column; border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
 .controls button { font: inherit; font-size: var(--fs-lg); width: 34px; height: 32px; color: var(--text); background: none; border: 0; cursor: pointer; }
-.controls button + button { border-top: 1px solid var(--line); }
+.controls button + button { border-top: var(--border-thin) solid var(--line); }
 .controls button:hover:not(:disabled) { background: var(--surface-2); }
 .hint { position: absolute; left: 8px; bottom: 4px; margin: 0; z-index: var(--z-raised); color: var(--text-3); font-size: var(--fs-sm); pointer-events: none; }
 .unnamed circle { fill: transparent; stroke: transparent; }
@@ -100,7 +100,7 @@
 .aboutPop {
   position: absolute; right: 44px; bottom: 0; z-index: var(--z-popover); width: min(420px, calc(100% - 60px)); margin: 0; cursor: pointer;
   padding: 12px 14px; font-size: var(--fs-md); line-height: var(--lh-relaxed); color: var(--text-2);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg);
 }
 
 /* keyboard focus in the tree: a ring around the active node (SVG draws no outline of its own) */

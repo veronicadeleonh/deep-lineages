@@ -43,6 +43,11 @@
   --accent-text: var(--amber-700); /* amber text at normal size: needs 4.5:1 */
   --accent-bg: var(--amber-700);   /* amber behind light text (buttons, badges): needs 4.5:1 */
   --map-accent-text: var(--amber-800); /* amber text over the map: 4.5:1 on --ocean and --land */
+  --accent-soft: color-mix(in srgb, var(--cursor) 12%, var(--surface)); /* a light amber fill: what's chosen or active */
+  --accent-edge: color-mix(in srgb, var(--cursor) 40%, transparent);     /* a light amber edge around an --accent-soft fill */
+  /* overlays */
+  --scrim: color-mix(in srgb, var(--text) 28%, transparent);   /* dims the app behind a dialog */
+  --veil: color-mix(in srgb, var(--surface) 85%, transparent); /* a near-opaque surface, so text reads over the map */
   /* maps */
   --ocean: var(--blue-100);
   --land: var(--sage-300);
@@ -137,16 +142,16 @@ body {
 }
 h1 { margin: 2px 0 0; font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight); font-variant-numeric: tabular-nums; }
 h2 { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-2); }
-kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0 4px; color: var(--text-2); background: var(--surface); }
+kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--line); border-bottom-width: calc(var(--border-thin) * 2); border-radius: var(--radius-sm); padding: 0 4px; color: var(--text-2); background: var(--surface); }
 
 /* shared pieces */
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; min-width: 0; }
+.card { background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; min-width: 0; }
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
 .muted { color: var(--text-3); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
 .note { margin: 8px 0 0; color: var(--text-3); font-size: var(--fs-sm); }
 .chip {
   font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2);
-  border: 1px solid var(--line); border-radius: var(--radius-full); padding: 3px 10px 3px 8px; cursor: pointer;
+  border: var(--border-thin) solid var(--line); border-radius: var(--radius-full); padding: 3px 10px 3px 8px; cursor: pointer;
   display: inline-flex; align-items: center; gap: 6px;
 }
 .chip:hover { border-color: var(--text-3); }
@@ -186,7 +191,7 @@ kbd { font: var(--fs-xs) var(--mono); border: 1px solid var(--line); border-bott
   }
   .select option:hover { background: var(--surface-2); }
   .select option:focus-visible { outline-offset: calc(var(--focus-offset) * -1); } /* inside, so the list doesn't clip it */
-  .select option:checked { font-weight: var(--fw-semibold); background: color-mix(in srgb, var(--cursor) 12%, var(--surface)); }
+  .select option:checked { font-weight: var(--fw-semibold); background: var(--accent-soft); }
   .select option::checkmark { color: var(--cursor); }
   .select option:disabled { color: var(--text-disabled); cursor: default; }
   .select option:disabled:checked { display: none; } /* a placeholder ("Pick a…"): it names the menu when closed, not a choice in the list */

@@ -14,7 +14,7 @@
 
 .content {
   position: relative; width: min(720px, 100%); padding: 36px 40px 28px; border-radius: var(--radius-xl);
-  background: color-mix(in srgb, var(--surface) 86%, transparent); border: 1px solid var(--line);
+  background: var(--veil); border: var(--border-thin) solid var(--line);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: var(--shadow-soft);
 }
 .eyebrow { margin: 0 0 10px; font-size: var(--fs-md); letter-spacing: var(--tracking-caps-wide); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--accent-text); }
@@ -30,10 +30,10 @@
   border-radius: var(--radius-md); padding: 8px 16px; cursor: pointer;
 }
 .start:hover { filter: brightness(1.08); }
-.explore { font: inherit; font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 8px 16px; cursor: pointer; }
+.explore { font: inherit; font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--text-2); background: none; border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 8px 16px; cursor: pointer; }
 .explore:hover { color: var(--text); border-color: var(--text-3); }
 
-.views { list-style: none; margin: 0 0 18px; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
+.views { list-style: none; margin: 0 0 18px; padding: 16px 0 0; border-top: var(--border-thin) solid var(--line); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
 .views li { display: grid; grid-template-columns: 22px 1fr; column-gap: 8px; font-size: var(--fs-md); line-height: var(--lh-normal); color: var(--text-2); }
 .views b { color: var(--text); font-weight: var(--fw-bold); }
 .views li > span:last-child { grid-column: 2; }
@@ -51,11 +51,11 @@
 }
 
 /* About: a compact dialog over the app (which stays visible, dimmed) */
-.aboutBackdrop { position: fixed; inset: 0; z-index: var(--z-dialog); background: color-mix(in srgb, var(--text) 28%, transparent); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fadeIn .2s ease-out; }
-.about { width: min(560px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px 26px 22px; box-shadow: var(--shadow-lg); animation: rise .2s ease-out; }
+.aboutBackdrop { position: fixed; inset: 0; z-index: var(--z-dialog); background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fadeIn .2s ease-out; }
+.about { width: min(560px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); padding: 22px 26px 22px; box-shadow: var(--shadow-lg); animation: rise .2s ease-out; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 .about { position: relative; padding: 26px 28px 24px; }
-.aboutClose { position: absolute; right: 14px; top: 14px; font: inherit; font-size: var(--fs-base); color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: var(--radius-md); width: 32px; height: 32px; cursor: pointer; }
+.aboutClose { position: absolute; right: 14px; top: 14px; font: inherit; font-size: var(--fs-base); color: var(--text-2); background: none; border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); width: 32px; height: 32px; cursor: pointer; }
 .aboutClose:hover { color: var(--text); border-color: var(--text-3); }
 .aboutTitle { margin: 0 44px 4px 0; font-size: var(--fs-title); font-weight: var(--fw-bold); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text); }
 .aboutCaption { margin: 0 0 14px; font-size: var(--fs-md); letter-spacing: var(--tracking-caps-wide); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--accent-text); }

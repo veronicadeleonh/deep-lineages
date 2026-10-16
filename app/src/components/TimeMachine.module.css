@@ -67,7 +67,7 @@
 .counter b { color: var(--map-ink); }
 
 .who {
-  font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: 1px solid var(--line);
+  font: inherit; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: var(--border-thin) solid var(--line);
   border-radius: var(--radius-md); padding: 3px 9px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
 }
 .who:hover { border-color: var(--cursor); }
@@ -81,9 +81,9 @@
 .around { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; pointer-events: auto; min-height: 0; overflow-y: auto; flex: 0 1 auto; padding: 4px; margin: -4px; } /* room for the focus ring: the list scrolls, so it clips */
 .aroundLabel { font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--map-ink-2); font-weight: var(--fw-bold); margin-bottom: 2px; }
 .aroundNone { font-size: var(--fs-sm); color: var(--map-ink-2); max-width: 200px; text-align: right; }
-.around .who { background: color-mix(in srgb, var(--surface) 85%, transparent); padding: 2px 8px; flex: none; }
+.around .who { background: var(--veil); padding: 2px 8px; flex: none; }
 .whoChev { width: 10px; height: 6px; fill: none; stroke: var(--text-2); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; margin-left: 2px; }
-.absent { margin: 0 0 6px; max-width: 300px; pointer-events: auto; text-align: right; font-size: var(--fs-md); line-height: var(--lh-normal); color: var(--text-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 8px 10px; }
+.absent { margin: 0 0 6px; max-width: 300px; pointer-events: auto; text-align: right; font-size: var(--fs-md); line-height: var(--lh-normal); color: var(--text-2); background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 8px 10px; }
 .absent b { color: var(--text); }
 .absent button { font: inherit; font-weight: var(--fw-bold); color: var(--map-accent-text); background: none; border: 0; padding: 0; cursor: pointer; }
 .absent button:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -93,7 +93,7 @@
 /* the selected animal: a small card unfolding under its family in the list */
 .mcard {
   position: relative; flex: none; width: 100%; max-width: 330px; margin: 0 0 4px; pointer-events: auto; padding: 12px 14px 12px; box-shadow: var(--shadow-md);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); animation: unfold .2s ease-out; transform-origin: top;
+  background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); animation: unfold .2s ease-out; transform-origin: top;
 }
 @keyframes unfold { from { opacity: 0; transform: translateY(-4px) scaleY(.96); } }
 .mcardHead { display: flex; align-items: center; gap: 10px; }
@@ -101,25 +101,25 @@
 .mcardSil { width: 56px; height: 36px; flex: none; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .mcardSub { margin: 2px 0 0; font-size: var(--fs-sm); color: var(--text-3); }
 .mcardTags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.mcardTags span { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 2px 8px; }
+.mcardTags span { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--text); background: var(--surface-2); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 2px 8px; }
 .mcardFacts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin: 10px 0 0; }
 .mcardFacts dt { font-size: var(--fs-xs); color: var(--text-3); }
 .mcardFacts dd { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text); font-variant-numeric: tabular-nums; }
 .mcardWide { grid-column: 1 / -1; }
 .mcardBlurb { margin: 10px 0 0; font-size: var(--fs-md); line-height: var(--lh-normal); color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.mcardDive { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.mcardDive { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 12px; padding-top: 10px; border-top: var(--border-thin) solid var(--line); }
 .mcardDive > span { grid-column: 1 / -1; font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
-.mcardDive button { font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 3px 4px; white-space: nowrap; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
+.mcardDive button { font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text); background: var(--surface-2); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 3px 4px; white-space: nowrap; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
 .mcardDive button i { font-style: normal; color: var(--accent-text); }
 .mcardDive button:hover { border-color: var(--cursor); }
 
 /* the "about the map" note, behind a small i */
-.about { flex: none; width: 22px; height: 22px; border-radius: var(--radius-full); border: 1px solid var(--line); background: var(--surface); color: var(--text-3); font: italic var(--fw-semibold) var(--fs-sm)/var(--lh-none) Georgia, serif; cursor: help; }
+.about { flex: none; width: 22px; height: 22px; border-radius: var(--radius-full); border: var(--border-thin) solid var(--line); background: var(--surface); color: var(--text-3); font: italic var(--fw-semibold) var(--fs-sm)/var(--lh-none) Georgia, serif; cursor: help; }
 .about[aria-expanded="true"] { color: var(--surface); background: var(--text-2); border-color: var(--text-2); }
 .aboutPop {
   position: absolute; right: 16px; bottom: calc(100% + 8px); width: min(420px, calc(100% - 32px)); margin: 0; z-index: var(--z-popover); cursor: pointer;
   padding: 12px 14px; font-size: var(--fs-md); line-height: var(--lh-relaxed); color: var(--text-2);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); animation: rise .2s ease-out;
+  background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); animation: rise .2s ease-out;
 }
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
 .about:not([aria-expanded="true"]):hover { color: var(--text); border-color: var(--text-3); }
@@ -134,9 +134,9 @@
 .play svg { display: block; margin: auto; fill: currentColor; }
 .play:hover { filter: brightness(1.08); }
 .play:active { transform: scale(.96); }
-.speed { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); flex: none; }
+.speed { display: inline-flex; border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); flex: none; }
 .speed button { font: inherit; font-size: var(--fs-sm); color: var(--text-2); background: none; border: 0; padding: 4px 9px; cursor: pointer; }
-.speed button + button { border-left: 1px solid var(--line); }
+.speed button + button { border-left: var(--border-thin) solid var(--line); }
 .speed button[aria-pressed="true"] { background: var(--surface-2); color: var(--text); font-weight: var(--fw-bold); }
 .scrubber { flex: 1; min-width: 0; cursor: pointer; touch-action: none; border-radius: var(--radius-md); }
 .scrubber svg { display: block; overflow: visible; }
