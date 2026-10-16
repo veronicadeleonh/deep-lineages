@@ -7,6 +7,7 @@ import { silhouetteUrl } from "../data";
 import { byCount, famRecord, fNum, fRange, genusRecord } from "../format";
 import { useStore } from "../state";
 import s from "./TimeMachine.module.css";
+import { revealInScroller } from "../hooks";
 
 const DIVES = [
   { mode: "timeline", icon: "☰", name: "Timeline", ask: "When did it live?" },
@@ -21,7 +22,7 @@ export function MachineCard({ compact = false }: { compact?: boolean }) {
   const { data, state, dispatch } = useStore();
   const ref = useRef<HTMLElement>(null);
   // the list may scroll: bring the card into view when it opens or changes
-  useEffect(() => { ref.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }, [state.selected, state.genus]);
+  useEffect(() => { revealInScroller(ref.current); }, [state.selected, state.genus]); // not scrollIntoView: see revealInScroller
   const f = data.families.find((x) => x.family === state.selected);
   if (!f) return null;
   const g = state.genus ? data.genera[f.family]?.genera.find((x) => x.genus === state.genus) : undefined;

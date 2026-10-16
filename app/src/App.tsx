@@ -149,7 +149,8 @@ function Layout() {
   const fam = state.selected ? data.families.find((f) => f.family === state.selected) : undefined;
   const sil = (state.genus && data.genera[state.selected ?? ""]?.genera.find((g) => g.genus === state.genus)?.phylopic?.svg) || fam?.phylopic?.svg;
   return (
-    <main className={`${s.layout} ${open ? (folded ? s.withRail : s.withPanel) : ""}`}>
+    // id + tabIndex: the target of the "Skip to" link (focus lands here, the next Tab enters the view)
+    <main id="content" tabIndex={-1} className={`${s.layout} ${open ? (folded ? s.withRail : s.withPanel) : ""}`}>
       {state.mode === "machine" ? <TimeMachine /> : state.mode === "tree" ? <TreeCard /> : state.mode === "guide" ? <FieldGuide /> : <TimelineCard />}
       {open && folded && (
         <div className={s.rail}>
@@ -177,6 +178,10 @@ function Header({ onAbout }: { onAbout: () => void }) {
   // a grid, so the right side lines up with the left: brand / following, time / views, keys / (nothing)
   return (
     <header className={s.top}>
+      {/* the first stop for the keyboard: straight to the view, past the header (WCAG 2.4.1) */}
+      <a className="skip" href="#content" onClick={(e) => { e.preventDefault(); document.getElementById("content")?.focus(); }}>
+        Skip to the {VIEWS.find((v) => v.mode === state.mode)?.name.toLowerCase() ?? "view"}
+      </a>
       <p className={s.eyebrow}><button className={s.home} onClick={onAbout} title="About Deep Lineages">🦕 <b>Deep Lineages</b></button><span className={s.tagline}> · dinosaur families of the Mesozoic</span></p>
       <Following />
       <h1>{fMa(state.t)} Ma {period && <span className={s.period}>· {period.name}</span>}</h1>
@@ -185,6 +190,7 @@ function Header({ onAbout }: { onAbout: () => void }) {
       <p className={s.hint}>
         {state.mode === "machine" && <><kbd>Space</kbd> plays and pauses · drag the bar or use <kbd>←</kbd> <kbd>→</kbd> to travel · click a family · <kbd>Esc</kbd> closes it</>}
         {state.mode === "tree" && <>Pinch to zoom · click a group to center it · <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> move · type a name · <kbd>Esc</kbd> closes it</>}
+        {state.mode === "guide" && <>Pick a continent, or click the map for a zone · in the list, <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>Enter</kbd> opens · <kbd>Esc</kbd> closes it</>}
         {state.mode === "timeline" && <>Drag along the timeline · <kbd>←</kbd> <kbd>→</kbd> 1 Myr · <kbd>Shift</kbd> 10 Myr · click a family · <kbd>Esc</kbd> closes it</>}
       </p>
     </header>

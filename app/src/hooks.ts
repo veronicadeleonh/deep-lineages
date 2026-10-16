@@ -38,3 +38,16 @@ export function useSize(ref: RefObject<HTMLElement | null>, fallback: [number, n
   }, [ref]); // eslint-disable-line react-hooks/exhaustive-deps
   return size;
 }
+
+/** Scrolls the nearest scrolling box so `el` shows, without Element.scrollIntoView: that one also moves the
+    browser's Tab starting point to `el`, so after a reload the first Tab skipped everything before it. */
+export function revealInScroller(el: HTMLElement | null, smooth = true) {
+  if (!el) return;
+  let box = el.parentElement;
+  while (box && !/(auto|scroll)/.test(getComputedStyle(box).overflowY)) box = box.parentElement;
+  if (!box) return;
+  const r = el.getBoundingClientRect(), b = box.getBoundingClientRect();
+  const behavior: ScrollBehavior = smooth ? "smooth" : "auto";
+  if (r.top < b.top) box.scrollBy({ top: r.top - b.top - 8, behavior });
+  else if (r.bottom > b.bottom) box.scrollBy({ top: r.bottom - b.bottom + 8, behavior });
+}

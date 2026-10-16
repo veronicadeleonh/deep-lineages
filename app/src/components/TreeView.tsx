@@ -12,6 +12,7 @@ import { fNum, fRange, genusRecord } from "../format";
 import { useLatest, useSize } from "../hooks";
 import { useStore } from "../state";
 import { findNode, lifeTree, periodOf, WELL_KNOWN, type RNode } from "../tree";
+import { KeysHint, useKeysHint } from "./KeysHint";
 import { DeckMap } from "./PaleoMap";
 import { useTooltip } from "./Tooltip";
 import s from "./TreeView.module.css";
@@ -288,10 +289,7 @@ export function TreeCard() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const active = (activeId && nodeById.get(activeId)) || (selId && nodeById.get(selId)) || root;
   const [ring, setRing] = useState(false);
-  // a short reminder of the keys, shown when the tree gets the keyboard focus and gone after a few moves
-  const [keysHint, setKeysHint] = useState(false);
-  const moves = useRef(0);
-  useEffect(() => { if (!keysHint) return; const id = setTimeout(() => setKeysHint(false), 8000); return () => clearTimeout(id); }, [keysHint]);
+  const keys = useKeysHint(); // the reminder of the keys, when the tree gets the keyboard focus
   const labelOf = (n: P) => {
     const d = n.data, nG = n.leaves().length;
     if (n === root) return `${d.name}, center of the tree, ${fNum(nG)} genera, ${zoomed ? "Enter shows the whole tree" : crumbs.length > 1 ? "Enter steps back out" : "Enter or → goes in"}`;
@@ -335,7 +333,7 @@ export function TreeCard() {
   const go = (to?: P) => { if (to) { setActiveId(to.data.id); keepInSight(to); } };
   const onTreeKey = (e: React.KeyboardEvent<SVGSVGElement>) => {
     const n = active;
-    if (keysHint && ++moves.current >= 4) setKeysHint(false);
+    keys.handlers.keyed();
     if (e.key === "ArrowUp") { e.preventDefault(); go(n.parent ?? undefined); return; }          // toward the center
     if (e.key === "ArrowDown") {                                                                 // toward the rim: the child straight out
       e.preventDefault();
@@ -427,8 +425,8 @@ export function TreeCard() {
           role="tree" aria-label={`Family tree of ${focus.name}`} tabIndex={0} onKeyDown={onTreeKey}
           aria-activedescendant={`tree-node-${active.data.id.replace(/\W/g, "_")}`}
           aria-describedby="tree-keys"
-          onFocus={(e) => { const kb = e.currentTarget.matches(":focus-visible"); setRing(kb); if (kb) { moves.current = 0; setKeysHint(true); } }}
-          onBlur={() => { setRing(false); setKeysHint(false); }}
+          onFocus={(e) => { setRing(e.currentTarget.matches(":focus-visible")); keys.handlers.onFocus(e); }}
+          onBlur={(e) => { setRing(false); keys.handlers.onBlur(e); }}
           onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}
           onDoubleClick={(e) => { const [sx, sy] = toLocal(e.clientX, e.clientY); zoomAt(2, sx, sy); }}>
 
@@ -545,9 +543,9 @@ export function TreeCard() {
           </g>
         </svg>
         {/* the keys, in place: visible for a moment when the tree gets the keyboard focus; always there for screen readers */}
-        <p id="tree-keys" className={keysHint ? s.keysHint : "sr-only"}>
+        <KeysHint id="tree-keys" show={keys.show}>
           <kbd>↑</kbd> <kbd>↓</kbd> in / out · <kbd>←</kbd> <kbd>→</kbd> around · type a name · <kbd>Enter</kbd> centers
-        </p>
+        </KeysHint>
         </div>
       </div>
 

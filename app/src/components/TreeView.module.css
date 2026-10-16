@@ -108,5 +108,3 @@
 .centerFocus circle { stroke: var(--cursor); stroke-width: 2; }
 .focusLabel rect { fill: var(--surface); stroke: var(--cursor); stroke-width: 1.5; }
 .focusLabel text { fill: var(--text); font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
-.keysHint { position: absolute; left: 8px; bottom: 8px; margin: 0; z-index: var(--z-popover); padding: 6px 10px; font-size: var(--fs-sm); color: var(--text); background: var(--surface); border: var(--border-thick) solid var(--cursor); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); pointer-events: none; animation: keysIn .2s ease-out; }
-@keyframes keysIn { from { opacity: 0; transform: translateY(4px); } }

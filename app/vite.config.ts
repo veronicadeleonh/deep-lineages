@@ -6,5 +6,5 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   publicDir: "../data/processed",
-  base: "./", // relative paths: works on GitHub Pages under /deep-lineages/
+  base: "/", // absolute paths: the app answers at /timeline/Tyrannosauridae too (vercel.json sends every path to index.html)
 });

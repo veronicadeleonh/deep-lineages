@@ -98,42 +98,51 @@ const INITIAL: State = { t: 252, selected: null, genus: null, expanded: [], coll
    ?view=timeline&family=Tyrannosauridae&genus=Tyrannosaurus&t=68&zoom=80-60 */
 const VIEW_NAMES: Record<State["mode"], string> = { machine: "time-machine", timeline: "timeline", tree: "family-tree", guide: "field-guide" };
 
+// names in the path: spaces as "_" (Megalosaurus_(Poikilopleuron)), the rest URL-encoded
+const toSeg = (name: string) => encodeURIComponent(name.replace(/ /g, "_"));
+const fromSeg = (seg: string) => { try { return decodeURIComponent(seg).replace(/_/g, " "); } catch { return seg; } };
+const VIEW_BY_NAME = new Map(Object.entries(VIEW_NAMES).map(([m, n]) => [n, m as State["mode"]]));
+
+/** The place in the URL: /timeline/Tyrannosauridae/Tyrannosaurus?t=69.1 (the old ?view=…&family=… still reads). */
+function readUrl() {
+  const q = new URLSearchParams(location.search);
+  const [view, family, genus] = location.pathname.split("/").filter(Boolean).map(fromSeg);
+  if (view) return { mode: VIEW_BY_NAME.get(view.toLowerCase()), family, genus, q };
+  return { mode: VIEW_BY_NAME.get(q.get("view") ?? ""), family: q.get("family") ?? undefined, genus: q.get("genus") ?? undefined, q };
+}
+
 /** True when the address carries a place in the app (then the welcome screen steps aside). */
-export const hasUrlState = () => { try { return new URLSearchParams(location.search).has("view"); } catch { return false; } };
+export const hasUrlState = () => { try { return !!readUrl().mode; } catch { return false; } };
 
 function fromUrl(data: AppData, base: State): State {
-  let q: URLSearchParams;
-  try { q = new URLSearchParams(location.search); } catch { return base; }
-  const s = { ...base };
-  const mode = (Object.keys(VIEW_NAMES) as State["mode"][]).find((m) => VIEW_NAMES[m] === q.get("view"));
-  if (mode) s.mode = mode;
+  let u: ReturnType<typeof readUrl>;
+  try { u = readUrl(); } catch { return base; }
+  const { q } = u, s = { ...base };
+  if (u.mode) s.mode = u.mode;
   const t = Number(q.get("t"));
   if (q.has("t") && Number.isFinite(t)) s.t = clampT(t);
   const zoom = q.get("zoom")?.split("-").map(Number);
   if (zoom?.length === 2 && zoom.every(Number.isFinite)) s.view = clampView([Math.max(...zoom), Math.min(...zoom)]);
   if (s.t > s.view[0] || s.t < s.view[1]) s.view = [...TIME] as Range; // a zoom that doesn't show the time: ignore it
-  const family = q.get("family");
-  if (family && data.families.some((f) => f.family === family)) {   // only names that exist: a bad link just opens the app
-    s.selected = family;
-    const genus = q.get("genus");
-    if (genus && data.genera[family]?.genera.some((g) => g.genus === genus)) s.genus = genus;
+  // only names that exist (any capitalization): a bad link just opens the view
+  const fam = u.family && data.families.find((f) => f.family.toLowerCase() === u.family!.toLowerCase());
+  if (fam) {
+    s.selected = fam.family;
+    const g = u.genus && data.genera[fam.family]?.genera.find((x) => x.genus.toLowerCase() === u.genus!.toLowerCase());
+    if (g) s.genus = g.genus;
   }
   return s;
 }
 
 function toUrl(s: State) {
-  const q = new URLSearchParams();
   const atStart = s.mode === "machine" && !s.selected && s.t === INITIAL.t;
-  if (!atStart) {
-    q.set("view", VIEW_NAMES[s.mode]);
-    if (s.selected) q.set("family", s.selected);
-    if (s.genus) q.set("genus", s.genus);
-    q.set("t", String(round1(s.t)));
-    const full = s.view[0] - s.view[1] >= TIME[0] - TIME[1] - 0.01;
-    if (!full && s.mode === "timeline") q.set("zoom", `${round1(s.view[0])}-${round1(s.view[1])}`);
-  }
-  const search = q.toString();
-  return `${location.pathname}${search ? `?${search}` : ""}${location.hash}`;
+  if (atStart) return `/${location.hash}`;
+  const path = ["", VIEW_NAMES[s.mode], ...(s.selected ? [toSeg(s.selected)] : []), ...(s.selected && s.genus ? [toSeg(s.genus)] : [])].join("/");
+  const q = new URLSearchParams();
+  q.set("t", String(round1(s.t)));
+  const full = s.view[0] - s.view[1] >= TIME[0] - TIME[1] - 0.01;
+  if (!full && s.mode === "timeline") q.set("zoom", `${round1(s.view[0])}-${round1(s.view[1])}`);
+  return `${path}?${q.toString()}${location.hash}`;
 }
 
 /** Writes the state into the address, without adding history entries, and at most a few times a second

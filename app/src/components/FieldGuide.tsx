@@ -7,10 +7,11 @@ import landUrl from "../assets/land-110m.json?url";
 import { GROUPS, TIME, dietOf, groupOf } from "../constants";
 import { silhouetteUrl } from "../data";
 import { fMa, fNum } from "../format";
-import { useWidth } from "../hooks";
+import { revealInScroller, useWidth } from "../hooks";
 import { useStore } from "../state";
 import type { Family, Fossil, Genus } from "../types";
 import s from "./FieldGuide.module.css";
+import { KeysHint, useKeysHint } from "./KeysHint";
 
 const CONTINENTS = ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"] as const;
 const ZONES = [{ km: 500, label: "S" }, { km: 1000, label: "M" }, { km: 2000, label: "L" }] as const;
@@ -148,8 +149,12 @@ export function FieldGuide() {
   const isSelRow = (r: Row) => pinned ? r.genus === pinned.genus
     : !!state.selected && r.f?.family === state.selected && (!state.genus || r.genus === state.genus);
   const firstSel = rows.find(isSelRow);
-  const selRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => { selRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }, [state.selected, state.genus, pinned, region]);
+  const selRef = useRef<HTMLButtonElement | null>(null);
+  // the list is one Tab stop: ↑ ↓ move between rows, Page Up/Down by ten, Home/End, Enter opens (a listbox)
+  const [rowKey, setRowKey] = useState<string | null>(null);
+  const rowEls = useRef(new Map<string, HTMLButtonElement>());
+  // bring the selection into the list's view (scrolling the list, not scrollIntoView: see revealInScroller)
+  useEffect(() => { revealInScroller(selRef.current); }, [state.selected, state.genus, pinned, region]);
 
   /* ---------- the list's time axis ---------- */
   const listWrap = useRef<HTMLDivElement>(null);
@@ -165,6 +170,20 @@ export function FieldGuide() {
   const Chip = ({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) =>
     <button className={`${s.chip} ${on ? s.chipOn : ""}`} aria-pressed={on} onClick={onClick}>{children}</button>;
 
+  const tabRow = (rowKey && rows.some((r) => r.genus === rowKey) ? rowKey : null) ?? firstSel?.genus ?? rows[0]?.genus;
+  const keys = useKeysHint(); // the reminder of the keys, when the list gets the keyboard focus
+  const onListKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const i = rows.findIndex((r) => r.genus === tabRow);
+    const to: Record<string, number> = { ArrowDown: i + 1, ArrowUp: i - 1, PageDown: i + 10, PageUp: i - 10, Home: 0, End: rows.length - 1 };
+    if (!(e.key in to)) return;
+    e.preventDefault();
+    const r = rows[Math.max(0, Math.min(rows.length - 1, to[e.key]))];
+    if (!r) return;
+    setRowKey(r.genus);
+    const el = rowEls.current.get(r.genus);
+    el?.focus({ preventScroll: true });
+    el?.scrollIntoView({ block: "nearest" });
+  };
   return (
     <section className={`card ${s.card}`} aria-label="Field guide: what lived here?">
       {/* left: where */}
@@ -260,12 +279,16 @@ export function FieldGuide() {
             </div>
           )}
           {rows.length === 0 && <p className={s.empty}>No dinosaur fossils match here. Try a bigger zone or another place.</p>}
+          <div role="listbox" aria-label={`Dinosaurs found ${region.kind === "world" ? "worldwide" : `in ${title}`}`} aria-describedby="guide-keys"
+            onKeyDown={(e) => { keys.handlers.keyed(); onListKey(e); }} onFocus={keys.handlers.onFocus} onBlur={keys.handlers.onBlur}>
           {rows.map((r) => {
             const own = r.g?.phylopic?.svg, sil = own ?? r.f?.phylopic?.svg;
             const sel = isSelRow(r);
             const famLabel = r.f ? r.f.family : r.pfam ? `${r.pfam} · no profile` : "family unknown · no profile";
             return (
-              <button key={r.genus} ref={sel && r === firstSel ? selRef : undefined} className={`${s.item} ${sel ? s.itemSel : ""} ${r.f ? "" : s.itemOther}`} style={{ ["--lw" as string]: `${LABEL}px` }}
+              <button key={r.genus} role="option" aria-selected={sel} tabIndex={r.genus === tabRow ? 0 : -1}
+                ref={(el) => { if (el) rowEls.current.set(r.genus, el); else rowEls.current.delete(r.genus); if (sel && r === firstSel) selRef.current = el; }}
+                onFocusCapture={() => setRowKey(r.genus)} className={`${s.item} ${sel ? s.itemSel : ""} ${r.f ? "" : s.itemOther}`} style={{ ["--lw" as string]: `${LABEL}px` }}
                 onMouseEnter={() => setHover(r.genus)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(r.genus)} onBlur={() => setHover(null)}
                 onClick={() => (!r.f ? setPinned(pinned?.genus === r.genus ? null : { genus: r.genus, family: r.pfam })
                   : r.g ? dispatch({ type: "genus", family: r.f.family, genus: r.genus }) : dispatch({ type: "select", family: r.f.family }))}
@@ -283,6 +306,10 @@ export function FieldGuide() {
               </button>
             );
           })}
+          </div>
+          <KeysHint id="guide-keys" show={keys.show}>
+            <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>Page Up</kbd> <kbd>Page Down</kbd> by ten · <kbd>Enter</kbd> opens
+          </KeysHint>
         </div>
       </div>
     </section>

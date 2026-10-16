@@ -13,6 +13,7 @@ import { useLatest, useWidth } from "../hooks";
 import { MIN_SPAN, clampView, useStore } from "../state";
 import { WELL_KNOWN, relLeafName, familyTree, genusTree, layout, leaves, pathTo, prune, type TNode } from "../tree";
 import type { Family, Genus, Range, Relative, RelativesGroup } from "../types";
+import { KeysHint, useKeysHint } from "./KeysHint";
 import { DeckMap } from "./PaleoMap";
 import { useTooltip } from "./Tooltip";
 import s from "./Timeline.module.css";
@@ -333,6 +334,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
     document.addEventListener("focusin", on);
     return () => document.removeEventListener("focusin", on);
   }, []);
+  const keys = useKeysHint(); // the reminder of the keys, when the rows get the keyboard focus
   const onTreeKey = (e: KeyboardEvent<SVGSVGElement>) => {
     const i = nav.findIndex((n) => n.key === active);
     const n = nav[i];
@@ -696,7 +698,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
       </div>
 
       <svg viewBox={`0 ${rowsTop} ${W} ${H - rowsTop}`} width={W} height={H - rowsTop} {...svgEvents}
-        role="tree" aria-label="Families by lineage" onKeyDown={onTreeKey}>
+        role="tree" aria-label="Families by lineage" aria-describedby="timeline-keys"
+        onKeyDown={(e) => { keys.handlers.keyed(); onTreeKey(e); }} onFocus={keys.handlers.onFocus} onBlur={keys.handlers.onBlur}>
         <defs>
           {/* one fade per diet color (a gradient's currentColor would come from <defs>, not from the bar using it) */}
           {fadeColors.map((c, i) => (
@@ -897,6 +900,9 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
         </g>
         {inView && <line className={s.cursorLine} x1={cx} x2={cx} y1={rowsTop} y2={H - AXIS} pointerEvents="none" />}
       </svg>
+      <KeysHint id="timeline-keys" show={keys.show}>
+        <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>→</kbd> unfolds · <kbd>←</kbd> folds · <kbd>Enter</kbd> selects
+      </KeysHint>
     </div>
   );
 }
