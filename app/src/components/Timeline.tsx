@@ -572,7 +572,9 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
   const divNow = data.diversity.find((d) => d.ma === Math.round(t))?.genera ?? 0;
   const nearRight = cx > W - M.r - 80;
 
-  const ticks = x.ticks(compact ? 3 : 8);
+  // about one label every 64px, and never two closer than 48px: on narrow screens they would overlap
+  const ticks = x.ticks(Math.max(1, Math.min(compact ? 3 : 8, Math.floor((W - M.r - L) / 64))))
+    .filter((v, i, a) => i === 0 || Math.abs(x(v) - x(a[i - 1])) >= 48);
   const fmtTick = span < 12 ? fMa1 : fMa;
 
   /** A range in three readings: a thin line from the first to the last fossil on record, a solid bar where most

@@ -27,7 +27,7 @@
 .storyText { margin: 0; font-size: var(--fs-narration); line-height: var(--lh-relaxed); color: var(--map-ink); font-weight: var(--fw-medium); }
 
 /* the chapter's most-found animal: a credit line with its silhouette */
-.starring { white-space: nowrap; display: inline-flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2-5); font: inherit; font-size: var(--fs-sm); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--map-ink-2); background: none; border: 0; padding: 0; cursor: pointer; pointer-events: auto; }
+.starring { display: inline-flex; flex-wrap: wrap; text-align: left; align-items: center; gap: var(--space-2); margin-top: var(--space-2-5); font: inherit; font-size: var(--fs-sm); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--map-ink-2); background: none; border: 0; padding: 0; cursor: pointer; pointer-events: auto; }
 .starring i { text-transform: none; letter-spacing: 0; font-size: var(--fs-base); font-weight: var(--fw-bold); color: var(--map-ink); }
 .starN { font-size: var(--fs-sm); letter-spacing: 0; color: var(--map-ink-2); font-variant-numeric: tabular-nums; margin-left: -3px; }
 .starSil { width: 44px; height: 24px; flex: none; background: var(--map-ink); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
@@ -93,7 +93,7 @@
 
 /* the selected animal: a small card unfolding under its family in the list */
 .mcard {
-  position: relative; flex: none; width: 100%; max-width: 330px; margin: 0 0 var(--space-1); pointer-events: auto; padding: var(--space-3) var(--space-3-5) var(--space-3); box-shadow: var(--shadow-md);
+  position: relative; flex: none; width: 100%; max-width: min(330px, 100%); min-width: 0; margin: 0 0 var(--space-1); pointer-events: auto; padding: var(--space-3) var(--space-3-5) var(--space-3); box-shadow: var(--shadow-md);
   background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); animation: unfold var(--dur-base) var(--ease-out); transform-origin: top;
 }
 @keyframes unfold { from { opacity: 0; transform: translateY(-4px) scaleY(.96); } }
@@ -108,9 +108,9 @@
 .mcardFacts dd { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text); font-variant-numeric: tabular-nums; }
 .mcardWide { grid-column: 1 / -1; }
 .mcardBlurb { margin: var(--space-2-5) 0 0; font-size: var(--fs-md); line-height: var(--lh-normal); color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.mcardDive { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-1); margin-top: var(--space-3); padding-top: var(--space-2-5); border-top: var(--border-thin) solid var(--line); }
-.mcardDive > span { grid-column: 1 / -1; font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
-.mcardDive button { font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text); background: var(--surface-2); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 3px var(--space-1); white-space: nowrap; cursor: pointer; display: inline-flex; gap: var(--space-1); align-items: center; justify-content: center; }
+.mcardDive { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-3); padding-top: var(--space-2-5); border-top: var(--border-thin) solid var(--line); }
+.mcardDive > span { flex-basis: 100%; font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--fw-bold); color: var(--text-3); }
+.mcardDive button { flex: 1 1 84px; font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text); background: var(--surface-2); border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); padding: 3px var(--space-1); cursor: pointer; display: inline-flex; gap: var(--space-1); align-items: center; justify-content: center; }
 .mcardDive button i { font-style: normal; color: var(--accent-text); }
 .mcardDive button:hover { border-color: var(--cursor); }
 
@@ -163,6 +163,9 @@
   .right { position: static; width: auto; padding: var(--space-3) var(--space-3-5); align-items: flex-start; }
   .around { flex-direction: row; flex-wrap: wrap; align-items: center; overflow: visible; }
   .aroundLabel { flex-basis: 100%; }
+  .around .mcard { flex-basis: 100%; max-width: 480px; margin-right: auto; } /* its own row, right under the family it belongs to */
+  .mcardHead > * { min-width: 0; } /* a long name wraps instead of widening the card */
+  @media (max-width: 360px) { .mcardSil { display: none; } } /* very narrow: the silhouette gives its room to the name */
   .controls { flex-wrap: wrap; }
   .scrubber { flex-basis: 100%; }
 }

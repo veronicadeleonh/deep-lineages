@@ -74,3 +74,4 @@ code { font-family: var(--mono); font-size: var(--fs-sm); }
 tr:hover .motion::after { left: calc(100% - 12px); }
 /* --map-halo: map text on land, with the halo */
 .haloDemo { display: inline-block; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); background: var(--land); color: var(--map-ink-2); font-size: var(--fs-md); font-weight: var(--fw-bold); }
+.tableWrap { overflow-x: auto; } /* narrow windows: the table scrolls sideways, not the page (WCAG 1.4.10 allows it for tables) */

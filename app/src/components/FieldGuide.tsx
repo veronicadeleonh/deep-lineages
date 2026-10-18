@@ -324,7 +324,9 @@ export function FieldGuide() {
               const ps = data.periods.filter((p) => p.name.endsWith(name));
               if (!ps.length) return null;
               const x0 = x(Math.max(...ps.map((p) => p.start))), x1 = x(Math.min(...ps.map((p) => p.end)));
-              return <text key={name} x={(x0 + x1) / 2} y={13} className={s.bandLabel}>{name}</text>;
+              // the full name if it fits, else its first three letters, else nothing
+              const label = x1 - x0 > name.length * 6.5 + 8 ? name : x1 - x0 > 26 ? name.slice(0, 3) : "";
+              return label ? <text key={name} x={(x0 + x1) / 2} y={13} className={s.bandLabel}><title>{name}</title>{label}</text> : null;
             })}
             <line x1={x(state.t)} x2={x(state.t)} y1={0} y2={26} className={s.cursor} />
           </svg>
@@ -359,7 +361,7 @@ export function FieldGuide() {
                 <span className={s.label}>
                   <i className={`${s.sil} ${own ? "" : s.silBorrowed} ${sil ? "" : s.silNone}`} style={sil ? { ["--src" as string]: `url("${silhouetteUrl(sil)}")` } : undefined}
                     title={own ? undefined : sil ? "Family silhouette: there is no drawing of this genus" : undefined} />
-                  <span className={s.names}><i>{r.genus}</i><small>{famLabel}</small></span>
+                  <span className={s.names} title={`${r.genus} · ${famLabel}`}><i>{r.genus}</i><small>{famLabel}</small></span>
                 </span>
                 <svg className={s.bar} width={listW - LABEL} height={22} viewBox={`${LABEL} 0 ${listW - LABEL} 22`}>
                   <line x1={x(state.t)} x2={x(state.t)} y1={0} y2={22} className={s.cursorFaint} />

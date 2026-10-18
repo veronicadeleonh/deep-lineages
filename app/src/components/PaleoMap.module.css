@@ -11,3 +11,4 @@
 .dotHi { opacity: 1; stroke: var(--surface); stroke-width: 1.5; }
 .deck figcaption.hint { color: var(--text-3); white-space: normal; line-height: var(--lh-snug); overflow: visible; } /* visible: the link's focus ring */
 .hint button { display: inline-block; font: inherit; color: var(--accent-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 700px) { .deck figcaption { white-space: normal; } } /* narrow: the caption wraps instead of being cut */

@@ -107,3 +107,4 @@
   .card { grid-template-columns: minmax(0, 1fr); height: auto; }
   .list { max-height: 70vh; }
 }
+@media (max-width: 700px) { .names i, .names small { white-space: normal; overflow-wrap: anywhere; } } /* narrow: names wrap instead of being cut */

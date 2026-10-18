@@ -110,7 +110,7 @@ export function Tokens() {
           <h2>{g} <span>{list.length}</span></h2>
           {INTRO[g] && <p className={s.note}>{INTRO[g]}</p>}
           {g === "Semantic colors" && <Failures names={list.map((x) => x.name)} probe={probe} />}
-          <table className={s.table}>
+          <div className={s.tableWrap}><table className={s.table}>
             <thead>
               <tr>
                 <th>Token</th><th>Preview</th><th>Value</th>
@@ -141,7 +141,7 @@ export function Tokens() {
                 );
               })}
             </tbody>
-          </table>
+          </table></div>
         </section>
       ))}
 
@@ -152,7 +152,7 @@ export function Tokens() {
           <div key={r.label} className={s.raw}>
             <h3>{r.label} <span>{r.rows.length} distinct · {r.hint}</span></h3>
             {r.rows.length === 0 ? <p className={s.note}>All tokenized ✓</p> : (
-              <table className={s.table}>
+              <div className={s.tableWrap}><table className={s.table}>
                 <tbody>
                   {r.rows.map((x) => (
                     <tr key={x.value}>
@@ -162,7 +162,7 @@ export function Tokens() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table></div>
             )}
           </div>
         ))}

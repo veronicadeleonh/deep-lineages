@@ -170,7 +170,7 @@
   --dur-fade: 600ms;    /* one map crossfading into the next */
   --dur-zoom: 260ms;    /* the timeline's animated zoom (read from JS) */
   --dur-scene: 1100ms;  /* a chapter's story arriving */
-  --dur-long: 1700ms;   /* the welcome's continents; one beat of the event pulse */
+  --dur-long: 1600ms;   /* the welcome's continents; one beat of the event pulse */
   --ease-out: ease-out;    /* things arriving */
   --ease-in-out: ease;     /* crossfades */
 }
