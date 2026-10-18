@@ -211,7 +211,7 @@ function RoleCells({ name, probe }: { name: string; probe: HTMLElement }) {
       <td><span className={s.role} title={ROLE_HELP[r.role]}>{r.role}</span>{r.need > 0 && <small className={s.need}>needs {r.need}:1</small>}</td>
       <td>
         {r.pairs.length === 0 ? <span className={s.na}>not measured</span> : r.pairs.map((p) => (
-          <span key={p.bg} className={`${s.cr} ${p.pass ? s.pass : s.fail}`}>on {p.bg} {p.r.toFixed(2)} <b>{p.pass ? "✓" : "✗"}</b></span>
+          <span key={p.bg} className={`${s.cr} ${p.pass ? s.pass : s.fail}`}>on {p.bg} {p.r.toFixed(2)} <b>{p.pass ? "✓" : "✗"}</b>{p.lc != null && <i className={p.lcOk ? s.lc : s.lcLow} title="APCA (WCAG 3 draft): 60+ for small labels, 45+ for large text">Lc {Math.round(p.lc)}</i>}</span>
         ))}
         {r.note && <small className={s.roleNote}>{r.note}</small>}
       </td>

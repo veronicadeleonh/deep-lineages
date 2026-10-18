@@ -53,7 +53,7 @@
    No opacity: fading would drop the family name below 4.5:1 */
 .famArc path:first-child { fill: var(--arc-fill); stroke: var(--arc-edge); stroke-width: var(--border-thick); transition: fill .12s; }
 .famArc:hover path:first-child, .famSel path:first-child { fill: var(--arc-hover); }
-.famCarn:hover path:first-child, .famCarn.famSel path:first-child, .famOther:hover path:first-child, .famOther.famSel path:first-child { stroke: var(--arc-hover); } /* solid: the edge darkens with it */
+.famCarn:hover path:first-child, .famCarn.famSel path:first-child { stroke: var(--arc-hover); } /* solid: the edge darkens with it */
 .famArc text { fill: var(--bg); font-size: var(--fs-xs); font-weight: var(--fw-semibold); pointer-events: none; }
 .famHerb text { fill: var(--diet-herb-on); } /* family names take their diet's "on" color */
 .famCarn text { fill: var(--diet-carn-on); }

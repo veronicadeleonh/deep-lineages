@@ -14,8 +14,8 @@ export interface Diet { label: string; key: "herb" | "carn" | "other"; color: st
 export const DIET: Record<string, Diet> = {
   herbivore: { label: "Herbivore", key: "herb", color: "var(--diet-herb)", fill: "var(--diet-herb-fill)", hover: "var(--diet-herb-hover)" },
   carnivore: { label: "Carnivore", key: "carn", color: "var(--diet-carn)", fill: "var(--diet-carn-fill)", hover: "var(--diet-carn-hover)" },
-  omnivore: { label: "Omnivore", key: "other", color: "var(--diet-other)", fill: "var(--diet-other)", hover: "var(--diet-other-hover)" },
-  none: { label: "No data", key: "other", color: "var(--diet-other)", fill: "var(--diet-other)", hover: "var(--diet-other-hover)" },
+  omnivore: { label: "Omnivore", key: "other", color: "var(--diet-other)", fill: "var(--diet-other-fill)", hover: "var(--diet-other-hover)" },
+  none: { label: "No data", key: "other", color: "var(--diet-other)", fill: "var(--diet-other-fill)", hover: "var(--diet-other-hover)" },
 };
 /** How an area is painted: its fill, edged in the diet's solid color (invisible when the two are the same). */
 export const paint = (d: Diet) => ({ fill: d.fill, stroke: d.color, strokeWidth: "var(--border-thin)" });

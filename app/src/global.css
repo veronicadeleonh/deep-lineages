@@ -6,10 +6,11 @@
   --gray-0: #ffffff;
   --gray-50: #f1f5f7;
   --gray-100: #eef2f4;
+  --gray-150: #e4e8eb;
   --gray-200: #d8e0e5;
   --gray-250: #d3dde4;   /* almost --gray-200: candidate to merge */
+  --gray-300: #ccd3d9;
   --gray-400: #7d8a96;
-  --gray-450: #8d949b;
   --gray-500: #6d8394;
   --gray-600: #5f6b76;
   --gray-700: #4a5763;
@@ -19,10 +20,10 @@
   --amber-700: #966100;  /* the darker amber: for amber that carries text */
   --amber-800: #6e4600;  /* the darkest: amber text over the map (land and sea) */
   --green-300: #8fd3b0;
-  --green-400: #6dbd96;
+  --green-400: #7cc8a2;
   --green-800: #0b6b50;
   --orange-700: #c4461f;
-  --orange-900: #8c3115;
+  --orange-800: #9a3618;
   --crimson-600: #c4285a;
   --blue-100: #d9e9f2;
   --sage-300: #b4c79e;
@@ -67,14 +68,15 @@
   --diet-herb: var(--green-800);
   --diet-herb-fill: var(--green-300);
   --diet-herb-on: var(--text);
-  --diet-herb-hover: var(--green-400);  /* the fill under the pointer, or selected: darker, still 4.5:1 with its text */
+  --diet-herb-hover: var(--green-400);  /* the fill under the pointer, or selected: darker, its text still easy to read (APCA Lc 60+) */
   --diet-carn: var(--orange-700);
   --diet-carn-fill: var(--diet-carn);
   --diet-carn-on: var(--surface);
-  --diet-carn-hover: var(--orange-900);
-  --diet-other: var(--gray-450);        /* omnivore, no data */
+  --diet-carn-hover: var(--orange-800);
+  --diet-other: var(--gray-500);        /* omnivore, no data: the edge (3:1 on white) */
+  --diet-other-fill: var(--gray-150);   /* near white: "no data" recedes, and dark names read on it easily */
   --diet-other-on: var(--text);
-  --diet-other-hover: var(--gray-400);
+  --diet-other-hover: var(--gray-300);
   --extinct: var(--crimson-600);
   /* shadows */
   --shadow-color: var(--gray-900); /* every shadow is this color at some opacity */
@@ -188,7 +190,7 @@ kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--lin
 /* the diet swatches: fill and edge, like the charts */
 .swatch-herb { background: var(--diet-herb-fill); box-shadow: inset 0 0 0 var(--border-thin) var(--diet-herb); }
 .swatch-carn { background: var(--diet-carn-fill); box-shadow: inset 0 0 0 var(--border-thin) var(--diet-carn); }
-.swatch-other { background: var(--diet-other); }
+.swatch-other { background: var(--diet-other-fill); box-shadow: inset 0 0 0 var(--border-thin) var(--diet-other); }
 
 .sil { pointer-events: none; }
 

@@ -64,6 +64,17 @@ const lum = ([r, g, b]: number[]) => {
   return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
 };
 export const ratio = (a: number[], b: number[]) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+/** APCA (the contrast method drafted for WCAG 3), as |Lc|. Unlike the WCAG 2 ratio it knows that dark text on a
+    mid tone reads worse than the ratio suggests. Text on the background `bg`. */
+export function apcaLc(txt: number[], bg: number[]) {
+  const y = ([r, g, b]: number[]) => 0.2126729 * (r / 255) ** 2.4 + 0.7151522 * (g / 255) ** 2.4 + 0.072175 * (b / 255) ** 2.4;
+  const clamp = (v: number) => (v > 0.022 ? v : v + (0.022 - v) ** 1.414);
+  const t = clamp(y(txt)), b = clamp(y(bg));
+  const s = b > t ? (b ** 0.56 - t ** 0.57) * 1.14 : (b ** 0.65 - t ** 0.62) * 1.14;
+  return Math.abs(s) < 0.1 ? 0 : (Math.abs(s) - 0.027) * 100;
+}
+/** The APCA level we hold text to, on top of WCAG 2 (a check, not a rule): small labels 60, large text 45. */
+export const NEED_LC: Partial<Record<Role, number>> = { text: 60, "large text": 45 };
 export const toHex = (c: number[]) => "#" + c.slice(0, 3).map((v) => Math.round(v).toString(16).padStart(2, "0")).join("");
 
 /* ---------- highlight the elements that use a token ---------- */
@@ -121,7 +132,7 @@ export const ROLE_HELP: Record<Role, string> = {
   decorative: "Doesn't carry information on its own: no requirement",
   disabled: "Inactive controls: WCAG 1.4.3 exempts them, so they can look faded",
 };
-export type RoleInfo = { role: Role; on?: string[]; note?: string };
+export type RoleInfo = { role: Role; on?: string[]; note?: string; inverse?: boolean }; // inverse: a background, measured against the text on it
 const PAPER = ["--bg", "--surface", "--surface-2"];
 const MAP = ["--ocean", "--land"];
 export const ROLES: Record<string, RoleInfo> = {
@@ -143,7 +154,7 @@ export const ROLES: Record<string, RoleInfo> = {
   "--accent-edge": { role: "decorative", note: "Edge of an --accent-soft fill. The fill and the text already mark it, so the edge needs no 3:1" },
   "--scrim": { role: "decorative", note: "Dims the app behind a dialog; the dialog's own surface carries the contrast" },
   "--veil": { role: "background", note: "--surface at 85%, so text reads over the map" },
-  "--accent-bg": { role: "text", on: ["--surface", "--bg"], note: "Measured against the light text on top of it" },
+  "--accent-bg": { role: "text", on: ["--surface", "--bg"], inverse: true, note: "Measured against the light text on top of it" },
   "--map-ink": { role: "text", on: MAP, note: "The story told over the map" },
   "--map-ink-2": { role: "text", on: MAP },
   "--map-dot": { role: "graphic", on: MAP },
@@ -158,9 +169,10 @@ export const ROLES: Record<string, RoleInfo> = {
   "--diet-carn": { role: "graphic", on: ["--surface"], note: "Dots, lines, and the edge of carnivore areas" },
   "--diet-carn-fill": { role: "decorative", note: "Areas and bars. Solid by default; if made lighter, the edge carries the 3:1" },
   "--diet-carn-on": { role: "text", on: ["--diet-carn-fill", "--diet-carn-hover"], note: "Family names on the carnivore arcs of the tree" },
-  "--diet-other": { role: "graphic", on: ["--surface"], note: "Omnivores and no data: solid, fill and edge alike" },
+  "--diet-other": { role: "graphic", on: ["--surface"], note: "Omnivores and no data: the edge, dots and lines" },
+  "--diet-other-fill": { role: "decorative", note: "Areas and bars: light, so the edge (--diet-other) carries the 3:1" },
   "--diet-other-hover": { role: "background", note: "No-data arc under the pointer or selected: --diet-other-on stays 4.5:1 on it" },
-  "--diet-other-on": { role: "text", on: ["--diet-other", "--diet-other-hover"], note: "Family names on the no-data arcs of the tree" },
+  "--diet-other-on": { role: "text", on: ["--diet-other-fill", "--diet-other-hover"], note: "Family names on the no-data arcs of the tree" },
   "--extinct": { role: "text", on: ["--surface"], note: "Labels like “K-Pg extinction”. On the map they get a --surface halo, so they're measured against that too" },
   "--shadow-color": { role: "decorative", note: "Used at 8–18% opacity inside the --shadow-* tokens" },
   "--period-tri": { role: "graphic", on: ["--surface"] },
@@ -177,7 +189,8 @@ export function checkRole(name: string, probe: HTMLElement) {
   const pairs = (info.on ?? []).map((bg) => {
     const b = toRgb(`var(${bg})`, probe);
     const r = c && b ? ratio(c, b) : 0;
-    return { bg, r, pass: r >= need };
+    const lc = c && b && NEED_LC[info.role] ? (info.inverse ? apcaLc(b, c) : apcaLc(c, b)) : null; // APCA cares which one is the text
+    return { bg, r, pass: r >= need, lc, lcOk: lc == null || lc >= NEED_LC[info.role]! };
   });
   return { ...info, need, pairs, pass: pairs.every((p) => p.pass) };
 }

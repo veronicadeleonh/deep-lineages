@@ -123,7 +123,9 @@ export function TokenLab() {
                   if (!r.pairs.length) return <span style={st.dim}>{r.role}</span>;
                   const worst = r.pairs.reduce((a, b) => (b.r < a.r ? b : a));
                   return <>
-                    <Badge r={worst.r} pass={r.pass} title={`${r.role}, needs ${r.need}:1\n` + r.pairs.map((p) => `on ${p.bg}: ${p.r.toFixed(2)}`).join("\n")} />
+                    <Badge r={worst.r} pass={r.pass} title={`${r.role}, needs ${r.need}:1\n` + r.pairs.map((p) => `on ${p.bg}: ${p.r.toFixed(2)}${p.lc != null ? ` · APCA Lc ${Math.round(p.lc)}` : ""}`).join("\n")} />
+                    {(() => { const lcs = r.pairs.filter((p) => p.lc != null); if (!lcs.length) return null; const low = lcs.reduce((a, b) => (b.lc! < a.lc! ? b : a));
+                      return <span style={{ ...st.dim, color: low.lcOk ? undefined : "#8f1538", fontWeight: low.lcOk ? undefined : 700 }} title="APCA (WCAG 3 draft), worst pair: 60+ for small labels">Lc {Math.round(low.lc!)}</span>; })()}
                     <span style={st.dim}>{r.role}</span>
                   </>;
                 })()}
@@ -134,7 +136,7 @@ export function TokenLab() {
           );
         })}
       </div>
-      <p style={st.foot}>Type any CSS value or another token (<code>var(--line)</code>) and press Enter. Each color is judged by its role (hover the badge): text 4.5:1 · graphics & large text 3:1. The badge shows its worst real pair.</p>
+      <p style={st.foot}>Type any CSS value or another token (<code>var(--line)</code>) and press Enter. Each color is judged by its role (hover the badge): text 4.5:1 · graphics & large text 3:1. The badge shows its worst real pair; for text, "Lc" is the APCA check (WCAG 3 draft, 60+), which catches dark text on mid tones.</p>
     </aside>
   );
 }
