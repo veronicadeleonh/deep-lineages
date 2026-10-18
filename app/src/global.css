@@ -9,6 +9,7 @@
   --gray-200: #d8e0e5;
   --gray-250: #d3dde4;   /* almost --gray-200: candidate to merge */
   --gray-400: #7d8a96;
+  --gray-450: #8d949b;
   --gray-500: #6d8394;
   --gray-600: #5f6b76;
   --gray-700: #4a5763;
@@ -17,8 +18,11 @@
   --amber-600: #b57500;
   --amber-700: #966100;  /* the darker amber: for amber that carries text */
   --amber-800: #6e4600;  /* the darkest: amber text over the map (land and sea) */
-  --green-600: #14946e;
-  --orange-500: #e2582f;
+  --green-300: #8fd3b0;
+  --green-400: #6dbd96;
+  --green-800: #0b6b50;
+  --orange-700: #c4461f;
+  --orange-900: #8c3115;
   --crimson-600: #c4285a;
   --blue-100: #d9e9f2;
   --sage-300: #b4c79e;
@@ -57,9 +61,20 @@
   --area: var(--gray-250);
   --area-edge: var(--gray-500);
   /* data: diet (validated on --surface: CVD ΔE 8.4, normal 28) */
-  --diet-herb: var(--green-600);
-  --diet-carn: var(--orange-500);
-  --diet-other: var(--gray-400);   /* omnivore, no data */
+  /* diets: each has a solid color (edges, dots, lines), a fill (areas and bars) and a text color on that fill.
+     Herbivores are a light fill with a dark edge, carnivores solid: they read apart by lightness, not only by
+     hue (red-green color blindness, grayscale). A fill equal to its solid color draws no visible edge */
+  --diet-herb: var(--green-800);
+  --diet-herb-fill: var(--green-300);
+  --diet-herb-on: var(--text);
+  --diet-herb-hover: var(--green-400);  /* the fill under the pointer, or selected: darker, still 4.5:1 with its text */
+  --diet-carn: var(--orange-700);
+  --diet-carn-fill: var(--diet-carn);
+  --diet-carn-on: var(--surface);
+  --diet-carn-hover: var(--orange-900);
+  --diet-other: var(--gray-450);        /* omnivore, no data */
+  --diet-other-on: var(--text);
+  --diet-other-hover: var(--gray-400);
   --extinct: var(--crimson-600);
   /* shadows */
   --shadow-color: var(--gray-900); /* every shadow is this color at some opacity */
@@ -170,6 +185,10 @@ kbd { font: var(--fs-xs) var(--mono); border: var(--border-thin) solid var(--lin
 }
 .chip:hover { border-color: var(--text-3); }
 .swatch { width: 8px; height: 8px; border-radius: var(--radius-xs); display: inline-block; flex: none; }
+/* the diet swatches: fill and edge, like the charts */
+.swatch-herb { background: var(--diet-herb-fill); box-shadow: inset 0 0 0 var(--border-thin) var(--diet-herb); }
+.swatch-carn { background: var(--diet-carn-fill); box-shadow: inset 0 0 0 var(--border-thin) var(--diet-carn); }
+.swatch-other { background: var(--diet-other); }
 
 .sil { pointer-events: none; }
 

@@ -6,7 +6,7 @@ import {
   area, curveMonotoneX, curveStepAfter, easeCubicOut, interpolate, line, max, scaleLinear, timer, type Timer,
 } from "d3";
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
-import { DIET, EXTINCTIONS, GROUPS, TIME, dietOf, groupOf, type Group } from "../constants";
+import { DIET, EXTINCTIONS, GROUPS, TIME, dietOf, groupOf, paint, type Diet, type Group } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, famRecord, fMa, fMa1, fNum, fRange, genusRecord, isAlive } from "../format";
 import { useLatest, useWidth } from "../hooks";
@@ -96,7 +96,7 @@ export function TimelineCard() {
           </span>
           <ul className={s.legend}>
             {Object.values(DIET).filter((d, i, a) => usedDiets.has(d.label) && a.findIndex((x) => x.label === d.label) === i).map((d) => (
-              <li key={d.label}><i className="swatch" style={{ background: d.color }} />{d.label}</li>
+              <li key={d.label}><i className={`swatch swatch-${d.key}`} />{d.label}</li>
             ))}
           </ul>
         </div>
@@ -575,7 +575,8 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
 
   /** A range in three readings: a thin line from the first to the last fossil on record, a solid bar where most
    *  fossils fall, and a fade after the last fossil (the group probably outlived it; never past the K–Pg). */
-  const rangeMarks = ({ core, record, y, h, color, dim, className }: { core: Range; record: Range; y: number; h: number; color: string; dim: boolean; className: string }) => {
+  const rangeMarks = ({ core, record, y, h, diet, dim, className }: { core: Range; record: Range; y: number; h: number; diet: Diet; dim: boolean; className: string }) => {
+    const color = diet.color;
     if (!vis(record[0], Math.max(66, record[1] - TAIL))) return null;
     const tail = Math.min(TAIL, record[1] - 66);
     const xe = x(record[1]), xt = x(record[1] - tail);
@@ -583,7 +584,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
       <g className={`${className} ${dim ? s.barDim : ""}`} clipPath={`url(#${clip})`} style={{ color }}>
         <line className={s.recordLine} x1={x(record[0])} x2={xe} y1={y} y2={y} />
         {tail > 0.3 && <rect x={xe} width={Math.max(0, xt - xe)} y={y - 1} height={2} fill={`url(#${fadeId}-${fadeColors.indexOf(color)})`} />}
-        <rect x={x(core[0])} width={Math.max(h / 3, x(core[1]) - x(core[0]))} y={y - h / 2} height={h} rx={Math.min(4, h / 2)} fill="currentColor" />
+        <rect x={x(core[0])} width={Math.max(h / 3, x(core[1]) - x(core[0]))} y={y - h / 2} height={h} rx={Math.min(4, h / 2)} style={paint(diet)} />
       </g>
     );
   };
@@ -772,7 +773,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
               <g clipPath={`url(#${clip})`}>
                 {it.fams.filter((f) => vis(f.range_ma[0], f.range_ma[1])).map((f) => (
                   <rect key={f.family} x={x(f.range_ma[0])} width={Math.max(3, x(f.range_ma[1]) - x(f.range_ma[0]))} y={ROW / 2 - 4} height={8} rx={4}
-                    fill={dietOf(f).color} opacity={0.35} />
+                    style={paint(dietOf(f))} opacity={0.35} />
                 ))}
               </g>
             </g>
@@ -787,7 +788,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
                 onPointerEnter={() => setHoverKey(f.family)} onPointerMove={(e) => tip.show(famTip(f), e)} onPointerLeave={leave}>
                 <rect className={s.hit} x={GUT} width={W - M.r - GUT} height={ROW} rx={3} />
                 <text className={s.slimLabel} x={nameX + 12} y={ROW / 2} dominantBaseline="central">{f.family}</text>
-                {rangeMarks({ core: f.range_ma, record: famRecord(f), y: ROW / 2, h: 4, color: dietOf(f).color, dim: true, className: s.bar })}
+                {rangeMarks({ core: f.range_ma, record: famRecord(f), y: ROW / 2, h: 4, diet: dietOf(f), dim: true, className: s.bar })}
               </g>
             );
             return (
@@ -810,7 +811,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
                 )}
                 <text className={`${s.rowLabel} ${!on ? s.labelDim : ""} ${sel ? s.labelSel : ""}`} x={nameX + 12} y={ROW / 2}
                   dominantBaseline="central" style={compact ? { fontSize: "var(--fs-xs)" } : undefined}>{f.family}</text>
-                {rangeMarks({ core: f.range_ma, record: famRecord(f), y: ROW / 2, h: 12, color: dietOf(f).color, dim: !on && !sel, className: s.bar })}
+                {rangeMarks({ core: f.range_ma, record: famRecord(f), y: ROW / 2, h: 12, diet: dietOf(f), dim: !on && !sel, className: s.bar })}
               </g>
             );
           }
@@ -832,7 +833,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
                 <g clipPath={`url(#${clip})`} style={{ color: dietOf(it.f).color }}>
                   {it.group.genera.filter((r) => vis(r.record[0], r.record[1])).map((r) => (
                     <rect key={r.genus} className={s.relMark} x={x(r.range_ma[0])} width={Math.max(3, x(r.range_ma[1]) - x(r.range_ma[0]))}
-                      y={ROW / 2 - 3} height={6} rx={3} fill="currentColor" />
+                      y={ROW / 2 - 3} height={6} rx={3} style={paint(dietOf(it.f))} />
                   ))}
                 </g>
               </g>
@@ -847,7 +848,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
                 <line className={s.guide} x1={nameX + 4} x2={nameX + 4} y1={0} y2={GROW} />
                 <text className={`${s.genusLabel} ${on ? s.genusAlive : ""}`} x={nameX + 16} y={GROW / 2} dominantBaseline="central">{r.genus}</text>
                 {!compact && <text className={s.genusN} x={L - 8} y={GROW / 2} dominantBaseline="central" textAnchor="end">{fNum(r.n)}</text>}
-                {rangeMarks({ core: r.range_ma, record: r.record, y: GROW / 2, h: 7, color: dietOf(it.f).color, dim: !on, className: s.gbar })}
+                {rangeMarks({ core: r.range_ma, record: r.record, y: GROW / 2, h: 7, diet: dietOf(it.f), dim: !on, className: s.gbar })}
               </g>
             );
           }
@@ -870,7 +871,7 @@ function Timeline({ animateTo, zoomBy, deckTop }: { animateTo: (to: Range) => vo
               <line className={s.guide} x1={nameX + 4} x2={nameX + 4} y1={0} y2={GROW} />
               <text className={`${s.genusLabel} ${on ? s.genusAlive : ""} ${sel ? s.labelSel : ""}`} x={nameX + 16} y={GROW / 2} dominantBaseline="central">{gn.genus}</text>
               {!compact && <text className={s.genusN} x={L - 8} y={GROW / 2} dominantBaseline="central" textAnchor="end">{fNum(gn.n)}</text>}
-              {rangeMarks({ core: gn.range_ma, record: genusRecord(gn), y: GROW / 2, h: 7, color: dietOf(f).color, dim: !on, className: s.gbar })}
+              {rangeMarks({ core: gn.range_ma, record: genusRecord(gn), y: GROW / 2, h: 7, diet: dietOf(f), dim: !on, className: s.gbar })}
               {spText && vis(...genusRecord(gn)) && (
                 <text className={s.species} x={spRight ? xe + 6 : x(genusRecord(gn)[0]) - 6} y={GROW / 2} dominantBaseline="central"
                   textAnchor={spRight ? "start" : "end"} clipPath={`url(#${clip})`}>{spText}</text>

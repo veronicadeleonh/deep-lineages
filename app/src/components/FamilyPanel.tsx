@@ -161,7 +161,7 @@ function Traits({ f, inherited }: { f: Family; inherited?: boolean }) {
   const src = `PBDB, for the whole family${inherited ? ` (${f.family})` : ""}`;
   return (
     <ul className={s.tags} aria-label="Traits">
-      <li className={s.tag} title={`Diet · ${src}`}><i className="swatch" style={{ background: diet.color }} />{diet.label}</li>
+      <li className={s.tag} title={`Diet · ${src}`}><i className={`swatch swatch-${diet.key}`} />{diet.label}</li>
       {social && <li className={s.tag} title={`Life habit · ${src}${social === "groups" ? "; usually inferred from bonebeds or trackways with many individuals" : ""}`}>{SOCIAL[social]}</li>}
       {inherited && <li className={s.tagNote}>family traits</li>}
     </ul>

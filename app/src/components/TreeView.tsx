@@ -372,9 +372,9 @@ export function TreeCard() {
           <li className={s.legendTitle}>First fossil</li>
           {PERIODS.map((p) => <li key={p.key}><i className={s.dot} style={{ background: p.color }} />{p.key}</li>)}
           <li className={s.legendTitle}>Ring</li>
-          <li><i className="swatch" style={{ background: "var(--diet-herb)" }} />Herbivore</li>
-          <li><i className="swatch" style={{ background: "var(--diet-carn)" }} />Carnivore</li>
-          <li><i className="swatch" style={{ background: "var(--diet-other)" }} />No data</li>
+          <li><i className="swatch swatch-herb" />Herbivore</li>
+          <li><i className="swatch swatch-carn" />Carnivore</li>
+          <li><i className="swatch swatch-other" />No data</li>
         </ul>
       </div>
 
@@ -447,10 +447,10 @@ export function TreeCard() {
             {famArcs.map(({ n, f, a }) => {
               const id = `fam-${n.data.id.replace(/\W/g, "_")}`, sel = state.selected === f.family;
               return (
-                <g key={n.data.id} className={`${s.famArc} ${sel ? s.famSel : ""}`} onClick={click(() => refocus(n.data))}
+                <g key={n.data.id} className={`${s.famArc} ${sel ? s.famSel : ""} ${dietOf(f).key === "herb" ? s.famHerb : dietOf(f).key === "carn" ? s.famCarn : s.famOther}`} onClick={click(() => refocus(n.data))}
                   onPointerMove={hover(<>{groupSil(n.data)}<b>{f.family}</b><br /><span>{fNum(n.leaves().length)} genera · {dietOf(f).label.toLowerCase()} · click to center on it</span></>)}
                   onPointerLeave={tip.hide}>
-                  <path d={arcPath(a[0], a[1], rFamS, rFamS + 20)} style={{ fill: dietOf(f).color }} />
+                  <path d={arcPath(a[0], a[1], rFamS, rFamS + 20)} style={{ ["--arc-fill" as string]: dietOf(f).fill, ["--arc-edge" as string]: dietOf(f).color, ["--arc-hover" as string]: dietOf(f).hover }} />
                   <path id={id} d={textArc(a[0], a[1], rFamS + 10)} fill="none" />
                   {(a[1] - a[0]) * (rFamS + 10) > f.family.length * 6.4 + 8 && (
                     <text dy="0.35em"><textPath href={`#${id}`} startOffset="50%" textAnchor="middle">{f.family}</textPath></text>

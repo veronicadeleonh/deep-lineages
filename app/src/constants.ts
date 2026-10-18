@@ -8,13 +8,17 @@ export const EXTINCTIONS = [
   { ma: 66, label: "K–Pg extinction", short: "K–Pg" },
 ];
 
-export interface Diet { label: string; color: string }
+/** `color` is the solid color (dots, lines, and the edge of areas); `fill` paints areas and bars, `hover` replaces it under the pointer (tree arcs); `key` names the swatch
+    class (.swatch-herb…) in global.css. */
+export interface Diet { label: string; key: "herb" | "carn" | "other"; color: string; fill: string; hover: string }
 export const DIET: Record<string, Diet> = {
-  herbivore: { label: "Herbivore", color: "var(--diet-herb)" },
-  carnivore: { label: "Carnivore", color: "var(--diet-carn)" },
-  omnivore: { label: "Omnivore", color: "var(--diet-other)" },
-  none: { label: "No data", color: "var(--diet-other)" },
+  herbivore: { label: "Herbivore", key: "herb", color: "var(--diet-herb)", fill: "var(--diet-herb-fill)", hover: "var(--diet-herb-hover)" },
+  carnivore: { label: "Carnivore", key: "carn", color: "var(--diet-carn)", fill: "var(--diet-carn-fill)", hover: "var(--diet-carn-hover)" },
+  omnivore: { label: "Omnivore", key: "other", color: "var(--diet-other)", fill: "var(--diet-other)", hover: "var(--diet-other-hover)" },
+  none: { label: "No data", key: "other", color: "var(--diet-other)", fill: "var(--diet-other)", hover: "var(--diet-other-hover)" },
 };
+/** How an area is painted: its fill, edged in the diet's solid color (invisible when the two are the same). */
+export const paint = (d: Diet) => ({ fill: d.fill, stroke: d.color, strokeWidth: "var(--border-thin)" });
 export const dietOf = (f: Family): Diet => DIET[f.pbdb?.diet ?? "none"] ?? DIET.none;
 
 // Main lineages (Brusatte: saurischians = theropods + sauropodomorphs; ornithischians)

@@ -174,7 +174,7 @@ export function TimeMachine() {
                 <button className={`${s.who} ${state.selected === f.family ? s.whoOn : ""}`} aria-expanded={state.selected === f.family}
                   onClick={() => dispatch({ type: "select", family: state.selected === f.family ? null : f.family })}
                   title={state.selected === f.family ? "Collapse" : `${f.family} · ${n} fossils here`}>
-                  <i className="swatch" style={{ background: dietOf(f).color }} />
+                  <i className={`swatch swatch-${dietOf(f).key}`} />
                   <span>{f.family}</span>
                   {f.phylopic?.svg && <i className={s.whoSil} style={{ ["--src" as string]: `url("${silhouetteUrl(f.phylopic.svg)}")` }} />}
                   {state.selected === f.family && <svg className={s.whoChev} viewBox="0 0 10 6" aria-hidden><path d="M1 5l4-4 4 4" /></svg>}

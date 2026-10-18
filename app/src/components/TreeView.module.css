@@ -49,9 +49,15 @@
 .linArc { cursor: zoom-in; }
 .linArc:hover path:first-child { fill: var(--line); }
 .famArc { cursor: zoom-in; }
-.famArc path:first-child { stroke: var(--surface); stroke-width: 2; opacity: .8; }
-.famArc:hover path:first-child, .famSel path:first-child { opacity: 1; }
+/* each arc: its diet's fill and edge; under the pointer (or selected) the fill darkens to its -hover token.
+   No opacity: fading would drop the family name below 4.5:1 */
+.famArc path:first-child { fill: var(--arc-fill); stroke: var(--arc-edge); stroke-width: var(--border-thick); transition: fill .12s; }
+.famArc:hover path:first-child, .famSel path:first-child { fill: var(--arc-hover); }
+.famCarn:hover path:first-child, .famCarn.famSel path:first-child, .famOther:hover path:first-child, .famOther.famSel path:first-child { stroke: var(--arc-hover); } /* solid: the edge darkens with it */
 .famArc text { fill: var(--bg); font-size: var(--fs-xs); font-weight: var(--fw-semibold); pointer-events: none; }
+.famHerb text { fill: var(--diet-herb-on); } /* family names take their diet's "on" color */
+.famCarn text { fill: var(--diet-carn-on); }
+.famOther text { fill: var(--diet-other-on); }
 
 .links path { fill: none; stroke: var(--text-3); stroke-width: 1; opacity: .7; }
 .links .linkHot { stroke: var(--text); stroke-width: 2.2; opacity: 1; }

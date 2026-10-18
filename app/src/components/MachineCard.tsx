@@ -40,7 +40,7 @@ export function MachineCard({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
       <div className={s.mcardTags}>
-        <span><i className="swatch" style={{ background: diet.color }} />{diet.label}</span>
+        <span><i className={`swatch swatch-${diet.key}`} />{diet.label}</span>
         {social && <span>{SOCIAL[social]}</span>}
       </div>
       <dl className={s.mcardFacts}>
