@@ -72,3 +72,5 @@ code { font-family: var(--mono); font-size: var(--fs-sm); }
 .motion::after { content: ""; position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: var(--radius-full); background: var(--cursor);
   transition: left var(--d, 600ms) var(--e, var(--ease-out)); }
 tr:hover .motion::after { left: calc(100% - 12px); }
+/* --map-halo: map text on land, with the halo */
+.haloDemo { display: inline-block; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); background: var(--land); color: var(--map-ink-2); font-size: var(--fs-md); font-weight: var(--fw-bold); }

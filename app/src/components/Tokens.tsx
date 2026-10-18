@@ -40,7 +40,7 @@ function rawValues(src: Sources) {
       const text = full.replace(/:root\s*\{[^}]*\}/, "").replace(/\/\*[\s\S]*?\*\//g, "");
       for (const m of text.matchAll(re)) {
         const v = m[1].trim();
-        const rest = v.replace(ignore ?? /$^/g, "").replace(/var\(--[\w-]+\)/g, "").replace(/\b0\b/g, "");
+        const rest = v.replace(ignore ?? /$^/g, "").replace(/var\(--[\w-]+\)/g, "").replace(/\b0\b/g, "").replace(/\b(inset|none|both|infinite)\b/g, ""); // keywords, not values
         if (!rest.trim() || (ignore && !/\dpx/.test(rest))) continue; // only tokens, zeros (and allowed tweaks): already tokenized
         const per = found.get(v) ?? new Map<string, number>();
         per.set(file, (per.get(file) ?? 0) + 1);
@@ -172,8 +172,21 @@ export function Tokens() {
 }
 
 const INTRO: Record<string, string> = {
-  "Semantic colors": "Named for what they do. Components use only these. Each one points at a primitive, so changing the palette never means hunting through the components. Each has a role (hover it): the role sets what WCAG asks of it, measured against the backgrounds it really sits on.",
+  "Semantic colors": "Named for what they do. Components use only these. Each one points at a primitive, so changing the palette never means hunting through the components. Each has a role (hover it): the role sets what WCAG asks of it, measured against the backgrounds it really sits on. Text colors also show their APCA level (Lc, the WCAG 3 draft), which catches dark text on mid tones that WCAG 2 lets through. Diets are a solid color (edges, dots), a fill, a text color on the fill and a hover tone, chosen to read apart with color blindness and in grayscale.",
   "Primitive colors": "The palette, named for what each color looks like (50 is near white, 900 near black). Components never use them directly: only the semantic tokens do. Contrast here is for reference only: whether a color passes depends on the role of the semantic token that uses it.",
+
+  "Type scale": "Every font size. Fixed sizes for the interface; the clamp() ones grow with the window, for titles and the story told over the map. --fs-2xs is only for text inside charts (axes, ticks): HTML labels start at --fs-xs.",
+  "Font weight": "The four weights IBM Plex Sans is loaded in. Anything else would be faked by the browser.",
+  "Font family": "IBM Plex Sans for everything, with system fallbacks; a system monospace for keys and code.",
+  "Letter spacing": "Tight for big headings, wide and caps for small uppercase labels.",
+  "Line height": "From one line (none) to relaxed reading text. Body text uses --lh-normal (1.5).",
+  "Radius": "Corners, from small swatches to dialogs. --radius-full makes pills and dots.",
+  "Border width": "Thin for edges and dividers, thick for dots and arcs that need to show at small sizes.",
+  "Spacing": "A 4px scale with half steps: the name is how many 4px (--space-3 = 12px). 1–3px tweaks inside small controls stay as plain px on purpose.",
+  "Motion": "How long things take, and how they ease. Hover a row to play it. With the system's Reduce motion on, every duration drops to ~0 and the event pulse stands still (WCAG 2.3.3, 2.2.2).",
+  "Shadow": "Elevation, one per kind of surface, all in --shadow-color. --map-halo is a text shadow: a light outline so text reads where land slips behind it.",
+  "Focus": "The keyboard focus ring, shown only when navigating with the keyboard. Selection uses borders and fills, never the outline.",
+  "Layer (z-index)": "The stacking order, lowest first. New layers go here, not as numbers in a component.",
 };
 
 function preview(g: string, t: Token) {
@@ -189,6 +202,7 @@ function preview(g: string, t: Token) {
   if (g === "Motion") return <span className={s.motion} style={t.name.startsWith("--dur-") ? { ["--d" as string]: v } : { ["--e" as string]: v }} title="Hover the row to play it" />;
   if (g === "Spacing") return <span className={s.spaceBar} style={{ width: v }} />;
   if (g === "Border width") return <span className={s.box} style={{ borderWidth: v, borderColor: "var(--text)" }} />;
+  if (g === "Shadow" && t.name === "--map-halo") return <span className={s.haloDemo} style={{ textShadow: v }}>Late Cretaceous</span>;
   if (g === "Shadow") return <span className={s.box} style={{ boxShadow: v, border: 0 }} />;
   return null;
 }
