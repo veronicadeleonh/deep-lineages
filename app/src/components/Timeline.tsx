@@ -9,7 +9,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type Keyboard
 import { DIET, EXTINCTIONS, GROUPS, TIME, dietOf, groupOf, paint, type Diet, type Group } from "../constants";
 import { silhouetteUrl } from "../data";
 import { byCount, famRecord, fMa, fMa1, fNum, fRange, genusRecord, isAlive } from "../format";
-import { useLatest, useWidth } from "../hooks";
+import { durationOf, useLatest, useWidth } from "../hooks";
 import { MIN_SPAN, clampView, useStore } from "../state";
 import { WELL_KNOWN, relLeafName, familyTree, genusTree, layout, leaves, pathTo, prune, type TNode } from "../tree";
 import type { Family, Genus, Range, Relative, RelativesGroup } from "../types";
@@ -49,8 +49,10 @@ export function TimelineCard() {
     const target = clampView(to);
     anim.current?.stop();
     const ip = interpolate(viewRef.current, target);
+    const dur = durationOf("--dur-zoom"); // 0 when motion is reduced: jump straight there
+    if (!dur) { dispatch({ type: "view", view: target }); return; }
     anim.current = timer((ms) => {
-      const k = Math.min(1, ms / 260);
+      const k = Math.min(1, ms / dur);
       dispatch({ type: "view", view: ip(easeCubicOut(k)) as Range });
       if (k === 1) anim.current?.stop();
     });

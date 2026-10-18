@@ -41,13 +41,22 @@ export function useSize(ref: RefObject<HTMLElement | null>, fallback: [number, n
 
 /** Scrolls the nearest scrolling box so `el` shows, without Element.scrollIntoView: that one also moves the
     browser's Tab starting point to `el`, so after a reload the first Tab skipped everything before it. */
+/** The person asked their system to reduce motion: jump instead of animating. */
+export const reducedMotion = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+/** A --dur-* token in ms, as JS animations need it (0 when motion is reduced). */
+export const durationOf = (token: string) => {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(token).trim(); // "260ms", or ".26s" once minified
+  const n = parseFloat(v) || 0;
+  return v.endsWith("ms") ? n : n * 1000;
+};
+
 export function revealInScroller(el: HTMLElement | null, smooth = true) {
   if (!el) return;
   let box = el.parentElement;
   while (box && !/(auto|scroll)/.test(getComputedStyle(box).overflowY)) box = box.parentElement;
   if (!box) return;
   const r = el.getBoundingClientRect(), b = box.getBoundingClientRect();
-  const behavior: ScrollBehavior = smooth ? "smooth" : "auto";
+  const behavior: ScrollBehavior = smooth && !reducedMotion() ? "smooth" : "auto";
   if (r.top < b.top) box.scrollBy({ top: r.top - b.top - 8, behavior });
   else if (r.bottom > b.bottom) box.scrollBy({ top: r.bottom - b.bottom + 8, behavior });
 }

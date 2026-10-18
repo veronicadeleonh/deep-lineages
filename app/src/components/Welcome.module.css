@@ -1,12 +1,12 @@
 /* The welcome screen: a full-screen layer over the app, the drifting continents behind the text. */
 .welcome {
   position: fixed; inset: 0; z-index: var(--z-dialog); overflow-y: auto; background: var(--bg);
-  display: flex; align-items: center; justify-content: center; padding: var(--space-10) var(--space-6); animation: fadeIn .4s ease-out;
+  display: flex; align-items: center; justify-content: center; padding: var(--space-10) var(--space-6); animation: fadeIn var(--dur-slow) var(--ease-out);
 }
 @keyframes fadeIn { from { opacity: 0; } }
 .bg { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .sphere { fill: var(--ocean); opacity: .6; }
-.land { fill: var(--land); opacity: 0; transition: opacity 1.6s ease; }
+.land { fill: var(--land); opacity: 0; transition: opacity var(--dur-long) var(--ease-in-out); }
 .clock {
   position: fixed; right: 24px; bottom: 18px; font-size: var(--fs-sm); letter-spacing: var(--tracking-caps); text-transform: uppercase;
   font-weight: var(--fw-bold); color: var(--text-3); font-variant-numeric: tabular-nums;
@@ -51,8 +51,8 @@
 }
 
 /* About: a compact dialog over the app (which stays visible, dimmed) */
-.aboutBackdrop { position: fixed; inset: 0; z-index: var(--z-dialog); background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: var(--space-6); animation: fadeIn .2s ease-out; }
-.about { width: min(560px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6) var(--space-6) var(--space-6); box-shadow: var(--shadow-lg); animation: rise .2s ease-out; }
+.aboutBackdrop { position: fixed; inset: 0; z-index: var(--z-dialog); background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: var(--space-6); animation: fadeIn var(--dur-base) var(--ease-out); }
+.about { width: min(560px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; background: var(--surface); border: var(--border-thin) solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6) var(--space-6) var(--space-6); box-shadow: var(--shadow-lg); animation: rise var(--dur-base) var(--ease-out); }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 .about { position: relative; padding: var(--space-6) var(--space-8) var(--space-6); }
 .aboutClose { position: absolute; right: 14px; top: 14px; font: inherit; font-size: var(--fs-base); color: var(--text-2); background: none; border: var(--border-thin) solid var(--line); border-radius: var(--radius-md); width: 32px; height: 32px; cursor: pointer; }

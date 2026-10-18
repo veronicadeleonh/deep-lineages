@@ -162,6 +162,21 @@
   --fs-narration: clamp(16px, 1.45vw, 20px); /* the story, told over the map */
   --font: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  /* motion: how long things take, and how they ease. All of it is turned off below for people who ask
+     their system to reduce motion (WCAG 2.3.3; the event pulse would otherwise loop forever, 2.2.2) */
+  --dur-fast: 150ms;    /* hover feedback: fills, opacity */
+  --dur-base: 200ms;    /* panels, menus, sheets coming in */
+  --dur-slow: 400ms;    /* the welcome fading in */
+  --dur-fade: 600ms;    /* one map crossfading into the next */
+  --dur-zoom: 260ms;    /* the timeline's animated zoom (read from JS) */
+  --dur-scene: 1100ms;  /* a chapter's story arriving */
+  --dur-long: 1700ms;   /* the welcome's continents; one beat of the event pulse */
+  --ease-out: ease-out;    /* things arriving */
+  --ease-in-out: ease;     /* crossfades */
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 1ms; --dur-base: 1ms; --dur-slow: 1ms; --dur-fade: 1ms; --dur-zoom: 0ms; --dur-scene: 1ms; --dur-long: 1ms; }
+  html { scroll-behavior: auto; }
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }

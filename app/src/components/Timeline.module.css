@@ -44,13 +44,13 @@
 .rowHighlight { fill: var(--surface-2); }
 .focusRow { fill: none; stroke: var(--cursor); stroke-width: var(--focus-width); } /* the focus ring for rows: SVG can't take outline, so it's drawn with the same color and width */
 .row:focus, .lineage:focus { outline: none; } /* the ring above replaces it */
-.rowSil { transition: opacity .15s; }
+.rowSil { transition: opacity var(--dur-fast); }
 .dim { opacity: .3; }
 .chev { fill: var(--text-3); font-size: var(--fs-2xs); pointer-events: none; }
 .rowLabel { fill: var(--text-2); font-size: var(--fs-sm); }
 .labelDim { fill: var(--text-3); }
 .labelSel { fill: var(--text); font-weight: var(--fw-bold); }
-.bar, .gbar { transition: opacity .15s; }
+.bar, .gbar { transition: opacity var(--dur-fast); }
 .barDim { opacity: .28; }
 .guide { stroke: var(--line); }
 .genusLabel { fill: var(--text-3); font-size: var(--fs-sm); font-style: italic; }

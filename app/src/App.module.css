@@ -58,7 +58,7 @@
 .railSil { width: 30px; height: 30px; background: var(--text); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .railName { writing-mode: vertical-rl; font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--text); white-space: nowrap; max-height: 60vh; overflow: hidden; text-overflow: ellipsis; }
 /* the profile column: stays on screen and scrolls on its own */
-.panel { max-height: calc(100vh - 32px); overflow-y: auto; min-width: 0; border-radius: var(--radius-lg); animation: slideIn .18s ease-out; }
+.panel { max-height: calc(100vh - 32px); overflow-y: auto; min-width: 0; border-radius: var(--radius-lg); animation: slideIn var(--dur-base) var(--ease-out); }
 @keyframes slideIn { from { opacity: 0; transform: translateX(12px); } }
 .fullScreen { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
 .fullScreen .layout { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); }
@@ -95,7 +95,7 @@
   /* phones and narrow windows: the profile is a bottom sheet over the timeline */
   .panel {
     position: fixed; left: 0; right: 0; bottom: 0; top: auto; max-height: 50vh; z-index: var(--z-sheet);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-lg-up); animation: sheetUp .2s ease-out;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-lg-up); animation: sheetUp var(--dur-base) var(--ease-out);
   }
   @keyframes sheetUp { from { transform: translateY(24px); opacity: 0; } }
   .top { padding: var(--space-4) var(--space-4) var(--space-2-5); }

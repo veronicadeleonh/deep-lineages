@@ -51,7 +51,7 @@
 .famArc { cursor: zoom-in; }
 /* each arc: its diet's fill and edge; under the pointer (or selected) the fill darkens to its -hover token.
    No opacity: fading would drop the family name below 4.5:1 */
-.famArc path:first-child { fill: var(--arc-fill); stroke: var(--arc-edge); stroke-width: var(--border-thick); transition: fill .12s; }
+.famArc path:first-child { fill: var(--arc-fill); stroke: var(--arc-edge); stroke-width: var(--border-thick); transition: fill var(--dur-fast); }
 .famArc:hover path:first-child, .famSel path:first-child { fill: var(--arc-hover); }
 .famCarn:hover path:first-child, .famCarn.famSel path:first-child { stroke: var(--arc-hover); } /* solid: the edge darkens with it */
 .famArc text { fill: var(--bg); font-size: var(--fs-xs); font-weight: var(--fw-semibold); pointer-events: none; }

@@ -2,6 +2,6 @@
 .hint {
   position: fixed; left: 16px; bottom: 16px; margin: 0; z-index: var(--z-popover); padding: var(--space-1-5) var(--space-2-5);
   font-size: var(--fs-sm); color: var(--text); background: var(--surface); border: var(--border-thick) solid var(--cursor);
-  border-radius: var(--radius-md); box-shadow: var(--shadow-sm); pointer-events: none; animation: keysIn .2s ease-out;
+  border-radius: var(--radius-md); box-shadow: var(--shadow-sm); pointer-events: none; animation: keysIn var(--dur-base) var(--ease-out);
 }
 @keyframes keysIn { from { opacity: 0; transform: translateY(4px); } }

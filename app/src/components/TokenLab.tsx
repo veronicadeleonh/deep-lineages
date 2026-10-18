@@ -18,6 +18,7 @@ const KINDS = {
   Shadow: (g: string) => g === "Shadow",
   "Border width": (g: string) => g === "Border width",
   Spacing: (g: string) => g === "Spacing",
+  Motion: (g: string) => g === "Motion",
   All: () => true,
 };
 type Kind = keyof typeof KINDS;

@@ -9,7 +9,9 @@ type Sources = Record<string, string>;
 
 /* ---------- where things are used ---------- */
 function countUses(src: Sources, name: string) {
-  const re = new RegExp(`var\\(\\s*${name.replace(/[-]/g, "\\-")}\\s*[,)]`, "g");
+  const esc = name.replace(/[-]/g, "\\-");
+  // var(--x) in styles, or "--x" read from JS (like durationOf("--dur-zoom"))
+  const re = new RegExp(`var\\(\\s*${esc}\\s*[,)]|["'\`]${esc}["'\`]`, "g");
   const files: { file: string; n: number }[] = [];
   for (const [file, text] of Object.entries(src)) {
     const n = (text.match(re) ?? []).length;
@@ -28,6 +30,7 @@ const RAW_CHECKS: { label: string; re: RegExp; hint: string; ignore?: RegExp }[]
   { label: "letter-spacing", re: /letter-spacing:\s*(-?[\d.]+em)/g, hint: "candidates for --tracking-*" },
   { label: "line-height", re: /line-height:\s*([\d.]+)(?![\w%])/g, hint: "candidates for --lh-*" },
   { label: "spacing", re: /(?<![\w-])(?:padding|margin|gap|row-gap|column-gap)(?:-(?:top|right|bottom|left|inline|block))?:\s*([^;}]*\dpx[^;}]*)/g, hint: "candidates for --space-* (1–3px tweaks inside small controls don't count)", ignore: /(?<![\w.])-?[13]px\b/g },
+  { label: "duration", re: /(?:transition|animation)(?:-duration)?:\s*([^;}]*\d*\.?\d+m?s\b[^;}]*)/g, hint: "candidates for --dur-*" },
   { label: "border-width", re: /(?:border(?:-(?:top|right|bottom|left))?(?:-width)?|outline(?:-width)?):\s*(?:[^;}]*\s)?([1-9][\d.]*px|0?\.\d+px)/g, hint: "candidates for --border-*" },
 ];
 function rawValues(src: Sources) {
@@ -68,7 +71,7 @@ export function Tokens() {
   const groups = useMemo(() => {
     const g = new Map<string, Token[]>();
     for (const t of tokens) g.set(t.group, [...(g.get(t.group) ?? []), t]);
-    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Spacing", "Shadow", "Focus", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
+    return ["Semantic colors", "Primitive colors", "Type scale", "Font weight", "Letter spacing", "Line height", "Font family", "Radius", "Border width", "Spacing", "Motion", "Shadow", "Focus", "Layer (z-index)", "Other"].filter((k) => g.has(k)).map((k) => [k, g.get(k)!] as const);
   }, [tokens]);
   const raw = useMemo(() => rawValues(src), [src]);
   const loaded = Object.keys(src).length > 0;
@@ -183,6 +186,7 @@ function preview(g: string, t: Token) {
   if (g === "Letter spacing") return <span style={{ letterSpacing: v, textTransform: t.name.includes("caps") ? "uppercase" : undefined, fontSize: "var(--fs-sm)" }}>{t.name.includes("caps") ? "On the map now" : "Tyrannosaurus"}</span>;
   if (g === "Line height") return <span style={{ display: "block", lineHeight: v, fontSize: "var(--fs-sm)", maxWidth: 180, background: "var(--surface-2)" }}>The Atlantic begins to open between two continents.</span>;
   if (g === "Focus") return focusPreview(t.name);
+  if (g === "Motion") return <span className={s.motion} style={t.name.startsWith("--dur-") ? { ["--d" as string]: v } : { ["--e" as string]: v }} title="Hover the row to play it" />;
   if (g === "Spacing") return <span className={s.spaceBar} style={{ width: v }} />;
   if (g === "Border width") return <span className={s.box} style={{ borderWidth: v, borderColor: "var(--text)" }} />;
   if (g === "Shadow") return <span className={s.box} style={{ boxShadow: v, border: 0 }} />;

@@ -67,3 +67,8 @@ code { font-family: var(--mono); font-size: var(--fs-sm); }
 .spaceBar { display: inline-block; height: 12px; background: var(--cursor); vertical-align: middle; }
 .lc, .lcLow { font-style: normal; font-size: var(--fs-xs); margin-left: var(--space-1-5); color: var(--text-2); cursor: help; }
 .lcLow { color: #8f1538; font-weight: var(--fw-bold); }
+/* motion previews: a dot that crosses its track with the token's duration or easing when the row is hovered */
+.motion { position: relative; display: inline-block; width: 120px; height: 12px; border-radius: var(--radius-full); background: var(--surface-2); vertical-align: middle; }
+.motion::after { content: ""; position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: var(--radius-full); background: var(--cursor);
+  transition: left var(--d, 600ms) var(--e, var(--ease-out)); }
+tr:hover .motion::after { left: calc(100% - 12px); }
