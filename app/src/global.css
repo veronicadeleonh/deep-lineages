@@ -57,6 +57,7 @@
   --ocean: var(--blue-100);
   --land: var(--sage-300);
   --map-ink: var(--text); --map-ink-2: var(--gray-800); --map-dot: var(--map-ink);
+  --map-halo: 0 0 2px var(--surface), 0 0 2px var(--surface), 0 0 4px var(--surface); /* text over the map: a light halo, so it reads where land slips behind it */
   --dot: var(--text-2);
   /* data: the diversity curves */
   --area: var(--gray-250);

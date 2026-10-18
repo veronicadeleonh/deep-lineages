@@ -134,7 +134,7 @@ export const ROLE_HELP: Record<Role, string> = {
 };
 export type RoleInfo = { role: Role; on?: string[]; note?: string; inverse?: boolean }; // inverse: a background, measured against the text on it
 const PAPER = ["--bg", "--surface", "--surface-2"];
-const MAP = ["--ocean", "--land"];
+const MAP = ["--surface", "--ocean", "--land"]; // the time machine map sits on --surface, the globe is --ocean
 export const ROLES: Record<string, RoleInfo> = {
   "--bg": { role: "background" },
   "--surface": { role: "background" },
